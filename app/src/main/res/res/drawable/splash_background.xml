@@ -1,0 +1,18 @@
+<!-- res/drawable/splash_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Gradient from red at the circumference to a lighter shade at the center -->
+    <gradient
+        android:type="radial"
+        android:centerX="0.9"
+        android:centerY="0.8"
+        android:gradientRadius="0.5"
+        android:startColor="#B0EAE3"
+        android:centerColor="#68EFEB"
+        android:endColor="#49C6E6"
+        android:angle="270" />
+
+</shape>
+
+

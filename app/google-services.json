@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "768078382622",
+    "project_id": "chantandhearapp",
+    "storage_bucket": "chantandhearapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:768078382622:android:edb6b5dea32f312b77900f",
+        "android_client_info": {
+          "package_name": "com.example.chantingworkingapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpPAX12MV4JZ36Dqh1EYptGW5g28FKHTU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
