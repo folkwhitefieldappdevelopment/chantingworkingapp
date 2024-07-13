@@ -72,22 +72,22 @@ public class Secondscreenlevelchose extends AppCompatActivity {
 //                     Handle history option
                     return true;
                 }
-                else if (id == R.id.history) {
-//                     Handle history option
-                    Intent intent = new Intent(Secondscreenlevelchose.this, HistoryActivity.class);
-                    startActivity(intent);
-                    return true;
-                } else if (id == R.id.menu_speed) {
-                    mains.showCustomDialog(Secondscreenlevelchose.this);
-                    // Handle speed option
-                    return true;
-                } else if (id == R.id.menu_help) {
-
-                    mains.showHelpDialog(Secondscreenlevelchose.this);
-//                    Toast.makeText(MainActivity.this,"helppp",Toast.LENGTH_SHORT).show();
-                    // Handle help option
-                    return true;
-                } else if (id == R.id.menu_quotes) {
+//                else if (id == R.id.history) {
+////                     Handle history option
+//                    Intent intent = new Intent(Secondscreenlevelchose.this, HistoryActivity.class);
+//                    startActivity(intent);
+//                    return true;
+//                } else if (id == R.id.menu_speed) {
+//                    mains.showCustomDialog(Secondscreenlevelchose.this);
+//                    // Handle speed option
+//                    return true;
+//                } else if (id == R.id.menu_help) {
+//
+//                    mains.showHelpDialog(Secondscreenlevelchose.this);
+////                    Toast.makeText(MainActivity.this,"helppp",Toast.LENGTH_SHORT).show();
+//                    // Handle help option
+//                    return true;
+                else if (id == R.id.menu_quotes) {
                     // Handle quotes option
                     return true;
                 } else if (id == R.id.menu_hearing) {

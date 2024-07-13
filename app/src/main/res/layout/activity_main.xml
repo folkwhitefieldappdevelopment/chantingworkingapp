@@ -7,8 +7,7 @@
     android:id="@+id/drawer_layout"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="">
+    android:fitsSystemWindows="true">
     <!-- res/layout/round_scoreboard.xml -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
@@ -106,7 +105,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
+                android:background="@drawable/scoreboardbg"
                 >
 
                 <!-- ScrollView with TextView inside -->
@@ -128,13 +127,14 @@
                         <TextView
                             android:id="@+id/HKM"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:fontFamily="@font/hind"
-                            android:padding="5sp"
-                            android:text="Hare Kṛṣṇa Hare Kṛṣṇa\n Kṛṣṇa Kṛṣṇa Hare Hare\n Hare Rāma Hare Rāma\n Rāma Rāma Hare Hare"
+                            android:letterSpacing="0.2"
+                            android:text="Hare Kṛṣṇa Hare Kṛṣṇa\nKṛṣṇa Kṛṣṇa Hare Hare
+                                          Hare Rāma Hare Rāma\nRāma Rāma Hare Hare"
                             android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textSize="20sp" />
+                            android:textColor="#C5C5C5"
+                            android:textSize="18sp" />
                     </ScrollView>
 
                     <!-- ImageView for Stop Icon -->
@@ -144,6 +144,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:layout_margin="20dp"
+                        android:alpha="0.8"
                         android:src="@drawable/baseline_play_arrow_24" />
 
 
@@ -153,8 +154,8 @@
                 <View
                     android:id="@+id/horizontalLine"
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
-android:background="@color/black"
+                    android:layout_height="0.5dp"
+                    android:background="@color/white_smoke"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hkmTextScrollView" />
@@ -163,8 +164,8 @@ android:background="@color/black"
                 <LinearLayout
                     android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
+                    android:layout_height="40sp"
+                    android:alpha="0.7"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/horizontalLine">
 
@@ -173,10 +174,14 @@ android:background="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/hind"
-                        android:text="00:00/00:00"
+                        android:text="00:00"
+                        android:paddingLeft="10sp"
+                        android:paddingRight="10sp"
+                        android:paddingTop="8sp"
+                        android:layout_gravity="center"
                         android:textAlignment="center"
                         android:textColor="@color/white"
-                        android:textSize="20sp"
+                        android:textSize="16sp"
                         android:verticalScrollbarPosition="defaultPosition"
                         android:visibility="visible"
                         app:layout_constraintStart_toStartOf="parent"
@@ -187,24 +192,29 @@ android:background="@color/black"
                         android:id="@+id/iconLayout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="8dp"
-                        android:gravity="right"
+                        android:gravity="end"
                         android:orientation="horizontal"
-                        android:padding="5dp"
-                        app:layout_constraintStart_toEndOf="@id/extraTextView"
+                        app:layout_constraintStart_toEndOf="@id/timetext"
                         app:layout_constraintTop_toBottomOf="@id/horizontalLine">
-
                         <ImageView
                             android:id="@+id/quickDoneImage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:paddingLeft="10sp"
+                            android:paddingRight="10sp"
+                            android:layout_gravity="center"
                             android:src="@drawable/baseline_task_alt_24" />
                         <FrameLayout
                             android:layout_width="wrap_content"
+                            android:paddingTop="4sp"
+                            android:paddingLeft="10sp"
+                            android:paddingRight="10sp"
+                            android:layout_gravity="center"
                             android:layout_height="wrap_content">
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:visibility="visible"
                             android:src="@drawable/baseline_notifications_active_24" />
                         <ImageView
                             android:layout_width="wrap_content"
@@ -215,7 +225,10 @@ android:background="@color/black"
                         </FrameLayout>
                     <FrameLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10sp"
+                        android:paddingRight="10sp"
+                        android:layout_gravity="center">
                         <ImageView
                             android:id="@+id/muteIconImageView"
                             android:layout_width="wrap_content"
@@ -227,19 +240,23 @@ android:background="@color/black"
                             android:layout_height="wrap_content"
                             android:visibility="invisible"
                             android:src="@drawable/baseline_volume_off_24"
-                            android:background="@android:color/black"/>
+                            android:background="@android:color/white"/>
                     </FrameLayout>
                         <ImageView
                             android:id="@+id/resetIconImageView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:paddingLeft="10sp"
+                            android:paddingRight="10sp"
+                            android:layout_gravity="center"
                             android:src="@drawable/baseline_refresh_24" />
-
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:paddingLeft="10sp"
+                            android:paddingRight="10sp"
+                            android:layout_gravity="center"
                             android:src="@drawable/baseline_speed_24" /><!-- Replace with your icon -->
-
                     </LinearLayout>
                 </LinearLayout>
 
@@ -284,6 +301,7 @@ android:background="@drawable/scoreboardbg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:alpha="0.7"
                 android:clickable="true"
                 android:contentDescription="help"
                 android:src="@drawable/baseline_menu_24" />
@@ -293,6 +311,7 @@ android:background="@drawable/scoreboardbg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:alpha="0.8"
                 android:clickable="true"
                 android:contentDescription="help"
                 android:src="@drawable/baseline_history_24" />
@@ -366,26 +385,18 @@ android:background="@drawable/scoreboardbg"
             app:layout_constraintVertical_bias="0.0"
             card_view:cardBackgroundColor="@android:color/transparent"
             card_view:cardCornerRadius="16dp"
-            card_view:cardElevation="8dp">
+            card_view:cardElevation="0dp">
 
-            <RelativeLayout
-                android:id="@+id/iiiirow"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
 
-                android:padding="8dp">
-
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    >
                     <!-- Horizontal LinearLayout as a container for both child layouts -->
                     <LinearLayout
                         android:id="@+id/parentLayout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:baselineAligned="false"
+                        android:layout_margin="20sp"
+                        android:background="@drawable/scoreboardbg">
 
                         <LinearLayout
                             android:id="@+id/TapIcon"
@@ -399,8 +410,6 @@ android:background="@drawable/scoreboardbg"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/eartapicon"
-
-                                android:layout_marginTop="4dp"
                                 android:padding="2dp">
 
                                 <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -408,7 +417,6 @@ android:background="@drawable/scoreboardbg"
                                     android:layout_width="110sp"
                                     android:layout_height="110sp"
                                     android:backgroundTint="#B0C3D1"
-                                    android:padding="8dp"
                                     android:scaleType="centerInside"
                                     android:src="@drawable/image"
                                     app:maxImageSize="0dp" />
@@ -423,10 +431,9 @@ android:background="@drawable/scoreboardbg"
                         <LinearLayout
                             xmlns:android="http://schemas.android.com/apk/res/android"
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:layout_weight="1.8"
-                            android:padding="8dp"
                             android:background="@drawable/scoreboardbg"
                             android:layout_gravity="center">
 
@@ -452,7 +459,7 @@ android:background="@drawable/scoreboardbg"
                                         android:layout_width="match_parent"
                                         android:layout_height="0dp"
                                         android:layout_weight="1"
-                                        android:text="108"
+                                        android:text="0"
                                         android:layout_marginTop="12sp"
                                         android:textAlignment="center"
                                         android:textColor="@android:color/white"
@@ -489,7 +496,7 @@ android:background="@drawable/scoreboardbg"
                                         android:layout_width="match_parent"
                                         android:layout_height="0dp"
                                         android:layout_weight="1"
-                                        android:text="108"
+                                        android:text="0"
                                         android:layout_marginTop="12sp"
                                         android:textAlignment="center"
                                         android:textColor="@android:color/white"
@@ -526,11 +533,11 @@ android:background="@drawable/scoreboardbg"
 
                                 <!-- Space between level text and buttons -->
                                 <View
-                                    android:layout_width="8dp"
+                                    android:layout_width="8sp"
                                     android:layout_height="match_parent" />
 
                                 <TextView
-                                    android:layout_width="40dp"
+                                    android:layout_width="40sp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/stroke_background"
                                     android:text="+"
@@ -543,12 +550,12 @@ android:background="@drawable/scoreboardbg"
 
                                 <!-- Space between buttons -->
                                 <View
-                                    android:layout_width="4dp"
+                                    android:layout_width="4sp"
                                     android:layout_height="match_parent" />
 
                                 <TextView
                                     android:id="@+id/levelCount"
-                                    android:layout_width="40dp"
+                                    android:layout_width="40sp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/stroke_background"
                                     android:text="02"
@@ -560,11 +567,11 @@ android:background="@drawable/scoreboardbg"
 
                                 <!-- Space between buttons -->
                                 <View
-                                    android:layout_width="4dp"
+                                    android:layout_width="4sp"
                                     android:layout_height="match_parent" />
 
                                 <TextView
-                                    android:layout_width="40dp"
+                                    android:layout_width="40sp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/stroke_background"
                                     android:text="-"
@@ -591,7 +598,6 @@ android:background="@drawable/scoreboardbg"
                             <FrameLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:layout_marginStart="10dp"
                                 android:layout_marginTop="10dp"
                                 android:layout_marginBottom="10dp">
 
@@ -599,7 +605,7 @@ android:background="@drawable/scoreboardbg"
                                 <ProgressBar
                                     android:id="@+id/progress_bar_1"
                                     style="@style/Widget.ProgressBar.Vertical"
-                                    android:layout_width="15dp"
+                                    android:layout_width="8dp"
                                     android:layout_height="match_parent"
                                     android:progress="0" />
 
@@ -627,7 +633,7 @@ android:background="@drawable/scoreboardbg"
                                 <ProgressBar
                                     android:id="@+id/progress_bar_2"
                                     style="@style/Widget.ProgressBar.Vertical"
-                                    android:layout_width="15dp"
+                                    android:layout_width="8dp"
                                     android:layout_height="match_parent"
                                     android:progress="60" />
 
@@ -655,7 +661,7 @@ android:background="@drawable/scoreboardbg"
                                 <ProgressBar
                                     android:id="@+id/progress_bar_3"
                                     style="@style/Widget.ProgressBar.Vertical"
-                                    android:layout_width="15dp"
+                                    android:layout_width="8dp"
                                     android:layout_height="match_parent"
                                     android:progress="60" />
 
@@ -683,7 +689,7 @@ android:background="@drawable/scoreboardbg"
                                 <ProgressBar
                                     android:id="@+id/progress_bar_4"
                                     style="@style/Widget.ProgressBar.Vertical"
-                                    android:layout_width="15dp"
+                                    android:layout_width="8dp"
                                     android:layout_height="match_parent"
                                     android:progress="60" />
 
@@ -711,7 +717,7 @@ android:background="@drawable/scoreboardbg"
                                 <ProgressBar
                                     android:id="@+id/progress_bar_5"
                                     style="@style/Widget.ProgressBar.Vertical"
-                                    android:layout_width="15dp"
+                                    android:layout_width="8dp"
                                     android:layout_height="match_parent"
                                     android:progress="60" />
 
@@ -739,7 +745,7 @@ android:background="@drawable/scoreboardbg"
                                 <ProgressBar
                                     android:id="@+id/progress_bar_6"
                                     style="@style/Widget.ProgressBar.Vertical"
-                                    android:layout_width="15dp"
+                                    android:layout_width="8dp"
                                     android:layout_height="match_parent"
                                     android:progress="60" />
 
@@ -762,14 +768,12 @@ android:background="@drawable/scoreboardbg"
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="8dp"
                                 android:layout_marginTop="10dp"
-
-                                android:layout_marginEnd="6dp"
                                 android:layout_marginBottom="10dp">
 
                                 <ProgressBar
                                     android:id="@+id/progress_bar_7"
                                     style="@style/Widget.ProgressBar.Vertical"
-                                    android:layout_width="15dp"
+                                    android:layout_width="8dp"
                                     android:layout_height="match_parent"
                                     android:progress="60" />
 
@@ -786,12 +790,8 @@ android:background="@drawable/scoreboardbg"
                                     android:textStyle="bold"
                                     android:visibility="visible" />
                             </FrameLayout>
-
                         </LinearLayout>
-
                     </LinearLayout>
-                </ScrollView>
-            </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
         <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
@@ -816,7 +816,7 @@ android:background="@drawable/scoreboardbg"
             android:scaleType="centerCrop"
             android:text="Round 1"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="#c5c5c5"
             android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline10"
             app:layout_constraintDimensionRatio="4:1"
