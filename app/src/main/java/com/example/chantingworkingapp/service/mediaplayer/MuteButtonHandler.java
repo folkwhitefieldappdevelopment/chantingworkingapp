@@ -23,6 +23,6 @@ public class MuteButtonHandler extends AbstractMediaPlayerEventHandler{
         super.getMediaplayer().setVolume(0.0f, 0.0f);
         super.getAppCompatActivity().findViewById(R.id.muteIconImageView).setVisibility(View.INVISIBLE);
         super.getAppCompatActivity().findViewById(R.id.unmuteIconImageView).setVisibility(View.VISIBLE);
-        CommonUtils.vibrateFunction(50,(Vibrator) super.getAppCompatActivity().getSystemService(Context.VIBRATOR_SERVICE));
+        super.vibrate(50);
     }
 }

@@ -412,15 +412,6 @@ android:background="@drawable/scoreboardbg"
                                 android:background="@drawable/eartapicon"
                                 android:padding="2dp">
 
-                                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                                    android:id="@+id/hear"
-                                    android:layout_width="110sp"
-                                    android:layout_height="110sp"
-                                    android:backgroundTint="#B0C3D1"
-                                    android:scaleType="centerInside"
-                                    android:src="@drawable/image"
-                                    app:maxImageSize="0dp" />
-
                             </FrameLayout>
 
                         </LinearLayout>
@@ -1019,6 +1010,17 @@ android:background="@drawable/scoreboardbg"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="20dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/hear"
+            android:layout_width="110sp"
+            android:layout_height="110sp"
+            android:backgroundTint="#B0C3D1"
+            android:scaleType="centerInside"
+            android:src="@drawable/image"
+            app:maxImageSize="0dp"
+            tools:layout_editor_absoluteX="19dp"
+            tools:layout_editor_absoluteY="148dp" />
 
 
         <!--    <com.google.android.material.button.MaterialButton-->

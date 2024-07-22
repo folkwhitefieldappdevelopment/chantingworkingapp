@@ -29,7 +29,14 @@ public class HearButtonHandler extends AbstractEventHandler {
     @Override
     public void handle(JapaMalaModel japaMalaModel, View view) {
 
+        //TextView textView = super.getAppCompatActivity().findViewById();
+        this.incrementHeardCount(japaMalaModel);
         this.sendToast(view);
+    }
+
+    private void incrementHeardCount(JapaMalaModel japaMalaModel){
+
+        japaMalaModel.getJapaMapaRoundDataModels();
     }
 
     private void sendToast(View view) {
@@ -46,7 +53,7 @@ public class HearButtonHandler extends AbstractEventHandler {
         toast.setGravity(Gravity.START | Gravity.CENTER, 1100, 400);
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.setView(layout);
-        CommonUtils.vibrateFunction(100,(Vibrator) super.getAppCompatActivity().getSystemService(Context.VIBRATOR_SERVICE));
+        super.vibrate(50);
         toast.show();
     }
 

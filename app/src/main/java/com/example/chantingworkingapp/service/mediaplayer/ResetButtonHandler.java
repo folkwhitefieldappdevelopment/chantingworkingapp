@@ -35,7 +35,7 @@ public class ResetButtonHandler extends AbstractMediaPlayerEventHandler {
 
         final MainActivity mainActivity = (MainActivity) super.getAppCompatActivity();
 
-        CommonUtils.vibrateFunction(50,vibrator);
+        super.vibrate(50);
 
         CommonUtils.showWarningDialog(
                 super.getAppCompatActivity(),
@@ -45,7 +45,7 @@ public class ResetButtonHandler extends AbstractMediaPlayerEventHandler {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         CommonUtils.vibrateFunction(50,vibrator);
-                        mainActivity.resetButtonFunction();
+                        mainActivity.getHkMantraClickHandler().resetButtonFunction();
                     }
                 },
                 new DialogInterface.OnClickListener() {

@@ -9,7 +9,7 @@ import com.example.chantingworkingapp.service.AbstractEventHandler;
 
 public abstract class AbstractMediaPlayerEventHandler extends AbstractEventHandler {
 
-    private final MediaPlayer mediaplayer;
+    private MediaPlayer mediaplayer;
 
     public AbstractMediaPlayerEventHandler(MainActivity appCompatActivity, MediaPlayer mediaplayer) {
         super(appCompatActivity);
@@ -18,5 +18,9 @@ public abstract class AbstractMediaPlayerEventHandler extends AbstractEventHandl
 
     public MediaPlayer getMediaplayer() {
         return mediaplayer;
+    }
+
+    public void setMediaplayer(MediaPlayer mediaplayer) {
+        this.mediaplayer = mediaplayer;
     }
 }
