@@ -4,13 +4,13 @@ import java.util.List;
 
 public class JapaMalaModel {
 
-    private List<RoundDataModel> japaMapaRoundDataModels;
+    private List<RoundDataModel> japaMalaRoundDataModels;
 
-    public List<RoundDataModel> getJapaMapaRoundDataModels() {
-        return japaMapaRoundDataModels;
+    public List<RoundDataModel> getJapaMalaRoundDataModels() {
+        return japaMalaRoundDataModels;
     }
 
-    public void setJapaMapaRoundDataModels(List<RoundDataModel> japaMapaRoundDataModels) {
-        this.japaMapaRoundDataModels = japaMapaRoundDataModels;
+    public void setJapaMalaRoundDataModels(List<RoundDataModel> japaMalaRoundDataModels) {
+        this.japaMalaRoundDataModels = japaMalaRoundDataModels;
     }
 }

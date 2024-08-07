@@ -90,31 +90,66 @@
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/srila_prabhupada" />
 
+<!--        <LinearLayout-->
+<!--            android:id="@+id/TapIcon"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:gravity="center"-->
+
+<!--            android:orientation="horizontal"-->
+<!--            android:padding="0dp"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/guideline7"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/guideline3"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/guideline21"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/guideline18">-->
+
+<!--            <FrameLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@drawable/eartapicon"-->
+<!--                android:padding="0dp">-->
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/hear"
+                    android:layout_width="@dimen/_90sdp"
+                    android:layout_height="@dimen/_90sdp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/image"
+                    app:maxImageSize="0dp"
+                    android:elevation="0dp"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline7"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    app:layout_constraintStart_toStartOf="@+id/guideline21"
+                    app:layout_constraintTop_toTopOf="@+id/guideline18"/>
+
+<!--            </FrameLayout>-->
+
+<!--        </LinearLayout>-->
+
         <androidx.cardview.widget.CardView
             android:id="@+id/hkmCardView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            card_view:cardBackgroundColor="@android:color/transparent"
-
             app:layout_constraintBottom_toTopOf="@+id/guideline14"
+
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toTopOf="@+id/guideline10">
+            app:layout_constraintTop_toTopOf="@+id/guideline10"
+            card_view:cardBackgroundColor="@android:color/transparent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/scoreboardbg"
-                >
+                android:background="@drawable/scoreboardbg">
 
                 <!-- ScrollView with TextView inside -->
                 <RelativeLayout
                     android:id="@+id/hkmTextScrollView"
-                    android:background="@android:color/transparent"
-
                     android:layout_width="match_parent"
+
                     android:layout_height="0dp"
+                    android:background="@android:color/transparent"
                     app:layout_constraintBottom_toTopOf="@+id/linearLayout"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -173,12 +208,12 @@
                         android:id="@+id/timetext"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:fontFamily="@font/hind"
-                        android:text="00:00"
-                        android:paddingLeft="10sp"
-                        android:paddingRight="10sp"
-                        android:paddingTop="8sp"
                         android:layout_gravity="center"
+                        android:fontFamily="@font/hind"
+                        android:paddingLeft="10sp"
+                        android:paddingTop="8sp"
+                        android:paddingRight="10sp"
+                        android:text="00:00"
                         android:textAlignment="center"
                         android:textColor="@color/white"
                         android:textSize="16sp"
@@ -196,66 +231,76 @@
                         android:orientation="horizontal"
                         app:layout_constraintStart_toEndOf="@id/timetext"
                         app:layout_constraintTop_toBottomOf="@id/horizontalLine">
+
                         <ImageView
                             android:id="@+id/quickDoneImage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:paddingLeft="10sp"
                             android:paddingRight="10sp"
-                            android:layout_gravity="center"
                             android:src="@drawable/baseline_task_alt_24" />
+
                         <FrameLayout
                             android:layout_width="wrap_content"
-                            android:paddingTop="4sp"
-                            android:paddingLeft="10sp"
-                            android:paddingRight="10sp"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_height="wrap_content">
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:visibility="visible"
-                            android:src="@drawable/baseline_notifications_active_24" />
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:visibility="invisible"
-                            android:src="@drawable/baseline_notifications_off_24"
-                            android:background="@android:color/black"/>
+                            android:paddingLeft="10sp"
+                            android:paddingTop="4sp"
+                            android:paddingRight="10sp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/baseline_notifications_active_24"
+                                android:visibility="visible" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/black"
+                                android:src="@drawable/baseline_notifications_off_24"
+                                android:visibility="invisible" />
                         </FrameLayout>
-                    <FrameLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="10sp"
-                        android:paddingRight="10sp"
-                        android:layout_gravity="center">
-                        <ImageView
-                            android:id="@+id/muteIconImageView"
+
+                        <FrameLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/baseline_volume_mute_24" />
-                        <ImageView
-                            android:id="@+id/unmuteIconImageView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:visibility="invisible"
-                            android:src="@drawable/baseline_volume_off_24"
-                            android:background="@android:color/white"/>
-                    </FrameLayout>
+                            android:layout_gravity="center"
+                            android:paddingLeft="10sp"
+                            android:paddingRight="10sp">
+
+                            <ImageView
+                                android:id="@+id/muteIconImageView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/baseline_volume_mute_24" />
+
+                            <ImageView
+                                android:id="@+id/unmuteIconImageView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/white"
+                                android:src="@drawable/baseline_volume_off_24"
+                                android:visibility="invisible" />
+                        </FrameLayout>
+
                         <ImageView
                             android:id="@+id/resetIconImageView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:paddingLeft="10sp"
                             android:paddingRight="10sp"
-                            android:layout_gravity="center"
                             android:src="@drawable/baseline_refresh_24" />
+
                         <ImageView
+                            android:id="@+id/speedMenuImage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:paddingLeft="10sp"
                             android:paddingRight="10sp"
-                            android:layout_gravity="center"
                             android:src="@drawable/baseline_speed_24" /><!-- Replace with your icon -->
                     </LinearLayout>
                 </LinearLayout>
@@ -267,9 +312,9 @@
             android:id="@+id/goldencommand"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/scoreboardbg"
             android:fontFamily="@font/hind"
             android:padding="5sp"
-android:background="@drawable/scoreboardbg"
             android:scaleType="centerCrop"
             android:text="Don't think. You have 22 hours to think. Tell your mind. Please allow me to hear, all your thinking you can do after I finish Japa."
 
@@ -380,7 +425,7 @@ android:background="@drawable/scoreboardbg"
             app:layout_constraintBottom_toTopOf="@+id/guideline9"
             app:layout_constraintEnd_toStartOf="@+id/guideline20"
 
-            app:layout_constraintStart_toStartOf="@+id/guideline21"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toTopOf="@+id/guideline16"
             app:layout_constraintVertical_bias="0.0"
             card_view:cardBackgroundColor="@android:color/transparent"
@@ -388,401 +433,419 @@ android:background="@drawable/scoreboardbg"
             card_view:cardElevation="0dp">
 
 
-                    <!-- Horizontal LinearLayout as a container for both child layouts -->
+            <!-- Horizontal LinearLayout as a container for both child layouts -->
+            <LinearLayout
+                android:id="@+id/parentLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20sp"
+                android:background="@drawable/scoreboardbg"
+                android:baselineAligned="false"
+                android:padding="0dp"
+                android:orientation="horizontal">
+
+
+                <!-- Container for Progress Bars -->
+
+                <!-- Container for TextViews -->
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.8"
+                    android:background="@drawable/scoreboardbg"
+                    android:orientation="vertical">
+
+                    <!-- Horizontal layout for counts -->
                     <LinearLayout
-                        android:id="@+id/parentLayout"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:baselineAligned="false"
-                        android:layout_margin="20sp"
-                        android:background="@drawable/scoreboardbg">
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
+                        <!-- Heard count layout -->
                         <LinearLayout
-                            android:id="@+id/TapIcon"
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1.2"
+                            android:layout_height="80dp"
+                            android:layout_weight="1"
                             android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <FrameLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/eartapicon"
-                                android:padding="2dp">
-
-                            </FrameLayout>
-
-                        </LinearLayout>
-                        <!-- Container for Progress Bars -->
-
-                        <!-- Container for TextViews -->
-
-                        <LinearLayout
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:layout_weight="1.8"
-                            android:background="@drawable/scoreboardbg"
-                            android:layout_gravity="center">
+                            android:padding="0dp">
 
-                            <!-- Horizontal layout for counts -->
-                            <LinearLayout
+                            <TextView
+                                android:id="@+id/hearingCount"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:gravity="center">
+                                android:layout_height="0dp"
+                                android:layout_marginTop="12sp"
+                                android:layout_weight="1"
+                                android:text= "Heard"
+                                android:textAlignment="center"
+                                android:textColor="@android:color/white"
+                                android:textSize="14sp" />
 
-                                <!-- Heard count layout -->
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="80dp"
-                                    android:layout_weight="1"
-                                    android:background="@drawable/round_button"
-                                    android:orientation="vertical"
-                                    android:gravity="center"
-                                    android:padding="8dp">
-
-                                    <TextView
-                                        android:id="@+id/hearingCount"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="0dp"
-                                        android:layout_weight="1"
-                                        android:text="0"
-                                        android:layout_marginTop="12sp"
-                                        android:textAlignment="center"
-                                        android:textColor="@android:color/white"
-                                        android:textSize="24sp" />
-
-                                    <TextView
-                                        android:id="@+id/Hearing_text"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="0dp"
-                                        android:layout_weight="1"
-                                        android:text="Heard"
-                                        android:textAlignment="center"
-                                        android:textColor="@android:color/white"
-                                        android:textSize="8sp" />
-                                </LinearLayout>
-
-                                <!-- Space between count layouts -->
-                                <View
-                                    android:layout_width="8dp"
-                                    android:layout_height="match_parent" />
-
-                                <!-- SPD count layout -->
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="80dp"
-                                    android:layout_weight="1"
-                                    android:background="@drawable/round_button"
-                                    android:orientation="vertical"
-                                    android:gravity="center"
-                                    android:padding="8dp">
-
-                                    <TextView
-                                        android:id="@+id/spChanting"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="0dp"
-                                        android:layout_weight="1"
-                                        android:text="0"
-                                        android:layout_marginTop="12sp"
-                                        android:textAlignment="center"
-                                        android:textColor="@android:color/white"
-                                        android:textSize="24sp" />
-
-                                    <TextView
-                                        android:id="@+id/chanting_text"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="0dp"
-                                        android:layout_weight="1"
-                                        android:text="Chanting"
-                                        android:textAlignment="center"
-                                        android:textColor="@android:color/white"
-                                        android:textSize="8sp" />
-                                </LinearLayout>
-                            </LinearLayout>
-
-                            <!-- Level layout -->
-                            <LinearLayout
+                            <TextView
+                                android:id="@+id/Hearing_text"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:gravity="center"
-                                android:layout_marginTop="6dp">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Level :"
-                                    android:textColor="@android:color/white"
-                                    android:textSize="15sp"
-                                    android:fontFamily="@font/hind"
-                                    android:gravity="center" />
-
-                                <!-- Space between level text and buttons -->
-                                <View
-                                    android:layout_width="8sp"
-                                    android:layout_height="match_parent" />
-
-                                <TextView
-                                    android:layout_width="40sp"
-                                    android:layout_height="wrap_content"
-                                    android:background="@drawable/stroke_background"
-                                    android:text="+"
-                                    android:textAlignment="center"
-                                    android:textColor="@android:color/white"
-                                    android:textSize="15sp"
-                                    android:textStyle="bold"
-                                    android:fontFamily="@font/hind"
-                                    android:gravity="center" />
-
-                                <!-- Space between buttons -->
-                                <View
-                                    android:layout_width="4sp"
-                                    android:layout_height="match_parent" />
-
-                                <TextView
-                                    android:id="@+id/levelCount"
-                                    android:layout_width="40sp"
-                                    android:layout_height="wrap_content"
-                                    android:background="@drawable/stroke_background"
-                                    android:text="02"
-                                    android:textAlignment="center"
-                                    android:textColor="@android:color/white"
-                                    android:textSize="15sp"
-                                    android:fontFamily="@font/hind"
-                                    android:gravity="center" />
-
-                                <!-- Space between buttons -->
-                                <View
-                                    android:layout_width="4sp"
-                                    android:layout_height="match_parent" />
-
-                                <TextView
-                                    android:layout_width="40sp"
-                                    android:layout_height="wrap_content"
-                                    android:background="@drawable/stroke_background"
-                                    android:text="-"
-                                    android:textAlignment="center"
-                                    android:textColor="@android:color/white"
-                                    android:textSize="15sp"
-                                    android:textStyle="bold"
-                                    android:fontFamily="@font/hind"
-                                    android:gravity="center" />
-                            </LinearLayout>
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:text= "0"
+                                android:textAlignment="center"
+                                android:textColor="@android:color/white"
+                                android:textSize="24sp" />
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:id="@+id/progresBarvertical"
-                            android:layout_width="0dp"
+                        <!-- Space between count layouts -->
+                        <View
+                            android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1.8"
-                            android:background="@drawable/scoreboardbg"
+                            android:background="@color/white_smoke"
+                            />
+
+                        <!-- SPD count layout -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="80dp"
+                            android:layout_weight="1"
                             android:gravity="center"
-                            android:orientation="horizontal">
+                            android:orientation="vertical"
+                            android:padding="0dp">
 
-                            <!-- FrameLayout for Progress Bar 1 -->
+                            <TextView
+                                android:id="@+id/spChanting"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_marginTop="12sp"
+                                android:layout_weight="1"
+                                android:text="Chanted"
+                                android:textAlignment="center"
+                                android:textColor="@android:color/white"
+                                android:textSize="14sp" />
 
-                            <FrameLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginBottom="10dp">
-
-
-                                <ProgressBar
-                                    android:id="@+id/progress_bar_1"
-                                    style="@style/Widget.ProgressBar.Vertical"
-                                    android:layout_width="8dp"
-                                    android:layout_height="match_parent"
-                                    android:progress="0" />
-
-                                <TextView
-                                    android:id="@+id/text_view_inside_frame1"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:fontFamily="@font/hind"
-                                    android:text="16"
-                                    android:textColor="@android:color/black"
-                                    android:textSize="12sp"
-                                    android:visibility="visible" />
-
-                            </FrameLayout>
-
-                            <!-- FrameLayout for Progress Bar 2 -->
-                            <FrameLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginBottom="10dp">
-
-                                <ProgressBar
-                                    android:id="@+id/progress_bar_2"
-                                    style="@style/Widget.ProgressBar.Vertical"
-                                    android:layout_width="8dp"
-                                    android:layout_height="match_parent"
-                                    android:progress="60" />
-
-                                <TextView
-                                    android:id="@+id/text_view_inside_frame2"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:fontFamily="@font/hind"
-                                    android:text="32"
-                                    android:textColor="@android:color/white"
-                                    android:textSize="12sp"
-                                    android:textStyle="bold"
-                                    android:visibility="visible" />
-                            </FrameLayout>
-
-                            <!-- FrameLayout for Progress Bar 3 -->
-                            <FrameLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginBottom="10dp">
-
-                                <ProgressBar
-                                    android:id="@+id/progress_bar_3"
-                                    style="@style/Widget.ProgressBar.Vertical"
-                                    android:layout_width="8dp"
-                                    android:layout_height="match_parent"
-                                    android:progress="60" />
-
-                                <TextView
-                                    android:id="@+id/text_view_inside_frame3"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:fontFamily="@font/hind"
-                                    android:text="48"
-                                    android:textColor="@android:color/white"
-                                    android:textSize="12sp"
-                                    android:textStyle="bold"
-                                    android:visibility="visible" />
-                            </FrameLayout>
-
-                            <!-- FrameLayout for Progress Bar 4 -->
-                            <FrameLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginBottom="10dp">
-
-                                <ProgressBar
-                                    android:id="@+id/progress_bar_4"
-                                    style="@style/Widget.ProgressBar.Vertical"
-                                    android:layout_width="8dp"
-                                    android:layout_height="match_parent"
-                                    android:progress="60" />
-
-                                <TextView
-                                    android:id="@+id/text_view_inside_frame4"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:fontFamily="@font/hind"
-                                    android:text="64"
-                                    android:textColor="@android:color/white"
-                                    android:textSize="12sp"
-                                    android:textStyle="bold"
-                                    android:visibility="visible" />
-                            </FrameLayout>
-
-                            <!-- FrameLayout for Progress Bar 5 -->
-                            <FrameLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginBottom="10dp">
-
-                                <ProgressBar
-                                    android:id="@+id/progress_bar_5"
-                                    style="@style/Widget.ProgressBar.Vertical"
-                                    android:layout_width="8dp"
-                                    android:layout_height="match_parent"
-                                    android:progress="60" />
-
-                                <TextView
-                                    android:id="@+id/text_view_inside_frame5"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:fontFamily="@font/hind"
-                                    android:text="80"
-                                    android:textColor="@android:color/white"
-                                    android:textSize="12sp"
-                                    android:textStyle="bold"
-                                    android:visibility="visible" />
-                            </FrameLayout>
-
-                            <!-- FrameLayout for Progress Bar 6 -->
-                            <FrameLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginBottom="10dp">
-
-                                <ProgressBar
-                                    android:id="@+id/progress_bar_6"
-                                    style="@style/Widget.ProgressBar.Vertical"
-                                    android:layout_width="8dp"
-                                    android:layout_height="match_parent"
-                                    android:progress="60" />
-
-                                <TextView
-                                    android:id="@+id/text_view_inside_frame6"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:fontFamily="@font/hind"
-                                    android:text="96"
-                                    android:textColor="@android:color/white"
-                                    android:textSize="12sp"
-                                    android:textStyle="bold"
-                                    android:visibility="visible" />
-                            </FrameLayout>
-
-                            <!-- FrameLayout for Progress Bar 7 -->
-                            <FrameLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginBottom="10dp">
-
-                                <ProgressBar
-                                    android:id="@+id/progress_bar_7"
-                                    style="@style/Widget.ProgressBar.Vertical"
-                                    android:layout_width="8dp"
-                                    android:layout_height="match_parent"
-                                    android:progress="60" />
-
-                                <TextView
-                                    android:id="@+id/text_view_inside_frame7"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:fontFamily="@font/hind"
-                                    android:text="108"
-                                    android:textAlignment="center"
-                                    android:textColor="@android:color/white"
-                                    android:textSize="11sp"
-                                    android:textStyle="bold"
-                                    android:visibility="visible" />
-                            </FrameLayout>
+                            <TextView
+                                android:id="@+id/chanting_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:text="0"
+                                android:textAlignment="center"
+                                android:textColor="@android:color/white"
+                                android:textSize="24sp" />
                         </LinearLayout>
                     </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/white_smoke"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
+                    <!-- Level layout -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/hind"
+                            android:gravity="center"
+                            android:text="Level"
+                            android:textColor="@android:color/white"
+                            android:textSize="15sp" />
+
+                        <!-- Space between level text and buttons -->
+                        <View
+                            android:layout_width="8sp"
+                            android:layout_height="match_parent" />
+
+                        <Button
+                            android:id="@+id/LevelAdd"
+                            android:layout_width="40sp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/stroke_background"
+                            android:fontFamily="@font/hind"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="25sp"
+                            android:textStyle="bold" />
+
+                        <!-- Space between buttons -->
+                        <View
+                            android:layout_width="4sp"
+                            android:layout_height="match_parent" />
+
+                        <TextView
+                            android:id="@+id/levelCount"
+                            android:layout_width="40sp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/stroke_background"
+                            android:fontFamily="@font/hind"
+                            android:gravity="center"
+                            android:text="06"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="15sp" />
+
+                        <!-- Space between buttons -->
+                        <View
+                            android:layout_width="4sp"
+                            android:layout_height="match_parent" />
+
+                        <Button
+                            android:id="@+id/LevelMinus"
+                            android:layout_width="40sp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/stroke_background"
+                            android:fontFamily="@font/hind"
+                            android:gravity="center"
+                            android:text="-"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="25sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/progresBarvertical"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.8"
+                    android:background="@drawable/scoreboardbg"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <!-- FrameLayout for Progress Bar 1 -->
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="10dp">
+                        <TextView
+                            android:id="@+id/text_view_inside_frame1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="fill_vertical"
+                            android:fontFamily="@font/hind"
+                            android:text="16"
+                            android:layout_weight="1"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/white"
+                            android:textSize="13sp"
+                            android:visibility="visible" />
+
+                        <ProgressBar
+                            android:id="@+id/progress_bar_1"
+                            style="@style/Widget.ProgressBar.Vertical"
+                            android:layout_width="15dp"
+                            android:layout_weight="3"
+                            android:layout_height="match_parent"
+                            android:progress="0" />
+
+
+
+                    </LinearLayout>
+
+                    <!-- FrameLayout for Progress Bar 2 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp">
+                        <TextView
+                            android:id="@+id/text_view_inside_frame2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="fill_vertical"
+                            android:fontFamily="@font/hind"
+                            android:text="32"
+                            android:layout_weight="1"
+
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:visibility="visible" />
+                        <ProgressBar
+                            android:id="@+id/progress_bar_2"
+                            style="@style/Widget.ProgressBar.Vertical"
+                            android:layout_width="15dp"
+                            android:layout_weight="3"
+                            android:layout_height="match_parent"
+                            android:progress="60" />
+
+
+                    </LinearLayout>
+
+                    <!-- FrameLayout for Progress Bar 3 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="10dp">
+                        <TextView
+                            android:id="@+id/text_view_inside_frame3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/hind"
+                            android:text="48"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:visibility="visible" />
+                        <ProgressBar
+                            android:id="@+id/progress_bar_3"
+                            style="@style/Widget.ProgressBar.Vertical"
+                            android:layout_width="15dp"
+                            android:layout_weight="3"
+                            android:layout_height="match_parent"
+                            android:progress="60" />
+
+
+                    </LinearLayout>
+
+                    <!-- FrameLayout for Progress Bar 4 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp">
+
+
+
+                        <TextView
+                            android:id="@+id/text_view_inside_frame4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/hind"
+                            android:text="64"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:visibility="visible" />
+                        <ProgressBar
+                            android:id="@+id/progress_bar_4"
+                            style="@style/Widget.ProgressBar.Vertical"
+                            android:layout_width="15dp"
+                            android:layout_weight="3"
+                            android:layout_height="match_parent"
+                            android:progress="60" />
+                    </LinearLayout>
+
+                    <!-- FrameLayout for Progress Bar 5 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp">
+
+
+
+                        <TextView
+                            android:id="@+id/text_view_inside_frame5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/hind"
+                            android:layout_weight="1"
+                            android:text="80"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:visibility="visible" />
+                        <ProgressBar
+                            android:id="@+id/progress_bar_5"
+                            style="@style/Widget.ProgressBar.Vertical"
+                            android:layout_width="15dp"
+                            android:layout_weight="3"
+                            android:layout_height="match_parent"
+                            android:progress="60" />
+                    </LinearLayout>
+
+                    <!-- FrameLayout for Progress Bar 6 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp">
+
+
+
+                        <TextView
+                            android:id="@+id/text_view_inside_frame6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/hind"
+                            android:text="96"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:visibility="visible" />
+                        <ProgressBar
+                            android:id="@+id/progress_bar_6"
+                            style="@style/Widget.ProgressBar.Vertical"
+                            android:layout_width="15dp"
+                            android:layout_weight="3"
+                            android:layout_height="match_parent"
+                            android:progress="60" />
+                    </LinearLayout>
+
+                    <!-- FrameLayout for Progress Bar 7 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp">
+
+
+
+                        <TextView
+                            android:id="@+id/text_view_inside_frame7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/hind"
+                            android:text="108"
+                            android:layout_weight="1"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            android:visibility="visible" />
+                        <ProgressBar
+                            android:id="@+id/progress_bar_7"
+                            style="@style/Widget.ProgressBar.Vertical"
+                            android:layout_width="15dp"
+                            android:layout_weight="3"
+                            android:layout_height="match_parent"
+                            android:progress="60" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
@@ -1010,17 +1073,6 @@ android:background="@drawable/scoreboardbg"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="20dp" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/hear"
-            android:layout_width="110sp"
-            android:layout_height="110sp"
-            android:backgroundTint="#B0C3D1"
-            android:scaleType="centerInside"
-            android:src="@drawable/image"
-            app:maxImageSize="0dp"
-            tools:layout_editor_absoluteX="19dp"
-            tools:layout_editor_absoluteY="148dp" />
 
 
         <!--    <com.google.android.material.button.MaterialButton-->

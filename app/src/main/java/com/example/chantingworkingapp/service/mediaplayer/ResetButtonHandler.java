@@ -21,11 +21,8 @@ public class ResetButtonHandler extends AbstractMediaPlayerEventHandler {
 
     @Override
     public void handle(JapaMalaModel japaMalaModel, View view) {
-
         final MediaPlayer mediaPlayer = super.getMediaplayer();
-
         mediaPlayer.pause();
-
         this.showConfirmationDialog(mediaPlayer);
     }
 
@@ -45,7 +42,7 @@ public class ResetButtonHandler extends AbstractMediaPlayerEventHandler {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         CommonUtils.vibrateFunction(50,vibrator);
-                        mainActivity.getHkMantraClickHandler().resetButtonFunction();
+                        //mainActivity.resetButtonFunction();
                     }
                 },
                 new DialogInterface.OnClickListener() {

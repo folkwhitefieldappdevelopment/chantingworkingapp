@@ -8,13 +8,13 @@ public class RoundDataModel {
 
     private Map<Milestone, RoundMilestoneDataModel> japaMalaRoundMilestoneDataModelMap;
 
-    private int roundId;
+    private int roundId;// number of the respective round
 
     private int startTime;
 
     private int endTime;
 
-    private int totalHeadCount;
+    private int totalHeardCount;
 
     public int getEndTime() {
         return endTime;
@@ -49,10 +49,10 @@ public class RoundDataModel {
     }
 
     public int getTotalHeadCount() {
-        return totalHeadCount;
+        return totalHeardCount;
     }
 
     public void setTotalHeadCount(int totalHeadCount) {
-        this.totalHeadCount = totalHeadCount;
+        this.totalHeardCount = totalHeadCount;
     }
 }

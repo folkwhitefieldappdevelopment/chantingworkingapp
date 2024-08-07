@@ -1,11 +1,9 @@
 package com.example.chantingworkingapp.service.mediaplayer;
 
-import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
-import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,7 +12,6 @@ import android.widget.TextView;
 import com.example.chantingworkingapp.MainActivity;
 import com.example.chantingworkingapp.R;
 import com.example.chantingworkingapp.model.JapaMalaModel;
-import com.example.chantingworkingapp.util.CommonUtils;
 
 import java.text.MessageFormat;
 import java.util.Locale;
@@ -23,6 +20,7 @@ public class HkMantraClickHandler extends AbstractMediaPlayerEventHandler{
 
     private ImageView startButtonImage = null;
     private TextView timerTextforTheMantra = null;
+    private SpeedButtonHandler speedButton;
     boolean varForCheckingIfMantraStoppedInBetween ;
     private final Handler handlerForTimer = new Handler(Looper.getMainLooper());
     private long timeInMsForTimer = 0;
@@ -31,38 +29,43 @@ public class HkMantraClickHandler extends AbstractMediaPlayerEventHandler{
     private long updatingTimeForTimerRunnable = 0;
     private int secondsForTimer;
     private int minutesForTimer;
+    private SpChantingThread spChantingThread;
     private int timeToStopTimerForChangingText;
     private int hearingCountTextOfUser;
     private int chantingCountTextOfSP;
+    private boolean start;
 
     public HkMantraClickHandler(MainActivity appCompatActivity, MediaPlayer mediaplayer) {
         super(appCompatActivity, mediaplayer);
         this.startButtonImage = super.getAppCompatActivity().findViewById(R.id.startIconImageView);
         this.timerTextforTheMantra = super.getAppCompatActivity().findViewById(R.id.timetext);
+        speedButton = new SpeedButtonHandler(appCompatActivity,mediaplayer);
+
     }
 
     @Override
     public void handle(JapaMalaModel japaMalaModel, View view) {
+        spChantingThread = new SpChantingThread(getAppCompatActivity(),japaMalaModel, start,super.getMediaplayer());
         if(startButtonImage.getVisibility() == View.VISIBLE){ //Resume
-            startButtonFunction(view);
+            startButtonFunction(view,spChantingThread);
         } else if(startButtonImage.getVisibility() == View.INVISIBLE){ //Pause
-            pauseButtonFunction(view);
+            pauseButtonFunction(view,spChantingThread);
         }
     }
 
     //Start Button Function
-    private void startButtonFunction(View view) {
+    private void startButtonFunction(View view,SpChantingThread spChantingThread) {
         MediaPlayer mediaPlayer = super.getMediaplayer();
         startButtonImage.setVisibility(View.INVISIBLE);
         startingTimeForTimerRunnable = SystemClock.uptimeMillis();
         super.vibrate(50);
-        handlerForTimer.postDelayed(runnableForTimer, 0);
+        handlerForTimer.postDelayed(spChantingThread, 0);
         if (mediaPlayer != null && mediaPlayer.getCurrentPosition() == 0 && !varForCheckingIfMantraStoppedInBetween) {
-            mediaPlayer.setPlaybackParams(super.getMediaplayer().getPlaybackParams().setSpeed(1));
+            mediaPlayer.setPlaybackParams(super.getMediaplayer().getPlaybackParams().setSpeed(Float.parseFloat(speedButton.getSpeed())));
             mediaPlayer.start();
             timeToStopTimerForChangingText = 4030;
             Log.e("MainActivity", "Successfully started MediaPlayer");
-            handlerForTimer.postDelayed(runnableForTimer, (long) (6435));
+            handlerForTimer.postDelayed(spChantingThread, (long) (6435));
         } else if (varForCheckingIfMantraStoppedInBetween) {
             timeToStopTimerForChangingText = 4030;
             //updateStartButtonText();
@@ -72,10 +75,10 @@ public class HkMantraClickHandler extends AbstractMediaPlayerEventHandler{
     }
 
     //Pause Button Function
-    private void pauseButtonFunction(View view) {
+    private void pauseButtonFunction(View view,SpChantingThread spChantingThread) {
         MediaPlayer mediaPlayer = super.getMediaplayer();
         startButtonImage.setVisibility(View.VISIBLE);
-        handlerForTimer.removeCallbacks(runnableForTimer);
+        handlerForTimer.removeCallbacks(spChantingThread);
         timeBuffForTimer += timeInMsForTimer;
         super.vibrate(50);
         if (mediaPlayer.getCurrentPosition() < 6435 && !varForCheckingIfMantraStoppedInBetween) {
@@ -89,10 +92,10 @@ public class HkMantraClickHandler extends AbstractMediaPlayerEventHandler{
         }
     }
     //Reset Button function
-    public void resetButtonFunction() {
+    public void resetButtonFunction(SpChantingThread spChantingThread) {
         MediaPlayer mediaPlayer = super.getMediaplayer();
         startButtonImage.setVisibility(View.VISIBLE);
-        handlerForTimer.removeCallbacks(runnableForTimer);
+        handlerForTimer.removeCallbacks(spChantingThread);
         timeBuffForTimer += timeInMsForTimer;
         super.vibrate(50);
         if (mediaPlayer != null) {
@@ -105,20 +108,4 @@ public class HkMantraClickHandler extends AbstractMediaPlayerEventHandler{
         timeBuffForTimer = 0L;
         timerTextforTheMantra.setText("00:00");
     }
-
-    //Runnable
-    private final Runnable runnableForTimer = new Runnable() {
-        @Override
-        public void run() {
-            timeInMsForTimer = SystemClock.uptimeMillis() - startingTimeForTimerRunnable;
-            updatingTimeForTimerRunnable = timeBuffForTimer + timeInMsForTimer;
-            secondsForTimer = (int) (updatingTimeForTimerRunnable / 1000);
-            minutesForTimer = secondsForTimer / 60;
-            secondsForTimer = secondsForTimer % 60;
-            // Update UI
-            timerTextforTheMantra.setText(MessageFormat.format("{0}:{1}", String.format(Locale.getDefault(), "%02d", minutesForTimer), String.format(Locale.getDefault(), "%02d", secondsForTimer)));
-            // Schedule the next update
-            handlerForTimer.postDelayed(this, 0);
-        }
-    };
 }

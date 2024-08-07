@@ -23,4 +23,7 @@ public abstract class AbstractMediaPlayerEventHandler extends AbstractEventHandl
     public void setMediaplayer(MediaPlayer mediaplayer) {
         this.mediaplayer = mediaplayer;
     }
+
+
+
 }

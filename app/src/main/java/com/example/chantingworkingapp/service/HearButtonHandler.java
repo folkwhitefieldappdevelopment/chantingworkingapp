@@ -1,20 +1,15 @@
 package com.example.chantingworkingapp.service;
 
-import android.content.Context;
-import android.os.Vibrator;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.chantingworkingapp.MainActivity;
 import com.example.chantingworkingapp.R;
 import com.example.chantingworkingapp.constant.NamaPrabhuToasts;
 import com.example.chantingworkingapp.model.JapaMalaModel;
-import com.example.chantingworkingapp.util.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +31,18 @@ public class HearButtonHandler extends AbstractEventHandler {
 
     private void incrementHeardCount(JapaMalaModel japaMalaModel){
 
-        japaMalaModel.getJapaMapaRoundDataModels();
+        japaMalaModel.getJapaMalaRoundDataModels();
+        TextView hearButton = super.getAppCompatActivity().findViewById(R.id.Hearing_text);
+        TextView levelTextButton = super.getAppCompatActivity().findViewById(R.id.levelCount);
+        int heardBeads = Integer.parseInt(hearButton.getText().toString());
+        int levelValue = Integer.parseInt(levelTextButton.getText().toString());
+        for(int add = 0;add<levelValue;add++) {
+            if (heardBeads < 108) {
+                heardBeads = heardBeads + 1;
+                hearButton.setText(String.valueOf(heardBeads));
+            }
+        }
+
     }
 
     private void sendToast(View view) {

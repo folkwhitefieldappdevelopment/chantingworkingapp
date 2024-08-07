@@ -17,8 +17,6 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-
-
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -28,9 +26,14 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        viewBinding = true
     }
 }
 dependencies {
@@ -39,6 +42,7 @@ dependencies {
     implementation( "androidx.localbroadcastmanager:localbroadcastmanager:1.1.0")
     implementation( "androidx.appcompat:appcompat:1.7.0")
     implementation( "androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation ("com.intuit.sdp:sdp-android:1.1.1")
     implementation( "com.google.code.gson:gson:2.10")
     implementation("com.google.firebase:firebase-auth")
     implementation ("androidx.cardview:cardview:1.0.0")

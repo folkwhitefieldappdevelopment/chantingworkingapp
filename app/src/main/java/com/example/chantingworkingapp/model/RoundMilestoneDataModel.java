@@ -6,7 +6,7 @@ public class RoundMilestoneDataModel {
 
     private Milestone milestone;
 
-    private int milestoneHeadCount;
+    private int milestoneHeardCount;
 
     public Milestone getMilestone() {
         return milestone;
@@ -16,11 +16,11 @@ public class RoundMilestoneDataModel {
         this.milestone = milestone;
     }
 
-    public int getMilestoneHeadCount() {
-        return milestoneHeadCount;
+    public int getMilestoneHeardCount() {
+        return milestoneHeardCount;
     }
 
-    public void setMilestoneHeadCount(int milestoneHeadCount) {
-        this.milestoneHeadCount = milestoneHeadCount;
+    public void setMilestoneHeardCount(int milestoneHeardCount) {
+        this.milestoneHeardCount = milestoneHeardCount;
     }
 }
