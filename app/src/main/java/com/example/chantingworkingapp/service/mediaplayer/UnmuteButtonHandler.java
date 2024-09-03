@@ -18,9 +18,9 @@ public class UnmuteButtonHandler extends AbstractMediaPlayerEventHandler{
 
     @Override
     public void handle(JapaMalaModel japaMalaModel, View view) {
-        super.getMediaplayer().setVolume(1.0f, 1.0f);
+        super.animateAndVibrate(view,50,200);
+        super.getAppCompatActivity().getHkMantraClickHandler().getCurrentMediaPlayer().setVolume(1.0f, 1.0f);
         super.getAppCompatActivity().findViewById(R.id.muteIconImageView).setVisibility(View.VISIBLE);
         super.getAppCompatActivity().findViewById(R.id.unmuteIconImageView).setVisibility(View.INVISIBLE);
-        super.vibrate(50);
     }
 }

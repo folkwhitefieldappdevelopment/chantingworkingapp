@@ -1,0 +1,6 @@
+<resources>
+    <dimen name="player_height">200dp</dimen>
+    <dimen name="login_activity_layout_padding_top">70sp</dimen>
+    <dimen name="login_activity_sp_image_margin_top">70sp</dimen>
+    <dimen name="level_selection_image_landscape_margin_start">0sp</dimen>
+</resources>

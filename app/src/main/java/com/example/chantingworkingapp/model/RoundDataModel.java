@@ -2,34 +2,27 @@ package com.example.chantingworkingapp.model;
 
 import com.example.chantingworkingapp.constant.Milestone;
 
+import java.util.Date;
 import java.util.Map;
 
 public class RoundDataModel {
 
-    private Map<Milestone, RoundMilestoneDataModel> japaMalaRoundMilestoneDataModelMap;
+    private Map<Milestone, RoundMilestoneDataModel> roundMilestoneDataModelMap;
 
     private int roundId;// number of the respective round
 
-    private int startTime;
+    private Date startTime;
 
-    private int endTime;
+    private Date endTime;
 
     private int totalHeardCount;
 
-    public int getEndTime() {
-        return endTime;
+    public Map<Milestone, RoundMilestoneDataModel> getRoundMilestoneDataModelMap() {
+        return roundMilestoneDataModelMap;
     }
 
-    public void setEndTime(int endTime) {
-        this.endTime = endTime;
-    }
-
-    public Map<Milestone, RoundMilestoneDataModel> getJapaMalaRoundMilestoneDataModelMap() {
-        return japaMalaRoundMilestoneDataModelMap;
-    }
-
-    public void setJapaMalaRoundMilestoneDataModelMap(Map<Milestone, RoundMilestoneDataModel> japaMalaRoundMilestoneDataModelMap) {
-        this.japaMalaRoundMilestoneDataModelMap = japaMalaRoundMilestoneDataModelMap;
+    public void setRoundMilestoneDataModelMap(Map<Milestone, RoundMilestoneDataModel> roundMilestoneDataModelMap) {
+        this.roundMilestoneDataModelMap = roundMilestoneDataModelMap;
     }
 
     public int getRoundId() {
@@ -40,19 +33,27 @@ public class RoundDataModel {
         this.roundId = roundId;
     }
 
-    public int getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(int startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public int getTotalHeadCount() {
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public int getTotalHeardCount() {
         return totalHeardCount;
     }
 
-    public void setTotalHeadCount(int totalHeadCount) {
-        this.totalHeardCount = totalHeadCount;
+    public void setTotalHeardCount(int totalHeardCount) {
+        this.totalHeardCount = totalHeardCount;
     }
 }

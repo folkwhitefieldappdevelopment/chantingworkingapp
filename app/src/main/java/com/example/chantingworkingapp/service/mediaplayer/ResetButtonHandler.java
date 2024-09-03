@@ -21,23 +21,19 @@ public class ResetButtonHandler extends AbstractMediaPlayerEventHandler {
 
     @Override
     public void handle(JapaMalaModel japaMalaModel, View view) {
-        final MediaPlayer mediaPlayer = super.getMediaplayer();
+        super.animateAndVibrate(view,50,200);
+        final MediaPlayer mediaPlayer = getAppCompatActivity().getHkMantraClickHandler().getCurrentMediaPlayer();
         mediaPlayer.pause();
         this.showConfirmationDialog(mediaPlayer);
     }
 
     private void showConfirmationDialog(MediaPlayer mediaPlayer){
-
-        final Vibrator vibrator = (Vibrator) super.getAppCompatActivity().getSystemService(Context.VIBRATOR_SERVICE);
-
-        final MainActivity mainActivity = (MainActivity) super.getAppCompatActivity();
-
-        super.vibrate(50);
-
+        Vibrator vibrator = (Vibrator) super.getAppCompatActivity().getSystemService(Context.VIBRATOR_SERVICE);
+        MainActivity mainActivity = (MainActivity) super.getAppCompatActivity();
         CommonUtils.showWarningDialog(
                 super.getAppCompatActivity(),
-                "Warning",
-                "Are you sure you will lose your Progress for the current round?",
+                "Hare Krishna",
+                "Are you sure to reset!! On your confirmation, current round will be started again freshly.",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

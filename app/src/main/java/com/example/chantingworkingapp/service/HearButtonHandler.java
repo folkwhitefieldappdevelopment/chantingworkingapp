@@ -10,6 +10,8 @@ import com.example.chantingworkingapp.MainActivity;
 import com.example.chantingworkingapp.R;
 import com.example.chantingworkingapp.constant.NamaPrabhuToasts;
 import com.example.chantingworkingapp.model.JapaMalaModel;
+import com.example.chantingworkingapp.service.beadcount.JapaMalaViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,49 +19,62 @@ import java.util.Random;
 
 public class HearButtonHandler extends AbstractEventHandler {
 
+    private final TextView levelCountTextView;
+    private int levelCountValue = 1;
+
     public HearButtonHandler(MainActivity appCompatActivity) {
         super(appCompatActivity);
+        levelCountTextView = getAppCompatActivity().findViewById(R.id.levelCount);
     }
 
     @Override
     public void handle(JapaMalaModel japaMalaModel, View view) {
+        super.vibrate(50);
 
-        //TextView textView = super.getAppCompatActivity().findViewById();
-        this.incrementHeardCount(japaMalaModel);
-        this.sendToast(view);
-    }
+        FloatingActionButton floatingActionButton = super.getAppCompatActivity().findViewById(R.id.hearButton);
+        floatingActionButton.animate().setDuration(100).scaleX(1.1f).scaleY(1.1f).withEndAction(() ->
+                floatingActionButton.animate().setDuration(100).scaleX(1.0f).scaleY(1.0f));
 
-    private void incrementHeardCount(JapaMalaModel japaMalaModel){
+        JapaMalaViewModel japaMalaViewModel = getAppCompatActivity().getJapaMalaViewModel();
 
-        japaMalaModel.getJapaMalaRoundDataModels();
-        TextView hearButton = super.getAppCompatActivity().findViewById(R.id.Hearing_text);
-        TextView levelTextButton = super.getAppCompatActivity().findViewById(R.id.levelCount);
-        int heardBeads = Integer.parseInt(hearButton.getText().toString());
-        int levelValue = Integer.parseInt(levelTextButton.getText().toString());
-        for(int add = 0;add<levelValue;add++) {
-            if (heardBeads < 108) {
-                heardBeads = heardBeads + 1;
-                hearButton.setText(String.valueOf(heardBeads));
-            }
+        if (japaMalaViewModel.getBeadCounterLiveData().getValue() > 1) {
+            getAppCompatActivity().getJapaMalaViewModel().incrementHeardBy(levelCountValue);
+            this.sendToast();
         }
-
     }
 
-    private void sendToast(View view) {
+    public void handleLevelUp(View view) {
+        super.animateAndVibrate(view, 50, 100);
+        levelCountValue = Integer.parseInt(levelCountTextView.getText().toString());
+        if (levelCountValue < 8) {
+            levelCountValue++;
+            levelCountTextView.setText(String.valueOf(levelCountValue));
+        }
+    }
+
+    public void handleLevelDown(View view) {
+        super.animateAndVibrate(view, 50, 100);
+        levelCountValue = Integer.parseInt(levelCountTextView.getText().toString());
+        if (levelCountValue > 1) {
+            levelCountValue--;
+            levelCountTextView.setText(String.valueOf(levelCountValue));
+        }
+    }
+
+    private void sendToast() {
         int lowerLimit = 0;
         int upperLimit = 13;
         List<Integer> used = new ArrayList<>();
 
-        View layout = super.getAppCompatActivity().getLayoutInflater().inflate(R.layout.custom_toast,(ViewGroup) super.getAppCompatActivity().findViewById(R.id.custom_toast_layout));
+        View layout = super.getAppCompatActivity().getLayoutInflater().inflate(R.layout.custom_toast, (ViewGroup) super.getAppCompatActivity().findViewById(R.id.custom_toast_layout));
         TextView textHearQuote = layout.findViewById(R.id.text);
-        textHearQuote.setText(String.valueOf(NamaPrabhuToasts.TOAST_MSGS[this.generateRandomNumber(lowerLimit,upperLimit,used)]));
+        textHearQuote.setText(String.valueOf(NamaPrabhuToasts.TOAST_MSGS[this.generateRandomNumber(lowerLimit, upperLimit, used)]));
 
         // Create and show the custom Toast
         Toast toast = new Toast(super.getAppCompatActivity().getApplicationContext());
         toast.setGravity(Gravity.START | Gravity.CENTER, 1100, 400);
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.setView(layout);
-        super.vibrate(50);
         toast.show();
     }
 

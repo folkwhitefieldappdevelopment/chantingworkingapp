@@ -1,6 +1,7 @@
 package com.example.chantingworkingapp.service.mediaplayer;
 
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
@@ -13,77 +14,58 @@ import com.example.chantingworkingapp.MainActivity;
 import com.example.chantingworkingapp.R;
 import com.example.chantingworkingapp.constant.Milestone;
 import com.example.chantingworkingapp.model.JapaMalaModel;
+import com.example.chantingworkingapp.model.RoundDataModel;
+import com.google.android.play.core.integrity.r;
 
 import java.text.MessageFormat;
+import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
-public class SpChantingThread extends AbstractMediaPlayerEventHandler implements Runnable{
-    private JapaMalaModel japaMalaModel;
-    private  SpeedButtonHandler speedButtonHandler;
-    private TextView timerTextforTheMantra = null, chantingText = null;
-    boolean varForCheckingIfMantraStoppedInBetween ;
+public class SpChantingThread implements Runnable {
+
+    private final JapaMalaModel japaMalaModel;
+    private int currentRoundId;
+    private int currentBeadNumber = 1;
+    private final MediaPlayer mediaPlayer;
+
     private final Handler handlerForTimer = new Handler(Looper.getMainLooper());
-    private long timeInMsForTimer = 0;
-    private long startingTimeForTimerRunnable = 0;
-    private long timeBuffForTimer = 0;
-    private long updatingTimeForTimerRunnable = 0;
-    private int secondsForTimer;
-    private int minutesForTimer;
-    private boolean start = true;
-    private ProgressBar progressBar16;
-    private Milestone milestone;
-    public SpChantingThread(MainActivity appCompatActivity, JapaMalaModel japaMalaModel, Boolean start, MediaPlayer mediaPlayer) {
-        super(appCompatActivity,mediaPlayer);
+
+    public SpChantingThread(JapaMalaModel japaMalaModel, int currentRoundId, MediaPlayer mediaPlayer) {
         this.japaMalaModel = japaMalaModel;
-        this.start = true;
-        timerTextforTheMantra = super.getAppCompatActivity().findViewById(R.id.timetext);
-        chantingText = super.getAppCompatActivity().findViewById(R.id.chanting_text);
-        progressBar16 = super.getAppCompatActivity().findViewById(R.id.progress_bar_1);
-        speedButtonHandler = new SpeedButtonHandler(appCompatActivity,mediaPlayer);
+        this.currentRoundId = currentRoundId;
+        this.mediaPlayer = mediaPlayer;
     }
 
     @Override
     public void run() {
-        if(japaMalaModel.getJapaMalaRoundDataModels() == null){
-            japaMalaModel.setJapaMalaRoundDataModels(new ArrayList<>());
+        int mediaCurrentPosition = mediaPlayer.getCurrentPosition();
+
+        Log.e(this.getClass().getSimpleName(), MessageFormat.format("{0}:{1}", String.format(Locale.getDefault(), "%02d", TimeUnit.MILLISECONDS.toMinutes(mediaCurrentPosition), String.format(Locale.getDefault(), "%02d", TimeUnit.MILLISECONDS.toSeconds(mediaCurrentPosition)))));
+        RoundDataModel roundDataModel = null;
+
+        if (japaMalaModel.getRoundDataModels() == null) {
+            japaMalaModel.setRoundDataModels(new ArrayList<>());
+        } else {
+            roundDataModel = japaMalaModel.getRoundDataModels().get(currentRoundId - 1);
         }
 
-        timeInMsForTimer = SystemClock.uptimeMillis() - startingTimeForTimerRunnable;
-        updatingTimeForTimerRunnable = timeBuffForTimer + timeInMsForTimer;
-        secondsForTimer = (int) (updatingTimeForTimerRunnable / 1000);
-        minutesForTimer = secondsForTimer / 60;
-        secondsForTimer = secondsForTimer % 60;
-        // Update UI
-        timerTextforTheMantra.setText(MessageFormat.format("{0}:{1}", String.format(Locale.getDefault(), "%02d", minutesForTimer), String.format(Locale.getDefault(), "%02d", secondsForTimer)));
-        // Schedule the next update
+        if (roundDataModel == null) {
+            roundDataModel = new RoundDataModel();
+            roundDataModel.setRoundId(currentRoundId);
+            roundDataModel.setStartTime(new Date());
+            roundDataModel.setRoundMilestoneDataModelMap(new HashMap<>());
+        }
 
-        handlerForTimer.postDelayed(this, 0);
-
+        if (currentBeadNumber != 108) {
+            currentBeadNumber++;
+        }
     }
 
-    @Override
-    public void handle(JapaMalaModel japaMalaModel, View view) {
-        run();
-
-
-    }
-
-    private void runSpChanting() {
-
-            float spSpeed = Float.parseFloat(speedButtonHandler.getSpeed());
-
-
-            int waitTimeForChanting = 0;
-            int spChantingCount = Integer.parseInt(chantingText.getText().toString());
-            if( spChantingCount <108){
-                waitTimeForChanting = 4030;
-                spChantingCount ++;
-                chantingText.setText(String.valueOf(spChantingCount));
-
-
-            }
-
-
+    public JapaMalaModel getJapaMalaModel() {
+        return japaMalaModel;
     }
 }

@@ -14,7 +14,7 @@ public class WelcomeActiviity extends AppCompatActivity {
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.welcomscreen);
+        setContentView(R.layout.login_activity);
         loginBtton = findViewById(R.id.loginButton);
         loginBtton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -27,7 +27,7 @@ public class WelcomeActiviity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WelcomeActiviity.this, registerActivity.class);
+                Intent intent = new Intent(WelcomeActiviity.this, RegisterActivity.class);
                 startActivity(intent);
                 finish();
             }

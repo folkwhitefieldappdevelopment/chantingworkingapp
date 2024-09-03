@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".LevelSelectionActivity">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/welcome_page_bg"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/headertext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:shadowColor="#000000"
+            android:shadowDx="15"
+            android:shadowDy="15"
+            android:shadowRadius="15"
+            android:text="@string/immerse_into_the_transcental_vibration"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50sp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="@integer/linearlayoutOrientation">
+                <!-- Level 1 :: Mindful Japa -->
+                <ImageView
+                    android:id="@+id/level1MindFullJapa"
+                    android:layout_width="250sp"
+                    android:layout_height="250sp"
+                    android:contentDescription="@string/mindful_japa"
+                    app:srcCompat="@drawable/level1_mindful_japa"
+                    android:layout_marginBottom="25sp"/>
+
+                <!-- Level 2 :: Mind full and Heart full Japa -->
+                <ImageView
+                    android:id="@+id/level2MindAndHeartFullJapa"
+                    android:layout_width="250sp"
+                    android:layout_height="250sp"
+                    android:contentDescription="@string/mindful_japa"
+                    app:srcCompat="@drawable/level2_heartful_japa"
+                    android:layout_marginStart="@dimen/level_selection_image_landscape_margin_start"
+                    android:layout_marginBottom="25sp"/>
+
+                <!-- Level 3 :: Soul full Japa -->
+                <ImageView
+                    android:id="@+id/level3SoulFullJapa"
+                    android:layout_width="250sp"
+                    android:layout_height="250sp"
+                    android:contentDescription="@string/mindful_japa"
+                    app:srcCompat="@drawable/level3_soulful_japa"
+                    android:layout_marginStart="@dimen/level_selection_image_landscape_margin_start"
+                    android:layout_marginBottom="25sp"/>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -4,6 +4,14 @@
 
     <string name="navigation_close">"Navigation View Closed"</string>
     <string name="default_web_client_id" translatable="false">768078382622-jcegn3pa1fk5g3bp2svv5sbru8bf5hen.apps.googleusercontent.com</string>
+    <string name="welcome_message">Hare Krishna, welcome\n Please sign up to chant and hear the holy name Haribol!</string>
+    <string name="google_icon">Google Icon</string>
+    <string name="sign_up_using_google">Sign up using Google</string>
+    <string name="shila_prabhupada_welcome_image">Shila Prabhupada Welcome Image</string>
+    <string name="iskcon_bangalore_logo">Iskcon Bangalore Logo</string>
+    <string name="main_activity_hk_maha_mantra">Hare Kṛṣṇa Hare Kṛṣṇa\nKṛṣṇa Kṛṣṇa Hare Hare Hare Rāma Hare Rāma\nRāma Rāma Hare Hare</string>
+    <string name="mindful_japa">Mindful Japa</string>
+    <string name="immerse_into_the_transcental_vibration">Immerse Into the Transcental Vibration</string>
     <string-array name="playback_speed_options">
         <item>0.75x</item>
         <item>1.0x</item>

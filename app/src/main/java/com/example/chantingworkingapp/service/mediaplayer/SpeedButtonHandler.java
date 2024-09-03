@@ -12,9 +12,10 @@ import com.example.chantingworkingapp.MainActivity;
 import com.example.chantingworkingapp.model.JapaMalaModel;
 import com.example.chantingworkingapp.util.CommonUtils;
 
-public class SpeedButtonHandler extends AbstractMediaPlayerEventHandler{
+public class SpeedButtonHandler extends AbstractMediaPlayerEventHandler {
 
-    private String speed  = "1.0f";
+    private String speed = "1.0f";
+
     public String getSpeed() {
         return speed;
     }
@@ -22,23 +23,20 @@ public class SpeedButtonHandler extends AbstractMediaPlayerEventHandler{
     public SpeedButtonHandler(MainActivity appCompatActivity, MediaPlayer mediaplayer) {
         super(appCompatActivity, mediaplayer);
     }
+
     @Override
     public void handle(JapaMalaModel japaMalaModel, View view) {
-        MediaPlayer mediaPlayer = super.getMediaplayer();
-
+        super.animateAndVibrate(view,50,200);
+        MediaPlayer mediaPlayer = super.getAppCompatActivity().getHkMantraClickHandler().getCurrentMediaPlayer();
         mediaPlayer.pause();
         this.showConfirmationDialog(getMediaplayer());
     }
+
     private void showConfirmationDialog(MediaPlayer mediaPlayer) {
         final Vibrator vibrator = (Vibrator) super.getAppCompatActivity().getSystemService(Context.VIBRATOR_SERVICE);
-
-
         final MainActivity mainActivity = (MainActivity) super.getAppCompatActivity();
-        super.vibrate(50);
-
         final String[] speeds = {"1x", "1.5x", "2x"};
         final int[] selectedItem = {0}; // Default selected item
-
         AlertDialog.Builder builder = new AlertDialog.Builder(super.getAppCompatActivity());
         builder.setTitle("Choose Speed")
                 .setSingleChoiceItems(speeds, selectedItem[0], new DialogInterface.OnClickListener() {
