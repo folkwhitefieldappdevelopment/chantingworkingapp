@@ -20,123 +20,47 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-
         android:background="@drawable/welcome_page_bg">
-        <!--    <RelativeLayout-->
-        <!--        android:layout_width="226dp"-->
-        <!--        android:layout_height="211dp"-->
-        <!--        android:layout_marginLeft="10dp"-->
-        <!--        android:layout_toRightOf="@id/HKM"-->
-        <!--        android:padding="16sp">-->
 
-        <!-- Scoreboard background -->
-
-        <!-- Counter value text -->
-
-
-        <!--        &lt;!&ndash; Round label (optional) &ndash;&gt;-->
-
-        <!--    </RelativeLayout>-->
-
-
-        <!--        <LinearLayout-->
-        <!--            android:id="@id/linear"-->
-        <!--            android:layout_width="330sp"-->
-        <!--            android:layout_height="50sp"-->
-        <!--            android:layout_below="@id/start"-->
-        <!--            android:layout_marginStart="200sp"-->
-        <!--            android:layout_marginLeft="34dp"-->
-        <!--            android:layout_marginTop="63dp"-->
-        <!--            android:layout_marginEnd="5sp"-->
-        <!--            android:layout_marginRight="-9sp"-->
-        <!--            android:layout_toRightOf="@id/add"-->
-        <!--            android:orientation="horizontal"-->
-        <!--            tools:ignore="NotSibling">-->
-
-
-        <!--        </LinearLayout>-->
-
-
-        <!-- Navigation Drawer -->
-
-
-        <!--    <TextView-->
-        <!--        android:id="@+id/chanting_score"-->
-
-        <!--        android:layout_width="wrap_content"-->
-        <!--        android:layout_height="wrap_content"-->
-
-        <!--        android:fontFamily="@font/balram"-->
-        <!--        android:padding="2dp"-->
-        <!--        android:scaleType="centerCrop"-->
-        <!--        android:text="16"-->
-        <!--        android:textAlignment="viewStart"-->
-        <!--        android:textColor="@color/white"-->
-        <!--        android:textSize="12sp"-->
-        <!--        tools:layout_editor_absoluteX="339dp"-->
-        <!--        tools:layout_editor_absoluteY="0dp" />-->
-
-        <ImageView
-            android:id="@+id/SpImage"
-            android:layout_width="244dp"
-            android:layout_height="258dp"
-            android:elevation="10sp"
-            android:stateListAnimator="@anim/slide_out_bottom"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toTopOf="@+id/guideline12"
-            app:layout_constraintEnd_toStartOf="@+id/guideline24"
-            app:layout_constraintHorizontal_bias="0.62"
-            app:layout_constraintStart_toStartOf="@+id/guideline11"
-            app:layout_constraintTop_toTopOf="@+id/guideline41"
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="300sp"
+            android:layout_height="330sp"
+            android:orientation="@integer/linearlayoutOrientation"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline6"
+            app:layout_constraintTop_toTopOf="@+id/guideline10"
             app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/srila_prabhupada_welcome_image_lbg" />
+            tools:ignore="MissingConstraints">
 
-        <!--        <LinearLayout-->
-        <!--            android:id="@+id/TapIcon"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_height="0dp"-->
-        <!--            android:gravity="center"-->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/spMainActivityImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/login_activity_sp_image_margin_top"
+                android:contentDescription="@string/shila_prabhupada_welcome_image"
+                android:visibility="visible"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large"
+                app:srcCompat="@drawable/srila_prabhupada_welcome_image_lbg"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="10dp" />
 
-        <!--            android:orientation="horizontal"-->
-        <!--            android:padding="0dp"-->
-        <!--            app:layout_constraintBottom_toTopOf="@+id/guideline7"-->
-        <!--            app:layout_constraintEnd_toStartOf="@+id/guideline3"-->
-        <!--            app:layout_constraintStart_toStartOf="@+id/guideline21"-->
-        <!--            app:layout_constraintTop_toTopOf="@+id/guideline18">-->
-
-        <!--            <FrameLayout-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:background="@drawable/eartapicon"-->
-        <!--                android:padding="0dp">-->
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/hearButton"
-            android:layout_width="@dimen/_90sdp"
-            android:layout_height="@dimen/_90sdp"
-            android:backgroundTint="#F1E8EB"
-            android:elevation="0dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/image"
-            app:layout_constraintBottom_toTopOf="@+id/guideline7"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintStart_toStartOf="@+id/guideline21"
-            app:layout_constraintTop_toTopOf="@+id/guideline18"
-            app:maxImageSize="0dp"
-            app:fabCustomSize="65sp"
-            />
-
-
-        <!--            </FrameLayout>-->
-
-        <!--        </LinearLayout>-->
+            <ViewFlipper
+                android:id="@+id/focusSlideshowFlipper"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/main_activity_view_flipper_bg"
+                android:elevation="2dp"
+                android:visibility="invisible"
+                tools:ignore="MissingConstraints" />
+        </RelativeLayout>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/hkmCardView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline14"
             android:layout_marginStart="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline14"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -147,16 +71,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/main_activity_hkm_bg"
-                android:elevation="10dp"
-                >
+                android:elevation="10dp">
 
                 <!-- ScrollView with TextView inside -->
                 <RelativeLayout
                     android:id="@+id/hkmTextScrollView"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:focusable="true"
                     app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:gravity="center"
+                    android:clickable="true">
 
                     <!-- ScrollView for Text -->
                     <ScrollView
@@ -166,10 +92,10 @@
                             android:id="@+id/hareKrishnaMahaMantraTextView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:letterSpacing="0.2"
                             android:layout_gravity="center"
-                            android:text="@string/main_activity_hk_maha_mantra"
+                            android:letterSpacing="0.1"
                             android:textAlignment="center"
+                            android:visibility="visible"
                             android:textColor="@color/ch_light_color"
                             android:textSize="16sp" />
                     </ScrollView>
@@ -183,8 +109,6 @@
                         android:layout_margin="20dp"
                         android:alpha="0.8"
                         android:src="@drawable/baseline_play_arrow_24" />
-
-
                 </RelativeLayout>
 
                 <!-- Horizontal line -->
@@ -296,47 +220,35 @@
                             android:paddingRight="10sp"
                             android:src="@drawable/baseline_refresh_24" />
 
-                        <ImageView
-                            android:id="@+id/speedMenuImage"
+
+                        <TextView
+                            android:id="@+id/speedMenu"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:gravity="center"
+                            android:letterSpacing="0.2"
                             android:paddingLeft="10sp"
                             android:paddingRight="10sp"
-                            android:src="@drawable/baseline_speed_24" /><!-- Replace with your icon -->
+                            android:text="1x"
+                            android:textAlignment="center"
+                            android:textColor="@color/ch_light_color"
+                            android:textSize="@dimen/_12sdp" />
+
                     </LinearLayout>
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/goldencommand"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/main_activity_hkm_bg"
-            android:fontFamily="@font/hind"
-            android:padding="5sp"
-            android:scaleType="centerCrop"
-            android:text="Don't think. You have 22 hours to think. Tell your mind. Please allow me to hear, all your thinking you can do after I finish Japa."
-
-            android:textAlignment="center"
-            android:textColor="@color/aquamarine"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/guideline9"
-            app:layout_constraintEnd_toStartOf="@+id/guideline4"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline6"
-            app:layout_constraintTop_toBottomOf="@+id/SpImage"
-            app:layout_constraintVertical_bias="0.322" />
 
         <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="6dp"
             android:orientation="horizontal"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@id/guideline15"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintHorizontal_bias="0.24"
@@ -364,80 +276,13 @@
                 android:src="@drawable/baseline_history_24" />
         </LinearLayout>
 
-        <!--    <Button-->
-        <!--        android:id="@+id/reset"-->
-        <!--        android:layout_width="61dp"-->
-        <!--        android:layout_height="62dp"-->
-
-
-        <!--        android:layout_weight="1"-->
-        <!--        android:background="@drawable/round_button"-->
-
-        <!--        android:fontFamily="@font/balram"-->
-        <!--        android:scaleType="centerCrop"-->
-        <!--        android:src="@drawable/baseline_refresh_24"-->
-        <!--        android:text="Reset"-->
-
-        <!--        tools:layout_editor_absoluteX="160dp"-->
-        <!--        tools:layout_editor_absoluteY="205dp" />-->
-
-        <!--    <Button-->
-        <!--        android:id="@+id/stop"-->
-        <!--        android:layout_width="62dp"-->
-        <!--        android:layout_height="62dp"-->
-
-
-        <!--        android:layout_weight="1"-->
-        <!--        android:background="@drawable/round_button"-->
-
-        <!--        android:enabled="false"-->
-        <!--        android:fontFamily="@font/balram"-->
-        <!--        android:scaleType="centerCrop"-->
-        <!--        android:text="Stop"-->
-        <!--        android:textSize="13sp"-->
-        <!--        app:icon="@drawable/baseline_stop_24"-->
-
-
-        <!--        tools:layout_editor_absoluteX="75dp"-->
-        <!--        tools:layout_editor_absoluteY="205dp" />-->
-
-
-        <!--    <Spinner-->
-        <!--        android:id="@+id/playbackSpeedSpinner"-->
-
-        <!--        android:layout_width="72dp"-->
-        <!--        android:layout_height="34dp"-->
-        <!--        android:layout_marginEnd="40dp"-->
-
-        <!--        android:background="@drawable/dropup_background"-->
-        <!--        android:fontFamily="@font/balram"-->
-        <!--        android:scaleType="centerCrop"-->
-
-        <!--        app:layout_constraintBottom_toTopOf="@+id/Speed_text"-->
-        <!--        app:layout_constraintDimensionRatio="4:3"-->
-        <!--        app:layout_constraintEnd_toStartOf="@+id/guideline"-->
-        <!--        app:layout_constraintHorizontal_bias="0.5"-->
-        <!--        app:layout_constraintStart_toEndOf="@+id/resetbutton"-->
-        <!--        app:layout_constraintTop_toTopOf="@+id/guideline14"-->
-        <!--        app:layout_constraintVertical_bias="0.538" />-->
-
-        <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-        <!--            android:id="@+id/hear"-->
-        <!--            android:layout_width="120dp"-->
-        <!--            android:layout_height="120dp"-->
-        <!--            android:layout_marginTop="4dp"-->
-        <!--            android:backgroundTint="@color/white"-->
-        <!--            android:padding="8dp"-->
-        <!--            android:scaleType="centerInside"-->
-        <!--            android:src="@drawable/baseline_hearing_24"-->
-        <!--            app:layout_constraintStart_toStartOf="@+id/guideline5"-->
-        <!--            app:layout_constraintTop_toTopOf="@+id/guideline12"-->
-        <!--            app:maxImageSize="0dp" />-->
 
         <androidx.cardview.widget.CardView
-            android:layout_width="400dp"
-            android:layout_height="184dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline9"
+            android:id="@+id/cardView"
+            android:layout_width="wrap_content"
+            android:layout_height="179dp"
+            android:layout_marginTop="@dimen/_1sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline20"
             app:layout_constraintHorizontal_bias="0.541"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -451,14 +296,14 @@
             <!-- Horizontal LinearLayout as a container for both child layouts -->
             <LinearLayout
                 android:id="@+id/parentLayout"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="10sp"
                 android:background="@drawable/main_activity_count_bg"
                 android:baselineAligned="false"
+                android:elevation="3dp"
                 android:orientation="horizontal"
-                android:padding="0dp"
-                android:elevation="10dp">
+                android:padding="0dp">
 
 
                 <!-- Container for Progress Bars -->
@@ -466,16 +311,14 @@
                 <!-- Container for TextViews -->
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_weight="1.8"
                     android:layout_marginTop="10sp"
                     android:orientation="vertical">
 
                     <!-- Horizontal layout for counts -->
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="160sp"
                         android:layout_height="79dp"
                         android:gravity="center"
                         android:orientation="horizontal">
@@ -491,10 +334,11 @@
 
                             <TextView
                                 android:id="@+id/hearingCount"
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
                                 android:layout_marginTop="12sp"
-                                android:layout_weight="1"
+                                android:gravity="center"
                                 android:text="Heard"
                                 android:textAlignment="center"
                                 android:textColor="#000186"
@@ -502,7 +346,7 @@
 
                             <TextView
                                 android:id="@+id/heardCountTextView"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="20dp"
                                 android:layout_marginBottom="10sp"
                                 android:layout_weight="1"
@@ -529,10 +373,9 @@
 
                             <TextView
                                 android:id="@+id/spChanting"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="0dp"
                                 android:layout_marginTop="12sp"
-                                android:layout_marginBottom="-10sp"
                                 android:layout_weight="1"
                                 android:text="Chanted"
                                 android:textAlignment="center"
@@ -541,9 +384,9 @@
 
                             <TextView
                                 android:id="@+id/beadCountTextView"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="20dp"
-                                android:layout_marginBottom="0sp"
+                                android:layout_marginBottom="10sp"
                                 android:layout_weight="1"
                                 android:text="0"
                                 android:textAlignment="center"
@@ -553,7 +396,7 @@
                     </LinearLayout>
 
                     <View
-                        android:layout_width="wrap_content"
+                        android:layout_width="130sp"
                         android:layout_height="1dp"
                         android:layout_marginStart="15sp"
                         android:background="@color/ch_counter_border_dark"
@@ -561,18 +404,18 @@
                         app:layout_constraintStart_toStartOf="parent" />
                     <!-- Level layout -->
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="150sp"
                         android:layout_height="match_parent"
                         android:layout_marginTop="6dp"
-                        android:gravity="center"
+                        android:gravity="start"
                         android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:layout_marginStart="15sp"
                             android:fontFamily="@font/hind"
-                            android:gravity="center"
                             android:text="Level"
                             android:textColor="#000186"
                             android:textSize="15sp" />
@@ -581,58 +424,63 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:layout_marginStart="10sp"
                             android:background="@drawable/level_hearing_layout_background">
 
                             <Button
                                 android:id="@+id/hearingLevelDown"
-                                android:layout_width="40sp"
+                                android:layout_width="10sp"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="20sp"
                                 android:background="@drawable/stroke_background"
                                 android:fontFamily="@font/hind"
+                                android:gravity="center"
                                 android:text="-"
                                 android:textColor="#000186"
-                                android:textSize="25sp" />
+                                android:textSize="30sp" />
 
                             <TextView
                                 android:id="@+id/levelCount"
-                                android:layout_width="40sp"
+                                android:layout_width="15sp"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="center"
                                 android:layout_marginTop="-2sp"
                                 android:fontFamily="@font/hind"
                                 android:gravity="center"
                                 android:text="1"
                                 android:textColor="#000186"
-                                android:textSize="15sp" />
+                                android:textSize="16sp" />
 
                             <Button
                                 android:id="@+id/hearingLevelUp"
-                                android:layout_width="40sp"
+                                android:layout_width="10sp"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="20sp"
                                 android:background="@drawable/stroke_background"
                                 android:fontFamily="@font/hind"
+                                android:gravity="center"
                                 android:text="+"
                                 android:textColor="#000186"
-                                android:textSize="25sp" />
+                                android:textSize="20sp" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/progresBarvertical"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.8"
                     android:gravity="center"
                     android:orientation="horizontal">
 
                     <View
                         android:layout_width="1dp"
-                        android:layout_height="140sp"
-                        android:layout_marginStart="10sp"
+                        android:layout_height="130sp"
                         android:layout_marginEnd="10sp"
                         android:background="@color/ch_counter_border_dark" />
-
                     <!-- FrameLayout for Progress Bar 1 -->
 
                     <LinearLayout
@@ -1024,7 +872,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.96107054" />
+            app:layout_constraintGuide_percent="0.86" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline10"
@@ -1138,6 +986,53 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="20dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline29"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="20dp" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="top" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/hearButton"
+            android:layout_width="155dp"
+            android:layout_height="116dp"
+            android:layout_marginEnd="25dp"
+            android:backgroundTint="#F1E8EB"
+            android:elevation="0dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/image"
+            app:fabCustomSize="65sp"
+            app:layout_constraintEnd_toStartOf="@+id/cardView"
+            app:layout_constraintStart_toEndOf="@+id/guideline12"
+            app:layout_constraintTop_toTopOf="@+id/guideline18"
+            app:maxImageSize="0dp" />
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/flow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="hearButton" />
+
+        <androidx.constraintlayout.helper.widget.Layer
+            android:id="@+id/layer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="hearButton" />
 
 
         <!--    <com.google.android.material.button.MaterialButton-->

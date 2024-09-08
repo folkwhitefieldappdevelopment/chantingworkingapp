@@ -19,7 +19,7 @@ public class ProgressBarHandler extends AbstractEventHandler {
     }
 
     @Override
-    public void handle(JapaMalaModel japaMalaModel, View view) {
+    public void handle(View view) {
     }
 
     public void initializeProgressBar(){

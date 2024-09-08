@@ -28,7 +28,7 @@ public class HearButtonHandler extends AbstractEventHandler {
     }
 
     @Override
-    public void handle(JapaMalaModel japaMalaModel, View view) {
+    public void handle(View view) {
         super.vibrate(50);
 
         FloatingActionButton floatingActionButton = super.getAppCompatActivity().findViewById(R.id.hearButton);

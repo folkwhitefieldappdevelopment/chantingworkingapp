@@ -31,7 +31,7 @@
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="10dp" />
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/spWelcomeImage"
                 android:layout_width="453dp"
                 android:layout_height="361dp"
@@ -39,7 +39,8 @@
                 android:contentDescription="@string/shila_prabhupada_welcome_image"
                 app:srcCompat="@drawable/srila_prabhupada_welcome_image_lbg"
                 tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="10dp" />
+                tools:layout_editor_absoluteX="10dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large" />
         </LinearLayout>
 
         <LinearLayout

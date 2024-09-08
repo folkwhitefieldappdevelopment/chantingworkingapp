@@ -25,7 +25,7 @@ public class YoutubeVideoHandler extends AbstractEventHandler {
     }
 
     @Override
-    public void handle(JapaMalaModel japaMalaModel, View view) {
+    public void handle(View view) {
 
     }
 
@@ -52,6 +52,7 @@ public class YoutubeVideoHandler extends AbstractEventHandler {
                         setPositiveButton("Haribol (OK)", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                onVideoCompleteOrSkip();
                                 dialogInterface.cancel();
                                 dialog.dismiss();
                             }
@@ -82,12 +83,13 @@ public class YoutubeVideoHandler extends AbstractEventHandler {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            new AlertDialog.Builder(getAppCompatActivity()).setTitle("Hare Krishna").setMessage("You watched a wonderful video, lets proceed towards next round of chanting haribol!!.").
+                            new AlertDialog.Builder(getAppCompatActivity()).setTitle("Hare Krishna").setMessage("You are more spiritually energized after a wonderful video, lets proceed towards next round of chanting haribol!!.").
                                     setPositiveButton("Haribol (OK)", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
                                             dialogInterface.cancel();
                                             dialog.cancel();
+                                            onVideoCompleteOrSkip();
                                         }
                                     }).show();
                         }
@@ -97,5 +99,9 @@ public class YoutubeVideoHandler extends AbstractEventHandler {
             }
         });
         dialog.show();
+    }
+
+    public void onVideoCompleteOrSkip(){
+        getAppCompatActivity().getJapaMalaViewModel().incrementRound();
     }
 }

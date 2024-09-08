@@ -7,16 +7,21 @@ import android.media.MediaPlayer;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.chantingworkingapp.MainActivity;
+import com.example.chantingworkingapp.R;
 import com.example.chantingworkingapp.model.JapaMalaModel;
 import com.example.chantingworkingapp.util.CommonUtils;
 
 public class SpeedButtonHandler extends AbstractMediaPlayerEventHandler {
 
-    private String speed = "1.0f";
+    private float speed = 1.0f;
 
-    public String getSpeed() {
+    private final String[] SPEED_DROPDOWN_DATA = {"0.25x", "0.5x", "1x", "1.1x", "1.2x", "1.5x", "2x", "4x"};
+
+    public float getSpeed() {
         return speed;
     }
 
@@ -25,58 +30,68 @@ public class SpeedButtonHandler extends AbstractMediaPlayerEventHandler {
     }
 
     @Override
-    public void handle(JapaMalaModel japaMalaModel, View view) {
-        super.animateAndVibrate(view,50,200);
-        MediaPlayer mediaPlayer = super.getAppCompatActivity().getHkMantraClickHandler().getCurrentMediaPlayer();
-        mediaPlayer.pause();
-        this.showConfirmationDialog(getMediaplayer());
+    public void handle(View view) {
+        super.animateAndVibrate(view, 50, 200);
+        HkMantraClickHandler hkMantraClickHandler = super.getAppCompatActivity().getHkMantraClickHandler();
+        if (hkMantraClickHandler.isHkMahaMantraPlaying()) {
+            MediaPlayer mediaPlayer = super.getAppCompatActivity().getHkMantraClickHandler().getCurrentMediaPlayer();
+            if (mediaPlayer != null && mediaPlayer.isPlaying() && mediaPlayer.getCurrentPosition() > 0) {
+                mediaPlayer.pause();
+                this.showConfirmationDialog(getMediaplayer());
+            } else {
+                Toast.makeText(getAppCompatActivity(), "Hare Krishna, Speed cannot be adjusted for Pancha Tattva.", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            this.showConfirmationDialog(getMediaplayer());
+        }
     }
 
     private void showConfirmationDialog(MediaPlayer mediaPlayer) {
         final Vibrator vibrator = (Vibrator) super.getAppCompatActivity().getSystemService(Context.VIBRATOR_SERVICE);
         final MainActivity mainActivity = (MainActivity) super.getAppCompatActivity();
-        final String[] speeds = {"1x", "1.5x", "2x"};
-        final int[] selectedItem = {0}; // Default selected item
+        final int[] selectedItem = {2}; // Default selected item
         AlertDialog.Builder builder = new AlertDialog.Builder(super.getAppCompatActivity());
         builder.setTitle("Choose Speed")
-                .setSingleChoiceItems(speeds, selectedItem[0], new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        selectedItem[0] = which;
-                    }
-                })
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setSingleChoiceItems(SPEED_DROPDOWN_DATA, selectedItem[0], new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         CommonUtils.vibrateFunction(50, vibrator);
-                        //mainActivity.resetButtonFunction();
-                        // Handle the selection
-
-                        switch (speed) {
-                            case "0":
-                                mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(1.0f));
-                                speed = "1.0f";
+                        switch (which) {
+                            case 0:
+                                speed = 0.25f;
                                 break;
-                            case "1":
-                                mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(1.5f));
-                                speed = "1.5f";
+                            case 1:
+                                speed = 0.5f;
                                 break;
-                            case "2":
-                                mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(2.0f));
-                                speed = "2.0f";
+                            case 2:
+                                speed = 1.0f;
+                                break;
+                            case 3:
+                                speed = 1.1f;
+                                break;
+                            case 4:
+                                speed = 1.2f;
+                                break;
+                            case 5:
+                                speed = 1.5f;
+                                break;
+                            case 6:
+                                speed = 2.0f;
+                                break;
+                            case 7:
+                                speed = 4.0f;
                                 break;
                         }
+                        ((TextView)getAppCompatActivity().findViewById(R.id.speedMenu)).setText(SPEED_DROPDOWN_DATA[which]);
                     }
-                })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        mediaPlayer.start();
-                        CommonUtils.vibrateFunction(50, vibrator);
-                        dialog.dismiss();
+                        MediaPlayer mediaPlayer = getAppCompatActivity().getHkMantraClickHandler().getCurrentMediaPlayer();
+                        if (mediaPlayer != null && mediaPlayer.isPlaying() && mediaPlayer.getCurrentPosition() > 0) {
+                            getAppCompatActivity().getHkMantraClickHandler().startHkMahaMantraMultipleMediaPlayer();
+                        }
                     }
-                })
-                .show();
+                }).show();
     }
-
 }

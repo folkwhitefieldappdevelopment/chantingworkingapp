@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.chantingworkingapp.constant.ApplicationConstants;
 import com.example.chantingworkingapp.databinding.ActivityMainBinding;
 import com.example.chantingworkingapp.model.JapaMalaModel;
+import com.example.chantingworkingapp.service.FlipperFocusSlideshowHandler;
 import com.example.chantingworkingapp.service.HearButtonHandler;
 import com.example.chantingworkingapp.service.beadcount.JapaMalaViewModel;
 import com.example.chantingworkingapp.service.mediaplayer.HkMantraClickHandler;
@@ -41,14 +42,15 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private SpeedButtonHandler speedClickHandler;
     private JapaMalaViewModel japaMalaViewModel;
     private YoutubeVideoHandler youtubeVideoHandler;
+    private FlipperFocusSlideshowHandler flipperFocusSlideshowHandler;
 
     private JapaMalaModel japaMalaModel = null;
     private float dx;
+
     private float dy;
     private int lastAction;
     TextView spChantingText;
     TextView hearingCountText;
-    TextView soulfulJapaQuoteText;
 
     ImageView menuHemBurgerIcon;
     ImageView startButtonImage;
@@ -67,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private PowerManager.WakeLock wakeLock;
     private ActivityMainBinding binding;
     private GestureDetector gestureDetector;
-    private ImageView speedMenuButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +89,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         spChantingText = findViewById(R.id.spChanting);
         //chantingCountTextOfSP= Integer.parseInt(String.valueOf(spChantingText.getText()));
         hearingCountText = findViewById(R.id.hearingCount);
-        soulfulJapaQuoteText = findViewById(R.id.goldencommand);
         // Initialize your buttons here
 
         //MediaPlayers
@@ -101,45 +101,47 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         youtubeVideoHandler = new YoutubeVideoHandler(this);
         speedClickHandler = new SpeedButtonHandler(this, spHkmMediaplayer);
         hearButtonHandler = new HearButtonHandler(this);
+        flipperFocusSlideshowHandler = new FlipperFocusSlideshowHandler(this);
 
         srilaPrabhupadaChantingWithOutPanchtattva = MediaPlayer.create(MainActivity.this, R.raw.hkm);
 
         //ImageViews
         menuHemBurgerIcon = findViewById(R.id.hamburgerIcon);
         startButtonImage = findViewById(R.id.startIconImageView);
-        speedMenuButton = findViewById(R.id.speedMenuImage);
 
-        speedMenuButton.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.speedMenu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                speedClickHandler.handle(japaMalaModel, v);
+                speedClickHandler.handle(v);
             }
         });
-        findViewById(R.id.hareKrishnaMahaMantraTextView).setOnClickListener(new View.OnClickListener() {
+        TextView hareKrishnaMahaMantraTextView = findViewById(R.id.hareKrishnaMahaMantraTextView);
+        hareKrishnaMahaMantraTextView.setText(R.string.main_activity_tap_to_start_your_mala_hare_krishna);
+        hareKrishnaMahaMantraTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hkMantraClickHandler.handle(japaMalaModel, v);
+                hkMantraClickHandler.handle(v);
             }
         });
         resetButtonImage = findViewById(R.id.resetIconImageView);
         resetButtonImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                resetButtonHandler.handle(japaMalaModel, view);
+                resetButtonHandler.handle(view);
             }
         });
         muteIconImage = findViewById(R.id.muteIconImageView);
         muteIconImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                muteButtonHandler.handle(japaMalaModel, view);
+                muteButtonHandler.handle(view);
             }
         });
         unmuteIconImage = findViewById(R.id.unmuteIconImageView);
         unmuteIconImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                unMuteButtonHandler.handle(japaMalaModel, view);
+                unMuteButtonHandler.handle(view);
             }
         });
         binding.hearButton.setOnTouchListener(this);
@@ -156,6 +158,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 hearButtonHandler.handleLevelDown(v);
             }
         });
+
+        flipperFocusSlideshowHandler.initializeFlipper();
 
         // Further initialization or event handling can be done here
         listeningCheck();
@@ -212,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private class GestureListener extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onSingleTapUp(MotionEvent e) {
-            hearButtonHandler.handle(japaMalaModel, null);
+            hearButtonHandler.handle(null);
 
             Log.d("GestureDetector", "Single Tap Up");
             return true;
@@ -294,6 +298,14 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     public YoutubeVideoHandler getYoutubeVideoHandler() {
         return youtubeVideoHandler;
+    }
+
+    public SpeedButtonHandler getSpeedClickHandler() {
+        return speedClickHandler;
+    }
+
+    public FlipperFocusSlideshowHandler getFlipperFocusSlideshowHandler() {
+        return flipperFocusSlideshowHandler;
     }
 
     @Override

@@ -16,7 +16,7 @@ public abstract class AbstractEventHandler {
         this.appCompatActivity = appCompatActivity;
     }
 
-    public abstract void handle(JapaMalaModel japaMalaModel, View view);
+    public abstract void handle(View view);
 
     public MainActivity getAppCompatActivity() {
         return appCompatActivity;

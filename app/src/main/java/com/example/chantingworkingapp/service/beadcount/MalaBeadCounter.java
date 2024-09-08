@@ -1,6 +1,7 @@
 package com.example.chantingworkingapp.service.beadcount;
 
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.lifecycle.MutableLiveData;
@@ -25,12 +26,15 @@ public class MalaBeadCounter extends CountDownTimer {
         Integer beadCount = japaMalaViewModel.getBeadCounterLiveData().getValue();
         if (beadCount != null && beadCount < ApplicationConstants.TOTAL_BEADS.getConstantValue(Integer.class)) {
             japaMalaViewModel.incrementBead();
+            Log.i(this.getClass().getSimpleName(), "onTick: "+japaMalaViewModel.getBeadCounterLiveData().getValue());
+        } else {
+            this.onFinish();
         }
     }
 
     @Override
     public void onFinish() {
-        hkMantraClickHandler.onMalaCompleted();
+       hkMantraClickHandler.onMalaCompleted();
     }
 
     public JapaMalaViewModel getJapaMalaViewModel() {
