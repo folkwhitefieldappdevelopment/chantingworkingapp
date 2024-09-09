@@ -1,26 +1,37 @@
 {
   "project_info": {
-    "project_number": "768078382622",
-    "project_id": "chantandhearapp",
-    "storage_bucket": "chantandhearapp.appspot.com"
+    "project_number": "978073891811",
+    "firebase_url": "https://folkwhitefield-chantandhear-default-rtdb.firebaseio.com",
+    "project_id": "folkwhitefield-chantandhear",
+    "storage_bucket": "folkwhitefield-chantandhear.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:768078382622:android:edb6b5dea32f312b77900f",
+        "mobilesdk_app_id": "1:978073891811:android:664e184d522b301fbae6d6",
         "android_client_info": {
-          "package_name": "com.example.chantingworkingapp"
+          "package_name": "com.iskcon.folk.app.chantandhear"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "978073891811-uhcnqmbtgr5k4270r15onun1rtnidrd6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyBpPAX12MV4JZ36Dqh1EYptGW5g28FKHTU"
+          "current_key": "AIzaSyAwueFJeHYH07PgaL0dnWm3XkSn4brhw9Q"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "978073891811-uhcnqmbtgr5k4270r15onun1rtnidrd6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

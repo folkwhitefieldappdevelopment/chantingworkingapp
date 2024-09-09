@@ -78,16 +78,17 @@
                     android:id="@+id/hkmTextScrollView"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:clickable="true"
                     android:focusable="true"
-                    app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                    app:layout_constraintTop_toTopOf="parent"
                     android:gravity="center"
-                    android:clickable="true">
+                    app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <!-- ScrollView for Text -->
                     <ScrollView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
                         <TextView
                             android:id="@+id/hareKrishnaMahaMantraTextView"
                             android:layout_width="match_parent"
@@ -95,9 +96,9 @@
                             android:layout_gravity="center"
                             android:letterSpacing="0.1"
                             android:textAlignment="center"
-                            android:visibility="visible"
                             android:textColor="@color/ch_light_color"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            android:visibility="visible" />
                     </ScrollView>
 
                     <!-- ImageView for Stop Icon -->
@@ -332,17 +333,32 @@
                             android:orientation="vertical"
                             android:padding="0dp">
 
-                            <TextView
-                                android:id="@+id/hearingCount"
+                            <LinearLayout
                                 android:layout_width="wrap_content"
-                                android:layout_height="20dp"
-                                android:layout_gravity="center"
+                                android:layout_height="wrap_content"
                                 android:layout_marginTop="12sp"
-                                android:gravity="center"
-                                android:text="Heard"
-                                android:textAlignment="center"
-                                android:textColor="#000186"
-                                android:textSize="14sp" />
+                                android:gravity="center_horizontal"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <TextView
+                                    android:id="@+id/hearingCount"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="20dp"
+                                    android:layout_gravity="center"
+                                    android:text="Heard"
+                                    android:textAlignment="center"
+                                    android:textColor="#000186"
+                                    android:textSize="14sp" />
+
+                                <ImageView
+                                    android:id="@+id/openNewWindow"
+                                    android:layout_width="12sp"
+                                    android:layout_height="12sp"
+                                    android:layout_marginStart="3sp"
+                                    android:background="@drawable/baseline_open_in_new_24"
+                                    android:contentDescription="Open new popup"/>
+                            </LinearLayout>
 
                             <TextView
                                 android:id="@+id/heardCountTextView"
@@ -354,6 +370,7 @@
                                 android:textAlignment="center"
                                 android:textColor="#000186"
                                 android:textSize="35sp" />
+
                         </LinearLayout>
 
                         <!-- Space between count layouts -->

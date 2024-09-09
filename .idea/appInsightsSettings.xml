@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="com.example.chantingworkingapp" />
-                  <option name="mobileSdkAppId" value="1:768078382622:android:edb6b5dea32f312b77900f" />
-                  <option name="projectId" value="chantandhearapp" />
-                  <option name="projectNumber" value="768078382622" />
+                  <option name="appId" value="com.iskcon.folk.app.chantandhear" />
+                  <option name="mobileSdkAppId" value="1:978073891811:android:664e184d522b301fbae6d6" />
+                  <option name="projectId" value="folkwhitefield-chantandhear" />
+                  <option name="projectNumber" value="978073891811" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
