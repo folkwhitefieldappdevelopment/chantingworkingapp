@@ -34,7 +34,6 @@ public class FlipperFocusSlideshowHandler extends AbstractEventHandler {
         focusViewFlipper = getAppCompatActivity().findViewById(R.id.focusSlideshowFlipper);
         flipperViews = this.getFlipperViews();
         this.addFlipperViews();
-        focusViewFlipper.setAutoStart(true);
         focusViewFlipper.setInAnimation(AnimationUtils.loadAnimation(getAppCompatActivity(), android.R.anim.fade_in));
         focusViewFlipper.setOutAnimation(AnimationUtils.loadAnimation(getAppCompatActivity(), android.R.anim.fade_out));
     }
@@ -59,8 +58,12 @@ public class FlipperFocusSlideshowHandler extends AbstractEventHandler {
         ((ShapeableImageView)getAppCompatActivity().findViewById(R.id.spMainActivityImage)).setVisibility(ViewFlipper.INVISIBLE);
         flipInterval = flipInterval != 0 ? flipInterval : ApplicationConstants.FLIP_VIEW_INTERVAL.getConstantValue(Integer.class);
         focusViewFlipper.setVisibility(View.VISIBLE);
+        focusViewFlipper.showNext();
         focusViewFlipper.setFlipInterval(Long.valueOf(flipInterval).intValue());
-        focusViewFlipper.startFlipping();
+    }
+
+    public void showNextFlipper(){
+        focusViewFlipper.showNext();
     }
 
     public void pauseFlipper() {

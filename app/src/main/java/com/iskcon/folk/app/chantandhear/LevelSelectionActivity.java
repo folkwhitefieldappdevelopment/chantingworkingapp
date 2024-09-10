@@ -18,8 +18,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.Locale;
-
 public class LevelSelectionActivity extends AppCompatActivity {
     private void vibrate(long milliseconds) {
         Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
@@ -88,22 +86,18 @@ public class LevelSelectionActivity extends AppCompatActivity {
             }
         });*/
 
-
         // Set a click listener for the TextView
         mind.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                // Handle the click event
-                entermain();
+            public void onClick(View view) {
+                vibrate(50);
+                view.animate().setDuration(200).scaleX(1.2f).scaleY(1.2f).withEndAction(() -> view.animate().setDuration(300).scaleX(1f).scaleY(1f));
+                enterMain();
             }
         });
-
-
     }
 
-    private void entermain() {
-        // Your code to handle the click event
-        vibrate(50);
+    private void enterMain() {
         Intent intent = new Intent(LevelSelectionActivity.this, MainActivity.class);
         startActivity(intent);
         finish();

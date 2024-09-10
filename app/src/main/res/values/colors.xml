@@ -142,6 +142,7 @@
     <color name="navy">#000080</color>
     <color name="black">#000000</color>
     <!-- Newly added for v2.0 -->
+    <color name="ch_dark_color">#191a92</color>
     <color name="ch_light_color">#F1E8EB</color>
     <color name="ch_media_player_border_dark">#4c4daa</color>
     <color name="ch_counter_border_dark">#d8d0d3</color>

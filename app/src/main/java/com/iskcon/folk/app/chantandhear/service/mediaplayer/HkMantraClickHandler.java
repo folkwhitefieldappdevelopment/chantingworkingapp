@@ -191,7 +191,7 @@ public class HkMantraClickHandler extends AbstractEventHandler {
                 hkMahaMantraMediaPlayer.start();
                 if (CURRENT_BEAD_COUNT == 0) {
                     getAppCompatActivity().getJapaMalaViewModel().incrementBead();
-                    getAppCompatActivity().getFlipperFocusSlideshowHandler().startFlipper(COUNT_DOWN_INTERVAL);
+                    getAppCompatActivity().getFlipperFocusSlideshowHandler().startFlipper(COUNT_DOWN_INTERVAL * ApplicationConstants.FLIP_VIEW_BEAD_AFTER.getConstantValue(Integer.class));
                 }
             }
         };

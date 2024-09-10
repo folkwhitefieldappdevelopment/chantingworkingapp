@@ -14,29 +14,30 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:visibility="invisible"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/menuoption" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="@drawable/welcome_page_bg">
+        android:background="@drawable/ch_background_light_3">
 
         <RelativeLayout
             android:id="@+id/relativeLayout"
-            android:layout_width="300sp"
-            android:layout_height="330sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="@integer/linearlayoutOrientation"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline6"
-            app:layout_constraintTop_toTopOf="@+id/guideline10"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cardView"
+            app:layout_constraintTop_toTopOf="@+id/guideline41"
             tools:ignore="MissingConstraints">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/spMainActivityImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="300sp"
+                android:layout_height="400sp"
                 android:layout_marginTop="@dimen/login_activity_sp_image_margin_top"
                 android:contentDescription="@string/shila_prabhupada_welcome_image"
                 android:visibility="visible"
@@ -47,9 +48,11 @@
 
             <ViewFlipper
                 android:id="@+id/focusSlideshowFlipper"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/main_activity_view_flipper_bg"
+                android:layout_width="300sp"
+                android:layout_height="360sp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="22dp"
+                android:background="@drawable/level_change_image_background"
                 android:elevation="2dp"
                 android:visibility="invisible"
                 tools:ignore="MissingConstraints" />
@@ -59,12 +62,13 @@
             android:id="@+id/hkmCardView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="30sp"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="5dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline14"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toTopOf="@+id/guideline10"
+            app:layout_constraintTop_toBottomOf="@+id/roundNoTextView"
             card_view:cardBackgroundColor="@android:color/transparent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -85,6 +89,8 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <!-- ScrollView for Text -->
+
+                    <!-- ImageView for Stop Icon -->
                     <ScrollView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
@@ -97,11 +103,10 @@
                             android:letterSpacing="0.1"
                             android:textAlignment="center"
                             android:textColor="@color/ch_light_color"
-                            android:textSize="16sp"
+                            android:textSize="18sp"
                             android:visibility="visible" />
                     </ScrollView>
 
-                    <!-- ImageView for Stop Icon -->
                     <ImageView
                         android:id="@+id/startIconImageView"
                         android:layout_width="wrap_content"
@@ -319,7 +324,7 @@
 
                     <!-- Horizontal layout for counts -->
                     <LinearLayout
-                        android:layout_width="160sp"
+                        android:layout_width="185sp"
                         android:layout_height="79dp"
                         android:gravity="center"
                         android:orientation="horizontal">
@@ -337,9 +342,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="12sp"
-                                android:gravity="center_horizontal"
                                 android:clickable="true"
-                                android:focusable="true">
+                                android:focusable="true"
+                                android:gravity="center_horizontal">
 
                                 <TextView
                                     android:id="@+id/hearingCount"
@@ -348,7 +353,7 @@
                                     android:layout_gravity="center"
                                     android:text="Heard"
                                     android:textAlignment="center"
-                                    android:textColor="#000186"
+                                    android:textColor="@color/ch_dark_color"
                                     android:textSize="14sp" />
 
                                 <ImageView
@@ -357,7 +362,7 @@
                                     android:layout_height="12sp"
                                     android:layout_marginStart="3sp"
                                     android:background="@drawable/baseline_open_in_new_24"
-                                    android:contentDescription="Open new popup"/>
+                                    android:contentDescription="Open new popup" />
                             </LinearLayout>
 
                             <TextView
@@ -367,8 +372,8 @@
                                 android:layout_marginBottom="10sp"
                                 android:layout_weight="1"
                                 android:text="0"
-                                android:textAlignment="center"
-                                android:textColor="#000186"
+                                android:textAlignment="textStart"
+                                android:textColor="@color/ch_dark_color"
                                 android:textSize="35sp" />
 
                         </LinearLayout>
@@ -396,7 +401,7 @@
                                 android:layout_weight="1"
                                 android:text="Chanted"
                                 android:textAlignment="center"
-                                android:textColor="#000186"
+                                android:textColor="@color/ch_dark_color"
                                 android:textSize="14sp" />
 
                             <TextView
@@ -407,15 +412,15 @@
                                 android:layout_weight="1"
                                 android:text="0"
                                 android:textAlignment="center"
-                                android:textColor="#000186"
+                                android:textColor="@color/ch_dark_color"
                                 android:textSize="35sp" />
                         </LinearLayout>
                     </LinearLayout>
 
                     <View
-                        android:layout_width="130sp"
+                        android:layout_width="145sp"
                         android:layout_height="1dp"
-                        android:layout_marginStart="15sp"
+                        android:layout_marginStart="20sp"
                         android:background="@color/ch_counter_border_dark"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
@@ -434,7 +439,7 @@
                             android:layout_marginStart="15sp"
                             android:fontFamily="@font/hind"
                             android:text="Level"
-                            android:textColor="#000186"
+                            android:textColor="@color/ch_dark_color"
                             android:textSize="15sp" />
 
                         <!-- Space between level text and buttons -->
@@ -455,7 +460,7 @@
                                 android:fontFamily="@font/hind"
                                 android:gravity="center"
                                 android:text="-"
-                                android:textColor="#000186"
+                                android:textColor="@color/ch_dark_color"
                                 android:textSize="30sp" />
 
                             <TextView
@@ -467,7 +472,7 @@
                                 android:fontFamily="@font/hind"
                                 android:gravity="center"
                                 android:text="1"
-                                android:textColor="#000186"
+                                android:textColor="@color/ch_dark_color"
                                 android:textSize="16sp" />
 
                             <Button
@@ -480,7 +485,7 @@
                                 android:fontFamily="@font/hind"
                                 android:gravity="center"
                                 android:text="+"
-                                android:textColor="#000186"
+                                android:textColor="@color/ch_dark_color"
                                 android:textSize="20sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -516,7 +521,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/hind"
                             android:text="0"
-                            android:textColor="#000186"
+                            android:textColor="@color/ch_dark_color"
                             android:textSize="12sp" />
 
                         <ProgressBar
@@ -533,7 +538,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/hind"
                             android:text="M1"
-                            android:textColor="#000186"
+                            android:textColor="@color/ch_dark_color"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -557,7 +562,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/hind"
                             android:text="0"
-                            android:textColor="#000186"
+                            android:textColor="@color/ch_dark_color"
                             android:textSize="12sp" />
 
                         <ProgressBar
@@ -576,7 +581,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/hind"
                             android:text="M2"
-                            android:textColor="#000186"
+                            android:textColor="@color/ch_dark_color"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -599,7 +604,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/hind"
                             android:text="0"
-                            android:textColor="#000186"
+                            android:textColor="@color/ch_dark_color"
                             android:textSize="12sp" />
 
                         <ProgressBar
@@ -618,7 +623,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/hind"
                             android:text="M3"
-                            android:textColor="#000186"
+                            android:textColor="@color/ch_dark_color"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -641,7 +646,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/hind"
                             android:text="0"
-                            android:textColor="#000186"
+                            android:textColor="@color/ch_dark_color"
                             android:textSize="12sp" />
 
                         <ProgressBar
@@ -659,7 +664,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/hind"
                             android:text="M4"
-                            android:textColor="#000186"
+                            android:textColor="@color/ch_dark_color"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -682,7 +687,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/hind"
                             android:text="0"
-                            android:textColor="#000186"
+                            android:textColor="@color/ch_dark_color"
                             android:textSize="12sp" />
 
                         <ProgressBar
@@ -700,7 +705,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/hind"
                             android:text="M5"
-                            android:textColor="#000186"
+                            android:textColor="@color/ch_dark_color"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -723,7 +728,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/hind"
                             android:text="0"
-                            android:textColor="#000186"
+                            android:textColor="@color/ch_dark_color"
                             android:textSize="12sp" />
 
                         <ProgressBar
@@ -742,7 +747,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/hind"
                             android:text="M6"
-                            android:textColor="#000186"
+                            android:textColor="@color/ch_dark_color"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -766,7 +771,7 @@
                             android:fontFamily="@font/hind"
                             android:text="0"
                             android:textAlignment="center"
-                            android:textColor="#000186"
+                            android:textColor="@color/ch_dark_color"
                             android:textSize="12sp" />
 
                         <ProgressBar
@@ -785,7 +790,7 @@
                             android:fontFamily="@font/hind"
                             android:text="M7"
                             android:textAlignment="center"
-                            android:textColor="#000186"
+                            android:textColor="@color/ch_dark_color"
                             android:textSize="12sp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -796,51 +801,19 @@
             android:id="@+id/roundNoTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="-20sp"
             android:padding="5sp"
             android:scaleType="centerCrop"
             android:text="Round 1"
             android:textAlignment="center"
             android:textColor="@color/ch_light_color"
-            android:textSize="30sp"
+            android:textSize="22sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline10"
             app:layout_constraintDimensionRatio="4:1"
             app:layout_constraintEnd_toEndOf="@+id/hkmCardView"
-            app:layout_constraintHorizontal_bias="0.47"
-            app:layout_constraintStart_toStartOf="@+id/hkmCardView" />
-
-        <!--        <TextView-->
-        <!--            android:id="@+id/Hearing_text"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="0dp"-->
-        <!--            android:fontFamily="@font/balram"-->
-        <!--            android:padding="2sp"-->
-        <!--            android:scaleType="centerCrop"-->
-        <!--            android:text="Hearing"-->
-        <!--            android:textAlignment="center"-->
-        <!--            android:textColor="@color/white"-->
-        <!--            android:textSize="15sp"-->
-        <!--            app:layout_constraintBottom_toTopOf="@+id/guideline9"-->
-        <!--            app:layout_constraintEnd_toEndOf="@+id/hear"-->
-        <!--            app:layout_constraintStart_toStartOf="@+id/hear"-->
-        <!--            app:layout_constraintTop_toTopOf="@+id/guideline8" />-->
-
-        <!--    <TextView-->
-        <!--        android:id="@+id/Speed_text"-->
-        <!--        android:layout_width="wrap_content"-->
-        <!--        android:layout_height="wrap_content"-->
-        <!--        android:layout_marginBottom="84dp"-->
-        <!--        android:fontFamily="@font/balram"-->
-        <!--        android:padding="2sp"-->
-        <!--        android:text=" Select Speed"-->
-        <!--        android:textAlignment="center"-->
-        <!--        android:textColor="@color/white"-->
-        <!--        android:textSize="15sp"-->
-        <!--        app:layout_constraintBottom_toBottomOf="@id/guideline9"-->
-        <!--        app:layout_constraintEnd_toEndOf="@+id/playbackSpeedSpinner"-->
-        <!--        app:layout_constraintStart_toStartOf="@+id/playbackSpeedSpinner"-->
-        <!--        app:layout_constraintTop_toTopOf="@+id/guideline12"-->
-        <!--        app:layout_constraintVertical_bias="0.0" />-->
-
+            app:layout_constraintHorizontal_bias="0.53"
+            app:layout_constraintStart_toStartOf="@+id/hkmCardView"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"

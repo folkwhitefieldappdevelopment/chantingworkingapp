@@ -250,6 +250,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     beadCountTextView.setText(String.valueOf(currentMalaBeadCount));
                     TextView textView = findViewById(R.id.hareKrishnaMahaMantraTextView);
                     textView.animate().setDuration(250).scaleX(1.1f).scaleY(1.1f).withEndAction(() -> textView.animate().scaleX(1).scaleY(1));
+                    flipperFocusSlideshowHandler.showNextFlipper();
                 } else {
                     hkMantraClickHandler.onMalaCompleted();
                 }
