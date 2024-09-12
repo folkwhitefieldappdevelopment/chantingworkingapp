@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,12 +17,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.imageview.ShapeableImageView;
 import com.iskcon.folk.app.chantandhear.constant.ApplicationConstants;
 import com.iskcon.folk.app.chantandhear.databinding.ActivityMainBinding;
 import com.iskcon.folk.app.chantandhear.model.JapaMalaModel;
 import com.iskcon.folk.app.chantandhear.service.FlipperFocusSlideshowHandler;
 import com.iskcon.folk.app.chantandhear.service.HearButtonHandler;
 import com.iskcon.folk.app.chantandhear.service.beadcount.JapaMalaViewModel;
+import com.iskcon.folk.app.chantandhear.service.mediaplayer.BeforeDoneClickHandler;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.HkMantraClickHandler;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.MuteButtonHandler;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.ResetButtonHandler;
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private JapaMalaViewModel japaMalaViewModel;
     private YoutubeVideoHandler youtubeVideoHandler;
     private FlipperFocusSlideshowHandler flipperFocusSlideshowHandler;
+    private BeforeDoneClickHandler beforeDoneClickHandler;
 
     private JapaMalaModel japaMalaModel = null;
     private float dx;
@@ -102,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         speedClickHandler = new SpeedButtonHandler(this, spHkmMediaplayer);
         hearButtonHandler = new HearButtonHandler(this);
         flipperFocusSlideshowHandler = new FlipperFocusSlideshowHandler(this);
+        beforeDoneClickHandler = new BeforeDoneClickHandler(this);
 
         srilaPrabhupadaChantingWithOutPanchtattva = MediaPlayer.create(MainActivity.this, R.raw.hkm);
 
@@ -160,6 +165,13 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         });
 
         flipperFocusSlideshowHandler.initializeFlipper();
+
+        ((ImageView)findViewById(R.id.beforeDoneImageView)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                beforeDoneClickHandler.handle(view);
+            }
+        });
 
         // Further initialization or event handling can be done here
         listeningCheck();
@@ -243,14 +255,17 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             @Override
             public void onChanged(Integer currentMalaBeadCount) {
                 if (currentMalaBeadCount != null && currentMalaBeadCount <= ApplicationConstants.TOTAL_BEADS.getConstantValue(Integer.class)) {
-                    if (currentMalaBeadCount == 2) {
+                    if (currentMalaBeadCount == 1) {
                         progressBarManager.initializeProgressBar();
                     }
                     TextView beadCountTextView = findViewById(R.id.beadCountTextView);
                     beadCountTextView.setText(String.valueOf(currentMalaBeadCount));
                     TextView textView = findViewById(R.id.hareKrishnaMahaMantraTextView);
-                    textView.animate().setDuration(250).scaleX(1.1f).scaleY(1.1f).withEndAction(() -> textView.animate().scaleX(1).scaleY(1));
-                    flipperFocusSlideshowHandler.showNextFlipper();
+                    textView.animate().setDuration(500).scaleX(1.1f).scaleY(1.1f).withEndAction(() -> textView.animate().scaleX(1).scaleY(1));
+
+                    if (currentMalaBeadCount % 3 == 0) {
+                        flipperFocusSlideshowHandler.showNextFlipper();
+                    }
                 } else {
                     hkMantraClickHandler.onMalaCompleted();
                 }
@@ -307,6 +322,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     public FlipperFocusSlideshowHandler getFlipperFocusSlideshowHandler() {
         return flipperFocusSlideshowHandler;
+    }
+
+    public HearButtonHandler getHearButtonHandler() {
+        return hearButtonHandler;
     }
 
     @Override

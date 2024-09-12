@@ -21,7 +21,7 @@ public class ProgressBarHandler extends AbstractEventHandler {
     public void handle(View view) {
     }
 
-    public void initializeProgressBar(){
+    public void initializeProgressBar() {
         LinearLayout linearLayout = super.getAppCompatActivity().findViewById(Milestone.MILESTONE_1.getLinearLayoutId());
         if (View.INVISIBLE == linearLayout.getVisibility()) {
             linearLayout.setVisibility(View.VISIBLE);
@@ -43,8 +43,8 @@ public class ProgressBarHandler extends AbstractEventHandler {
         } else {
             progressBar.setMax(ApplicationConstants.TOTAL_BEADS_IN_A_MILESTONE.getConstantValue(Integer.class));
         }
-        int progressData = (Milestone.MILESTONE_1.equals(milestone) ? currentHeardCount : (currentHeardCount + (currentBeadCount - 1)) % progressBar.getMax());
-        progressData = progressData == 0 ? milestone.getEndBead() : progressData;
+        int progressData = (Milestone.MILESTONE_1.equals(milestone) ? currentHeardCount : (currentBeadCount - milestone.getStartBead()) + 1);
+        progressData = progressData == 0 ? 1 : progressData;
         progressBar.setProgress(progressData, true);
         TextView textView = getAppCompatActivity().findViewById(milestone.getHeardCountTextViewId());
         textView.setText(String.valueOf(progressData));

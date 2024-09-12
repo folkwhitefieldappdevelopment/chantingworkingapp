@@ -11,9 +11,11 @@
     <string name="iskcon_bangalore_logo">Iskcon Bangalore Logo</string>
     <string name="main_activity_hk_maha_mantra">Hare Kṛṣṇa Hare Kṛṣṇa\nKṛṣṇa Kṛṣṇa Hare Hare\nHare Rāma Hare Rāma\nRāma Rāma Hare Hare</string>
     <string name="mindful_japa">Mindful Japa</string>
-    <string name="immerse_into_the_transcental_vibration">Immerse Into the Transcental Vibration</string>
+    <string name="immerse_into_the_transcental_vibration">Immerse Into the Transcendental Vibration</string>
     <string name="main_activity_tap_to_start_your_mala_hare_krishna">Tap to start / resume your mala.\n Hare Krishna</string>
     <string name="main_activity_pancha_tattva_mantra">jaya sri-krishna-chaitanya\nprabhu nityananda\nsri-adwaita gadadhara\nshrivasadi-gaura-bhakta-vrinda</string>
+    <string name="soul_full_japa">Soul full japa</string>
+    <string name="heart_full_japa">Heart full japa</string>
     <string-array name="playback_speed_options">
         <item>0.75x</item>
         <item>1.0x</item>

@@ -18,6 +18,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.navigation.NavigationView;
 
+import java.text.MessageFormat;
+import java.util.Locale;
+
 public class LevelSelectionActivity extends AppCompatActivity {
     private void vibrate(long milliseconds) {
         Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
@@ -45,8 +48,7 @@ public class LevelSelectionActivity extends AppCompatActivity {
 
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         if (acct != null) {
-            String personName = acct.getDisplayName();
-            //name.setText(personName);
+            ((TextView)findViewById(R.id.levelSelectionWelcomeTextView)).setText(MessageFormat.format("Hare Krishna {0}.\nImmerse into the transcendental vibration",acct.getDisplayName().toUpperCase(Locale.ROOT)));
         }
         action = new ActionBarDrawerToggle(this, draw, R.string.navigation_open, R.string.navigation_close);
         draw.addDrawerListener(action);

@@ -1,5 +1,6 @@
 package com.iskcon.folk.app.chantandhear.service.mediaplayer;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.media.MediaPlayer;
@@ -20,9 +21,9 @@ public class ResetButtonHandler extends AbstractMediaPlayerEventHandler {
     @Override
     public void handle(View view) {
         super.animateAndVibrate(view, 50, 200);
-        final MediaPlayer mediaPlayer = getAppCompatActivity().getHkMantraClickHandler().getCurrentMediaPlayer();
+        MediaPlayer mediaPlayer = getAppCompatActivity().getHkMantraClickHandler().getCurrentMediaPlayer();
         if (mediaPlayer != null && mediaPlayer.isPlaying() && mediaPlayer.getCurrentPosition() > 0) {
-            mediaPlayer.pause();
+            getAppCompatActivity().getHkMantraClickHandler().pauseMediaPlayer();
             this.showConfirmationDialog(mediaPlayer);
         } else {
             Toast.makeText(getAppCompatActivity(), "Hare Krishna, nothing to reset, round has not yet started.", Toast.LENGTH_SHORT).show();
@@ -32,26 +33,24 @@ public class ResetButtonHandler extends AbstractMediaPlayerEventHandler {
     private void showConfirmationDialog(MediaPlayer mediaPlayer) {
         Vibrator vibrator = (Vibrator) super.getAppCompatActivity().getSystemService(Context.VIBRATOR_SERVICE);
         MainActivity mainActivity = (MainActivity) super.getAppCompatActivity();
-        CommonUtils.showWarningDialog(
-                super.getAppCompatActivity(),
-                "Hare Krishna",
-                "Are you sure to reset!! On your confirmation, current round will be started again freshly.",
-                new DialogInterface.OnClickListener() {
+        new AlertDialog.Builder(getAppCompatActivity()).setTitle("Hare Krishna").setMessage("Are you sure you want to reset!! On your confirmation, current round will be started again freshly.?").
+                setPositiveButton("Reset", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface dialogInterface, int i) {
                         CommonUtils.vibrateFunction(50, vibrator);
-                        mainActivity.getHkMantraClickHandler().destroy();
+                        dialogInterface.cancel();
+                        getAppCompatActivity().getHkMantraClickHandler().destroy();
+                        getAppCompatActivity().getHkMantraClickHandler().setMediaPaused(false);
+                        getAppCompatActivity().getHkMantraClickHandler().handle(null);
                     }
-                },
-                new DialogInterface.OnClickListener() {
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Handle Cancel button click
-                        mediaPlayer.start();
+                    public void onClick(DialogInterface dialogInterface, int i) {
                         CommonUtils.vibrateFunction(50, vibrator);
-                        dialog.dismiss();
+                        getAppCompatActivity().getHkMantraClickHandler().resumeMediaPlayer();
+                        CommonUtils.vibrateFunction(50, vibrator);
+                        dialogInterface.cancel();
                     }
-                }
-        );
+                }).show();
     }
 }

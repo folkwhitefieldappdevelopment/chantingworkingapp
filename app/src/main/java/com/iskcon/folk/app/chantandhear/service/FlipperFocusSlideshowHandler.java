@@ -34,8 +34,8 @@ public class FlipperFocusSlideshowHandler extends AbstractEventHandler {
         focusViewFlipper = getAppCompatActivity().findViewById(R.id.focusSlideshowFlipper);
         flipperViews = this.getFlipperViews();
         this.addFlipperViews();
-        focusViewFlipper.setInAnimation(AnimationUtils.loadAnimation(getAppCompatActivity(), android.R.anim.fade_in));
-        focusViewFlipper.setOutAnimation(AnimationUtils.loadAnimation(getAppCompatActivity(), android.R.anim.fade_out));
+        focusViewFlipper.setInAnimation(AnimationUtils.loadAnimation(getAppCompatActivity(), R.anim.flipper_zoom_in));
+        focusViewFlipper.setOutAnimation(AnimationUtils.loadAnimation(getAppCompatActivity(), R.anim.flipper_zoom_out));
     }
 
     private List<View> getFlipperViews() {
@@ -55,14 +55,14 @@ public class FlipperFocusSlideshowHandler extends AbstractEventHandler {
     }
 
     public void startFlipper(long flipInterval) {
-        ((ShapeableImageView)getAppCompatActivity().findViewById(R.id.spMainActivityImage)).setVisibility(ViewFlipper.INVISIBLE);
+        ((ShapeableImageView) getAppCompatActivity().findViewById(R.id.spMainActivityImage)).setVisibility(ViewFlipper.INVISIBLE);
         flipInterval = flipInterval != 0 ? flipInterval : ApplicationConstants.FLIP_VIEW_INTERVAL.getConstantValue(Integer.class);
         focusViewFlipper.setVisibility(View.VISIBLE);
         focusViewFlipper.showNext();
         focusViewFlipper.setFlipInterval(Long.valueOf(flipInterval).intValue());
     }
 
-    public void showNextFlipper(){
+    public void showNextFlipper() {
         focusViewFlipper.showNext();
     }
 
@@ -71,7 +71,7 @@ public class FlipperFocusSlideshowHandler extends AbstractEventHandler {
     }
 
     public void stopFlipper() {
-        ((ShapeableImageView)getAppCompatActivity().findViewById(R.id.spMainActivityImage)).setVisibility(ViewFlipper.VISIBLE);
+        ((ShapeableImageView) getAppCompatActivity().findViewById(R.id.spMainActivityImage)).setVisibility(ViewFlipper.VISIBLE);
         focusViewFlipper.stopFlipping();
         focusViewFlipper.setVisibility(View.INVISIBLE);
     }
