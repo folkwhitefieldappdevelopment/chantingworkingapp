@@ -1,3 +1,5 @@
 <resources>
     <item name="linearlayoutOrientation" type="integer">1</item>
+    <item name="history_activity_layout_weight" type="integer">4</item>
+
 </resources>
