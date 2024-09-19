@@ -6,14 +6,14 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.Firebase;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.iskcon.folk.app.chantandhear.history.model.RoundDataEntity;
+import com.iskcon.folk.app.chantandhear.model.UserDetails;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -21,49 +21,76 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 public class ChantingDataDao {
 
-    private FirebaseAuth firebaseAuth;
-    private FirebaseUser firebaseUser;
-    private FirebaseDatabase firebaseDatabase;
+    private final UserDetails userDetails;
+    private final FirebaseDatabase firebaseDatabase;
+    private final String CHILD_USERS = "users";
+    private final String CHILD_ROUND_DATA = "roundDetails";
 
 
-    public ChantingDataDao() {
+    public ChantingDataDao(UserDetails userDetails) {
+        this.userDetails = userDetails;
         this.firebaseDatabase = FirebaseDatabase.getInstance();
     }
 
-    public void save(Serializable serializable) {
-
-        firebaseDatabase.getReference().child("roundData").setValue(serializable).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                Log.i(this.getClass().getSimpleName(), "onComplete: data got saved");
-            }
-        });
+    public void saveUser(UserDetails userDetails) {
+        firebaseDatabase.getReference()
+                .child(CHILD_USERS)
+                .child(userDetails.getId())
+                .child("userDetails")
+                .setValue(userDetails);
     }
 
-    public List<RoundDataEntity> get(Date date, String userId) {
+    public void saveRoundData(RoundDataEntity roundDataEntity, Date date) {
+
+        DatabaseReference databaseReference = firebaseDatabase.getReference()
+                .child(CHILD_USERS)
+                .child(userDetails.getId())
+                .child(CHILD_ROUND_DATA)
+                .child(this.getCurrentDateAsString(date));
 
         final List<RoundDataEntity> roundDataEntities = new ArrayList<>();
 
-        firebaseDatabase.getReference().child("roundData")
-                .child(userId)
-                .equalTo(new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH).format(date))
-                .orderByChild("roundId").addValueEventListener(new ValueEventListener() {
+        databaseReference
+                .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                            roundDataEntities.add(dataSnapshot.getValue(RoundDataEntity.class));
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+
+                        Object result = task.getResult().getValue();
+
+                        if (result != null) {
+                            roundDataEntities.addAll((List) result);
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                        roundDataEntities.add(roundDataEntity);
 
+                        databaseReference.setValue(roundDataEntities).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Log.i(this.getClass().getSimpleName(), "onComplete: data got saved");
+                            }
+                        });
                     }
                 });
+    }
+
+    public List<RoundDataEntity> get(Date date, String userId, ValueEventListener valueEventListener) {
+
+        final List<RoundDataEntity> roundDataEntities = new ArrayList<>();
+
+        firebaseDatabase.getReference()
+                .child(CHILD_USERS)
+                .child(userId)
+                .child(CHILD_ROUND_DATA)
+                .child(this.getCurrentDateAsString(date))
+                .addValueEventListener(valueEventListener);
+
         return roundDataEntities;
+    }
+
+    private String getCurrentDateAsString(Date date) {
+        return new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH).format(date);
     }
 }

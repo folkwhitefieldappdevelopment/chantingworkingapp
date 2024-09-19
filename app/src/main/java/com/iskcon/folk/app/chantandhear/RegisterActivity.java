@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -26,6 +27,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
+import com.iskcon.folk.app.chantandhear.dao.ChantingDataDao;
+import com.iskcon.folk.app.chantandhear.model.UserDetails;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -34,6 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseDatabase database;
     Button loginButton;
+    UserDetails userDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +56,10 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 signIn();
-                ((TextView)findViewById(R.id.welcomeMessage)).startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in));
+                ((TextView) findViewById(R.id.welcomeMessage)).startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
             }
         });
-        ((LinearLayout)findViewById(R.id.loginButtonLL)).setOnClickListener(new View.OnClickListener(){
+        ((LinearLayout) findViewById(R.id.loginButtonLL)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 signIn();
@@ -64,7 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         TextView welcomeMessageTextView = findViewById(R.id.welcomeMessage);
         welcomeMessageTextView.setVisibility(View.VISIBLE);
-        welcomeMessageTextView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in));
+        welcomeMessageTextView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
     }
 
     @Override
@@ -88,41 +92,31 @@ public class RegisterActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 20) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuth(account.getIdToken());
-                Toast.makeText(getApplicationContext(), "Some---" + account.getIdToken(), Toast.LENGTH_SHORT).show();
-
                 navigateToSecondActivity();
             } catch (ApiException e) {
-                navigateToSecondActivity();
-                System.err.println(e);
-                Toast.makeText(getApplicationContext(), "Something went wrong = " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Unable to signup at this moment, please contact system administrator.", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
     private void firebaseAuth(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.i("task", "onComplete: task");
                         if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "Loo Now", Toast.LENGTH_SHORT).show();
-
-                            FirebaseUser user = auth.getCurrentUser();
-                            ReadWriteContactDetails read = new ReadWriteContactDetails();
-                            read.name = user.getDisplayName();
-                            database.getReference().child("users").child(user.getUid()).setValue(read).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    Toast.makeText(getApplicationContext(), "L in Now", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-
+                            userDetails = new UserDetails(
+                                    task.getResult().getUser().getUid(),
+                                    task.getResult().getUser().getDisplayName(),
+                                    task.getResult().getUser().getEmail(),
+                                    task.getResult().getUser().getDisplayName()
+                            );
+                            new ChantingDataDao(userDetails).saveUser(userDetails);
                             navigateToSecondActivity();
                         } else {
                             Toast.makeText(getApplicationContext(), "Something went wrong2", Toast.LENGTH_SHORT).show();
@@ -134,6 +128,7 @@ public class RegisterActivity extends AppCompatActivity {
     void navigateToSecondActivity() {
 
         Intent intent = new Intent(RegisterActivity.this, LevelSelectionActivity.class);
+        intent.putExtra("userDetails", userDetails);
         startActivity(intent);
     }
 }

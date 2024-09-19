@@ -17,6 +17,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.iskcon.folk.app.chantandhear.model.UserDetails;
 
 import java.text.MessageFormat;
@@ -45,12 +47,21 @@ public class LevelSelectionActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.level_selection);
+
+        Object userDetailsObj = getIntent().getExtras().get("userDetails");
+
+        GoogleSignInAccount googleSignInAccount = GoogleSignIn.getLastSignedInAccount(this);
+        if (userDetailsObj != null) {
+            userDetails = (UserDetails) userDetailsObj;
+        } else {
+            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+            userDetails = new UserDetails(googleSignInAccount.getId(), googleSignInAccount.getDisplayName(), googleSignInAccount.getEmail(), googleSignInAccount.getDisplayName());
+        }
+
         MainActivity mains = new MainActivity();
         draw = findViewById(R.id.drawer_layout);
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(this, gso);
-        GoogleSignInAccount googleSignInAccount = GoogleSignIn.getLastSignedInAccount(this);
-        userDetails = new UserDetails(googleSignInAccount.getId(),googleSignInAccount.getGivenName(),googleSignInAccount.getEmail(),googleSignInAccount.getDisplayName());
         ((TextView) findViewById(R.id.levelSelectionWelcomeTextView)).setText(MessageFormat.format("Hare Krishna {0}.\nImmerse into the transcendental vibration", googleSignInAccount.getDisplayName().toUpperCase(Locale.ROOT)));
         action = new ActionBarDrawerToggle(this, draw, R.string.navigation_open, R.string.navigation_close);
         draw.addDrawerListener(action);

@@ -147,4 +147,9 @@
     <color name="ch_media_player_border_dark">#4c4daa</color>
     <color name="ch_counter_border_dark">#d8d0d3</color>
     <color name="login_activity_welcome_message">#F1E8EB</color>
+    <color name="history_list_view_header">#DBD4D9</color>
+    <color name="history_list_row_view_round_number">#8C99AA</color>
+    <color name="history_list_row_view_label_text">#8C99AA</color>
+    <color name="history_list_row_view_heardCount_value">#303640</color>
+    <color name="history_list_row_view_timeTaken_value">#69788D</color>
 </resources>

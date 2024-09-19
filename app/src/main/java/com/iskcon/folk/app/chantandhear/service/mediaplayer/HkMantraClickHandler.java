@@ -17,8 +17,6 @@ import com.iskcon.folk.app.chantandhear.R;
 import com.iskcon.folk.app.chantandhear.constant.ApplicationConstants;
 import com.iskcon.folk.app.chantandhear.dao.ChantingDataDao;
 import com.iskcon.folk.app.chantandhear.factory.MediaPlayerInstanceCreatorFactory;
-import com.iskcon.folk.app.chantandhear.history.model.BeadDataEntity;
-import com.iskcon.folk.app.chantandhear.history.model.DailyDataEntity;
 import com.iskcon.folk.app.chantandhear.history.model.RoundDataEntity;
 import com.iskcon.folk.app.chantandhear.service.AbstractEventHandler;
 import com.iskcon.folk.app.chantandhear.service.CountdownTimerImpl;
@@ -29,8 +27,6 @@ import com.iskcon.folk.app.chantandhear.service.progress.ProgressBarHandler;
 import java.text.MessageFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 public class HkMantraClickHandler extends AbstractEventHandler {
@@ -260,6 +256,16 @@ public class HkMantraClickHandler extends AbstractEventHandler {
         hkMahaMantraMediaPlayer.stop();
         hkMahaMantraMediaPlayer.release();
 
+        JapaMalaViewModel japaMalaViewModel = super.getAppCompatActivity().getJapaMalaViewModel();
+
+        RoundDataEntity roundDataEntity = new RoundDataEntity();
+        roundDataEntity.setUserId(getAppCompatActivity().getUserDetails().getEmailId());
+        roundDataEntity.setChantingDate(new Date());
+        roundDataEntity.setRoundNumber(japaMalaViewModel.getRoundNumberLiveData().getValue());
+        roundDataEntity.setTimeTaken(countDownTimer.getTimeElapsed());
+        roundDataEntity.setTotalHeardCount(japaMalaViewModel.getHeardCounterLiveData().getValue());
+        new ChantingDataDao(super.getAppCompatActivity().getUserDetails()).saveRoundData(roundDataEntity,new Date());
+
         this.destroyResources();
 
         TextView textView = getAppCompatActivity().findViewById(R.id.mediaTimerTextView);
@@ -268,9 +274,9 @@ public class HkMantraClickHandler extends AbstractEventHandler {
 
         playButton.setVisibility(View.VISIBLE);
 
-        JapaMalaViewModel japaMalaViewModel = super.getAppCompatActivity().getJapaMalaViewModel();
         japaMalaViewModel.resetBead();
         japaMalaViewModel.resetHeard();
+
 
         ((TextView) getAppCompatActivity().findViewById(R.id.heardCountTextView)).setText("0");
 
@@ -295,15 +301,6 @@ public class HkMantraClickHandler extends AbstractEventHandler {
         alertDialogBuilder.show();
 
         getAppCompatActivity().getFlipperFocusSlideshowHandler().stopFlipper();
-
-        RoundDataEntity roundDataEntity = new RoundDataEntity();
-        roundDataEntity.setUserId(getAppCompatActivity().getUserDetails().getEmailId());
-        roundDataEntity.setChantingDate(new Date());
-        roundDataEntity.setRoundNumber(japaMalaViewModel.getRoundNumberLiveData().getValue());
-        roundDataEntity.setTimeTaken(countDownTimer.getTimeElapsed());
-        roundDataEntity.setTotalHeardCount(japaMalaViewModel.getHeardCounterLiveData().getValue());
-
-        new ChantingDataDao().save(roundDataEntity);
     }
 
     private void destroyResources() {

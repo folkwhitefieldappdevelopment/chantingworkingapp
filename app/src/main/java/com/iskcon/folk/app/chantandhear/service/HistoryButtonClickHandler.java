@@ -3,9 +3,17 @@ package com.iskcon.folk.app.chantandhear.service;
 import android.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
 import com.iskcon.folk.app.chantandhear.MainActivity;
 import com.iskcon.folk.app.chantandhear.R;
 import com.iskcon.folk.app.chantandhear.dao.ChantingDataDao;
@@ -26,45 +34,76 @@ public class HistoryButtonClickHandler extends AbstractEventHandler {
     @Override
     public void handle(View view) {
 
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                GenericTypeIndicator<List<RoundDataEntity>> typeIndicator = new GenericTypeIndicator<List<RoundDataEntity>>() {
+                };
+                renderLayoutOverAlert(snapshot.getValue(typeIndicator));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+
+        new ChantingDataDao(getAppCompatActivity().getUserDetails())
+                .get(new Date(), getAppCompatActivity().getUserDetails().getId(), valueEventListener);
+    }
+
+    private void renderLayoutOverAlert(List<RoundDataEntity> roundDataEntities) {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getAppCompatActivity());
 
-        //LinearLayout historyListViewLinearLayout = super.getAppCompatActivity().findViewById(R.id.historyListViewLinearLayout);
+        View historyListView = super.getAppCompatActivity().getLayoutInflater().inflate(R.layout.history_list_view_activity, null);
 
-        //List<RoundDataEntity> roundDataEntities = new ChantingDataDao().get(new Date(), super.getAppCompatActivity().getUserDetails().getEmailId());
+        LinearLayout historyListViewLinearLayout = historyListView.findViewById(R.id.historyListViewLinearLayout);
 
-        List<RoundDataEntity> roundDataEntities = new ArrayList<>();
-        RoundDataEntity roundDataEntity1 = new RoundDataEntity();
-        roundDataEntity1.setRoundNumber(1);
-        roundDataEntity1.setTimeTaken(56988);
-        roundDataEntity1.setTotalHeardCount(45);
-
-        RoundDataEntity roundDataEntity2 = new RoundDataEntity();
-        roundDataEntity2.setRoundNumber(2);
-        roundDataEntity2.setTimeTaken(6789323);
-        roundDataEntity2.setTotalHeardCount(56);
-
-        RoundDataEntity roundDataEntity3 = new RoundDataEntity();
-        roundDataEntity3.setRoundNumber(3);
-        roundDataEntity3.setTimeTaken(890909);
-        roundDataEntity3.setTotalHeardCount(98);
-
-        roundDataEntities.add(roundDataEntity1);
-        roundDataEntities.add(roundDataEntity2);
-        roundDataEntities.add(roundDataEntity3);
-
-        LinearLayout historyListViewLinearLayout = new LinearLayout(getAppCompatActivity());
+        LinearLayout linearLayout = new LinearLayout(getAppCompatActivity());
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        int margin = 90;
+        layoutParams.setMargins(margin, 0, margin, margin);
+        linearLayout.setLayoutParams(layoutParams);
 
         if (roundDataEntities != null && !roundDataEntities.isEmpty()) {
             roundDataEntities.forEach(roundDataEntity -> {
                 View historyView = super.getAppCompatActivity().getLayoutInflater().inflate(R.layout.history_list_row_view_activity, null);
-                ((TextView) historyView.findViewById(R.id.roundIdTextView)).setText(roundDataEntity.getRoundNumber() + "");
+                ((TextView) historyView.findViewById(R.id.roundIdTextView)).setText(
+                        String.format(
+                                Locale.ENGLISH,
+                                "0%d",
+                                roundDataEntity.getRoundNumber()
+                        )
+                );
                 ((TextView) historyView.findViewById(R.id.heardCountTextView)).setText(roundDataEntity.getTotalHeardCount() + "");
-                ((TextView) historyView.findViewById(R.id.timeTakenTextView)).setText(String.format(Locale.ENGLISH, "0%d:%02d min", TimeUnit.MILLISECONDS.toMinutes(roundDataEntity.getTimeTaken()) % 60, TimeUnit.MILLISECONDS.toSeconds(roundDataEntity.getTimeTaken()) % 60));
-                historyListViewLinearLayout.addView(historyView);
+                ((TextView) historyView.findViewById(R.id.timeTakenTextView)).setText(
+                        String.format(
+                                Locale.ENGLISH,
+                                "0%d:%02d min",
+                                TimeUnit.MILLISECONDS.toMinutes(roundDataEntity.getTimeTaken()) % 60,
+                                TimeUnit.MILLISECONDS.toSeconds(roundDataEntity.getTimeTaken()) % 60
+                        )
+                );
+                LinearLayout.LayoutParams historyRowViewLayoutParams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+                historyRowViewLayoutParams.setMargins(0, 0, 0, 50);
+                historyView.setLayoutParams(historyRowViewLayoutParams);
+
+                linearLayout.addView(historyView);
             });
         }
+
+        ScrollView scrollView = new ScrollView(getAppCompatActivity());
+        scrollView.addView(linearLayout);
+        historyListViewLinearLayout.addView(scrollView);
         builder.setView(historyListViewLinearLayout);
-        builder.create();
         builder.show();
     }
 }

@@ -1,7 +1,7 @@
 package com.iskcon.folk.app.chantandhear.constant;
 
 public enum ApplicationConstants {
-    TOTAL_BEADS(108),
+    TOTAL_BEADS(3),
     TOTAL_ROUND(16),
     TOTAL_BEADS_IN_A_MILESTONE(16),
     PANCHA_TATTVA_MANTRA_DURATION(6445L),
