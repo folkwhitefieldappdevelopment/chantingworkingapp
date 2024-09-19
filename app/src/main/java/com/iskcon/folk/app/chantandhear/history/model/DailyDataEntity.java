@@ -4,19 +4,19 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class ChantingDailyDataEntity implements Serializable {
+public class DailyDataEntity implements Serializable {
 
     private String userId;
     private Date chantingDate;
     private String rowId;
     private int numberOfRoundsDone;
     private int numberOfRoundsSet;
-    private List<ChantingRoundDataEntity> chantingRoundDataEntities;
+    private List<RoundDataEntity> chantingRoundDataEntities;
 
-    public ChantingDailyDataEntity(){
+    public DailyDataEntity(){
     }
 
-    public ChantingDailyDataEntity(String userId, Date chantingDate, String rowId, int numberOfRoundsDone, int numberOfRoundsSet, List<ChantingRoundDataEntity> chantingRoundDataEntities) {
+    public DailyDataEntity(String userId, Date chantingDate, String rowId, int numberOfRoundsDone, int numberOfRoundsSet, List<RoundDataEntity> chantingRoundDataEntities) {
         this.userId = userId;
         this.chantingDate = chantingDate;
         this.rowId = rowId;
@@ -65,11 +65,11 @@ public class ChantingDailyDataEntity implements Serializable {
         this.numberOfRoundsSet = numberOfRoundsSet;
     }
 
-    public List<ChantingRoundDataEntity> getChantingRoundDataEntities() {
+    public List<RoundDataEntity> getChantingRoundDataEntities() {
         return chantingRoundDataEntities;
     }
 
-    public void setChantingRoundDataEntities(List<ChantingRoundDataEntity> chantingRoundDataEntities) {
+    public void setChantingRoundDataEntities(List<RoundDataEntity> chantingRoundDataEntities) {
         this.chantingRoundDataEntities = chantingRoundDataEntities;
     }
 }

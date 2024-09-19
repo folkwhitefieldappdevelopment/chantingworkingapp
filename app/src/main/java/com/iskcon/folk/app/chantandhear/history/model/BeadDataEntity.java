@@ -2,7 +2,7 @@ package com.iskcon.folk.app.chantandhear.history.model;
 
 import java.io.Serializable;
 
-public class ChantingBeadDataEntity implements Serializable {
+public class BeadDataEntity implements Serializable {
 
     private String rowId;
     private int roundNumber;
@@ -11,10 +11,10 @@ public class ChantingBeadDataEntity implements Serializable {
     private int endBead;
     private int heardCount;
 
-    public ChantingBeadDataEntity() {
+    public BeadDataEntity() {
     }
 
-    public ChantingBeadDataEntity(String rowId, int roundNumber, int hearingLevel, int startBead, int endBead, int heardCount) {
+    public BeadDataEntity(String rowId, int roundNumber, int hearingLevel, int startBead, int endBead, int heardCount) {
         this.rowId = rowId;
         this.roundNumber = roundNumber;
         this.hearingLevel = hearingLevel;

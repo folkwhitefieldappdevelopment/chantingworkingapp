@@ -1,0 +1,5 @@
+<style xmlns:android="http://schemas.android.com/apk/res/android"
+    android:name="fab_square" >
+    <item android:name="cornerFamily">rounded</item>
+    <item android:name="cornerSize">10dp</item>
+</style>

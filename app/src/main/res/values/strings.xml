@@ -16,6 +16,9 @@
     <string name="main_activity_pancha_tattva_mantra">jaya sri-krishna-chaitanya\nprabhu nityananda\nsri-adwaita gadadhara\nshrivasadi-gaura-bhakta-vrinda</string>
     <string name="soul_full_japa">Soul full japa</string>
     <string name="heart_full_japa">Heart full japa</string>
+    <string name="level">Level</string>
+    <string name="heard_button">Heard button</string>
+    <string name="milestone_wise_heard_count">Milestone wise heard count</string>
     <string-array name="playback_speed_options">
         <item>0.75x</item>
         <item>1.0x</item>

@@ -36,10 +36,10 @@ public class HearButtonHandler extends AbstractEventHandler {
 
         JapaMalaViewModel japaMalaViewModel = getAppCompatActivity().getJapaMalaViewModel();
 
-        if (japaMalaViewModel.getBeadCounterLiveData().getValue() > 1) {
+        if(super.getAppCompatActivity().getHkMantraClickHandler().isHkMahaMantraPlaying()) {
             getAppCompatActivity().getJapaMalaViewModel().incrementHeardBy(levelCountValue);
-            this.sendToast();
         }
+        this.sendToast();
     }
 
     public void handleLevelUp(View view) {

@@ -11,16 +11,23 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.imageview.ShapeableImageView;
 import com.iskcon.folk.app.chantandhear.MainActivity;
 import com.iskcon.folk.app.chantandhear.R;
 import com.iskcon.folk.app.chantandhear.constant.ApplicationConstants;
+import com.iskcon.folk.app.chantandhear.dao.ChantingDataDao;
 import com.iskcon.folk.app.chantandhear.factory.MediaPlayerInstanceCreatorFactory;
+import com.iskcon.folk.app.chantandhear.history.model.BeadDataEntity;
+import com.iskcon.folk.app.chantandhear.history.model.DailyDataEntity;
+import com.iskcon.folk.app.chantandhear.history.model.RoundDataEntity;
 import com.iskcon.folk.app.chantandhear.service.AbstractEventHandler;
+import com.iskcon.folk.app.chantandhear.service.CountdownTimerImpl;
 import com.iskcon.folk.app.chantandhear.service.beadcount.JapaMalaViewModel;
 import com.iskcon.folk.app.chantandhear.service.beadcount.MalaBeadCounter;
 import com.iskcon.folk.app.chantandhear.service.progress.ProgressBarHandler;
 
 import java.text.MessageFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -35,11 +42,11 @@ public class HkMantraClickHandler extends AbstractEventHandler {
     private boolean isMediaPaused;
     private Handler hkMahaMantraHandler;
     private Runnable hkMahaMantraRunnable;
-    private Timer malaTimerClock;
     private Handler hkMahaMantraMalaCounterHandler;
     private Runnable hkMahaMantraMalaCounterRunnable;
     private CountDownTimer malaBeadCounter;
     private TextView hareKrishnaMahaMantraTextView;
+    private CountdownTimerImpl countDownTimer;
 
     public HkMantraClickHandler(MainActivity appCompatActivity) {
         super(appCompatActivity);
@@ -72,9 +79,12 @@ public class HkMantraClickHandler extends AbstractEventHandler {
     // Start Pancha Tattva Mantra Media player
     private void startPanchaTattvaMantraMediaPlayer() {
         playButton.setVisibility(View.INVISIBLE);
+        ((ImageView) super.getAppCompatActivity().findViewById(R.id.spBadgeImageView)).setVisibility(View.VISIBLE);
+        ((ShapeableImageView) super.getAppCompatActivity().findViewById(R.id.spMainActivityImage)).setImageResource(R.drawable.panchatattva);
         hareKrishnaMahaMantraTextView.setAnimation(AnimationUtils.loadAnimation(getAppCompatActivity(), android.R.anim.fade_in));
         hareKrishnaMahaMantraTextView.setText(R.string.main_activity_pancha_tattva_mantra);
-        CountDownTimer countDownTimer = initiateMediaTimeCountDownTimer();
+        this.countDownTimer = initiateMediaTimeCountDownTimer();
+        this.countDownTimer.start();
         this.panchTattvaMantraMediaPlayer.setPlaybackParams(this.panchTattvaMantraMediaPlayer.getPlaybackParams().setSpeed(speedButtonHandler.getSpeed()));
         panchTattvaMantraMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
@@ -87,61 +97,27 @@ public class HkMantraClickHandler extends AbstractEventHandler {
             }
         });
         panchTattvaMantraMediaPlayer.start();
-        /*new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                initiateMediaTimeCountDownTimer().start();
-            }
-        }, 500);*/
-
-        initializeMalaTimerClock();
     }
 
-    private CountDownTimer initiateMediaTimeCountDownTimer() {
+    private CountdownTimerImpl initiateMediaTimeCountDownTimer() {
         long totalMediaTime = this.getTotalMediaDuration();
         Log.i("TAG = ", "totalMediaTime = : " + totalMediaTime);
         TextView textView = getAppCompatActivity().findViewById(R.id.mediaTimerTextView);
-        //TextView roundNoTextView = getAppCompatActivity().findViewById(R.id.roundNoTextView);
         String totalTime = String.format(Locale.ENGLISH, "0%d:%02d", TimeUnit.MILLISECONDS.toMinutes(totalMediaTime), TimeUnit.MILLISECONDS.toSeconds(totalMediaTime));
         textView.setText(totalTime);
-        return new CountDownTimer(720000, 1000) {
-            long timeElapsed = 0;
+        return new CountdownTimerImpl(900000, 1000) {
 
             @Override
             public void onTick(long totalMediaDuration) {
-                timeElapsed = timeElapsed + 1000;
-                String elapsedTime = String.format(Locale.ENGLISH, "0%d:%02d", TimeUnit.MILLISECONDS.toMinutes(timeElapsed), TimeUnit.MILLISECONDS.toSeconds(timeElapsed));
-                //roundNoTextView.setText(MessageFormat.format("Round {0}  |  {1} ", getAppCompatActivity().getJapaMalaViewModel().getRoundNumberLiveData().getValue(), getAppCompatActivity().getJapaMalaViewModel().getBeadCounterLiveData().getValue()));
-                //textView.setText(MessageFormat.format("{0} / {1}", elapsedTime, totalTime));
-                textView.setText(MessageFormat.format("{0}", elapsedTime));
+                super.setTimeElapsed(super.getTimeElapsed() + 1000);
+                textView.setText(String.format(Locale.ENGLISH, "0%d:%02d", TimeUnit.MILLISECONDS.toMinutes(super.getTimeElapsed()) % 60, TimeUnit.MILLISECONDS.toSeconds(super.getTimeElapsed()) % 60));
             }
 
             @Override
             public void onFinish() {
-                timeElapsed = 0;
+                super.setTimeElapsed(0);
             }
         };
-    }
-
-    private void initializeMalaTimerClock() {
-        TextView mediaTimerTextView = getAppCompatActivity().findViewById(R.id.mediaTimerTextView);
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            long timeElapsed = 0;
-
-            @Override
-            public void run() {
-                timeElapsed = timeElapsed + 1000;
-                String elapsedTime = String.format(Locale.ENGLISH, "0%d:%02d", TimeUnit.MILLISECONDS.toMinutes(timeElapsed), TimeUnit.MILLISECONDS.toSeconds(timeElapsed));
-                mediaTimerTextView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        mediaTimerTextView.setText(MessageFormat.format("{0}", elapsedTime));
-                    }
-                });
-            }
-        }, 50, 1000);
-        this.malaTimerClock = timer;
     }
 
     private long getTotalMediaDuration() {
@@ -182,6 +158,7 @@ public class HkMantraClickHandler extends AbstractEventHandler {
         hareKrishnaMahaMantraTextView.setAnimation(AnimationUtils.loadAnimation(getAppCompatActivity(), android.R.anim.fade_in));
         hareKrishnaMahaMantraTextView.setText(R.string.main_activity_hk_maha_mantra);
         hkMahaMantraMediaPlayer.setPlaybackParams(hkMahaMantraMediaPlayer.getPlaybackParams().setSpeed(speedButtonHandler.getSpeed()));
+        super.getAppCompatActivity().getProgressBarHandler().initializeProgressBar();
         final int CURRENT_BEAD_COUNT = getAppCompatActivity().getJapaMalaViewModel().getBeadCounterLiveData().getValue();
         final long COUNT_DOWN_INTERVAL = ApplicationConstants.HARE_KRISHNA_MANTRA_SINGLE_BEAD_DURATION.getConstantValue(Long.class) / Float.valueOf(speedButtonHandler.getSpeed()).longValue();
         this.hkMahaMantraHandler = new Handler();
@@ -318,6 +295,15 @@ public class HkMantraClickHandler extends AbstractEventHandler {
         alertDialogBuilder.show();
 
         getAppCompatActivity().getFlipperFocusSlideshowHandler().stopFlipper();
+
+        RoundDataEntity roundDataEntity = new RoundDataEntity();
+        roundDataEntity.setUserId(getAppCompatActivity().getUserDetails().getEmailId());
+        roundDataEntity.setChantingDate(new Date());
+        roundDataEntity.setRoundNumber(japaMalaViewModel.getRoundNumberLiveData().getValue());
+        roundDataEntity.setTimeTaken(countDownTimer.getTimeElapsed());
+        roundDataEntity.setTotalHeardCount(japaMalaViewModel.getHeardCounterLiveData().getValue());
+
+        new ChantingDataDao().save(roundDataEntity);
     }
 
     private void destroyResources() {
@@ -327,10 +313,9 @@ public class HkMantraClickHandler extends AbstractEventHandler {
             if (malaBeadCounter != null) {
                 malaBeadCounter.cancel();
             }
-            malaTimerClock.cancel();
-            malaTimerClock.purge();
             getAppCompatActivity().getFlipperFocusSlideshowHandler().pauseFlipper();
         }
+        this.countDownTimer.cancel();
     }
 
     public void destroy() {

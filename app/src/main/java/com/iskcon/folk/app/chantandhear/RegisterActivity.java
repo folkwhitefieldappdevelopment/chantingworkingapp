@@ -39,7 +39,6 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
-
         loginButton = findViewById(R.id.loginButton);
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
@@ -121,7 +120,6 @@ public class RegisterActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Void unused) {
                                     Toast.makeText(getApplicationContext(), "L in Now", Toast.LENGTH_SHORT).show();
-
                                 }
                             });
 

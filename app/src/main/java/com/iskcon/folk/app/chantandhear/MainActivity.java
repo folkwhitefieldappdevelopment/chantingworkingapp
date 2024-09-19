@@ -8,8 +8,8 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,12 +17,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.material.imageview.ShapeableImageView;
 import com.iskcon.folk.app.chantandhear.constant.ApplicationConstants;
 import com.iskcon.folk.app.chantandhear.databinding.ActivityMainBinding;
 import com.iskcon.folk.app.chantandhear.model.JapaMalaModel;
+import com.iskcon.folk.app.chantandhear.model.UserDetails;
 import com.iskcon.folk.app.chantandhear.service.FlipperFocusSlideshowHandler;
 import com.iskcon.folk.app.chantandhear.service.HearButtonHandler;
+import com.iskcon.folk.app.chantandhear.service.HistoryButtonClickHandler;
 import com.iskcon.folk.app.chantandhear.service.beadcount.JapaMalaViewModel;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.BeforeDoneClickHandler;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.HkMantraClickHandler;
@@ -47,8 +48,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private YoutubeVideoHandler youtubeVideoHandler;
     private FlipperFocusSlideshowHandler flipperFocusSlideshowHandler;
     private BeforeDoneClickHandler beforeDoneClickHandler;
-
+    private ProgressBarHandler progressBarHandler;
+    private HistoryButtonClickHandler historyViewOpenHandler;
     private JapaMalaModel japaMalaModel = null;
+    private UserDetails userDetails;
     private float dx;
 
     private float dy;
@@ -82,6 +85,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         japaMalaModel = this.initializeJapaMalaModel();
         gestureDetector = new GestureDetector(this, new GestureListener());
 
+        userDetails = (UserDetails) getIntent().getExtras().get("userDetails");
+
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -97,7 +102,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         //MediaPlayers
         spHkmMediaplayer = MediaPlayer.create(MainActivity.this, R.raw.iu_maha_mantra_one_bead_1);
-
         resetButtonHandler = new ResetButtonHandler(this, spHkmMediaplayer);
         muteButtonHandler = new MuteButtonHandler(this, spHkmMediaplayer);
         unMuteButtonHandler = new UnmuteButtonHandler(this, spHkmMediaplayer);
@@ -107,7 +111,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         hearButtonHandler = new HearButtonHandler(this);
         flipperFocusSlideshowHandler = new FlipperFocusSlideshowHandler(this);
         beforeDoneClickHandler = new BeforeDoneClickHandler(this);
-
+        progressBarHandler = new ProgressBarHandler(this);
+        historyViewOpenHandler = new HistoryButtonClickHandler(this);
         srilaPrabhupadaChantingWithOutPanchtattva = MediaPlayer.create(MainActivity.this, R.raw.hkm);
 
         //ImageViews
@@ -166,10 +171,17 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         flipperFocusSlideshowHandler.initializeFlipper();
 
-        ((ImageView)findViewById(R.id.beforeDoneImageView)).setOnClickListener(new View.OnClickListener() {
+        ((ImageView) findViewById(R.id.beforeDoneImageView)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 beforeDoneClickHandler.handle(view);
+            }
+        });
+
+        ((LinearLayout)findViewById(R.id.heardLinearLayout)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                historyViewOpenHandler.handle(view);
             }
         });
 
@@ -250,19 +262,15 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     private JapaMalaViewModel initializeJapaMalaViewModel() {
         JapaMalaViewModel japaMalaViewModel = new ViewModelProvider(this).get(JapaMalaViewModel.class);
-        ProgressBarHandler progressBarManager = new ProgressBarHandler(this);
         Observer<Integer> beadCountIncrementObserver = new Observer<Integer>() {
             @Override
             public void onChanged(Integer currentMalaBeadCount) {
                 if (currentMalaBeadCount != null && currentMalaBeadCount <= ApplicationConstants.TOTAL_BEADS.getConstantValue(Integer.class)) {
-                    if (currentMalaBeadCount == 1) {
-                        progressBarManager.initializeProgressBar();
-                    }
                     TextView beadCountTextView = findViewById(R.id.beadCountTextView);
                     beadCountTextView.setText(String.valueOf(currentMalaBeadCount));
                     TextView textView = findViewById(R.id.hareKrishnaMahaMantraTextView);
                     textView.animate().setDuration(500).scaleX(1.1f).scaleY(1.1f).withEndAction(() -> textView.animate().scaleX(1).scaleY(1));
-
+                    progressBarHandler.showProgressBar(currentMalaBeadCount);
                     if (currentMalaBeadCount % 3 == 0) {
                         flipperFocusSlideshowHandler.showNextFlipper();
                     }
@@ -291,7 +299,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             public void onChanged(Integer currentHeardCount) {
                 if (currentHeardCount != null && currentHeardCount <= ApplicationConstants.TOTAL_BEADS.getConstantValue(Integer.class)) {
                     if (currentHeardCount != 0) {
-                        progressBarManager.manageProgress(currentHeardCount);
+                        progressBarHandler.incrementProgressBar(currentHeardCount);
                         TextView heardCountTextView = findViewById(R.id.heardCountTextView);
                         heardCountTextView.setText(String.valueOf(currentHeardCount));
                     }
@@ -326,6 +334,18 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     public HearButtonHandler getHearButtonHandler() {
         return hearButtonHandler;
+    }
+
+    public ProgressBarHandler getProgressBarHandler() {
+        return progressBarHandler;
+    }
+
+    public UserDetails getUserDetails() {
+        return userDetails;
+    }
+
+    public HistoryButtonClickHandler getHistoryViewOpenHandler() {
+        return historyViewOpenHandler;
     }
 
     @Override

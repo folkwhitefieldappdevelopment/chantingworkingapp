@@ -1,5 +1,6 @@
 package com.iskcon.folk.app.chantandhear.service.progress;
 
+import android.media.MediaPlayer;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -7,11 +8,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.iskcon.folk.app.chantandhear.MainActivity;
+import com.iskcon.folk.app.chantandhear.R;
 import com.iskcon.folk.app.chantandhear.constant.ApplicationConstants;
 import com.iskcon.folk.app.chantandhear.constant.Milestone;
 import com.iskcon.folk.app.chantandhear.service.AbstractEventHandler;
 
 public class ProgressBarHandler extends AbstractEventHandler {
+
+    private Milestone currentMilestone;
 
     public ProgressBarHandler(MainActivity appCompatActivity) {
         super(appCompatActivity);
@@ -28,30 +32,45 @@ public class ProgressBarHandler extends AbstractEventHandler {
         }
     }
 
-    public void manageProgress(int currentHeardCount) {
-        int currentBeadCount = super.getAppCompatActivity().getJapaMalaViewModel().getBeadCounterLiveData().getValue();
-        Milestone milestone = Milestone.beadInBetweenWhichMilestoe(currentBeadCount);
-        LinearLayout linearLayout = super.getAppCompatActivity().findViewById(milestone.getLinearLayoutId());
-        if (View.INVISIBLE == linearLayout.getVisibility()) {
-            linearLayout.setVisibility(View.VISIBLE);
+    public void showProgressBar(int currentHeardCount) {
+        Milestone milestone = Milestone.beadInBetweenWhichMilestoe(currentHeardCount);
+        if (milestone != null) {
+            LinearLayout linearLayout = super.getAppCompatActivity().findViewById(milestone.getLinearLayoutId());
+            if (View.INVISIBLE == linearLayout.getVisibility()) {
+                linearLayout.setVisibility(View.VISIBLE);
+            }
         }
-        Log.i(this.getClass().getName(), "milestone = " + milestone);
-
-        ProgressBar progressBar = super.getAppCompatActivity().findViewById(milestone.getProgressBarId());
-        if (Milestone.MILESTONE_7.getMilestoneId() == milestone.getMilestoneId()) {
-            progressBar.setMax(12);
-        } else {
-            progressBar.setMax(ApplicationConstants.TOTAL_BEADS_IN_A_MILESTONE.getConstantValue(Integer.class));
-        }
-        int progressData = (Milestone.MILESTONE_1.equals(milestone) ? currentHeardCount : (currentBeadCount - milestone.getStartBead()) + 1);
-        progressData = progressData == 0 ? 1 : progressData;
-        progressBar.setProgress(progressData, true);
-        TextView textView = getAppCompatActivity().findViewById(milestone.getHeardCountTextViewId());
-        textView.setText(String.valueOf(progressData));
     }
 
-    public void setCurrentMilestone(int currentBeadCount) {
+    public void incrementProgressBar(int currentHeardCount) {
+        if (!super.getAppCompatActivity().getHkMantraClickHandler().isMediaPaused()) {
+            Milestone milestone = Milestone.beadInBetweenWhichMilestoe(currentHeardCount);
+            if (currentMilestone == null) {
+                currentMilestone = milestone;
+            }
+            if (milestone != null) {
+                this.showProgressBar(currentHeardCount);
+                ProgressBar progressBar = super.getAppCompatActivity().findViewById(milestone.getProgressBarId());
+                if (Milestone.MILESTONE_7.getMilestoneId() == milestone.getMilestoneId()) {
+                    progressBar.setMax(12);
+                } else {
+                    progressBar.setMax(ApplicationConstants.TOTAL_BEADS_IN_A_MILESTONE.getConstantValue(Integer.class));
+                }
+                int progressData = (Milestone.MILESTONE_1.equals(milestone) ? currentHeardCount : (currentHeardCount - milestone.getStartBead()) + 1);
+                progressData = progressData == 0 ? 1 : progressData;
+                progressBar.setProgress(progressData, true);
+                TextView textView = getAppCompatActivity().findViewById(milestone.getHeardCountTextViewId());
+                textView.setText(String.valueOf(progressData));
 
+                if (currentMilestone.getMilestoneId() != milestone.getMilestoneId()) {
+                    MediaPlayer milestoneMediaPlayer = MediaPlayer.create(getAppCompatActivity(), R.raw.beat16);
+                    milestoneMediaPlayer.start();
+                    milestoneMediaPlayer.stop();
+                    milestoneMediaPlayer.release();
+                    currentMilestone = milestone;
+                }
+            }
+        }
     }
 
     public void clearProgressBar() {

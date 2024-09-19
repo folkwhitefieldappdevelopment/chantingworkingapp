@@ -4,8 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class ChantingRoundDataEntity implements Serializable{
-    private String rowId;
+public class RoundDataEntity implements Serializable {
+    private String userId;
+    private Date chantingDate;
     private int roundNumber;
     private Date startTime;
     private Date endTime;
@@ -14,13 +15,14 @@ public class ChantingRoundDataEntity implements Serializable{
     private Float playbackSpeed;
     private int status;
     private int earlyDone;
-    private List<ChantingBeadDataEntity> chantingBeadDataEntities;
+    private List<BeadDataEntity> chantingBeadDataEntities;
 
-    public ChantingRoundDataEntity(){
-    };
+    public RoundDataEntity() {
+    }
 
-    public ChantingRoundDataEntity(String rowId, int roundNumber, Date startTime, Date endTime, long timeTaken, int totalHeardCount, Float playbackSpeed, int status, int earlyDone, List<ChantingBeadDataEntity> chantingBeadDataEntities) {
-        this.rowId = rowId;
+    public RoundDataEntity(String userId, Date chantingDate, int roundNumber, Date startTime, Date endTime, long timeTaken, int totalHeardCount, Float playbackSpeed, int status, int earlyDone, List<BeadDataEntity> chantingBeadDataEntities) {
+        this.userId = userId;
+        this.chantingDate = chantingDate;
         this.roundNumber = roundNumber;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -32,20 +34,20 @@ public class ChantingRoundDataEntity implements Serializable{
         this.chantingBeadDataEntities = chantingBeadDataEntities;
     }
 
-    public int getStatus() {
-        return status;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getRowId() {
-        return rowId;
+    public Date getChantingDate() {
+        return chantingDate;
     }
 
-    public void setRowId(String rowId) {
-        this.rowId = rowId;
+    public void setChantingDate(Date chantingDate) {
+        this.chantingDate = chantingDate;
     }
 
     public int getRoundNumber() {
@@ -96,6 +98,14 @@ public class ChantingRoundDataEntity implements Serializable{
         this.playbackSpeed = playbackSpeed;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     public int getEarlyDone() {
         return earlyDone;
     }
@@ -104,11 +114,11 @@ public class ChantingRoundDataEntity implements Serializable{
         this.earlyDone = earlyDone;
     }
 
-    public List<ChantingBeadDataEntity> getChantingBeadDataEntities() {
+    public List<BeadDataEntity> getChantingBeadDataEntities() {
         return chantingBeadDataEntities;
     }
 
-    public void setChantingBeadDataEntities(List<ChantingBeadDataEntity> chantingBeadDataEntities) {
+    public void setChantingBeadDataEntities(List<BeadDataEntity> chantingBeadDataEntities) {
         this.chantingBeadDataEntities = chantingBeadDataEntities;
     }
 }
