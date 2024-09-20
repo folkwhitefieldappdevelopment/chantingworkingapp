@@ -17,7 +17,9 @@ public class SpeedButtonHandler extends AbstractMediaPlayerEventHandler {
 
     private float speed = 1.0f;
 
-    private final String[] SPEED_DROPDOWN_DATA = {"0.25x", "0.5x", "1x", "1.1x", "1.2x", "1.5x", "2x", "4x"};
+    private int speedIndex;
+
+    private final String[] SPEED_DROPDOWN_DATA = {"0.25x", "0.5x", "0.75x", "Normal", "1.2x", "1.25x", "1.3x", "1.4x", "1.5x", "1.75x"};
 
     public float getSpeed() {
         return speed;
@@ -31,29 +33,24 @@ public class SpeedButtonHandler extends AbstractMediaPlayerEventHandler {
     public void handle(View view) {
         super.animateAndVibrate(view, 50, 200);
         HkMantraClickHandler hkMantraClickHandler = super.getAppCompatActivity().getHkMantraClickHandler();
-        if (hkMantraClickHandler.isHkMahaMantraPlaying()) {
-            MediaPlayer mediaPlayer = super.getAppCompatActivity().getHkMantraClickHandler().getCurrentMediaPlayer();
-            if (mediaPlayer != null && mediaPlayer.isPlaying() && mediaPlayer.getCurrentPosition() > 0) {
-                mediaPlayer.pause();
-                this.showConfirmationDialog(getMediaplayer());
-            } else {
-                Toast.makeText(getAppCompatActivity(), "Hare Krishna, Speed cannot be adjusted for Pancha Tattva.", Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            this.showConfirmationDialog(getMediaplayer());
+        MediaPlayer mediaPlayer = super.getAppCompatActivity().getHkMantraClickHandler().getCurrentMediaPlayer();
+        if (mediaPlayer != null && mediaPlayer.isPlaying() && mediaPlayer.getCurrentPosition() > 0) {
+            hkMantraClickHandler.pauseMediaPlayer();
         }
+        this.showConfirmationDialog();
     }
 
-    private void showConfirmationDialog(MediaPlayer mediaPlayer) {
+    private void showConfirmationDialog() {
         final Vibrator vibrator = (Vibrator) super.getAppCompatActivity().getSystemService(Context.VIBRATOR_SERVICE);
         final MainActivity mainActivity = (MainActivity) super.getAppCompatActivity();
-        final int[] selectedItem = {2}; // Default selected item
+        final int selectedItem = speedIndex != 0 ? speedIndex : 3; // Default selected item
         AlertDialog.Builder builder = new AlertDialog.Builder(super.getAppCompatActivity());
         builder.setTitle("Choose Speed")
-                .setSingleChoiceItems(SPEED_DROPDOWN_DATA, selectedItem[0], new DialogInterface.OnClickListener() {
+                .setSingleChoiceItems(SPEED_DROPDOWN_DATA, selectedItem, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         CommonUtils.vibrateFunction(50, vibrator);
+                        speedIndex = which;
                         switch (which) {
                             case 0:
                                 speed = 0.25f;
@@ -62,33 +59,36 @@ public class SpeedButtonHandler extends AbstractMediaPlayerEventHandler {
                                 speed = 0.5f;
                                 break;
                             case 2:
-                                speed = 1.0f;
+                                speed = 0.75f;
                                 break;
                             case 3:
-                                speed = 1.1f;
+                                speed = 1.0f;
                                 break;
                             case 4:
                                 speed = 1.2f;
                                 break;
                             case 5:
-                                speed = 1.5f;
+                                speed = 1.25f;
                                 break;
                             case 6:
-                                speed = 2.0f;
+                                speed = 1.3f;
                                 break;
                             case 7:
-                                speed = 4.0f;
+                                speed = 1.4f;
+                                break;
+                            case 8:
+                                speed = 1.5f;
+                                break;
+                            case 9:
+                                speed = 1.75f;
                                 break;
                         }
-                        ((TextView)getAppCompatActivity().findViewById(R.id.speedMenu)).setText(SPEED_DROPDOWN_DATA[which]);
                     }
                 }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        MediaPlayer mediaPlayer = getAppCompatActivity().getHkMantraClickHandler().getCurrentMediaPlayer();
-                        if (mediaPlayer != null && mediaPlayer.isPlaying() && mediaPlayer.getCurrentPosition() > 0) {
-                            getAppCompatActivity().getHkMantraClickHandler().startHkMahaMantraMultipleMediaPlayer();
-                        }
+                        ((TextView) getAppCompatActivity().findViewById(R.id.speedMenu)).setText(SPEED_DROPDOWN_DATA[speedIndex]);
+                        getAppCompatActivity().getHkMantraClickHandler().resumeMediaPlayer();
                     }
                 }).show();
     }

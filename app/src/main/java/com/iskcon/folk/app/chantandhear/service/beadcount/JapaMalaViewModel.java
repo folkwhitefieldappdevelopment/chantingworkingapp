@@ -13,7 +13,7 @@ public class JapaMalaViewModel extends ViewModel {
 
     private final int INITIAL_BEAD_VALUE = 0;
 
-    private final int INITIAL_ROUND_NO_VALUE = 1;
+    private int initialRoundNoValue = 1;
 
     private final int INITIAL_HEARD_VALUE = 0;
 
@@ -26,7 +26,7 @@ public class JapaMalaViewModel extends ViewModel {
 
     public MutableLiveData<Integer> getRoundNumberLiveData() {
         if (roundNumberLiveData == null) {
-            roundNumberLiveData = new MutableLiveData<>(INITIAL_ROUND_NO_VALUE);
+            roundNumberLiveData = new MutableLiveData<>(initialRoundNoValue);
         }
         return roundNumberLiveData;
     }
@@ -54,7 +54,7 @@ public class JapaMalaViewModel extends ViewModel {
             roundNumberLiveData.setValue(incrementBead);
             roundNumberLiveData.postValue(incrementBead);
         } else {
-            roundNumberLiveData = new MutableLiveData<>(INITIAL_ROUND_NO_VALUE);
+            roundNumberLiveData = new MutableLiveData<>(initialRoundNoValue);
         }
     }
 
@@ -96,5 +96,13 @@ public class JapaMalaViewModel extends ViewModel {
         } else {
             heardCounterLiveData = new MutableLiveData<>(INITIAL_HEARD_VALUE);
         }
+    }
+
+    public int getInitialRoundNoValue() {
+        return initialRoundNoValue;
+    }
+
+    public void setInitialRoundNoValue(int initialRoundNoValue) {
+        this.initialRoundNoValue = initialRoundNoValue;
     }
 }

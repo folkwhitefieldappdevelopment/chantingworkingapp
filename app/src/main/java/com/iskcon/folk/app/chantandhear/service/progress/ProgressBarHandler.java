@@ -43,13 +43,13 @@ public class ProgressBarHandler extends AbstractEventHandler {
     }
 
     public void incrementProgressBar(int currentHeardCount) {
+        this.showProgressBar(currentHeardCount);
         if (!super.getAppCompatActivity().getHkMantraClickHandler().isMediaPaused()) {
             Milestone milestone = Milestone.beadInBetweenWhichMilestoe(currentHeardCount);
             if (currentMilestone == null) {
                 currentMilestone = milestone;
             }
             if (milestone != null) {
-                this.showProgressBar(currentHeardCount);
                 ProgressBar progressBar = super.getAppCompatActivity().findViewById(milestone.getProgressBarId());
                 if (Milestone.MILESTONE_7.getMilestoneId() == milestone.getMilestoneId()) {
                     progressBar.setMax(12);
@@ -62,12 +62,18 @@ public class ProgressBarHandler extends AbstractEventHandler {
                 TextView textView = getAppCompatActivity().findViewById(milestone.getHeardCountTextViewId());
                 textView.setText(String.valueOf(progressData));
 
-                if (currentMilestone.getMilestoneId() != milestone.getMilestoneId()) {
+                if (progressData == 16 || (Milestone.MILESTONE_7 == currentMilestone && progressData == 12)) {
                     MediaPlayer milestoneMediaPlayer = MediaPlayer.create(getAppCompatActivity(), R.raw.beat16);
+                    milestoneMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            mediaPlayer.stop();
+                            mediaPlayer.release();
+                        }
+                    });
                     milestoneMediaPlayer.start();
-                    milestoneMediaPlayer.stop();
-                    milestoneMediaPlayer.release();
                     currentMilestone = milestone;
+                    this.showProgressBar(currentHeardCount);
                 }
             }
         }

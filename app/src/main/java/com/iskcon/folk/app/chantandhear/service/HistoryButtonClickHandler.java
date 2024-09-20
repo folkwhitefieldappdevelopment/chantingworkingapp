@@ -1,6 +1,8 @@
 package com.iskcon.folk.app.chantandhear.service;
 
 import android.app.AlertDialog;
+import android.graphics.Typeface;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +21,9 @@ import com.iskcon.folk.app.chantandhear.R;
 import com.iskcon.folk.app.chantandhear.dao.ChantingDataDao;
 import com.iskcon.folk.app.chantandhear.history.model.RoundDataEntity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -70,16 +74,20 @@ public class HistoryButtonClickHandler extends AbstractEventHandler {
         layoutParams.setMargins(margin, 0, margin, margin);
         linearLayout.setLayoutParams(layoutParams);
 
+        int totalHeardCount = 0;
+
         if (roundDataEntities != null && !roundDataEntities.isEmpty()) {
-            roundDataEntities.forEach(roundDataEntity -> {
+
+            Collections.reverse(roundDataEntities);
+
+            for (int i = 0; i < roundDataEntities.size(); i++) {
+
+                RoundDataEntity roundDataEntity = roundDataEntities.get(i);
+
                 View historyView = super.getAppCompatActivity().getLayoutInflater().inflate(R.layout.history_list_row_view_activity, null);
-                ((TextView) historyView.findViewById(R.id.roundIdTextView)).setText(
-                        String.format(
-                                Locale.ENGLISH,
-                                "0%d",
-                                roundDataEntity.getRoundNumber()
-                        )
-                );
+                int roundNumber = roundDataEntity.getRoundNumber();
+                String roundNumberStr = roundNumber > 9 ? String.valueOf(roundNumber) : String.format(Locale.ENGLISH, "0%d", roundNumber);
+                ((TextView) historyView.findViewById(R.id.roundIdTextView)).setText(roundNumberStr);
                 ((TextView) historyView.findViewById(R.id.heardCountTextView)).setText(roundDataEntity.getTotalHeardCount() + "");
                 ((TextView) historyView.findViewById(R.id.timeTakenTextView)).setText(
                         String.format(
@@ -96,14 +104,35 @@ public class HistoryButtonClickHandler extends AbstractEventHandler {
                 historyRowViewLayoutParams.setMargins(0, 0, 0, 50);
                 historyView.setLayoutParams(historyRowViewLayoutParams);
 
+                totalHeardCount = totalHeardCount + roundDataEntity.getTotalHeardCount();
+
                 linearLayout.addView(historyView);
-            });
+            }
+        } else {
+            TextView textView = new TextView(getAppCompatActivity());
+            textView.setText("Hare Krishna, no data found, please start your mala to see data in history. ");
+            textView.setTextColor(getAppCompatActivity().getResources().getColor(R.color.ch_light_color));
+            textView.setTypeface(textView.getTypeface(), Typeface.ITALIC);
+            textView.setTextSize(14);
+            textView.setGravity(Gravity.CENTER);
+            linearLayout.addView(textView);
         }
 
         ScrollView scrollView = new ScrollView(getAppCompatActivity());
         scrollView.addView(linearLayout);
         historyListViewLinearLayout.addView(scrollView);
+
+        ((TextView) historyListViewLinearLayout.findViewById(R.id.currentDateTextView))
+                .setText(new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH).format(new Date()));
+
+        ((TextView) historyListViewLinearLayout.findViewById(R.id.userNameTextView))
+                .setText(super.getAppCompatActivity().getUserDetails().getDisplayName());
+
+        ((TextView) historyListViewLinearLayout.findViewById(R.id.totalHeardCountTextView))
+                .setText(String.valueOf(totalHeardCount));
+
         builder.setView(historyListViewLinearLayout);
+
         builder.show();
     }
 }

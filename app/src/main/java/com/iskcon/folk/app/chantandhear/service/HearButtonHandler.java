@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.iskcon.folk.app.chantandhear.MainActivity;
 import com.iskcon.folk.app.chantandhear.R;
+import com.iskcon.folk.app.chantandhear.constant.ApplicationConstants;
 import com.iskcon.folk.app.chantandhear.constant.NamaPrabhuToasts;
 import com.iskcon.folk.app.chantandhear.service.beadcount.JapaMalaViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -29,15 +30,15 @@ public class HearButtonHandler extends AbstractEventHandler {
     @Override
     public void handle(View view) {
         super.vibrate(50);
-
         FloatingActionButton floatingActionButton = super.getAppCompatActivity().findViewById(R.id.hearButton);
         floatingActionButton.animate().setDuration(100).scaleX(1.1f).scaleY(1.1f).withEndAction(() ->
                 floatingActionButton.animate().setDuration(100).scaleX(1.0f).scaleY(1.0f));
 
         JapaMalaViewModel japaMalaViewModel = getAppCompatActivity().getJapaMalaViewModel();
 
-        if(super.getAppCompatActivity().getHkMantraClickHandler().isHkMahaMantraPlaying()) {
-            getAppCompatActivity().getJapaMalaViewModel().incrementHeardBy(levelCountValue);
+        if (super.getAppCompatActivity().getHkMantraClickHandler().isHkMahaMantraPlaying() &&
+                super.getAppCompatActivity().getJapaMalaViewModel().getHeardCounterLiveData().getValue() < ApplicationConstants.TOTAL_BEADS.getConstantValue(Integer.class)) {
+            super.getAppCompatActivity().getJapaMalaViewModel().incrementHeardBy(levelCountValue);
         }
         this.sendToast();
     }

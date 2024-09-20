@@ -33,8 +33,8 @@ public class HkMantraClickHandler extends AbstractEventHandler {
 
     private ImageView playButton = null;
     private SpeedButtonHandler speedButtonHandler;
-    private MediaPlayer hkMahaMantraMediaPlayer;
-    private MediaPlayer panchTattvaMantraMediaPlayer;
+    private android.media.MediaPlayer hkMahaMantraMediaPlayer;
+    private android.media.MediaPlayer panchTattvaMantraMediaPlayer;
     private boolean isMediaPaused;
     private Handler hkMahaMantraHandler;
     private Runnable hkMahaMantraRunnable;
@@ -43,6 +43,13 @@ public class HkMantraClickHandler extends AbstractEventHandler {
     private CountDownTimer malaBeadCounter;
     private TextView hareKrishnaMahaMantraTextView;
     private CountdownTimerImpl countDownTimer;
+
+    private enum MediaPlayerPlaying {
+        HKM_MEDIA_PLAYER,
+        PM_MEDIA_PLAYER
+    }
+
+    private MediaPlayerPlaying currentMediaPlayer;
 
     public HkMantraClickHandler(MainActivity appCompatActivity) {
         super(appCompatActivity);
@@ -81,10 +88,13 @@ public class HkMantraClickHandler extends AbstractEventHandler {
         hareKrishnaMahaMantraTextView.setText(R.string.main_activity_pancha_tattva_mantra);
         this.countDownTimer = initiateMediaTimeCountDownTimer();
         this.countDownTimer.start();
-        this.panchTattvaMantraMediaPlayer.setPlaybackParams(this.panchTattvaMantraMediaPlayer.getPlaybackParams().setSpeed(speedButtonHandler.getSpeed()));
-        panchTattvaMantraMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+        this.panchTattvaMantraMediaPlayer.setPlaybackParams(
+                this.panchTattvaMantraMediaPlayer.getPlaybackParams()
+                        .setSpeed(ApplicationConstants.PANCHA_TATTVA_MANTRA_SPEED.getConstantValue(Float.class))
+        );
+        panchTattvaMantraMediaPlayer.setOnCompletionListener(new android.media.MediaPlayer.OnCompletionListener() {
             @Override
-            public void onCompletion(MediaPlayer panchtattvaMediaPlayer) {
+            public void onCompletion(android.media.MediaPlayer panchtattvaMediaPlayer) {
                 panchtattvaMediaPlayer.stop();
                 panchtattvaMediaPlayer.release();
                 panchTattvaMantraMediaPlayer = null;
@@ -93,6 +103,7 @@ public class HkMantraClickHandler extends AbstractEventHandler {
             }
         });
         panchTattvaMantraMediaPlayer.start();
+        currentMediaPlayer = MediaPlayerPlaying.PM_MEDIA_PLAYER;
     }
 
     private CountdownTimerImpl initiateMediaTimeCountDownTimer() {
@@ -106,7 +117,13 @@ public class HkMantraClickHandler extends AbstractEventHandler {
             @Override
             public void onTick(long totalMediaDuration) {
                 super.setTimeElapsed(super.getTimeElapsed() + 1000);
-                textView.setText(String.format(Locale.ENGLISH, "0%d:%02d", TimeUnit.MILLISECONDS.toMinutes(super.getTimeElapsed()) % 60, TimeUnit.MILLISECONDS.toSeconds(super.getTimeElapsed()) % 60));
+                Log.i(this.getClass().getSimpleName(), "-------------------------- onTick: " + super.getTimeElapsed());
+                textView.setText(String.format(
+                        Locale.ENGLISH,
+                        "0%d:%02d",
+                        TimeUnit.MILLISECONDS.toMinutes(super.getTimeElapsed()) % 60,
+                        TimeUnit.MILLISECONDS.toSeconds(super.getTimeElapsed()) % 60)
+                );
             }
 
             @Override
@@ -121,6 +138,7 @@ public class HkMantraClickHandler extends AbstractEventHandler {
     }
 
     // Start Hare Krishna Maha Mantra Media player
+    // NOT USED FOR NOW
     private void startHkMahaMantraSingleMediaPlayer() {
         hkMahaMantraMediaPlayer.setPlaybackParams(hkMahaMantraMediaPlayer.getPlaybackParams().setSpeed(speedButtonHandler.getSpeed()));
         this.hkMahaMantraHandler = new Handler();
@@ -132,9 +150,9 @@ public class HkMantraClickHandler extends AbstractEventHandler {
             }
         };
         hkMahaMantraHandler.postDelayed(hkMahaMantraRunnable, 100);
-        hkMahaMantraMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+        hkMahaMantraMediaPlayer.setOnCompletionListener(new android.media.MediaPlayer.OnCompletionListener() {
             @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
+            public void onCompletion(android.media.MediaPlayer mediaPlayer) {
                 Integer beadCount = getAppCompatActivity().getJapaMalaViewModel().getBeadCounterLiveData().getValue();
                 getAppCompatActivity().getJapaMalaViewModel().incrementBead();
                 if (beadCount != null && beadCount < ApplicationConstants.TOTAL_BEADS.getConstantValue(Integer.class)) {
@@ -156,7 +174,7 @@ public class HkMantraClickHandler extends AbstractEventHandler {
         hkMahaMantraMediaPlayer.setPlaybackParams(hkMahaMantraMediaPlayer.getPlaybackParams().setSpeed(speedButtonHandler.getSpeed()));
         super.getAppCompatActivity().getProgressBarHandler().initializeProgressBar();
         final int CURRENT_BEAD_COUNT = getAppCompatActivity().getJapaMalaViewModel().getBeadCounterLiveData().getValue();
-        final long COUNT_DOWN_INTERVAL = ApplicationConstants.HARE_KRISHNA_MANTRA_SINGLE_BEAD_DURATION.getConstantValue(Long.class) / Float.valueOf(speedButtonHandler.getSpeed()).longValue();
+        final long COUNT_DOWN_INTERVAL = Math.round(ApplicationConstants.HARE_KRISHNA_MANTRA_SINGLE_BEAD_DURATION.getConstantValue(Long.class) / Float.valueOf(speedButtonHandler.getSpeed()));
         this.hkMahaMantraHandler = new Handler();
         this.hkMahaMantraRunnable = new Runnable() {
             @Override
@@ -164,7 +182,8 @@ public class HkMantraClickHandler extends AbstractEventHandler {
                 hkMahaMantraMediaPlayer.start();
                 if (CURRENT_BEAD_COUNT == 0) {
                     getAppCompatActivity().getJapaMalaViewModel().incrementBead();
-                    getAppCompatActivity().getFlipperFocusSlideshowHandler().startFlipper(COUNT_DOWN_INTERVAL * ApplicationConstants.FLIP_VIEW_BEAD_AFTER.getConstantValue(Integer.class));
+                    getAppCompatActivity().getFlipperFocusSlideshowHandler()
+                            .startFlipper(ApplicationConstants.FLIP_VIEW_INTERVAL.getConstantValue(Integer.class));
                 }
             }
         };
@@ -182,10 +201,16 @@ public class HkMantraClickHandler extends AbstractEventHandler {
                     finalBeadCount = ApplicationConstants.TOTAL_BEADS.getConstantValue(Integer.class);
                 }
                 long millisInFuture = ApplicationConstants.HARE_KRISHNA_MANTRA_SINGLE_BEAD_DURATION.getConstantValue(Long.class) * finalBeadCount;
-                malaBeadCounter = new MalaBeadCounter(millisInFuture, COUNT_DOWN_INTERVAL, getAppCompatActivity().getJapaMalaViewModel(), getAppCompatActivity().getHkMantraClickHandler()).start();
+                malaBeadCounter = new MalaBeadCounter(
+                        millisInFuture,
+                        COUNT_DOWN_INTERVAL,
+                        getAppCompatActivity().getJapaMalaViewModel(),
+                        getAppCompatActivity().getHkMantraClickHandler()
+                ).start();
             }
         };
 
+        currentMediaPlayer = MediaPlayerPlaying.HKM_MEDIA_PLAYER;
         hkMahaMantraMalaCounterHandler.postDelayed(hkMahaMantraMalaCounterRunnable, COUNT_DOWN_INTERVAL);
     }
 
@@ -200,23 +225,17 @@ public class HkMantraClickHandler extends AbstractEventHandler {
         this.destroyResources();
     }
 
-    // Reset Media Player play from the starting of the mala including Pancha Tattva mantra.
-    public void resetMediaPlayer() {
-        this.startPanchaTattvaMantraMediaPlayer();
-    }
-
     // Pause either Hare Krishna Maha Mantra or Pancha Tattva Media player depending on which is being played currently.
     public void resumeMediaPlayer() {
-        playButton.setVisibility(View.INVISIBLE);
-        if (panchTattvaMantraMediaPlayer != null && panchTattvaMantraMediaPlayer.getCurrentPosition() > 0) {
-            startPanchaTattvaMantraMediaPlayer();
-        } else {
-            startHkMahaMantraMultipleMediaPlayer();
+        if (currentMediaPlayer != null) {
+            playButton.setVisibility(View.INVISIBLE);
+            if (currentMediaPlayer.equals(MediaPlayerPlaying.HKM_MEDIA_PLAYER)) {
+                this.startHkMahaMantraMultipleMediaPlayer();
+            } else {
+                this.startPanchaTattvaMantraMediaPlayer();
+            }
         }
         isMediaPaused = false;
-        if (this.isHkMahaMantraPlaying()) {
-            getAppCompatActivity().getJapaMalaViewModel().decrementBead();
-        }
     }
 
     // Getting instance of either Hare Krishna Maha Mantra or Pancha Tattva Media player depending on which is being played currently.
@@ -225,10 +244,10 @@ public class HkMantraClickHandler extends AbstractEventHandler {
         try {
             if (hkMahaMantraMediaPlayer.isPlaying()) {
                 mediaPlayer = hkMahaMantraMediaPlayer;
-                Log.i("getCurrentMediaPlayer", "hkMahaMantraMediaPlayer.isPlaying() = " + hkMahaMantraMediaPlayer.isPlaying());
+                currentMediaPlayer = MediaPlayerPlaying.HKM_MEDIA_PLAYER;
             } else {
                 mediaPlayer = panchTattvaMantraMediaPlayer;
-                Log.i("getCurrentMediaPlayer", "panchTattvaMantraMediaPlayer.isPlaying() = " + panchTattvaMantraMediaPlayer.isPlaying());
+                currentMediaPlayer = MediaPlayerPlaying.PM_MEDIA_PLAYER;
             }
         } catch (Exception e) {
             mediaPlayer = hkMahaMantraMediaPlayer;
@@ -253,32 +272,16 @@ public class HkMantraClickHandler extends AbstractEventHandler {
 
     public void onMalaCompleted(boolean isBeforeDone) {
 
-        hkMahaMantraMediaPlayer.stop();
-        hkMahaMantraMediaPlayer.release();
-
         JapaMalaViewModel japaMalaViewModel = super.getAppCompatActivity().getJapaMalaViewModel();
-
         RoundDataEntity roundDataEntity = new RoundDataEntity();
         roundDataEntity.setUserId(getAppCompatActivity().getUserDetails().getEmailId());
         roundDataEntity.setChantingDate(new Date());
         roundDataEntity.setRoundNumber(japaMalaViewModel.getRoundNumberLiveData().getValue());
         roundDataEntity.setTimeTaken(countDownTimer.getTimeElapsed());
         roundDataEntity.setTotalHeardCount(japaMalaViewModel.getHeardCounterLiveData().getValue());
-        new ChantingDataDao(super.getAppCompatActivity().getUserDetails()).saveRoundData(roundDataEntity,new Date());
+        new ChantingDataDao(super.getAppCompatActivity().getUserDetails()).saveRoundData(roundDataEntity, new Date());
 
-        this.destroyResources();
-
-        TextView textView = getAppCompatActivity().findViewById(R.id.mediaTimerTextView);
-        textView.setText(String.format(Locale.ENGLISH, "0%d:%02d", 0, 0));
-        this.initializeMediaPlayers();
-
-        playButton.setVisibility(View.VISIBLE);
-
-        japaMalaViewModel.resetBead();
-        japaMalaViewModel.resetHeard();
-
-
-        ((TextView) getAppCompatActivity().findViewById(R.id.heardCountTextView)).setText("0");
+        this.resetActivity();
 
         String message = null;
 
@@ -294,13 +297,39 @@ public class HkMantraClickHandler extends AbstractEventHandler {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.cancel();
-                new ProgressBarHandler(getAppCompatActivity()).clearProgressBar();
                 getAppCompatActivity().getYoutubeVideoHandler().showVideo();
             }
         });
         alertDialogBuilder.show();
+    }
 
-        getAppCompatActivity().getFlipperFocusSlideshowHandler().stopFlipper();
+    public void resetActivity() {
+
+        hkMahaMantraMediaPlayer.stop();
+        hkMahaMantraMediaPlayer.release();
+
+        this.destroyResources();
+
+        this.initializeMediaPlayers();
+
+        playButton.setVisibility(View.VISIBLE);
+
+        JapaMalaViewModel japaMalaViewModel = super.getAppCompatActivity().getJapaMalaViewModel();
+        japaMalaViewModel.resetBead();
+        japaMalaViewModel.resetHeard();
+
+        ((TextView) super.getAppCompatActivity().findViewById(R.id.mediaTimerTextView)).setText(String.format(Locale.ENGLISH, "0%d:%02d", 0, 0));
+        ((TextView) super.getAppCompatActivity().findViewById(R.id.heardCountTextView)).setText("0");
+
+        super.getAppCompatActivity().getFlipperFocusSlideshowHandler().stopFlipper();
+
+        this.countDownTimer.cancel();
+
+        this.setMediaPaused(false);
+
+        hareKrishnaMahaMantraTextView.setText(R.string.main_activity_tap_to_start_your_mala_hare_krishna);
+
+        super.getAppCompatActivity().getProgressBarHandler().clearProgressBar();
     }
 
     private void destroyResources() {
@@ -312,11 +341,10 @@ public class HkMantraClickHandler extends AbstractEventHandler {
             }
             getAppCompatActivity().getFlipperFocusSlideshowHandler().pauseFlipper();
         }
-        this.countDownTimer.cancel();
     }
 
     public void destroy() {
-        MediaPlayer mediaPlayer = getCurrentMediaPlayer();
+        android.media.MediaPlayer mediaPlayer = getCurrentMediaPlayer();
         if (mediaPlayer != null) {
             if (mediaPlayer.getCurrentPosition() > 0) {
                 mediaPlayer.stop();

@@ -80,17 +80,22 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        this.japaMalaViewModel = this.initializeJapaMalaViewModel();
+        super.onCreate(savedInstanceState);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        int initialRoundNumber = Integer.valueOf(getIntent().getExtras().get("completedRounds").toString());
+
+        initialRoundNumber++;
+        ((TextView) findViewById(R.id.roundNoTextView)).setText(MessageFormat.format("Round {0}", initialRoundNumber));
+
+        this.japaMalaViewModel = this.initializeJapaMalaViewModel(initialRoundNumber);
 
         japaMalaModel = this.initializeJapaMalaModel();
         gestureDetector = new GestureDetector(this, new GestureListener());
 
         userDetails = (UserDetails) getIntent().getExtras().get("userDetails");
 
-        super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        //binding.HearingText.setOnTouchListener(this);
         PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
         wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, "MyApp::WakeLockTag");
         wakeLock.acquire();
@@ -178,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             }
         });
 
-        ((LinearLayout)findViewById(R.id.heardLinearLayout)).setOnClickListener(new View.OnClickListener() {
+        ((LinearLayout) findViewById(R.id.heardLinearLayout)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 historyViewOpenHandler.handle(view);
@@ -260,8 +265,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         }
     }
 
-    private JapaMalaViewModel initializeJapaMalaViewModel() {
+    private JapaMalaViewModel initializeJapaMalaViewModel(int initialRoundNoValue) {
         JapaMalaViewModel japaMalaViewModel = new ViewModelProvider(this).get(JapaMalaViewModel.class);
+        japaMalaViewModel.setInitialRoundNoValue(initialRoundNoValue);
         Observer<Integer> beadCountIncrementObserver = new Observer<Integer>() {
             @Override
             public void onChanged(Integer currentMalaBeadCount) {
