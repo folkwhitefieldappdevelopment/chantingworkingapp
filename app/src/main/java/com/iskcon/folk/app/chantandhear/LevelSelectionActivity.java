@@ -71,7 +71,10 @@ public class LevelSelectionActivity extends AppCompatActivity {
         draw = findViewById(R.id.drawer_layout);
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(this, gso);
-        ((TextView) findViewById(R.id.levelSelectionWelcomeTextView)).setText(MessageFormat.format("Hare Krishna {0}.\nImmerse into the transcendental vibration", googleSignInAccount.getDisplayName().toUpperCase(Locale.ROOT)));
+        ((TextView) findViewById(R.id.levelSelectionWelcomeTextView))
+                .setText(MessageFormat.format(
+                        "Hare Krishna {0}, feel the presence of Krishna with every bead",
+                        googleSignInAccount.getDisplayName().toUpperCase(Locale.ENGLISH)));
         action = new ActionBarDrawerToggle(this, draw, R.string.navigation_open, R.string.navigation_close);
         draw.addDrawerListener(action);
         action.syncState();
