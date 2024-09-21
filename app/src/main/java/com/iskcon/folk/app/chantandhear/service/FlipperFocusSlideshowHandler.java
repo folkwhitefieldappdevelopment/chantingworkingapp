@@ -80,7 +80,7 @@ public class FlipperFocusSlideshowHandler extends AbstractEventHandler {
 
         ShapeableImageView shapeableImageView = new ShapeableImageView(getAppCompatActivity());
 
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         final int MARGIN_SIZE = 5;
         layoutParams.setMargins(MARGIN_SIZE, MARGIN_SIZE, MARGIN_SIZE, MARGIN_SIZE);
         shapeableImageView.setLayoutParams(layoutParams);

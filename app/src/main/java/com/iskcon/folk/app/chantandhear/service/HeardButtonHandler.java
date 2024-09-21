@@ -17,12 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class HearButtonHandler extends AbstractEventHandler {
+public class HeardButtonHandler extends AbstractEventHandler {
 
     private final TextView levelCountTextView;
     private int levelCountValue = 1;
 
-    public HearButtonHandler(MainActivity appCompatActivity) {
+    public HeardButtonHandler(MainActivity appCompatActivity) {
         super(appCompatActivity);
         levelCountTextView = getAppCompatActivity().findViewById(R.id.levelCount);
     }
@@ -37,8 +37,9 @@ public class HearButtonHandler extends AbstractEventHandler {
         JapaMalaViewModel japaMalaViewModel = getAppCompatActivity().getJapaMalaViewModel();
 
         if (super.getAppCompatActivity().getHkMantraClickHandler().isHkMahaMantraPlaying() &&
-                super.getAppCompatActivity().getJapaMalaViewModel().getHeardCounterLiveData().getValue() < ApplicationConstants.TOTAL_BEADS.getConstantValue(Integer.class)) {
-            super.getAppCompatActivity().getJapaMalaViewModel().incrementHeardBy(levelCountValue);
+                japaMalaViewModel.getHeardCounterLiveData().getValue() < ApplicationConstants.TOTAL_BEADS.getConstantValue(Integer.class)) {
+            japaMalaViewModel.incrementHeardBy(levelCountValue);
+            super.getAppCompatActivity().getProgressBarHandler().incrementProgressBar(japaMalaViewModel.getHeardCounterLiveData().getValue());
         }
         this.sendToast();
     }

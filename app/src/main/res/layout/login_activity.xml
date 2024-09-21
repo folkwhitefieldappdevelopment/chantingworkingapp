@@ -21,7 +21,7 @@
             android:layout_height="361dp"
             android:contentDescription="@string/shila_prabhupada_welcome_image"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large"
-            app:srcCompat="@drawable/srila_prabhupada_welcome_image_lbg"
+            app:srcCompat="@drawable/welcome_srila_prabhupada_welcome_image_lbg"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="10dp" />
     </LinearLayout>
@@ -30,39 +30,83 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:gravity="center"
+        android:layout_marginStart="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_25sdp"
+        android:layout_marginEnd="@dimen/_40sdp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/welcomeMessage"
+        <RelativeLayout
+            android:id="@+id/spQuoteRelativeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20sp"
-            android:layout_marginEnd="20sp"
-            android:background="#F1E8EB"
-            android:text="@string/welcome_message"
-            android:textAlignment="center"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large.Inverse"
-            android:textColor="#000186"
-            android:textSize="20sp" />
+            android:layout_gravity="center"
+            android:background="@drawable/welcome_activity_sp_quote_text_bg"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/_10sdp"
+            android:visibility="invisible">
+
+            <ImageView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:background="@drawable/baseline_format_quote_24" />
+
+            <TextView
+                android:id="@+id/spQuote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40sp"
+                android:layout_marginEnd="20sp"
+                android:elevation="2dp"
+                android:shadowColor="#c5c5c5"
+                android:shadowDx="10"
+                android:shadowDy="10"
+                android:shadowRadius="10"
+                android:text="@string/welcome_sp_quote"
+                android:textColor="#4D4D4D"
+                android:textSize="12sp"
+                android:textStyle="italic" />
+        </RelativeLayout>
 
         <View
+            android:id="@+id/titleDivider"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_1sdp"
-            android:layout_margin="@dimen/_15sdp"
-            android:background="@color/ch_counter_border_dark" />
+            android:layout_height="@dimen/_3sdp"
+            android:layout_marginStart="@dimen/_70sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_70sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:background="@drawable/dotted_line"
+            android:visibility="invisible" />
 
-        <TextView
-            android:id="@+id/spQuote"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/welcomeMessageRelativeLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20sp"
-            android:layout_marginEnd="20sp"
-            android:background="#F1E8EB"
-            android:text="@string/welcome_sp_quote"
-            android:textColor="#57814B"
-            android:textSize="15sp"
-            android:textStyle="italic" />
+            android:layout_gravity="center"
+            android:background="@drawable/welcome_activity_welcome_text_bg"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/_12sdp"
+            android:visibility="invisible">
+
+            <ImageView
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:background="@drawable/prayer_beads" />
+
+            <TextView
+                android:id="@+id/welcomeMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="2dp"
+                android:letterSpacing="0.05"
+                android:paddingStart="@dimen/_35sdp"
+                android:text="@string/welcome_message"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large.Inverse"
+                android:textColor="#4D4D4D"
+                android:textSize="15sp" />
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/loginButtonLL"
@@ -74,7 +118,8 @@
             android:clickable="true"
             android:elevation="5dp"
             android:focusable="true"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="invisible">
 
             <ImageView
                 android:id="@+id/googleIcon"
@@ -88,10 +133,11 @@
 
             <Button
                 android:id="@+id/loginButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginEnd="20sp"
-                android:background="@drawable/welcome_button_drawable"
+                android:background="@android:color/transparent"
                 android:gravity="center"
                 android:text="@string/sign_up_using_google"
                 android:textAllCaps="false"

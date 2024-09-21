@@ -4,8 +4,8 @@
 
     <string name="navigation_close">"Navigation View Closed"</string>
     <string name="default_web_client_id" translatable="false">978073891811-uhcnqmbtgr5k4270r15onun1rtnidrd6.apps.googleusercontent.com</string>
-    <string name="welcome_message">Hare Krishna, Welcome to\nChant and Hear App.\nPlease sign up to experience and enhance your chanting skills.</string>
-    <string name="welcome_sp_quote">By Srila Prabupada,\n\"The name Krishna and the Supreme Person Krishna are non-different. Therefore, if one concentrates his mind on hearing and chanting Hare Krishan, The Same Result is Achieved.\"</string>
+    <string name="welcome_message">Hare Krishna Welcome to\nChant and Hear App.\nPlease sign up to experience and enhance your chanting.</string>
+    <string name="welcome_sp_quote">By Srila Prabhupada\n\"The name Krishna and the Supreme Person Krishna are non-different.\"\nTherefore, if one concentrates his mind on hearing and chanting Hare Krishan, The Same Result is Achieved.</string>
     <string name="google_icon">Google Icon</string>
     <string name="sign_up_using_google">Sign up using Google</string>
     <string name="shila_prabhupada_welcome_image">Shila Prabhupada Welcome Image</string>

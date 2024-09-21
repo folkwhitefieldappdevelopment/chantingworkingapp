@@ -81,15 +81,13 @@ public class HistoryButtonClickHandler extends AbstractEventHandler {
             Collections.reverse(roundDataEntities);
 
             for (int i = 0; i < roundDataEntities.size(); i++) {
-
                 RoundDataEntity roundDataEntity = roundDataEntities.get(i);
-
-                View historyView = super.getAppCompatActivity().getLayoutInflater().inflate(R.layout.history_list_row_view_activity, null);
+                View historyRowView = super.getAppCompatActivity().getLayoutInflater().inflate(R.layout.history_list_row_view_activity, null);
                 int roundNumber = roundDataEntity.getRoundNumber();
                 String roundNumberStr = roundNumber > 9 ? String.valueOf(roundNumber) : String.format(Locale.ENGLISH, "0%d", roundNumber);
-                ((TextView) historyView.findViewById(R.id.roundIdTextView)).setText(roundNumberStr);
-                ((TextView) historyView.findViewById(R.id.heardCountTextView)).setText(roundDataEntity.getTotalHeardCount() + "");
-                ((TextView) historyView.findViewById(R.id.timeTakenTextView)).setText(
+                ((TextView) historyRowView.findViewById(R.id.roundIdTextView)).setText(roundNumberStr);
+                ((TextView) historyRowView.findViewById(R.id.heardCountTextView)).setText(roundDataEntity.getTotalHeardCount() + "");
+                ((TextView) historyRowView.findViewById(R.id.timeTakenTextView)).setText(
                         String.format(
                                 Locale.ENGLISH,
                                 "0%d:%02d min",
@@ -102,11 +100,11 @@ public class HistoryButtonClickHandler extends AbstractEventHandler {
                         LinearLayout.LayoutParams.WRAP_CONTENT
                 );
                 historyRowViewLayoutParams.setMargins(0, 0, 0, 50);
-                historyView.setLayoutParams(historyRowViewLayoutParams);
+                historyRowView.setLayoutParams(historyRowViewLayoutParams);
 
                 totalHeardCount = totalHeardCount + roundDataEntity.getTotalHeardCount();
 
-                linearLayout.addView(historyView);
+                linearLayout.addView(historyRowView);
             }
         } else {
             TextView textView = new TextView(getAppCompatActivity());
@@ -134,5 +132,9 @@ public class HistoryButtonClickHandler extends AbstractEventHandler {
         builder.setView(historyListViewLinearLayout);
 
         builder.show();
+    }
+
+    private void addStarts(View historyRowView,int heardCount){
+        LinearLayout starContainerLinearLayout = historyRowView.findViewById(R.id.starContainerLinearLayout);
     }
 }

@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,12 +21,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 import com.iskcon.folk.app.chantandhear.dao.ChantingDataDao;
@@ -43,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
-        loginButton = findViewById(R.id.loginButton);
+        this.animate();
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -52,6 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
         gsc = GoogleSignIn.getClient(this, gso);
 
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,20 +67,13 @@ public class RegisterActivity extends AppCompatActivity {
                 signIn();
             }
         });
-
-        TextView welcomeMessageTextView = findViewById(R.id.welcomeMessage);
-        welcomeMessageTextView.setVisibility(View.VISIBLE);
-        welcomeMessageTextView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         if (auth.getCurrentUser() != null) {
-            Toast.makeText(RegisterActivity.this, "ALready Logged in", Toast.LENGTH_SHORT).show();
             navigateToSecondActivity();
-        } else {
-            Toast.makeText(RegisterActivity.this, "You can log in now", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -126,9 +121,56 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     void navigateToSecondActivity() {
-
         Intent intent = new Intent(RegisterActivity.this, LevelSelectionActivity.class);
         intent.putExtra("userDetails", userDetails);
         startActivity(intent);
+    }
+
+    private void animate() {
+
+        RelativeLayout spQuoteRelativeLayout = findViewById(R.id.spQuoteRelativeLayout);
+        spQuoteRelativeLayout.setVisibility(View.VISIBLE);
+        spQuoteRelativeLayout.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.welcome_message_fade_in));
+        spQuoteRelativeLayout.startLayoutAnimation();
+
+        spQuoteRelativeLayout.getAnimation().setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                findViewById(R.id.titleDivider).setVisibility(View.VISIBLE);
+                RelativeLayout welcomeMessageRelativeLayout = findViewById(R.id.welcomeMessageRelativeLayout);
+                welcomeMessageRelativeLayout.setVisibility(View.VISIBLE);
+                welcomeMessageRelativeLayout.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.welcome_message_fade_in));
+                welcomeMessageRelativeLayout.startLayoutAnimation();
+                welcomeMessageRelativeLayout.getAnimation().setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        LinearLayout loginButtonLinearLayout = findViewById(R.id.loginButtonLL);
+                        loginButtonLinearLayout.setVisibility(View.VISIBLE);
+                        loginButtonLinearLayout.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.welcome_message_fade_in));
+                        loginButtonLinearLayout.startLayoutAnimation();
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
     }
 }

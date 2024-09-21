@@ -34,9 +34,9 @@ public class SpeedButtonHandler extends AbstractMediaPlayerEventHandler {
         super.animateAndVibrate(view, 50, 200);
         HkMantraClickHandler hkMantraClickHandler = super.getAppCompatActivity().getHkMantraClickHandler();
         MediaPlayer mediaPlayer = super.getAppCompatActivity().getHkMantraClickHandler().getCurrentMediaPlayer();
-        if (mediaPlayer != null && mediaPlayer.isPlaying() && mediaPlayer.getCurrentPosition() > 0) {
+        /*if (mediaPlayer != null && mediaPlayer.isPlaying() && mediaPlayer.getCurrentPosition() > 0) {
             hkMantraClickHandler.pauseMediaPlayer();
-        }
+        }*/
         this.showConfirmationDialog();
     }
 
@@ -88,7 +88,11 @@ public class SpeedButtonHandler extends AbstractMediaPlayerEventHandler {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ((TextView) getAppCompatActivity().findViewById(R.id.speedMenu)).setText(SPEED_DROPDOWN_DATA[speedIndex]);
-                        getAppCompatActivity().getHkMantraClickHandler().resumeMediaPlayer();
+                        HkMantraClickHandler hkMantraClickHandler = getAppCompatActivity().getHkMantraClickHandler();
+                        if (hkMantraClickHandler.isMediaPlayerInitialized()) {
+                            hkMantraClickHandler.pauseMediaPlayer();
+                            hkMantraClickHandler.resumeMediaPlayer();
+                        }
                     }
                 }).show();
     }

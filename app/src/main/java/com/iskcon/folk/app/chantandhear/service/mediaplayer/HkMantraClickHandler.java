@@ -112,6 +112,10 @@ public class HkMantraClickHandler extends AbstractEventHandler {
         TextView textView = getAppCompatActivity().findViewById(R.id.mediaTimerTextView);
         String totalTime = String.format(Locale.ENGLISH, "0%d:%02d", TimeUnit.MILLISECONDS.toMinutes(totalMediaTime), TimeUnit.MILLISECONDS.toSeconds(totalMediaTime));
         textView.setText(totalTime);
+        if (countDownTimer != null && countDownTimer.getTimeElapsed() > 0) {
+            countDownTimer.cancel();
+            countDownTimer = null;
+        }
         return new CountdownTimerImpl(900000, 1000) {
 
             @Override
@@ -369,5 +373,9 @@ public class HkMantraClickHandler extends AbstractEventHandler {
 
     public void setMediaPaused(boolean mediaPaused) {
         isMediaPaused = mediaPaused;
+    }
+
+    public boolean isMediaPlayerInitialized() {
+        return hkMahaMantraMediaPlayer != null || panchTattvaMantraMediaPlayer != null;
     }
 }

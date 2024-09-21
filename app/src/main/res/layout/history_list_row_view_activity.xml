@@ -138,6 +138,7 @@
             android:visibility="invisible" />
 
         <LinearLayout
+            android:id="@+id/starContainerLinearLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_15sdp"

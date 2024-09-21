@@ -2,7 +2,7 @@
     android:color="#88FFFFFF"> <!-- Ripple color :: WHITE -->
     <item>
         <shape>
-            <solid android:color="#000186"/>
+            <solid android:color="#CC000186"/>
             <corners android:radius="50dp"/>
         </shape>
     </item>

@@ -22,7 +22,7 @@ import com.iskcon.folk.app.chantandhear.databinding.ActivityMainBinding;
 import com.iskcon.folk.app.chantandhear.model.JapaMalaModel;
 import com.iskcon.folk.app.chantandhear.model.UserDetails;
 import com.iskcon.folk.app.chantandhear.service.FlipperFocusSlideshowHandler;
-import com.iskcon.folk.app.chantandhear.service.HearButtonHandler;
+import com.iskcon.folk.app.chantandhear.service.HeardButtonHandler;
 import com.iskcon.folk.app.chantandhear.service.HistoryButtonClickHandler;
 import com.iskcon.folk.app.chantandhear.service.beadcount.JapaMalaViewModel;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.BeforeDoneClickHandler;
@@ -38,7 +38,7 @@ import java.text.MessageFormat;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
 
-    private HearButtonHandler hearButtonHandler;
+    private HeardButtonHandler hearButtonHandler;
     private ResetButtonHandler resetButtonHandler;
     private MuteButtonHandler muteButtonHandler;
     private UnmuteButtonHandler unMuteButtonHandler;
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         hkMantraClickHandler = new HkMantraClickHandler(this);
         youtubeVideoHandler = new YoutubeVideoHandler(this);
         speedClickHandler = new SpeedButtonHandler(this, spHkmMediaplayer);
-        hearButtonHandler = new HearButtonHandler(this);
+        hearButtonHandler = new HeardButtonHandler(this);
         flipperFocusSlideshowHandler = new FlipperFocusSlideshowHandler(this);
         beforeDoneClickHandler = new BeforeDoneClickHandler(this);
         progressBarHandler = new ProgressBarHandler(this);
@@ -305,7 +305,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             public void onChanged(Integer currentHeardCount) {
                 if (currentHeardCount != null && currentHeardCount <= ApplicationConstants.TOTAL_BEADS.getConstantValue(Integer.class)) {
                     if (currentHeardCount != 0) {
-                        progressBarHandler.incrementProgressBar(currentHeardCount);
                         TextView heardCountTextView = findViewById(R.id.heardCountTextView);
                         heardCountTextView.setText(String.valueOf(currentHeardCount));
                     }
@@ -338,7 +337,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         return flipperFocusSlideshowHandler;
     }
 
-    public HearButtonHandler getHearButtonHandler() {
+    public HeardButtonHandler getHearButtonHandler() {
         return hearButtonHandler;
     }
 

@@ -16,6 +16,7 @@ import com.iskcon.folk.app.chantandhear.service.AbstractEventHandler;
 public class ProgressBarHandler extends AbstractEventHandler {
 
     private Milestone currentMilestone;
+    private int progressData;
 
     public ProgressBarHandler(MainActivity appCompatActivity) {
         super(appCompatActivity);
@@ -33,8 +34,15 @@ public class ProgressBarHandler extends AbstractEventHandler {
     }
 
     public void showProgressBar(int currentHeardCount) {
+        this.showProgressBar(currentHeardCount, true);
+    }
+
+    private void showProgressBar(int currentHeardCount, boolean updateCurrentMilestone) {
         Milestone milestone = Milestone.beadInBetweenWhichMilestoe(currentHeardCount);
         if (milestone != null) {
+            if (updateCurrentMilestone) {
+                currentMilestone = milestone;
+            }
             LinearLayout linearLayout = super.getAppCompatActivity().findViewById(milestone.getLinearLayoutId());
             if (View.INVISIBLE == linearLayout.getVisibility()) {
                 linearLayout.setVisibility(View.VISIBLE);
@@ -43,7 +51,7 @@ public class ProgressBarHandler extends AbstractEventHandler {
     }
 
     public void incrementProgressBar(int currentHeardCount) {
-        this.showProgressBar(currentHeardCount);
+        this.showProgressBar(currentHeardCount, false);
         if (!super.getAppCompatActivity().getHkMantraClickHandler().isMediaPaused()) {
             Milestone milestone = Milestone.beadInBetweenWhichMilestoe(currentHeardCount);
             if (currentMilestone == null) {
@@ -56,13 +64,11 @@ public class ProgressBarHandler extends AbstractEventHandler {
                 } else {
                     progressBar.setMax(ApplicationConstants.TOTAL_BEADS_IN_A_MILESTONE.getConstantValue(Integer.class));
                 }
-                int progressData = (Milestone.MILESTONE_1.equals(milestone) ? currentHeardCount : (currentHeardCount - milestone.getStartBead()) + 1);
-                progressData = progressData == 0 ? 1 : progressData;
+                progressData = progressData + 1;
                 progressBar.setProgress(progressData, true);
                 TextView textView = getAppCompatActivity().findViewById(milestone.getHeardCountTextViewId());
                 textView.setText(String.valueOf(progressData));
-
-                if (progressData == 16 || (Milestone.MILESTONE_7 == currentMilestone && progressData == 12)) {
+                if (progressData == 16 || (Milestone.MILESTONE_7 == milestone && progressData == 12)) {
                     MediaPlayer milestoneMediaPlayer = MediaPlayer.create(getAppCompatActivity(), R.raw.beat16);
                     milestoneMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         @Override
@@ -72,7 +78,7 @@ public class ProgressBarHandler extends AbstractEventHandler {
                         }
                     });
                     milestoneMediaPlayer.start();
-                    currentMilestone = milestone;
+                    progressData = 0;
                     this.showProgressBar(currentHeardCount);
                 }
             }
