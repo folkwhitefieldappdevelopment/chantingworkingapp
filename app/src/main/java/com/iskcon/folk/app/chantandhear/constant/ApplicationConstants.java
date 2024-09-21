@@ -9,7 +9,8 @@ public enum ApplicationConstants {
     HARE_KRISHNA_MANTRA_SINGLE_BEAD_DURATION(4021L),
     FLIP_VIEW_INTERVAL(25000),
     FLIP_VIEW_BEAD_AFTER(2),
-    NO_OF_IMAGE_VIEW_FOR_FLIPPER(42);
+    NO_OF_IMAGE_VIEW_FOR_FLIPPER(42),
+    STAR_RATING_FOR_HEARD_COUNT(5);
 
     private final Object constantValue;
 

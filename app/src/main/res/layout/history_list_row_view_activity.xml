@@ -42,7 +42,7 @@
                     android:text="01"
                     android:textAlignment="center"
                     android:textColor="@color/history_list_row_view_round_number"
-                    android:textSize="@dimen/_25sdp" />
+                    android:textSize="@dimen/_20sdp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -144,42 +144,6 @@
             android:layout_marginStart="@dimen/_15sdp"
             android:layout_weight="1"
             android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/baseline_star_24"
-                android:contentDescription="@string/star" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/baseline_star_24"
-                android:contentDescription="@string/star" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/baseline_star_24"
-                android:contentDescription="@string/star" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/baseline_star_24"
-                android:contentDescription="@string/star" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/baseline_star_24"
-                android:contentDescription="@string/star" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/baseline_star_24"
-                android:contentDescription="@string/star" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

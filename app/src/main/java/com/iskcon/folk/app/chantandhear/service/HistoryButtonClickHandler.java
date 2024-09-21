@@ -3,9 +3,8 @@ package com.iskcon.folk.app.chantandhear.service;
 import android.app.AlertDialog;
 import android.graphics.Typeface;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -18,11 +17,11 @@ import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.iskcon.folk.app.chantandhear.MainActivity;
 import com.iskcon.folk.app.chantandhear.R;
+import com.iskcon.folk.app.chantandhear.constant.ApplicationConstants;
 import com.iskcon.folk.app.chantandhear.dao.ChantingDataDao;
 import com.iskcon.folk.app.chantandhear.history.model.RoundDataEntity;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -104,6 +103,8 @@ public class HistoryButtonClickHandler extends AbstractEventHandler {
 
                 totalHeardCount = totalHeardCount + roundDataEntity.getTotalHeardCount();
 
+                this.addStars(historyRowView, roundDataEntity.getTotalHeardCount());
+
                 linearLayout.addView(historyRowView);
             }
         } else {
@@ -134,7 +135,36 @@ public class HistoryButtonClickHandler extends AbstractEventHandler {
         builder.show();
     }
 
-    private void addStarts(View historyRowView,int heardCount){
+    private void addStars(View historyRowView, int heardCount) {
         LinearLayout starContainerLinearLayout = historyRowView.findViewById(R.id.starContainerLinearLayout);
+        if (heardCount > 0) {
+            int noOfStars = Math.round((float) heardCount / ApplicationConstants.TOTAL_BEADS.getConstantValue(Integer.class) * ApplicationConstants.STAR_RATING_FOR_HEARD_COUNT.getConstantValue(Integer.class));
+            if (noOfStars > 0) {
+                for (int i = 0; i < noOfStars; i++) {
+                    ImageView imageView = new ImageView(getAppCompatActivity());
+                    LinearLayout.LayoutParams imageViewLayoutParams = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                    );
+                    imageView.setLayoutParams(imageViewLayoutParams);
+                    imageView.setBackgroundResource(R.drawable.baseline_star_24);
+                    starContainerLinearLayout.addView(imageView);
+                }
+            }
+        }
+
+        if(starContainerLinearLayout.getChildCount() == 0){
+            TextView noStarsTextView = new TextView(getAppCompatActivity());
+            LinearLayout.LayoutParams textViewLayoutParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            noStarsTextView.setLayoutParams(textViewLayoutParams);
+            noStarsTextView.setText("No stars, you must hear while chanting.");
+            noStarsTextView.setTextSize(11);
+            noStarsTextView.setTextColor(getAppCompatActivity().getResources().getColor(R.color.history_list_row_view_round_number));
+            noStarsTextView.setTypeface(noStarsTextView.getTypeface(),Typeface.ITALIC);
+            starContainerLinearLayout.addView(noStarsTextView);
+        }
     }
 }
