@@ -71,17 +71,14 @@ public class LevelSelectionActivity extends AppCompatActivity {
         draw = findViewById(R.id.drawer_layout);
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(this, gso);
-        ((TextView) findViewById(R.id.levelSelectionWelcomeTextView))
+        /*((TextView) findViewById(R.id.levelSelectionWelcomeTextView))
                 .setText(MessageFormat.format(
                         "Hare Krishna {0}, feel the presence of Krishna with every bead",
-                        googleSignInAccount.getDisplayName().toUpperCase(Locale.ENGLISH)));
+                        googleSignInAccount.getDisplayName().toUpperCase(Locale.ENGLISH)));*/
         action = new ActionBarDrawerToggle(this, draw, R.string.navigation_open, R.string.navigation_close);
         draw.addDrawerListener(action);
         action.syncState();
         mind = findViewById(R.id.level1MindFullJapa);
-        heart = findViewById(R.id.level2MindAndHeartFullJapa);
-        soul = findViewById(R.id.level3SoulFullJapa);
-        // Set a click listener for the TextView
         mind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

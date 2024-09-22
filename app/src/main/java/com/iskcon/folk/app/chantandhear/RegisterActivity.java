@@ -22,13 +22,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 import com.iskcon.folk.app.chantandhear.dao.ChantingDataDao;
+import com.iskcon.folk.app.chantandhear.homepage.HomePageActivity;
 import com.iskcon.folk.app.chantandhear.model.UserDetails;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -73,6 +73,12 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (auth.getCurrentUser() != null) {
+            userDetails = new UserDetails(
+                    auth.getCurrentUser().getUid(),
+                    auth.getCurrentUser().getDisplayName(),
+                    auth.getCurrentUser().getEmail(),
+                    auth.getCurrentUser().getDisplayName()
+            );
             navigateToSecondActivity();
         }
     }
@@ -120,8 +126,8 @@ public class RegisterActivity extends AppCompatActivity {
                 });
     }
 
-    void navigateToSecondActivity() {
-        Intent intent = new Intent(RegisterActivity.this, LevelSelectionActivity.class);
+    private void navigateToSecondActivity() {
+        Intent intent = new Intent(RegisterActivity.this, HomePageActivity.class);
         intent.putExtra("userDetails", userDetails);
         startActivity(intent);
     }

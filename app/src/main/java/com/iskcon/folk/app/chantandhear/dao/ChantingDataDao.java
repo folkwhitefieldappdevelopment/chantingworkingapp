@@ -85,7 +85,7 @@ public class ChantingDataDao {
                 .child(userId)
                 .child(CHILD_ROUND_DATA)
                 .child(this.getCurrentDateAsString(date))
-                .addValueEventListener(valueEventListener);
+                .addListenerForSingleValueEvent(valueEventListener);
 
         return roundDataEntities;
     }
