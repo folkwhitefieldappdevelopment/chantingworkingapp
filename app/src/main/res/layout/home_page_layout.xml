@@ -40,7 +40,7 @@
             android:shadowDx="15"
             android:shadowDy="15"
             android:shadowRadius="15"
-            android:text="Feel the present of Krishna in every bead."
+            android:text="Feel the presence of Krishna in every bead."
             android:textColor="@color/ch_light_color"
             android:textSize="@dimen/_12sdp"
             android:textStyle="italic" />
