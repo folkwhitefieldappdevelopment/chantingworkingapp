@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -190,6 +191,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             }
         });
 
+        ((LinearLayout) findViewById(R.id.heardLinearLayout)).setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blink));
+
         // Further initialization or event handling can be done here
         listeningCheck();
     }
@@ -277,9 +280,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     TextView textView = findViewById(R.id.hareKrishnaMahaMantraTextView);
                     textView.animate().setDuration(500).scaleX(1.1f).scaleY(1.1f).withEndAction(() -> textView.animate().scaleX(1).scaleY(1));
                     progressBarHandler.showProgressBar(currentMalaBeadCount);
-                    if (currentMalaBeadCount % 3 == 0) {
-                        flipperFocusSlideshowHandler.showNextFlipper();
-                    }
                 } else {
                     hkMantraClickHandler.onMalaCompleted();
                 }

@@ -48,7 +48,7 @@
 
             <ViewFlipper
                 android:id="@+id/focusSlideshowFlipper"
-                android:layout_width="300sp"
+                android:layout_width="290sp"
                 android:layout_height="360sp"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="22dp"
@@ -109,8 +109,8 @@
                             android:layout_gravity="center"
                             android:letterSpacing="0.1"
                             android:textAlignment="center"
-                            android:textColor="@color/ch_light_color"
-                            android:textSize="18sp"
+                            android:textColor="@color/ch_light_color_text_view"
+                            android:textSize="16sp"
                             android:visibility="visible" />
                     </ScrollView>
 
@@ -292,7 +292,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="wrap_content"
-            android:layout_height="179dp"
+            android:layout_height="160dp"
             android:layout_marginTop="@dimen/_1sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline20"
@@ -522,8 +522,8 @@
                             android:id="@+id/tvProgressBarHeardCount_1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:layout_marginBottom="@dimen/_1sdp"
+                            android:layout_weight="1"
                             android:text="0"
                             android:textColor="@color/ch_dark_color"
                             android:textSize="12sp" />
@@ -560,9 +560,9 @@
                             android:id="@+id/tvProgressBarHeardCount_2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/_1sdp"
                             android:layout_gravity="fill_vertical"
                             android:layout_marginStart="1sp"
+                            android:layout_marginBottom="@dimen/_1sdp"
                             android:layout_weight="1"
                             android:text="0"
                             android:textColor="@color/ch_dark_color"
@@ -644,8 +644,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="1sp"
-                            android:layout_weight="1"
                             android:layout_marginBottom="@dimen/_1sdp"
+                            android:layout_weight="1"
                             android:text="0"
                             android:textColor="@color/ch_dark_color"
                             android:textSize="12sp" />
@@ -684,9 +684,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="1sp"
+                            android:layout_marginBottom="@dimen/_1sdp"
                             android:layout_weight="1"
                             android:text="0"
-                            android:layout_marginBottom="@dimen/_1sdp"
                             android:textColor="@color/ch_dark_color"
                             android:textSize="12sp" />
 
@@ -724,8 +724,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="1sp"
-                            android:layout_weight="1"
                             android:layout_marginBottom="@dimen/_1sdp"
+                            android:layout_weight="1"
                             android:text="0"
                             android:textColor="@color/ch_dark_color"
                             android:textSize="12sp" />
@@ -765,8 +765,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="1sp"
-                            android:layout_weight="1"
                             android:layout_marginBottom="@dimen/_1sdp"
+                            android:layout_weight="1"
                             android:text="0"
                             android:textAlignment="center"
                             android:textColor="@color/ch_dark_color"
@@ -1023,5 +1023,25 @@
             android:layout_height="168dp"
             app:constraint_referenced_ids="hearButton"
             tools:layout_editor_absoluteY="115dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="20dp" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="flow" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

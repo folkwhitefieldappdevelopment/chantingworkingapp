@@ -143,7 +143,11 @@
     <color name="black">#000000</color>
     <!-- Newly added for v2.0 -->
     <color name="ch_dark_color">#191a92</color>
+    <color name="ch_dark_color_80_opacity">#E6191a92</color>
     <color name="ch_light_color">#F1E8EB</color>
+    <color name="ch_light_color_90_opacity">#E6F1E8EB</color>
+    <color name="ch_light_color_80_opacity">#CCF1E8EB</color>
+    <color name="ch_light_color_text_view">#B8B9F3</color>
     <color name="ch_media_player_border_dark">#4c4daa</color>
     <color name="ch_counter_border_dark">#D8D0D3</color>
     <color name="login_activity_welcome_message">#F1E8EB</color>

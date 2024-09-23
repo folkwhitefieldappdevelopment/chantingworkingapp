@@ -71,7 +71,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
-        super.onStart();
         if (auth.getCurrentUser() != null) {
             userDetails = new UserDetails(
                     auth.getCurrentUser().getUid(),
@@ -81,6 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
             );
             navigateToSecondActivity();
         }
+        super.onStart();
     }
 
     void signIn() {
@@ -96,7 +96,6 @@ public class RegisterActivity extends AppCompatActivity {
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuth(account.getIdToken());
-                navigateToSecondActivity();
             } catch (ApiException e) {
                 Toast.makeText(getApplicationContext(), "Unable to signup at this moment, please contact system administrator.", Toast.LENGTH_SHORT).show();
             }

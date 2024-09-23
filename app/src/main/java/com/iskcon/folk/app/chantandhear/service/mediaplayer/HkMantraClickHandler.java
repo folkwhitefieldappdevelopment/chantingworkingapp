@@ -213,7 +213,6 @@ public class HkMantraClickHandler extends AbstractEventHandler {
                 ).start();
             }
         };
-
         currentMediaPlayer = MediaPlayerPlaying.HKM_MEDIA_PLAYER;
         hkMahaMantraMalaCounterHandler.postDelayed(hkMahaMantraMalaCounterRunnable, COUNT_DOWN_INTERVAL);
     }

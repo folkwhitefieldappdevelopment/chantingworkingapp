@@ -29,6 +29,7 @@ import java.util.List;
 public class HomePageLevelSelectionFragment extends Fragment {
     private int completedRounds;
     private UserDetails userDetails;
+    private boolean gotData = false;
 
     @Nullable
     @Override
@@ -39,8 +40,10 @@ public class HomePageLevelSelectionFragment extends Fragment {
         mind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                view.animate().setDuration(200).scaleX(1.2f).scaleY(1.2f).withEndAction(() -> view.animate().setDuration(300).scaleX(1f).scaleY(1f));
-                enterMain(userDetails, getCompletedRounds());
+                if (gotData) {
+                    view.animate().setDuration(200).scaleX(1.2f).scaleY(1.2f).withEndAction(() -> view.animate().setDuration(300).scaleX(1f).scaleY(1f));
+                    enterMain(userDetails, getCompletedRounds());
+                }
             }
         });
         return view;
@@ -61,6 +64,7 @@ public class HomePageLevelSelectionFragment extends Fragment {
                 if (snapshot != null && snapshot.exists()) {
                     setCompletedRounds(snapshot.getValue(typeIndicator).size());
                 }
+                gotData = true;
             }
 
             @Override
