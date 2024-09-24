@@ -160,9 +160,9 @@ public class HistoryButtonClickHandler extends AbstractEventHandler {
                     LinearLayout.LayoutParams.WRAP_CONTENT
             );
             noStarsTextView.setLayoutParams(textViewLayoutParams);
-            noStarsTextView.setText("No stars, you must hear while chanting.");
-            noStarsTextView.setTextSize(11);
-            noStarsTextView.setTextColor(getAppCompatActivity().getResources().getColor(R.color.history_list_row_view_round_number));
+            noStarsTextView.setText("Please hear while chanting, no reward");
+            noStarsTextView.setTextSize(12);
+            noStarsTextView.setTextColor(getAppCompatActivity().getResources().getColor(R.color.red));
             noStarsTextView.setTypeface(noStarsTextView.getTypeface(),Typeface.ITALIC);
             starContainerLinearLayout.addView(noStarsTextView);
         }

@@ -15,6 +15,7 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.iskcon.folk.app.chantandhear.MainActivity;
 import com.iskcon.folk.app.chantandhear.R;
 import com.iskcon.folk.app.chantandhear.constant.ApplicationConstants;
+import com.iskcon.folk.app.chantandhear.constant.VideoType;
 import com.iskcon.folk.app.chantandhear.dao.ChantingDataDao;
 import com.iskcon.folk.app.chantandhear.factory.MediaPlayerInstanceCreatorFactory;
 import com.iskcon.folk.app.chantandhear.history.model.RoundDataEntity;
@@ -300,7 +301,7 @@ public class HkMantraClickHandler extends AbstractEventHandler {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.cancel();
-                getAppCompatActivity().getYoutubeVideoHandler().showVideo();
+                getAppCompatActivity().getYoutubeVideoHandler().showVideo(VideoType.SOULFUL_JAPA);
             }
         });
         alertDialogBuilder.show();

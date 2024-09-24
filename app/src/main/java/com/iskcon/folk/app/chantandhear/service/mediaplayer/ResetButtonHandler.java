@@ -40,6 +40,7 @@ public class ResetButtonHandler extends AbstractMediaPlayerEventHandler {
                         CommonUtils.vibrateFunction(50, vibrator);
                         dialogInterface.cancel();
                         getAppCompatActivity().getHkMantraClickHandler().resetActivity();
+                        getAppCompatActivity().getProgressBarHandler().setAttentiveVideoShown(false);
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override

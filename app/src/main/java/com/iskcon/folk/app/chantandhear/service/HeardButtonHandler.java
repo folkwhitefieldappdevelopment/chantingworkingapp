@@ -3,6 +3,7 @@ package com.iskcon.folk.app.chantandhear.service;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,15 +42,19 @@ public class HeardButtonHandler extends AbstractEventHandler {
             japaMalaViewModel.incrementHeardBy(levelCountValue);
             super.getAppCompatActivity().getProgressBarHandler().incrementProgressBar(japaMalaViewModel.getHeardCounterLiveData().getValue());
         }
-        this.sendToast();
+        //this.showToast();
     }
 
     public void handleLevelUp(View view) {
-        super.animateAndVibrate(view, 50, 100);
+        if (view != null) {
+            super.animateAndVibrate(view, 50, 100);
+        }
         levelCountValue = Integer.parseInt(levelCountTextView.getText().toString());
         if (levelCountValue < 8) {
             levelCountValue++;
             levelCountTextView.setText(String.valueOf(levelCountValue));
+        } else {
+            Toast.makeText(getAppCompatActivity(), "Maximum level reached.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -59,10 +64,21 @@ public class HeardButtonHandler extends AbstractEventHandler {
         if (levelCountValue > 1) {
             levelCountValue--;
             levelCountTextView.setText(String.valueOf(levelCountValue));
+        } else {
+            Toast.makeText(getAppCompatActivity(), "Minimum level reached.", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void sendToast() {
+    public void animateLevelChange() {
+        getAppCompatActivity().findViewById(R.id.hearLevelChangeLinearLayout)
+                .startAnimation(
+                        AnimationUtils.loadAnimation(
+                                getAppCompatActivity(),
+                                R.anim.blink_5_times)
+                );
+    }
+
+    private void showToast() {
         int lowerLimit = 0;
         int upperLimit = 13;
         List<Integer> used = new ArrayList<>();
@@ -97,5 +113,9 @@ public class HeardButtonHandler extends AbstractEventHandler {
         int randomNumber = availableNumbers.get(randomIndex);
         usedNumbers.add(randomNumber);
         return randomNumber;
+    }
+
+    public int getLevelCountValue() {
+        return levelCountValue;
     }
 }

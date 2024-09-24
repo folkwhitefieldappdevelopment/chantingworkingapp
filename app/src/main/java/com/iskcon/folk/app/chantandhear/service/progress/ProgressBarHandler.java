@@ -1,5 +1,7 @@
 package com.iskcon.folk.app.chantandhear.service.progress;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.util.Log;
 import android.view.View;
@@ -11,12 +13,16 @@ import com.iskcon.folk.app.chantandhear.MainActivity;
 import com.iskcon.folk.app.chantandhear.R;
 import com.iskcon.folk.app.chantandhear.constant.ApplicationConstants;
 import com.iskcon.folk.app.chantandhear.constant.Milestone;
+import com.iskcon.folk.app.chantandhear.constant.VideoType;
 import com.iskcon.folk.app.chantandhear.service.AbstractEventHandler;
+import com.iskcon.folk.app.chantandhear.service.HeardButtonHandler;
+import com.iskcon.folk.app.chantandhear.service.mediaplayer.HkMantraClickHandler;
 
 public class ProgressBarHandler extends AbstractEventHandler {
 
     private Milestone currentMilestone;
     private int progressData;
+    private boolean attentiveVideoShown;
 
     public ProgressBarHandler(MainActivity appCompatActivity) {
         super(appCompatActivity);
@@ -33,8 +39,10 @@ public class ProgressBarHandler extends AbstractEventHandler {
         }
     }
 
-    public void showProgressBar(int currentHeardCount) {
-        this.showProgressBar(currentHeardCount, true);
+    public void showProgressBar(int currentBeadCount) {
+
+        this.checkAndShowNoHeardVideo(currentBeadCount);
+        this.showProgressBar(currentBeadCount, true);
     }
 
     private void showProgressBar(int currentHeardCount, boolean updateCurrentMilestone) {
@@ -64,7 +72,7 @@ public class ProgressBarHandler extends AbstractEventHandler {
                 } else {
                     progressBar.setMax(ApplicationConstants.TOTAL_BEADS_IN_A_MILESTONE.getConstantValue(Integer.class));
                 }
-                progressData = progressData + 1;
+                progressData = progressData + getAppCompatActivity().getHearButtonHandler().getLevelCountValue();
                 progressBar.setProgress(progressData, true);
                 TextView textView = getAppCompatActivity().findViewById(milestone.getHeardCountTextViewId());
                 textView.setText(String.valueOf(progressData));
@@ -80,6 +88,9 @@ public class ProgressBarHandler extends AbstractEventHandler {
                     milestoneMediaPlayer.start();
                     progressData = 0;
                     this.showProgressBar(currentHeardCount);
+                    HeardButtonHandler heardButtonHandler = getAppCompatActivity().getHearButtonHandler();
+                    //heardButtonHandler.handleLevelUp(null);
+                    heardButtonHandler.animateLevelChange();
                 }
             }
         }
@@ -92,5 +103,37 @@ public class ProgressBarHandler extends AbstractEventHandler {
             LinearLayout linearLayout = super.getAppCompatActivity().findViewById(milestone.getLinearLayoutId());
             linearLayout.setVisibility(View.INVISIBLE);
         }
+    }
+
+    private void checkAndShowNoHeardVideo(int currentBeadCount) {
+        if (!attentiveVideoShown && (currentBeadCount > 16 && getAppCompatActivity().getJapaMalaViewModel().getHeardCounterLiveData().getValue() == 0)) {
+            attentiveVideoShown = true;
+            HkMantraClickHandler hkMantraClickHandler = getAppCompatActivity().getHkMantraClickHandler();
+            hkMantraClickHandler.pauseMediaPlayer();
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getAppCompatActivity());
+            String message = "The process is that you chant and must hear the very sound. Your not clicking on heard button, please tap it promptly after every bead you have heard.";
+            alertDialogBuilder.setTitle("Hare Krishna").setMessage(message);
+            alertDialogBuilder.setPositiveButton("I will be attentive", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.cancel();
+                    hkMantraClickHandler.resumeMediaPlayer();
+                    //attentiveVideoShown = false;
+                }
+            });
+            alertDialogBuilder.setNegativeButton("Enlighten me more", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    //attentiveVideoShown = false;
+                    dialogInterface.cancel();
+                    getAppCompatActivity().getYoutubeVideoHandler().showVideo(VideoType.ATTENTIVE);
+                }
+            });
+            alertDialogBuilder.show();
+        }
+    }
+
+    public void setAttentiveVideoShown(boolean attentiveVideoShown) {
+        this.attentiveVideoShown = attentiveVideoShown;
     }
 }

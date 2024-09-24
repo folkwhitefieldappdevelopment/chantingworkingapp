@@ -191,28 +191,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             }
         });
 
-        ((LinearLayout) findViewById(R.id.heardLinearLayout)).setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blink));
-
-        // Further initialization or event handling can be done here
-        listeningCheck();
+        ((LinearLayout) findViewById(R.id.heardLinearLayout)).setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blink_10_times));
     }
 
     private JapaMalaModel initializeJapaMalaModel() {
         return new JapaMalaModel();
-    }
-
-    private void listeningCheck() {
-        int notHearingTime = 1;
-        boolean userListeningCheck = true;
-        //if (chantingCountTextOfSP - hearingCountTextOfUser >= 15 * notHearingTime) {
-        userListeningCheck = false;
-        //}
-        if (userListeningCheck) {
-            notHearingTime = 0;
-            notHearingTime += 1;
-            youtubeVideoHandler.showVideo();
-            userListeningCheck = true;
-        }
     }
 
     @Override

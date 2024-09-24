@@ -4,13 +4,13 @@
         <shape>
             <gradient
                 android:angle="45"
-                android:endColor="#ffF1E8EB"
-                android:startColor="#ffF1E8EB"
+                android:endColor="#FFF1E8EB"
+                android:startColor="#FFF1E8EB"
                 android:type="linear" />
             <corners android:radius="@dimen/_10sdp" />
             <stroke
                 android:width="5dp"
-                android:color="#c5c5c5" />
+                android:color="#80C5C5C5" />
         </shape>
     </item>
     <!-- Make sure the ripple doesn't exceed the bounds -->

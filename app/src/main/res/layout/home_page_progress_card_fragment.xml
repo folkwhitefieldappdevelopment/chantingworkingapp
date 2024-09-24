@@ -13,12 +13,16 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/todayLegend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_15sdp"
-            android:background="@color/ch_light_color"
+            android:background="@drawable/home_page_todays_progress_bg"
+            android:padding="@dimen/_8sdp"
             android:text="Today's (23-Sep-2024)"
-            android:textSize="@dimen/_15sdp" />
+            android:textColor="@color/ch_dark_color"
+            android:textSize="@dimen/_10sdp"
+            android:textStyle="italic" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,6 +31,120 @@
             android:background="@drawable/home_page_todays_progress_bg"
             android:gravity="center"
             android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/heardLinearLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_30sdp"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="start"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/todaysRound"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="4"
+                    android:textAlignment="center"
+                    android:textColor="@color/ch_dark_color"
+                    android:textSize="@dimen/_15sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rounds"
+                    android:textAlignment="center"
+                    android:textColor="@color/ch_dark_color"
+                    android:textSize="@dimen/_10sdp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="@dimen/_35sdp"
+                android:background="@color/ch_media_player_border_dark" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_30sdp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/todaysHeardCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="367"
+                    android:textAlignment="center"
+                    android:textColor="@color/ch_dark_color"
+                    android:textSize="@dimen/_15sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Heard"
+                    android:textAlignment="center"
+                    android:textColor="@color/ch_dark_color"
+                    android:textSize="@dimen/_10sdp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="@dimen/_35sdp"
+                android:background="@color/ch_media_player_border_dark" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_30sdp"
+                android:gravity="start"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/todaysStarCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="2.5"
+                    android:textAlignment="center"
+                    android:textColor="@color/ch_dark_color"
+                    android:textSize="@dimen/_15sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Stars"
+                    android:textAlignment="center"
+                    android:textColor="@color/ch_dark_color"
+                    android:textSize="@dimen/_10sdp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_60sdp"
+            android:background="@color/ch_light_color"
+            android:text="Cummulative"
+            android:textSize="@dimen/_15sdp"
+            android:visibility="invisible" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_gravity="top"
+            android:background="@drawable/home_page_todays_progress_bg"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="invisible">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -41,6 +159,7 @@
                     android:layout_gravity="center"
                     android:text="4"
                     android:textAlignment="center"
+                    android:textColor="@color/ch_dark_color"
                     android:textSize="@dimen/_15sdp" />
 
                 <TextView
@@ -48,13 +167,14 @@
                     android:layout_height="wrap_content"
                     android:text="Rounds"
                     android:textAlignment="center"
+                    android:textColor="@color/ch_dark_color"
                     android:textSize="@dimen/_10sdp" />
             </LinearLayout>
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="@dimen/_35sdp"
-                android:background="@color/history_list_row_view_label_text" />
+                android:background="@color/ch_media_player_border_dark" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -71,6 +191,7 @@
                     android:layout_gravity="center"
                     android:text="367"
                     android:textAlignment="center"
+                    android:textColor="@color/ch_dark_color"
                     android:textSize="@dimen/_15sdp" />
 
                 <TextView
@@ -78,13 +199,14 @@
                     android:layout_height="wrap_content"
                     android:text="Heard"
                     android:textAlignment="center"
+                    android:textColor="@color/ch_dark_color"
                     android:textSize="@dimen/_10sdp" />
             </LinearLayout>
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="@dimen/_35sdp"
-                android:background="@color/history_list_row_view_label_text" />
+                android:background="@color/ch_media_player_border_dark" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -100,6 +222,7 @@
                     android:layout_gravity="center"
                     android:text="2.5"
                     android:textAlignment="center"
+                    android:textColor="@color/ch_dark_color"
                     android:textSize="@dimen/_15sdp" />
 
                 <TextView
@@ -107,110 +230,7 @@
                     android:layout_height="wrap_content"
                     android:text="Stars"
                     android:textAlignment="center"
-                    android:textSize="@dimen/_10sdp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_50sdp"
-            android:background="@color/ch_light_color"
-            android:text="Cummulative"
-            android:textSize="@dimen/_15sdp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_60sdp"
-            android:layout_gravity="top"
-
-            android:background="@drawable/home_page_todays_progress_bg"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_30sdp"
-                android:gravity="start"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="34"
-                    android:textAlignment="center"
-                    android:textSize="@dimen/_15sdp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rounds"
-                    android:textAlignment="center"
-                    android:textSize="@dimen/_10sdp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="@dimen/_35sdp"
-                android:background="@color/history_list_row_view_label_text" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="@dimen/_30sdp"
-                android:layout_marginEnd="@dimen/_30sdp"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="1568"
-                    android:textAlignment="center"
-                    android:textSize="@dimen/_15sdp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Heard"
-                    android:textAlignment="center"
-                    android:textSize="@dimen/_10sdp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="@dimen/_35sdp"
-                android:background="@color/history_list_row_view_label_text" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_30sdp"
-                android:layout_marginEnd="@dimen/_30sdp"
-                android:gravity="start"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Bronze"
-                    android:textAlignment="center"
-                    android:textSize="@dimen/_15sdp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="Medal"
-                    android:textAlignment="center"
+                    android:textColor="@color/ch_dark_color"
                     android:textSize="@dimen/_10sdp" />
             </LinearLayout>
         </LinearLayout>
