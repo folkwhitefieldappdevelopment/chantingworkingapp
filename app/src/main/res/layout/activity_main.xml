@@ -433,7 +433,7 @@
                     </LinearLayout>
 
                     <View
-                        android:layout_width="@dimen/_120sdp"
+                        android:layout_width="@dimen/_105sdp"
                         android:layout_height="1dp"
                         android:layout_gravity="center"
                         android:background="@color/ch_counter_border_dark"

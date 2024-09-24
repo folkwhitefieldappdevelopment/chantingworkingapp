@@ -15,11 +15,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
-import com.iskcon.folk.app.chantandhear.MainActivity;
 import com.iskcon.folk.app.chantandhear.R;
 import com.iskcon.folk.app.chantandhear.constant.ApplicationConstants;
 import com.iskcon.folk.app.chantandhear.dao.ChantingDataDao;
 import com.iskcon.folk.app.chantandhear.history.model.RoundDataEntity;
+import com.iskcon.folk.app.chantandhear.model.UserDetails;
 
 import java.text.SimpleDateFormat;
 import java.util.Collections;
@@ -28,21 +28,16 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-public class HistoryButtonClickHandler extends AbstractEventHandler {
+public class HistoryViewClickHandler {
 
-    public HistoryButtonClickHandler(MainActivity appCompatActivity) {
-        super(appCompatActivity);
-    }
-
-    @Override
-    public void handle(View view) {
+    public void showHistoryPopup(View view, UserDetails userDetails, boolean reverseList) {
 
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 GenericTypeIndicator<List<RoundDataEntity>> typeIndicator = new GenericTypeIndicator<List<RoundDataEntity>>() {
                 };
-                renderLayoutOverAlert(snapshot.getValue(typeIndicator));
+                renderLayoutOverAlert(view, userDetails, reverseList, snapshot.getValue(typeIndicator));
             }
 
             @Override
@@ -51,19 +46,18 @@ public class HistoryButtonClickHandler extends AbstractEventHandler {
             }
         };
 
-        new ChantingDataDao(getAppCompatActivity().getUserDetails())
-                .get(new Date(), getAppCompatActivity().getUserDetails().getId(), valueEventListener);
+        new ChantingDataDao(userDetails).get(new Date(), userDetails.getId(), valueEventListener);
     }
 
-    private void renderLayoutOverAlert(List<RoundDataEntity> roundDataEntities) {
+    private void renderLayoutOverAlert(View view, UserDetails userDetails, boolean reverseList, List<RoundDataEntity> roundDataEntities) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getAppCompatActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 
-        View historyListView = super.getAppCompatActivity().getLayoutInflater().inflate(R.layout.history_list_view_activity, null);
+        View historyListView = View.inflate(view.getContext(), R.layout.history_list_view_activity, null);
 
         LinearLayout historyListViewLinearLayout = historyListView.findViewById(R.id.historyListViewLinearLayout);
 
-        LinearLayout linearLayout = new LinearLayout(getAppCompatActivity());
+        LinearLayout linearLayout = new LinearLayout(view.getContext());
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -77,11 +71,13 @@ public class HistoryButtonClickHandler extends AbstractEventHandler {
 
         if (roundDataEntities != null && !roundDataEntities.isEmpty()) {
 
-            Collections.reverse(roundDataEntities);
+            if (reverseList) {
+                Collections.reverse(roundDataEntities);
+            }
 
             for (int i = 0; i < roundDataEntities.size(); i++) {
                 RoundDataEntity roundDataEntity = roundDataEntities.get(i);
-                View historyRowView = super.getAppCompatActivity().getLayoutInflater().inflate(R.layout.history_list_row_view_activity, null);
+                View historyRowView = View.inflate(view.getContext(), R.layout.history_list_row_view_activity, null);
                 int roundNumber = roundDataEntity.getRoundNumber();
                 String roundNumberStr = roundNumber > 9 ? String.valueOf(roundNumber) : String.format(Locale.ENGLISH, "0%d", roundNumber);
                 ((TextView) historyRowView.findViewById(R.id.roundIdTextView)).setText(roundNumberStr);
@@ -108,16 +104,16 @@ public class HistoryButtonClickHandler extends AbstractEventHandler {
                 linearLayout.addView(historyRowView);
             }
         } else {
-            TextView textView = new TextView(getAppCompatActivity());
+            TextView textView = new TextView(view.getContext());
             textView.setText("Hare Krishna, no data found, please start your mala to see data in history. ");
-            textView.setTextColor(getAppCompatActivity().getResources().getColor(R.color.ch_light_color));
+            textView.setTextColor(view.getResources().getColor(R.color.ch_light_color));
             textView.setTypeface(textView.getTypeface(), Typeface.ITALIC);
             textView.setTextSize(14);
             textView.setGravity(Gravity.CENTER);
             linearLayout.addView(textView);
         }
 
-        ScrollView scrollView = new ScrollView(getAppCompatActivity());
+        ScrollView scrollView = new ScrollView(view.getContext());
         scrollView.addView(linearLayout);
         historyListViewLinearLayout.addView(scrollView);
 
@@ -125,14 +121,35 @@ public class HistoryButtonClickHandler extends AbstractEventHandler {
                 .setText(new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH).format(new Date()));
 
         ((TextView) historyListViewLinearLayout.findViewById(R.id.userNameTextView))
-                .setText(super.getAppCompatActivity().getUserDetails().getDisplayName());
+                .setText(userDetails.getDisplayName());
 
         ((TextView) historyListViewLinearLayout.findViewById(R.id.totalHeardCountTextView))
                 .setText(String.valueOf(totalHeardCount));
 
         builder.setView(historyListViewLinearLayout);
 
-        builder.show();
+        AlertDialog alertDialog = builder.create();
+
+        ((ImageView) historyListView.findViewById(R.id.closeButton)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                view.animate()
+                        .setDuration(200)
+                        .scaleX(1.5f)
+                        .scaleY(1.5f)
+                        .withEndAction(() ->
+                                view.animate()
+                                        .setDuration(200)
+                                        .scaleX(1f)
+                                        .scaleY(1f)
+                        );
+
+                alertDialog.dismiss();
+            }
+        });
+
+        alertDialog.show();
     }
 
     private void addStars(View historyRowView, int heardCount) {
@@ -141,7 +158,7 @@ public class HistoryButtonClickHandler extends AbstractEventHandler {
             int noOfStars = Math.round((float) heardCount / ApplicationConstants.TOTAL_BEADS.getConstantValue(Integer.class) * ApplicationConstants.STAR_RATING_FOR_HEARD_COUNT.getConstantValue(Integer.class));
             if (noOfStars > 0) {
                 for (int i = 0; i < noOfStars; i++) {
-                    ImageView imageView = new ImageView(getAppCompatActivity());
+                    ImageView imageView = new ImageView(historyRowView.getContext());
                     LinearLayout.LayoutParams imageViewLayoutParams = new LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.WRAP_CONTENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT
@@ -153,8 +170,8 @@ public class HistoryButtonClickHandler extends AbstractEventHandler {
             }
         }
 
-        if(starContainerLinearLayout.getChildCount() == 0){
-            TextView noStarsTextView = new TextView(getAppCompatActivity());
+        if (starContainerLinearLayout.getChildCount() == 0) {
+            TextView noStarsTextView = new TextView(historyRowView.getContext());
             LinearLayout.LayoutParams textViewLayoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
@@ -162,8 +179,8 @@ public class HistoryButtonClickHandler extends AbstractEventHandler {
             noStarsTextView.setLayoutParams(textViewLayoutParams);
             noStarsTextView.setText("Please hear while chanting, no reward");
             noStarsTextView.setTextSize(12);
-            noStarsTextView.setTextColor(getAppCompatActivity().getResources().getColor(R.color.red));
-            noStarsTextView.setTypeface(noStarsTextView.getTypeface(),Typeface.ITALIC);
+            noStarsTextView.setTextColor(historyRowView.getContext().getResources().getColor(R.color.red));
+            noStarsTextView.setTypeface(noStarsTextView.getTypeface(), Typeface.ITALIC);
             starContainerLinearLayout.addView(noStarsTextView);
         }
     }

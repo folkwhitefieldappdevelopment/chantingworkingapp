@@ -24,7 +24,7 @@ import com.iskcon.folk.app.chantandhear.model.JapaMalaModel;
 import com.iskcon.folk.app.chantandhear.model.UserDetails;
 import com.iskcon.folk.app.chantandhear.service.FlipperFocusSlideshowHandler;
 import com.iskcon.folk.app.chantandhear.service.HeardButtonHandler;
-import com.iskcon.folk.app.chantandhear.service.HistoryButtonClickHandler;
+import com.iskcon.folk.app.chantandhear.service.HistoryViewClickHandler;
 import com.iskcon.folk.app.chantandhear.service.beadcount.JapaMalaViewModel;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.BeforeDoneClickHandler;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.HkMantraClickHandler;
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private FlipperFocusSlideshowHandler flipperFocusSlideshowHandler;
     private BeforeDoneClickHandler beforeDoneClickHandler;
     private ProgressBarHandler progressBarHandler;
-    private HistoryButtonClickHandler historyViewOpenHandler;
+    private HistoryViewClickHandler historyViewOpenHandler;
     private JapaMalaModel japaMalaModel = null;
     private UserDetails userDetails;
     private float dx;
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         flipperFocusSlideshowHandler = new FlipperFocusSlideshowHandler(this);
         beforeDoneClickHandler = new BeforeDoneClickHandler(this);
         progressBarHandler = new ProgressBarHandler(this);
-        historyViewOpenHandler = new HistoryButtonClickHandler(this);
+        historyViewOpenHandler = new HistoryViewClickHandler();
         srilaPrabhupadaChantingWithOutPanchtattva = MediaPlayer.create(MainActivity.this, R.raw.hkm);
 
         //ImageViews
@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         ((LinearLayout) findViewById(R.id.heardLinearLayout)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                historyViewOpenHandler.handle(view);
+                historyViewOpenHandler.showHistoryPopup(view,userDetails,false);
             }
         });
 
@@ -332,7 +332,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         return userDetails;
     }
 
-    public HistoryButtonClickHandler getHistoryViewOpenHandler() {
+    public HistoryViewClickHandler getHistoryViewOpenHandler() {
         return historyViewOpenHandler;
     }
 

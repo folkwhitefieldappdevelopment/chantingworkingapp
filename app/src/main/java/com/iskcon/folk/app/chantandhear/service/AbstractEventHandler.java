@@ -26,7 +26,16 @@ public abstract class AbstractEventHandler {
     }
 
     public void animate(View view, int duration) {
-        view.animate().setDuration(duration).scaleX(1.5f).scaleY(1.5f).withEndAction(() -> view.animate().setDuration(duration).scaleX(1f).scaleY(1f));
+        view.animate()
+                .setDuration(duration)
+                .scaleX(1.5f)
+                .scaleY(1.5f)
+                .withEndAction(() ->
+                        view.animate()
+                                .setDuration(duration)
+                                .scaleX(1f)
+                                .scaleY(1f)
+                );
     }
 
     public void animateAndVibrate(View view, int vibrationDuration, int animationDuration) {

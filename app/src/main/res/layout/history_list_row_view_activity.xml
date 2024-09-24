@@ -130,18 +130,11 @@
                     android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
-
-        <View
-            android:layout_width="@dimen/_1sdp"
-            android:layout_height="60sp"
-            android:background="@color/ch_counter_border_dark"
-            android:visibility="invisible" />
-
         <LinearLayout
             android:id="@+id/starContainerLinearLayout"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_10sdp"
             android:layout_weight="1"
             android:orientation="horizontal">
         </LinearLayout>
