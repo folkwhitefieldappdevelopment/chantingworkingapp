@@ -32,10 +32,11 @@ import com.iskcon.folk.app.chantandhear.service.mediaplayer.MuteButtonHandler;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.ResetButtonHandler;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.SpeedButtonHandler;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.UnmuteButtonHandler;
-import com.iskcon.folk.app.chantandhear.service.progress.ProgressBarHandler;
 import com.google.android.material.navigation.NavigationView;
+import com.iskcon.folk.app.chantandhear.service.progress.ProgressBarHandler;
 
 import java.text.MessageFormat;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
 
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         int initialRoundNumber = Integer.valueOf(getIntent().getExtras().get("completedRounds").toString());
 
         initialRoundNumber++;
-        ((TextView) findViewById(R.id.roundNoTextView)).setText(MessageFormat.format("Round {0}", initialRoundNumber));
+        ((TextView) findViewById(R.id.roundNoTextView)).setText(MessageFormat.format("R\no\nu\nn\nd\n\n{0}", initialRoundNumber).toLowerCase(Locale.ENGLISH));
 
         this.japaMalaViewModel = this.initializeJapaMalaViewModel(initialRoundNumber);
 
@@ -187,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         ((LinearLayout) findViewById(R.id.heardLinearLayout)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                historyViewOpenHandler.showHistoryPopup(view,userDetails,false);
+                historyViewOpenHandler.showHistoryPopup(view, userDetails, true);
             }
         });
 
@@ -262,7 +263,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     beadCountTextView.setText(String.valueOf(currentMalaBeadCount));
                     TextView textView = findViewById(R.id.hareKrishnaMahaMantraTextView);
                     textView.animate().setDuration(500).scaleX(1.1f).scaleY(1.1f).withEndAction(() -> textView.animate().scaleX(1).scaleY(1));
-                    progressBarHandler.showProgressBar(currentMalaBeadCount);
+                    progressBarHandler.addProgressRow(currentMalaBeadCount);
                 } else {
                     hkMantraClickHandler.onMalaCompleted();
                 }
@@ -276,7 +277,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             public void onChanged(Integer currentRoundNumber) {
                 if (currentRoundNumber != null && currentRoundNumber <= ApplicationConstants.TOTAL_ROUND.getConstantValue(Integer.class)) {
                     TextView roundNoTextView = findViewById(R.id.roundNoTextView);
-                    roundNoTextView.setText(String.valueOf(MessageFormat.format("Round {0}", currentRoundNumber)));
+                    roundNoTextView.setText(String.valueOf(MessageFormat.format("R\no\nu\nn\nd\n\n{0}", currentRoundNumber)).toUpperCase(Locale.ENGLISH));
                 }
                 Log.i(this.getClass().getSimpleName(), "roundIncrementObserver.onChanged: " + currentRoundNumber);
             }

@@ -40,7 +40,7 @@ public class HeardButtonHandler extends AbstractEventHandler {
         if (super.getAppCompatActivity().getHkMantraClickHandler().isHkMahaMantraPlaying() &&
                 japaMalaViewModel.getHeardCounterLiveData().getValue() < ApplicationConstants.TOTAL_BEADS.getConstantValue(Integer.class)) {
             japaMalaViewModel.incrementHeardBy(levelCountValue);
-            super.getAppCompatActivity().getProgressBarHandler().incrementProgressBar(japaMalaViewModel.getHeardCounterLiveData().getValue());
+            super.getAppCompatActivity().getProgressBarHandler().incrementProgress(japaMalaViewModel.getHeardCounterLiveData().getValue());
         }
         //this.showToast();
     }

@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import com.iskcon.folk.app.chantandhear.MainActivity;
 import com.iskcon.folk.app.chantandhear.service.AbstractEventHandler;
-import com.iskcon.folk.app.chantandhear.service.progress.ProgressBarHandler;
 import com.iskcon.folk.app.chantandhear.util.CommonUtils;
 
 public class BeforeDoneClickHandler extends AbstractEventHandler {

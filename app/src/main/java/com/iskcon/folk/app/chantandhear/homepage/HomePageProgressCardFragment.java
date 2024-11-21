@@ -1,12 +1,15 @@
 package com.iskcon.folk.app.chantandhear.homepage;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,6 +37,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class HomePageProgressCardFragment extends Fragment {
+    private int completedRounds = 0;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,14 +54,15 @@ public class HomePageProgressCardFragment extends Fragment {
         });
 
         TextView letsFinishTextView = view.findViewById(R.id.letsFinishChanting);
-        SpannableString spannableString = new SpannableString("Lets finish today's chanting!!");
-        spannableString.setSpan(new UnderlineSpan(),0,spannableString.length(),0);
+        SpannableString spannableString = new SpannableString("Continue chanting");
+        spannableString.setSpan(new UnderlineSpan(), 0, spannableString.length(), 0);
         letsFinishTextView.setText(spannableString);
         letsFinishTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), MainActivity.class);
                 intent.putExtra("userDetails", userDetails);
+                intent.putExtra("completedRounds",completedRounds);
                 startActivity(intent);
             }
         });
@@ -71,6 +77,7 @@ public class HomePageProgressCardFragment extends Fragment {
                 };
                 if (snapshot != null && snapshot.exists()) {
                     List<RoundDataEntity> roundDataEntities = snapshot.getValue(typeIndicator);
+                    completedRounds = roundDataEntities.size();
                     int todaysHeardCount = 0;
                     int todaysNoOfStars = 0;
                     for (int i = 0; i < roundDataEntities.size(); i++) {
@@ -80,7 +87,13 @@ public class HomePageProgressCardFragment extends Fragment {
                     }
                     ((TextView) view.findViewById(R.id.todaysRound)).setText(String.valueOf(roundDataEntities.size()));
                     ((TextView) view.findViewById(R.id.todaysHeardCount)).setText(String.valueOf(todaysHeardCount));
-                    ((TextView) view.findViewById(R.id.todaysStarCount)).setText(String.valueOf(todaysNoOfStars));
+                    ((TextView) view.findViewById(R.id.todaysStarCount)).setText(String.valueOf(todaysNoOfStars / ApplicationConstants.STAR_RATING_FOR_HEARD_COUNT.getConstantValue(Integer.class)));
+
+                    TextView textView = view.findViewById(R.id.letsFinishChanting);
+                    textView.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.wiggle_3));
+                    if(completedRounds == 16){
+                        textView.setVisibility(View.INVISIBLE);
+                    }
                 }
             }
 

@@ -68,19 +68,18 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/hkmCardView"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginBottom="5dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline14"
+            android:layout_marginTop="@dimen/_40sdp"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toBottomOf="@+id/roundNoTextView"
+            app:layout_constraintTop_toTopOf="parent"
             card_view:cardBackgroundColor="@android:color/transparent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/_120sdp"
                 android:background="@drawable/main_activity_hkm_bg"
                 android:elevation="10dp">
 
@@ -88,30 +87,68 @@
                 <RelativeLayout
                     android:id="@+id/hkmTextScrollView"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="true"
-                    android:gravity="center"
-                    app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:gravity="center">
 
                     <!-- ScrollView for Text -->
 
                     <!-- ImageView for Stop Icon -->
                     <ScrollView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content">
 
-                        <TextView
-                            android:id="@+id/hareKrishnaMahaMantraTextView"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:letterSpacing="0.1"
-                            android:textAlignment="center"
-                            android:textColor="@color/ch_light_color_text_view"
-                            android:textSize="16sp"
-                            android:visibility="visible" />
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/roundNoTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:letterSpacing="0.2"
+                                android:paddingStart="@dimen/_15sdp"
+                                android:paddingTop="@dimen/_6sdp"
+                                android:paddingEnd="@dimen/_15sdp"
+                                android:paddingBottom="@dimen/_6sdp"
+                                android:rotation="0"
+                                android:shadowColor="@color/history_list_row_view_heardCount_value"
+                                android:shadowDx="5"
+                                android:shadowDy="5"
+                                android:shadowRadius="5"
+                                android:text="R\no\nu\nn\nd\n\n"
+                                android:textAlignment="center"
+                                android:textColor="@color/ch_light_color_text_view"
+                                android:textSize="12sp" />
+
+                            <View
+                                android:layout_width="0.5dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:layout_marginBottom="@dimen/_10sdp"
+                                android:background="@color/ch_media_player_border_dark" />
+
+                            <TextView
+                                android:id="@+id/hareKrishnaMahaMantraTextView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:letterSpacing="0.1"
+                                android:paddingEnd="@dimen/_20sdp"
+                                android:text="Hare Krishna"
+                                android:textAlignment="center"
+                                android:textColor="@color/ch_light_color_text_view"
+                                android:textSize="15sp"
+                                android:visibility="visible" />
+                        </LinearLayout>
+
+
                     </ScrollView>
 
                     <ImageView
@@ -138,7 +175,7 @@
                 <LinearLayout
                     android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="40sp"
+                    android:layout_height="30sp"
                     android:alpha="0.7"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/horizontalLine">
@@ -327,13 +364,16 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <!-- Horizontal layout for counts -->
                     <LinearLayout
                         android:layout_width="@dimen/_125sdp"
                         android:layout_height="79dp"
-                        android:gravity="center"
+                        android:layout_gravity="top"
+                        android:gravity="top"
                         android:orientation="horizontal">
 
                         <!-- Heard count layout -->
@@ -396,7 +436,7 @@
                         <!-- Space between count layouts -->
                         <View
                             android:layout_width="1dp"
-                            android:layout_height="65sp"
+                            android:layout_height="@dimen/_55sdp"
                             android:background="@color/ch_counter_border_dark" />
 
                         <!-- SPD count layout -->
@@ -496,8 +536,8 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/progresBarvertical"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/progressBarVertical"
+                    android:layout_width="@dimen/_120sdp"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="10sp"
                     android:gravity="center"
@@ -505,309 +545,113 @@
 
                     <View
                         android:layout_width="1dp"
-                        android:layout_height="150sp"
+                        android:layout_height="@dimen/_100sdp"
                         android:layout_gravity="center"
                         android:background="@color/ch_counter_border_dark" />
-                    <!-- FrameLayout for Progress Bar 1 -->
+
                     <LinearLayout
-                        android:id="@+id/layoutProgressBar_1"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10sp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:gravity="top"
                         android:orientation="vertical"
-                        android:visibility="invisible">
+                        android:paddingTop="@dimen/_1sdp">
 
-                        <TextView
-                            android:id="@+id/tvProgressBarHeardCount_1"
-                            android:layout_width="wrap_content"
+                        <!--<TextView
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/_1sdp"
-                            android:layout_weight="1"
-                            android:text="0"
-                            android:textColor="@color/ch_dark_color"
-                            android:textSize="12sp" />
-
-                        <ProgressBar
-                            android:id="@+id/progressBar_1"
-                            style="@style/Widget.ProgressBar.Vertical"
-                            android:layout_width="8dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="10" />
-
-                        <TextView
-                            android:id="@+id/text_view_inside_frame1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="M1"
-                            android:textColor="@color/ch_dark_color"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-
-                    <!-- FrameLayout for Progress Bar 2 -->
-                    <LinearLayout
-                        android:id="@+id/layoutProgressBar_2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="10dp"
-                        android:orientation="vertical"
-                        android:visibility="invisible">
-
-                        <TextView
-                            android:id="@+id/tvProgressBarHeardCount_2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="fill_vertical"
-                            android:layout_marginStart="1sp"
-                            android:layout_marginBottom="@dimen/_1sdp"
-                            android:layout_weight="1"
-                            android:text="0"
-                            android:textColor="@color/ch_dark_color"
-                            android:textSize="12sp" />
-
-                        <ProgressBar
-                            android:id="@+id/progressBar_2"
-                            style="@style/Widget.ProgressBar.Vertical"
-                            android:layout_width="8dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="1sp"
-                            android:layout_weight="10" />
-
-                        <TextView
-                            android:id="@+id/text_view_inside_frame2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="fill_vertical"
-                            android:layout_weight="1"
-                            android:text="M2"
-                            android:textColor="@color/ch_dark_color"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-
-                    <!-- FrameLayout for Progress Bar 3 -->
-                    <LinearLayout
-                        android:id="@+id/layoutProgressBar_3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="10dp"
-                        android:orientation="vertical"
-                        android:visibility="invisible">
-
-                        <TextView
-                            android:id="@+id/tvProgressBarHeardCount_3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="1sp"
-                            android:layout_marginBottom="@dimen/_1sdp"
-                            android:layout_weight="1"
-                            android:text="0"
-                            android:textColor="@color/ch_dark_color"
-                            android:textSize="12sp" />
-
-                        <ProgressBar
-                            android:id="@+id/progressBar_3"
-                            style="@style/Widget.ProgressBar.Vertical"
-                            android:layout_width="8dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="1sp"
-                            android:layout_weight="10" />
-
-                        <TextView
-                            android:id="@+id/text_view_inside_frame3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:text="M3"
-                            android:textColor="@color/ch_dark_color"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-
-                    <!-- FrameLayout for Progress Bar 4 -->
-                    <LinearLayout
-                        android:id="@+id/layoutProgressBar_4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="10dp"
-                        android:orientation="vertical"
-                        android:visibility="invisible">
-
-                        <TextView
-                            android:id="@+id/tvProgressBarHeardCount_4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="1sp"
-                            android:layout_marginBottom="@dimen/_1sdp"
-                            android:layout_weight="1"
-                            android:text="0"
-                            android:textColor="@color/ch_dark_color"
-                            android:textSize="12sp" />
-
-                        <ProgressBar
-                            android:id="@+id/progressBar_4"
-                            style="@style/Widget.ProgressBar.Vertical"
-                            android:layout_width="8dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="1sp"
-                            android:layout_weight="10" />
-
-                        <TextView
-                            android:id="@+id/text_view_inside_frame4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="M4"
-                            android:textColor="@color/ch_dark_color"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-
-                    <!-- FrameLayout for Progress Bar 5 -->
-                    <LinearLayout
-                        android:id="@+id/layoutProgressBar_5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="10dp"
-                        android:orientation="vertical"
-                        android:visibility="invisible">
-
-                        <TextView
-                            android:id="@+id/tvProgressBarHeardCount_5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="1sp"
-                            android:layout_marginBottom="@dimen/_1sdp"
-                            android:layout_weight="1"
-                            android:text="0"
-                            android:textColor="@color/ch_dark_color"
-                            android:textSize="12sp" />
-
-                        <ProgressBar
-                            android:id="@+id/progressBar_5"
-                            style="@style/Widget.ProgressBar.Vertical"
-                            android:layout_width="8dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="1sp"
-                            android:layout_weight="10" />
-
-                        <TextView
-                            android:id="@+id/text_view_inside_frame5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="M5"
-                            android:textColor="@color/ch_dark_color"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-
-                    <!-- FrameLayout for Progress Bar 6 -->
-                    <LinearLayout
-                        android:id="@+id/layoutProgressBar_6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="10dp"
-                        android:orientation="vertical"
-                        android:visibility="invisible">
-
-                        <TextView
-                            android:id="@+id/tvProgressBarHeardCount_6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="1sp"
-                            android:layout_marginBottom="@dimen/_1sdp"
-                            android:layout_weight="1"
-                            android:text="0"
-                            android:textColor="@color/ch_dark_color"
-                            android:textSize="12sp" />
-
-                        <ProgressBar
-                            android:id="@+id/progressBar_6"
-                            style="@style/Widget.ProgressBar.Vertical"
-                            android:layout_width="8dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="1sp"
-                            android:layout_weight="10" />
-
-                        <TextView
-                            android:id="@+id/text_view_inside_frame6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="0dp"
-                            android:layout_weight="1"
-                            android:text="M6"
-                            android:textColor="@color/ch_dark_color"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-
-                    <!-- FrameLayout for Progress Bar 7 -->
-                    <LinearLayout
-                        android:id="@+id/layoutProgressBar_7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="10dp"
-                        android:orientation="vertical"
-                        android:visibility="invisible">
-
-                        <TextView
-                            android:id="@+id/tvProgressBarHeardCount_7"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="1sp"
-                            android:layout_marginBottom="@dimen/_1sdp"
-                            android:layout_weight="1"
-                            android:text="0"
+                            android:layout_gravity="top"
+                            android:gravity="top"
+                            android:text="Progress"
                             android:textAlignment="center"
                             android:textColor="@color/ch_dark_color"
-                            android:textSize="12sp" />
+                            android:textSize="14sp" />-->
 
-                        <ProgressBar
-                            android:id="@+id/progressBar_7"
-                            style="@style/Widget.ProgressBar.Vertical"
-                            android:layout_width="8dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="1sp"
-                            android:layout_weight="10" />
-
-                        <TextView
-                            android:id="@+id/text_view_inside_frame7"
+                        <TableLayout
+                            android:id="@+id/progressBarHeaderTableLayout"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="M7"
-                            android:textAlignment="center"
-                            android:textColor="@color/ch_dark_color"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                            android:layout_height="match_parent"
+                            android:layout_gravity=""
+                            android:gravity="center"
+                            android:paddingLeft="@dimen/_5sdp"
+                            android:paddingRight="@dimen/_5sdp"
+                            android:stretchColumns="*">
 
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="1sp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/_2sdp"
+                                android:background="@color/ch_counter_border_dark" />
+
+                            <TableRow android:layout_marginTop="@dimen/_4sdp" android:layout_marginBottom="@dimen/_4sdp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Beads"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/ch_dark_color"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Heard"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/ch_dark_color"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"/>
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Progress"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/ch_dark_color"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"/>
+                            </TableRow>
+
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="1sp"
+                                android:layout_gravity="center"
+                                android:background="@color/ch_counter_border_dark" />
+                        </TableLayout>
+                        <ScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TableLayout
+                                android:id="@+id/progressBarTableLayout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity=""
+                                android:gravity="center"
+                                android:paddingLeft="@dimen/_5sdp"
+                                android:paddingRight="@dimen/_5sdp"
+                                android:stretchColumns="*">
+                            </TableLayout>
+                        </ScrollView>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/roundNoTextView"
+            android:id="@+id/actionInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="-20sp"
             android:padding="5sp"
             android:scaleType="centerCrop"
-            android:text="Round 1"
+            android:text="Action info"
             android:textAlignment="center"
             android:textColor="@color/ch_light_color"
             android:textSize="22sp"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/guideline10"
             app:layout_constraintDimensionRatio="4:1"
             app:layout_constraintEnd_toEndOf="@+id/hkmCardView"
@@ -932,7 +776,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.2676399" />
+            app:layout_constraintGuide_percent="0.09" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline18"
@@ -1016,14 +860,16 @@
             android:id="@+id/flow"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:constraint_referenced_ids="hearButton" />
+            app:constraint_referenced_ids="hearButton"
+            tools:layout_editor_absoluteX="62dp"
+            tools:layout_editor_absoluteY="-31dp" />
 
         <androidx.constraintlayout.helper.widget.Layer
             android:id="@+id/layer"
             android:layout_width="176dp"
             android:layout_height="168dp"
             app:constraint_referenced_ids="hearButton"
-            tools:layout_editor_absoluteY="115dp" />
+            tools:layout_editor_absoluteY="125dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline30"

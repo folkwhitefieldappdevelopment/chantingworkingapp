@@ -23,7 +23,6 @@ import com.iskcon.folk.app.chantandhear.service.AbstractEventHandler;
 import com.iskcon.folk.app.chantandhear.service.CountdownTimerImpl;
 import com.iskcon.folk.app.chantandhear.service.beadcount.JapaMalaViewModel;
 import com.iskcon.folk.app.chantandhear.service.beadcount.MalaBeadCounter;
-import com.iskcon.folk.app.chantandhear.service.progress.ProgressBarHandler;
 
 import java.text.MessageFormat;
 import java.util.Date;
