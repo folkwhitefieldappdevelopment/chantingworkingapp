@@ -2,6 +2,7 @@ package com.iskcon.folk.app.chantandhear.service.progress;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.media.MediaPlayer;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import androidx.annotation.Px;
 
 import com.iskcon.folk.app.chantandhear.MainActivity;
 import com.iskcon.folk.app.chantandhear.R;
@@ -39,6 +42,7 @@ public class ProgressBarHandler extends AbstractEventHandler {
     }
 
     public void initializeProgressBar() {
+        ((TableLayout) super.getAppCompatActivity().findViewById(R.id.progressBarHeaderTableLayout)).setVisibility(View.VISIBLE);
         this.addRow(Milestone.MILESTONE_1);
     }
 
@@ -74,38 +78,46 @@ public class ProgressBarHandler extends AbstractEventHandler {
 
     private void addRow(Milestone milestone) {
 
+        this.doNotificationOfMilestoneCompletion(milestone);
+
         this.currentMilestone = milestone;
 
         this.milestoneWiseProgress.put(milestone, 0);
 
         TableRow tableRow = new TableRow(super.getAppCompatActivity());
+        tableRow.setGravity(Gravity.CENTER);
         tableRow.setId(milestone.getMilestoneId());
         tableRow.setPadding(0, 8, 0, 8);
         tableRow.setGravity(Gravity.CENTER);
 
         tableRow.setAnimation(AnimationUtils.loadAnimation(super.getAppCompatActivity(), R.anim.blink_5_times));
 
+        TableRow.LayoutParams tableLayoutParams = new TableRow.LayoutParams(10, 60, 0f);
+
         // Column 1 :: Bead Division
         TextView beadDivisionTextView = new TextView(super.getAppCompatActivity());
-        beadDivisionTextView.setTextSize(20);
-        beadDivisionTextView.setTextColor(super.getAppCompatActivity().getResources().getColor(R.color.ch_dark_color));
+        beadDivisionTextView.setPadding(0, 12, 0, 0);
+        beadDivisionTextView.setTextSize(12);
+        beadDivisionTextView.setTextColor(super.getAppCompatActivity().getResources().getColor(R.color.history_list_row_view_round_number));
         beadDivisionTextView.setText(MessageFormat.format("{0} - {1}", milestone.getStartBead(), milestone.getEndBead()));
         beadDivisionTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        tableRow.addView(beadDivisionTextView);
+        tableRow.addView(beadDivisionTextView, tableLayoutParams);
 
         // Column 2 :: Heard count
         TextView heardCountTextView = new TextView(super.getAppCompatActivity());
         heardCountTextView.setTextSize(20);
         heardCountTextView.setTextColor(super.getAppCompatActivity().getResources().getColor(R.color.ch_dark_color));
         heardCountTextView.setText(String.valueOf(0));
+        heardCountTextView.setGravity(Gravity.CENTER);
         heardCountTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        tableRow.addView(heardCountTextView);
+        tableRow.addView(heardCountTextView, tableLayoutParams);
 
         // Column 3 :: Progress bar
         ProgressBar progressBar = new ProgressBar(this.getAppCompatActivity(), null, android.R.attr.progressBarStyleHorizontal);
-        progressBar.setPadding(4, 0, 4, 0);
+        progressBar.setLayoutParams(new LinearLayout.LayoutParams(5, 2));
+        //progressBar.setPadding(10, 5, 10, 5);
         progressBar.setMax(16);
-        tableRow.addView(progressBar);
+        tableRow.addView(progressBar, tableLayoutParams);
 
         // Adding row to the table
         TableLayout tableLayout = super.getAppCompatActivity().findViewById(R.id.progressBarTableLayout);
@@ -118,6 +130,22 @@ public class ProgressBarHandler extends AbstractEventHandler {
         tableLayout.addView(rowSeparator);
 
         this.changePreviousRowsAppearance(milestone);
+    }
+
+    private void doNotificationOfMilestoneCompletion(Milestone milestone) {
+
+        if (!milestone.equals(Milestone.MILESTONE_1)) {
+
+            MediaPlayer milestoneMediaPlayer = MediaPlayer.create(getAppCompatActivity(), R.raw.beat16);
+            milestoneMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    mediaPlayer.stop();
+                    mediaPlayer.release();
+                }
+            });
+            milestoneMediaPlayer.start();
+        }
     }
 
     private void changePreviousRowsAppearance(Milestone currentMilestone) {

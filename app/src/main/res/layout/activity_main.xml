@@ -79,7 +79,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_120sdp"
+                android:layout_height="@dimen/_110sdp"
                 android:background="@drawable/main_activity_hkm_bg"
                 android:elevation="10dp">
 
@@ -330,15 +330,13 @@
             android:id="@+id/cardView"
             android:layout_width="wrap_content"
             android:layout_height="160dp"
-            android:layout_marginTop="@dimen/_1sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline20"
-            app:layout_constraintHorizontal_bias="0.541"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toTopOf="@+id/guideline16"
             app:layout_constraintVertical_bias="0.0"
+            android:background="@android:color/transparent"
             card_view:cardBackgroundColor="@android:color/transparent"
-            card_view:cardCornerRadius="16dp"
             card_view:cardElevation="0dp">
 
 
@@ -348,7 +346,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_margin="10sp"
                 android:background="@drawable/main_activity_count_bg"
                 android:baselineAligned="false"
                 android:elevation="3dp"
@@ -364,7 +361,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_gravity="top"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -376,22 +374,57 @@
                         android:gravity="top"
                         android:orientation="horizontal">
 
-                        <!-- Heard count layout -->
+                        <!-- SPD count layout -->
                         <LinearLayout
-                            android:id="@+id/heardLinearLayout"
                             android:layout_width="0dp"
-                            android:layout_height="80dp"
+                            android:layout_height="70dp"
                             android:layout_weight="1"
-                            android:clickable="true"
-                            android:focusable="true"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:padding="0dp">
 
+                            <TextView
+                                android:id="@+id/spChanting"
+                                android:layout_width="wrap_content"
+                                android:layout_height="0dp"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                android:layout_weight="1"
+                                android:text="Chanted"
+                                android:textAlignment="center"
+                                android:textColor="@color/ch_dark_color"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/beadCountTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="20dp"
+                                android:layout_weight="1"
+                                android:text="0"
+                                android:textAlignment="center"
+                                android:textColor="@color/ch_dark_color"
+                                android:textSize="35sp" />
+                        </LinearLayout>
+                        <!-- Space between count layouts -->
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="@dimen/_45sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:background="@color/ch_counter_border_dark" />
+                        <!-- Heard count layout -->
+                        <LinearLayout
+                            android:id="@+id/heardLinearLayout"
+                            android:layout_width="0dp"
+                            android:layout_height="70dp"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="12sp"
+                                android:layout_marginTop="@dimen/_4sdp"
                                 android:clickable="true"
                                 android:focusable="true"
                                 android:gravity="center_horizontal">
@@ -424,49 +457,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="20dp"
                                 android:layout_marginStart="-5sp"
-                                android:layout_marginBottom="10sp"
                                 android:layout_weight="1"
                                 android:text="0"
                                 android:textAlignment="textStart"
-                                android:textColor="@color/ch_dark_color"
-                                android:textSize="35sp" />
-
-                        </LinearLayout>
-
-                        <!-- Space between count layouts -->
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="@dimen/_55sdp"
-                            android:background="@color/ch_counter_border_dark" />
-
-                        <!-- SPD count layout -->
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="80dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="0dp">
-
-                            <TextView
-                                android:id="@+id/spChanting"
-                                android:layout_width="wrap_content"
-                                android:layout_height="0dp"
-                                android:layout_marginTop="12sp"
-                                android:layout_weight="1"
-                                android:text="Chanted"
-                                android:textAlignment="center"
-                                android:textColor="@color/ch_dark_color"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:id="@+id/beadCountTextView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="20dp"
-                                android:layout_marginBottom="10sp"
-                                android:layout_weight="1"
-                                android:text="0"
-                                android:textAlignment="center"
                                 android:textColor="@color/ch_dark_color"
                                 android:textSize="35sp" />
                         </LinearLayout>
@@ -485,7 +478,6 @@
                         android:id="@+id/hearLevelChangeLinearLayout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="15sp"
                         android:layout_marginTop="5sp"
                         android:background="@drawable/level_hearing_layout_background"
                         android:gravity="center">
@@ -506,6 +498,7 @@
                             android:layout_gravity="center"
                             android:background="@drawable/stroke_background"
                             android:gravity="center"
+                            android:paddingBottom="@dimen/_2sdp"
                             android:text="-"
                             android:textColor="@color/ch_dark_color"
                             android:textSize="30sp" />
@@ -545,7 +538,7 @@
 
                     <View
                         android:layout_width="1dp"
-                        android:layout_height="@dimen/_100sdp"
+                        android:layout_height="@dimen/_95sdp"
                         android:layout_gravity="center"
                         android:background="@color/ch_counter_border_dark" />
 
@@ -553,38 +546,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="top"
-                        android:gravity="top"
+                        android:gravity="center"
                         android:orientation="vertical"
-                        android:paddingTop="@dimen/_1sdp">
-
-                        <!--<TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="top"
-                            android:gravity="top"
-                            android:text="Progress"
-                            android:textAlignment="center"
-                            android:textColor="@color/ch_dark_color"
-                            android:textSize="14sp" />-->
+                        android:layout_marginTop="@dimen/_5sdp">
 
                         <TableLayout
                             android:id="@+id/progressBarHeaderTableLayout"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_gravity=""
+                            android:layout_gravity="center"
                             android:gravity="center"
                             android:paddingLeft="@dimen/_5sdp"
                             android:paddingRight="@dimen/_5sdp"
-                            android:stretchColumns="*">
+                            android:stretchColumns="*"
+                            android:visibility="invisible">
 
-                            <View
-                                android:layout_width="1dp"
-                                android:layout_height="1sp"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="@dimen/_2sdp"
-                                android:background="@color/ch_counter_border_dark" />
-
-                            <TableRow android:layout_marginTop="@dimen/_4sdp" android:layout_marginBottom="@dimen/_4sdp">
+                            <TableRow
+                                android:layout_marginTop="@dimen/_4sdp"
+                                android:layout_marginBottom="@dimen/_4sdp">
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -592,8 +571,7 @@
                                     android:text="Beads"
                                     android:textAlignment="center"
                                     android:textColor="@color/ch_dark_color"
-                                    android:textSize="12sp"
-                                    android:textStyle="bold"/>
+                                    android:textSize="12sp" />
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -601,24 +579,24 @@
                                     android:text="Heard"
                                     android:textAlignment="center"
                                     android:textColor="@color/ch_dark_color"
-                                    android:textSize="12sp"
-                                    android:textStyle="bold"/>
+                                    android:textSize="12sp" />
+
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Progress"
                                     android:textAlignment="center"
                                     android:textColor="@color/ch_dark_color"
-                                    android:textSize="12sp"
-                                    android:textStyle="bold"/>
+                                    android:textSize="12sp" />
                             </TableRow>
 
                             <View
-                                android:layout_width="1dp"
-                                android:layout_height="1sp"
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
                                 android:layout_gravity="center"
                                 android:background="@color/ch_counter_border_dark" />
                         </TableLayout>
+
                         <ScrollView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
@@ -626,13 +604,12 @@
                             <TableLayout
                                 android:id="@+id/progressBarTableLayout"
                                 android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_gravity=""
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
                                 android:gravity="center"
                                 android:paddingLeft="@dimen/_5sdp"
                                 android:paddingRight="@dimen/_5sdp"
-                                android:stretchColumns="*">
-                            </TableLayout>
+                                android:stretchColumns="*"/>
                         </ScrollView>
                     </LinearLayout>
                 </LinearLayout>

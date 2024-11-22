@@ -99,7 +99,7 @@ public class HkMantraClickHandler extends AbstractEventHandler {
                 panchtattvaMediaPlayer.release();
                 panchTattvaMantraMediaPlayer = null;
                 //startHkMahaMantraSingleMediaPlayer();
-                startHkMahaMantraMultipleMediaPlayer();
+                startHkMahaMantraMultipleMediaPlayer(false);
             }
         });
         panchTattvaMantraMediaPlayer.start();
@@ -171,12 +171,14 @@ public class HkMantraClickHandler extends AbstractEventHandler {
         Log.i(this.getClass().getSimpleName(), "mediaPlayer.getDuration() = " + hkMahaMantraMediaPlayer.getDuration());
     }
 
-    public void startHkMahaMantraMultipleMediaPlayer() {
+    private void startHkMahaMantraMultipleMediaPlayer(boolean calledViaResume) {
         hareKrishnaMahaMantraTextView.setAnimation(AnimationUtils.loadAnimation(getAppCompatActivity(), android.R.anim.fade_out));
         hareKrishnaMahaMantraTextView.setAnimation(AnimationUtils.loadAnimation(getAppCompatActivity(), android.R.anim.fade_in));
         hareKrishnaMahaMantraTextView.setText(R.string.main_activity_hk_maha_mantra);
         hkMahaMantraMediaPlayer.setPlaybackParams(hkMahaMantraMediaPlayer.getPlaybackParams().setSpeed(speedButtonHandler.getSpeed()));
-        super.getAppCompatActivity().getProgressBarHandler().initializeProgressBar();
+        if(!calledViaResume) {
+            super.getAppCompatActivity().getProgressBarHandler().initializeProgressBar();
+        }
         final int CURRENT_BEAD_COUNT = getAppCompatActivity().getJapaMalaViewModel().getBeadCounterLiveData().getValue();
         final long COUNT_DOWN_INTERVAL = Math.round(ApplicationConstants.HARE_KRISHNA_MANTRA_SINGLE_BEAD_DURATION.getConstantValue(Long.class) / Float.valueOf(speedButtonHandler.getSpeed()));
         this.hkMahaMantraHandler = new Handler();
@@ -233,7 +235,7 @@ public class HkMantraClickHandler extends AbstractEventHandler {
         if (currentMediaPlayer != null) {
             playButton.setVisibility(View.INVISIBLE);
             if (currentMediaPlayer.equals(MediaPlayerPlaying.HKM_MEDIA_PLAYER)) {
-                this.startHkMahaMantraMultipleMediaPlayer();
+                this.startHkMahaMantraMultipleMediaPlayer(true);
             } else {
                 this.startPanchaTattvaMantraMediaPlayer();
             }
