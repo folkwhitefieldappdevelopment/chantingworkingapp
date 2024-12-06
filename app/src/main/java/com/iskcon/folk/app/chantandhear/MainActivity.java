@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         srilaPrabhupadaChantingWithOutPanchtattva = MediaPlayer.create(MainActivity.this, R.raw.hkm);
 
         //ImageViews
-        menuHemBurgerIcon = findViewById(R.id.hamburgerIcon);
+       // menuHemBurgerIcon = findViewById(R.id.hamburgerIcon);
         startButtonImage = findViewById(R.id.startIconImageView);
 
         findViewById(R.id.speedMenu).setOnClickListener(new View.OnClickListener() {

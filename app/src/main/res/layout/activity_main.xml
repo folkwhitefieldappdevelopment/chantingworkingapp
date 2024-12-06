@@ -63,7 +63,10 @@
             android:layout_width="80sp"
             android:layout_height="80sp"
             android:src="@drawable/sp_badge"
-            android:visibility="invisible" />
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/hkmCardView"
@@ -291,51 +294,51 @@
         </androidx.cardview.widget.CardView>
 
 
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="6dp"
-            android:orientation="horizontal"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@id/guideline15"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintHorizontal_bias="0.24"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/linearLayout2"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:layout_marginTop="6dp"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            android:visibility="visible"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@id/guideline15"-->
+        <!--            app:layout_constraintEnd_toStartOf="@+id/guideline3"-->
+        <!--            app:layout_constraintHorizontal_bias="0.24"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent">-->
 
-            <ImageView
-                android:id="@+id/hamburgerIcon"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:alpha="0.7"
-                android:clickable="true"
-                android:contentDescription="help"
-                android:src="@drawable/baseline_menu_24" />
+        <!--            <ImageView-->
+        <!--                android:id="@+id/hamburgerIcon"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:alpha="0.7"-->
+        <!--                android:clickable="true"-->
+        <!--                android:contentDescription="help"-->
+        <!--                android:src="@drawable/baseline_menu_24" />-->
 
-            <ImageView
-                android:id="@+id/historyIcon"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:alpha="0.8"
-                android:clickable="true"
-                android:contentDescription="help"
-                android:src="@drawable/baseline_history_24" />
-        </LinearLayout>
+        <!--            <ImageView-->
+        <!--                android:id="@+id/historyIcon"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:alpha="0.8"-->
+        <!--                android:clickable="true"-->
+        <!--                android:contentDescription="help"-->
+        <!--                android:src="@drawable/soulfuljapa" />-->
+        <!--        </LinearLayout>-->
 
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="wrap_content"
             android:layout_height="160dp"
+            android:background="@android:color/transparent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline20"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toTopOf="@+id/guideline16"
             app:layout_constraintVertical_bias="0.0"
-            android:background="@android:color/transparent"
             card_view:cardBackgroundColor="@android:color/transparent"
             card_view:cardElevation="0dp">
 
@@ -361,8 +364,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
                     android:layout_gravity="top"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -546,9 +549,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="top"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:gravity="center"
-                        android:orientation="vertical"
-                        android:layout_marginTop="@dimen/_5sdp">
+                        android:orientation="vertical">
 
                         <TableLayout
                             android:id="@+id/progressBarHeaderTableLayout"
@@ -609,7 +612,7 @@
                                 android:gravity="center"
                                 android:paddingLeft="@dimen/_5sdp"
                                 android:paddingRight="@dimen/_5sdp"
-                                android:stretchColumns="*"/>
+                                android:stretchColumns="*" />
                         </ScrollView>
                     </LinearLayout>
                 </LinearLayout>
@@ -617,24 +620,24 @@
 
         </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/actionInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-20sp"
-            android:padding="5sp"
-            android:scaleType="centerCrop"
-            android:text="Action info"
-            android:textAlignment="center"
-            android:textColor="@color/ch_light_color"
-            android:textSize="22sp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/guideline10"
-            app:layout_constraintDimensionRatio="4:1"
-            app:layout_constraintEnd_toEndOf="@+id/hkmCardView"
-            app:layout_constraintHorizontal_bias="0.53"
-            app:layout_constraintStart_toStartOf="@+id/hkmCardView"
-            app:layout_constraintTop_toTopOf="parent" />
+        <!--        <TextView-->
+        <!--            android:id="@+id/actionInfo"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="-20sp"-->
+        <!--            android:padding="5sp"-->
+        <!--            android:scaleType="centerCrop"-->
+        <!--            android:text="Action info"-->
+        <!--            android:textAlignment="center"-->
+        <!--            android:textColor="@color/ch_light_color"-->
+        <!--            android:textSize="22sp"-->
+        <!--            android:visibility="invisible"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/guideline10"-->
+        <!--            app:layout_constraintDimensionRatio="4:1"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/hkmCardView"-->
+        <!--            app:layout_constraintHorizontal_bias="0.53"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/hkmCardView"-->
+        <!--            app:layout_constraintTop_toTopOf="parent" />-->
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"
@@ -753,7 +756,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.09" />
+            app:layout_constraintGuide_percent="0.13" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline18"
@@ -818,6 +821,7 @@
             android:layout_height="wrap_content"
             app:barrierDirection="top" />
 
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/hearButton"
             android:layout_width="250sp"
@@ -833,39 +837,88 @@
             app:layout_constraintTop_toTopOf="@+id/guideline18"
             app:maxImageSize="0dp" />
 
-        <androidx.constraintlayout.helper.widget.Flow
-            android:id="@+id/flow"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:constraint_referenced_ids="hearButton"
-            tools:layout_editor_absoluteX="62dp"
-            tools:layout_editor_absoluteY="-31dp" />
+        <!--        <androidx.constraintlayout.helper.widget.Flow-->
+        <!--            android:id="@+id/flow"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            app:constraint_referenced_ids="hearButton"-->
+        <!--            tools:layout_editor_absoluteX="62dp"-->
+        <!--            tools:layout_editor_absoluteY="-31dp" />-->
 
-        <androidx.constraintlayout.helper.widget.Layer
-            android:id="@+id/layer"
-            android:layout_width="176dp"
-            android:layout_height="168dp"
-            app:constraint_referenced_ids="hearButton"
-            tools:layout_editor_absoluteY="125dp" />
+        <!--        <androidx.constraintlayout.helper.widget.Layer-->
+        <!--            android:id="@+id/layer"-->
+        <!--            android:layout_width="176dp"-->
+        <!--            android:layout_height="168dp"-->
+        <!--            app:constraint_referenced_ids="hearButton"-->
+        <!--            tools:layout_editor_absoluteY="125dp" />-->
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline30"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="20dp" />
+            app:layout_constraintGuide_begin="119dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline31"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="20dp" />
+            app:layout_constraintGuide_begin="11dp" />
 
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:constraint_referenced_ids="flow" />
+
+        <!-- The CardView -->
+
+            <!-- The TextView to overlay above the CardView -->
+
+        <ImageView
+            android:id="@+id/soulfulJapabadge"
+            android:layout_width="90sp"
+            android:layout_height="90sp"
+            android:elevation="4sp"
+            android:src="@drawable/soul2"
+            android:translationZ="50dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/guideline13"
+            app:layout_constraintStart_toStartOf="@+id/guideline30"
+            app:layout_constraintTop_toTopOf="@+id/guideline31"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/soulfultext"
+            android:layout_width="382dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="-5dp"
+            android:layout_weight="0.1"
+            android:background="@drawable/rounded_chat_bubble"
+            android:elevation="2dp"
+            android:padding="@dimen/_5sdp"
+            android:rotation="0"
+            android:shadowColor="@color/history_list_row_view_heardCount_value"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="1"
+            android:text="Hare krishna, Are you hearing attentively? "
+            android:textAlignment="center"
+            android:textColor="#191A91"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/hkmCardView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toTopOf="@+id/hkmCardView"
+            app:layout_constraintVertical_bias="0.53" />
+
+
+
+
+
+        <!--        <androidx.constraintlayout.widget.Group-->
+        <!--            android:id="@+id/group"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            app:constraint_referenced_ids="flow" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.drawerlayout.widget.DrawerLayout>
