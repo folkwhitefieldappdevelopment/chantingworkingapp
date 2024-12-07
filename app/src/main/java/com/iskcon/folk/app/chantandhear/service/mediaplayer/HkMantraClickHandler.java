@@ -188,8 +188,8 @@ public class HkMantraClickHandler extends AbstractEventHandler {
                 hkMahaMantraMediaPlayer.start();
                 if (CURRENT_BEAD_COUNT == 0) {
                     getAppCompatActivity().getJapaMalaViewModel().incrementBead();
-                    getAppCompatActivity().getFlipperFocusSlideshowHandler()
-                            .startFlipper(ApplicationConstants.FLIP_VIEW_INTERVAL.getConstantValue(Integer.class));
+                    getAppCompatActivity().getVideoViewManager()
+                            .startVideo(ApplicationConstants.FLIP_VIEW_INTERVAL.getConstantValue(Integer.class));
                 }
             }
         };
@@ -326,7 +326,7 @@ public class HkMantraClickHandler extends AbstractEventHandler {
         ((TextView) super.getAppCompatActivity().findViewById(R.id.mediaTimerTextView)).setText(String.format(Locale.ENGLISH, "0%d:%02d", 0, 0));
         ((TextView) super.getAppCompatActivity().findViewById(R.id.heardCountTextView)).setText("0");
 
-        super.getAppCompatActivity().getFlipperFocusSlideshowHandler().stopFlipper();
+        super.getAppCompatActivity().getVideoViewManager().stopVideo();
 
         this.countDownTimer.cancel();
 
@@ -344,7 +344,7 @@ public class HkMantraClickHandler extends AbstractEventHandler {
             if (malaBeadCounter != null) {
                 malaBeadCounter.cancel();
             }
-            getAppCompatActivity().getFlipperFocusSlideshowHandler().pauseFlipper();
+            getAppCompatActivity().getVideoViewManager().pauseVideo();
         }
     }
 

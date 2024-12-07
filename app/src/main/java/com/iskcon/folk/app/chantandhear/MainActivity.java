@@ -8,9 +8,11 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,6 +36,7 @@ import com.iskcon.folk.app.chantandhear.service.mediaplayer.SpeedButtonHandler;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.UnmuteButtonHandler;
 import com.google.android.material.navigation.NavigationView;
 import com.iskcon.folk.app.chantandhear.service.progress.ProgressBarHandler;
+import com.iskcon.folk.app.chantandhear.service.videoview.VideoViewManager;
 
 import java.text.MessageFormat;
 import java.util.Locale;
@@ -48,12 +51,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private SpeedButtonHandler speedClickHandler;
     private JapaMalaViewModel japaMalaViewModel;
     private YoutubeVideoHandler youtubeVideoHandler;
-    private FlipperFocusSlideshowHandler flipperFocusSlideshowHandler;
     private BeforeDoneClickHandler beforeDoneClickHandler;
     private ProgressBarHandler progressBarHandler;
     private HistoryViewClickHandler historyViewOpenHandler;
     private JapaMalaModel japaMalaModel = null;
     private UserDetails userDetails;
+    private VideoViewManager videoViewManager;
     private float dx;
 
     private float dy;
@@ -116,11 +119,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         youtubeVideoHandler = new YoutubeVideoHandler(this);
         speedClickHandler = new SpeedButtonHandler(this, spHkmMediaplayer);
         hearButtonHandler = new HeardButtonHandler(this);
-        flipperFocusSlideshowHandler = new FlipperFocusSlideshowHandler(this);
         beforeDoneClickHandler = new BeforeDoneClickHandler(this);
         progressBarHandler = new ProgressBarHandler(this);
         historyViewOpenHandler = new HistoryViewClickHandler();
         srilaPrabhupadaChantingWithOutPanchtattva = MediaPlayer.create(MainActivity.this, R.raw.hkm);
+        videoViewManager = new VideoViewManager(this);
 
         //ImageViews
        // menuHemBurgerIcon = findViewById(R.id.hamburgerIcon);
@@ -176,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             }
         });
 
-        flipperFocusSlideshowHandler.initializeFlipper();
+        videoViewManager.loadVideo();
 
         ((ImageView) findViewById(R.id.beforeDoneImageView)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -193,6 +196,31 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         });
 
         ((LinearLayout) findViewById(R.id.heardLinearLayout)).setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blink_10_times));
+
+        findViewById(R.id.userAttentionSliderRelativeLayout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_out_right);
+                animation.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        view.setVisibility(View.INVISIBLE);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+                view.setAnimation(animation);
+                view.animate();
+            }
+        });
     }
 
     private JapaMalaModel initializeJapaMalaModel() {
@@ -317,10 +345,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         return speedClickHandler;
     }
 
-    public FlipperFocusSlideshowHandler getFlipperFocusSlideshowHandler() {
-        return flipperFocusSlideshowHandler;
-    }
-
     public HeardButtonHandler getHearButtonHandler() {
         return hearButtonHandler;
     }
@@ -335,6 +359,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     public HistoryViewClickHandler getHistoryViewOpenHandler() {
         return historyViewOpenHandler;
+    }
+
+    public VideoViewManager getVideoViewManager(){
+        return videoViewManager;
     }
 
     @Override

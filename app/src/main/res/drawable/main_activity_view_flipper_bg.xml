@@ -3,7 +3,7 @@
         <layer-list>
             <item>
                 <shape>
-                    <stroke android:width="5px"
+                    <stroke android:width="2px"
                         android:color="@color/ch_counter_border_dark"/>
                     <corners android:radius="10dp" />
                 </shape>

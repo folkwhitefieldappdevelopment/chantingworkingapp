@@ -2,19 +2,28 @@ package com.iskcon.folk.app.chantandhear.homepage;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.iskcon.folk.app.chantandhear.LevelSelectionActivity;
 import com.iskcon.folk.app.chantandhear.MainActivity;
 import com.iskcon.folk.app.chantandhear.R;
@@ -23,6 +32,7 @@ import com.iskcon.folk.app.chantandhear.history.model.RoundDataEntity;
 import com.iskcon.folk.app.chantandhear.model.UserDetails;
 import com.iskcon.folk.app.chantandhear.util.CommonUtils;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 
@@ -41,6 +51,7 @@ public class HomePageLevelSelectionFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (gotData) {
+                    downloadFile();
                     view.animate().setDuration(200).scaleX(1.2f).scaleY(1.2f).withEndAction(() -> view.animate().setDuration(300).scaleX(1f).scaleY(1f));
                     enterMain(userDetails, getCompletedRounds());
                 }
@@ -90,5 +101,30 @@ public class HomePageLevelSelectionFragment extends Fragment {
         this.completedRounds = completedRounds;
     }
 
+    private void downloadFile() {
+        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+        StorageReference storageReference = firebaseStorage.getReference("flip_videos").child("sample_kirshna_images.mp4");
 
+        File rootDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "chantAndHear_v1");
+
+        if (!rootDirectory.exists()) {
+            rootDirectory.mkdir();
+        }
+
+        File videoFilePath = new File(rootDirectory, "sample_kirshna_images.mp4");
+        videoFilePath.deleteOnExit();
+
+        storageReference.getFile(videoFilePath).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                Toast.makeText(getContext(), "File downloaded " + videoFilePath.getPath(), Toast.LENGTH_LONG).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e("TAG", e.getMessage(), e);
+                Toast.makeText(getContext(), "Unable to download the file, error = " + e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 }

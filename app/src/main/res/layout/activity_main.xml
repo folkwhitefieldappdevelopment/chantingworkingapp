@@ -46,10 +46,17 @@
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="10dp" />
 
+            <VideoView
+                android:id="@+id/krishnaVideoView"
+                android:layout_width="300sp"
+                android:layout_height="380sp"
+                android:background="@drawable/main_activity_view_flipper_bg"
+                android:visibility="invisible" />
+
             <ViewFlipper
                 android:id="@+id/focusSlideshowFlipper"
-                android:layout_width="290sp"
-                android:layout_height="360sp"
+                android:layout_width="300sp"
+                android:layout_height="30sp"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="22dp"
                 android:background="@drawable/level_change_image_background"
@@ -147,7 +154,7 @@
                                 android:text="Hare Krishna"
                                 android:textAlignment="center"
                                 android:textColor="@color/ch_light_color_text_view"
-                                android:textSize="15sp"
+                                android:textSize="14sp"
                                 android:visibility="visible" />
                         </LinearLayout>
 
@@ -195,7 +202,7 @@
                         android:text="00:00"
                         android:textAlignment="center"
                         android:textColor="@color/ch_light_color"
-                        android:textSize="15sp"
+                        android:textSize="13sp"
                         android:verticalScrollbarPosition="defaultPosition"
                         android:visibility="visible"
                         app:layout_constraintStart_toStartOf="parent"
@@ -562,11 +569,13 @@
                             android:paddingLeft="@dimen/_5sdp"
                             android:paddingRight="@dimen/_5sdp"
                             android:stretchColumns="*"
-                            android:visibility="invisible">
+                            android:visibility="visible">
 
                             <TableRow
+                                android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/_4sdp"
-                                android:layout_marginBottom="@dimen/_4sdp">
+                                android:layout_marginBottom="@dimen/_4sdp"
+                                android:gravity="center">
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -574,7 +583,7 @@
                                     android:text="Beads"
                                     android:textAlignment="center"
                                     android:textColor="@color/ch_dark_color"
-                                    android:textSize="12sp" />
+                                    android:textSize="14sp" />
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -582,7 +591,7 @@
                                     android:text="Heard"
                                     android:textAlignment="center"
                                     android:textColor="@color/ch_dark_color"
-                                    android:textSize="12sp" />
+                                    android:textSize="14sp" />
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -590,19 +599,20 @@
                                     android:text="Progress"
                                     android:textAlignment="center"
                                     android:textColor="@color/ch_dark_color"
-                                    android:textSize="12sp" />
+                                    android:textSize="14sp" />
                             </TableRow>
 
                             <View
-                                android:layout_width="0dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="1dp"
                                 android:layout_gravity="center"
+                                android:layout_marginBottom="5dp"
                                 android:background="@color/ch_counter_border_dark" />
                         </TableLayout>
 
                         <ScrollView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="wrap_content">
 
                             <TableLayout
                                 android:id="@+id/progressBarTableLayout"
@@ -612,7 +622,7 @@
                                 android:gravity="center"
                                 android:paddingLeft="@dimen/_5sdp"
                                 android:paddingRight="@dimen/_5sdp"
-                                android:stretchColumns="*" />
+                                android:stretchColumns="*"></TableLayout>
                         </ScrollView>
                     </LinearLayout>
                 </LinearLayout>
@@ -869,50 +879,54 @@
 
         <!-- The CardView -->
 
-            <!-- The TextView to overlay above the CardView -->
+        <!-- The TextView to overlay above the CardView -->
+        <RelativeLayout
+            android:id="@+id/userAttentionSliderRelativeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_100sdp"
+            android:gravity="center"
+            android:paddingStart="@dimen/_35sdp"
+            android:translationY="@dimen/_10sdp"
+            android:translationZ="2dp"
+            android:visibility="invisible"
+            android:clickable="true">
 
-        <ImageView
-            android:id="@+id/soulfulJapabadge"
-            android:layout_width="90sp"
-            android:layout_height="90sp"
-            android:elevation="4sp"
-            android:src="@drawable/soul2"
-            android:translationZ="50dp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/guideline13"
-            app:layout_constraintStart_toStartOf="@+id/guideline30"
-            app:layout_constraintTop_toTopOf="@+id/guideline31"
-            app:layout_constraintVertical_bias="0.0" />
+            <ImageView
+                android:id="@+id/soulfulJapabadge"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@drawable/user_box_bg_round_rect"
+                android:elevation="0dp"
+                android:src="@drawable/soul2"
+                android:translationX="20sp"
+                android:translationY="-20dp"
+                android:translationZ="1dp"
+                android:visibility="visible" />
 
-        <TextView
-            android:id="@+id/soulfultext"
-            android:layout_width="382dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="-5dp"
-            android:layout_weight="0.1"
-            android:background="@drawable/rounded_chat_bubble"
-            android:elevation="2dp"
-            android:padding="@dimen/_5sdp"
-            android:rotation="0"
-            android:shadowColor="@color/history_list_row_view_heardCount_value"
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="1"
-            android:text="Hare krishna, Are you hearing attentively? "
-            android:textAlignment="center"
-            android:textColor="#191A91"
-            android:textSize="15sp"
-            app:layout_constraintBottom_toTopOf="@+id/hkmCardView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toTopOf="@+id/hkmCardView"
-            app:layout_constraintVertical_bias="0.53" />
+            <TextView
+                android:id="@+id/userAttentionSliderMessage"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="@dimen/_70sdp"
+                android:layout_marginStart="@dimen/_40sdp"
+                android:layout_marginBottom="-5dp"
+                android:layout_weight="0.1"
+                android:background="@drawable/rounded_chat_bubble"
+                android:gravity="top"
+                android:paddingStart="@dimen/_40sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:rotation="0"
+                android:shadowColor="@color/history_list_row_view_heardCount_value"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:textColor="@color/ch_dark_color"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintVertical_bias="0.53" />
 
-
-
+        </RelativeLayout>
 
 
         <!--        <androidx.constraintlayout.widget.Group-->

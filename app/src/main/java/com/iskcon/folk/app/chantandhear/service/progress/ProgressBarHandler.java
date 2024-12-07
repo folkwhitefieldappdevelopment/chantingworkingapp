@@ -3,12 +3,15 @@ package com.iskcon.folk.app.chantandhear.service.progress;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.media.MediaPlayer;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -17,7 +20,9 @@ import androidx.annotation.Px;
 
 import com.iskcon.folk.app.chantandhear.MainActivity;
 import com.iskcon.folk.app.chantandhear.R;
+import com.iskcon.folk.app.chantandhear.constant.ApplicationConstants;
 import com.iskcon.folk.app.chantandhear.constant.Milestone;
+import com.iskcon.folk.app.chantandhear.constant.UserAttentionSliderMessage;
 import com.iskcon.folk.app.chantandhear.constant.VideoType;
 import com.iskcon.folk.app.chantandhear.service.AbstractEventHandler;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.HkMantraClickHandler;
@@ -50,6 +55,11 @@ public class ProgressBarHandler extends AbstractEventHandler {
 
         if (currentMalaCount != 0) {
 
+            if (currentMalaCount % ApplicationConstants.USER_ATTENTION_SLIDER_SHOW_ON_EVERY.getConstantValue(Integer.class) == 0) {
+
+                this.showUserAttentionSlider();
+            }
+
             Milestone calculatedMilestone = Milestone.beadInBetweenWhichMilestoe(currentMalaCount);
 
             if (!this.currentMilestone.equals(calculatedMilestone) && !this.milestoneWiseProgress.containsKey(calculatedMilestone)) {
@@ -78,58 +88,61 @@ public class ProgressBarHandler extends AbstractEventHandler {
 
     private void addRow(Milestone milestone) {
 
-        this.doNotificationOfMilestoneCompletion(milestone);
+        if (true) {
+            //if (!this.checkAndShowNoHeardVideo(milestone)) {
 
-        this.currentMilestone = milestone;
+            this.doNotificationOfMilestoneCompletion(milestone);
 
-        this.milestoneWiseProgress.put(milestone, 0);
+            this.currentMilestone = milestone;
 
-        TableRow tableRow = new TableRow(super.getAppCompatActivity());
-        tableRow.setGravity(Gravity.CENTER);
-        tableRow.setId(milestone.getMilestoneId());
-        tableRow.setPadding(0, 8, 0, 8);
-        tableRow.setGravity(Gravity.CENTER);
+            this.milestoneWiseProgress.put(milestone, 0);
 
-        tableRow.setAnimation(AnimationUtils.loadAnimation(super.getAppCompatActivity(), R.anim.blink_5_times));
+            TableRow tableRow = new TableRow(super.getAppCompatActivity());
+            tableRow.setGravity(Gravity.CENTER);
+            tableRow.setId(milestone.getMilestoneId());
+            tableRow.setPadding(0, 0, 0, 15);
+            tableRow.setGravity(Gravity.CENTER);
 
-        TableRow.LayoutParams tableLayoutParams = new TableRow.LayoutParams(10, 60, 0f);
+            tableRow.setAnimation(AnimationUtils.loadAnimation(super.getAppCompatActivity(), R.anim.blink_5_times));
 
-        // Column 1 :: Bead Division
-        TextView beadDivisionTextView = new TextView(super.getAppCompatActivity());
-        beadDivisionTextView.setPadding(0, 12, 0, 0);
-        beadDivisionTextView.setTextSize(12);
-        beadDivisionTextView.setTextColor(super.getAppCompatActivity().getResources().getColor(R.color.history_list_row_view_round_number));
-        beadDivisionTextView.setText(MessageFormat.format("{0} - {1}", milestone.getStartBead(), milestone.getEndBead()));
-        beadDivisionTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        tableRow.addView(beadDivisionTextView, tableLayoutParams);
+            TableRow.LayoutParams tableLayoutParams = new TableRow.LayoutParams(10, 40, 0f);
 
-        // Column 2 :: Heard count
-        TextView heardCountTextView = new TextView(super.getAppCompatActivity());
-        heardCountTextView.setTextSize(20);
-        heardCountTextView.setTextColor(super.getAppCompatActivity().getResources().getColor(R.color.ch_dark_color));
-        heardCountTextView.setText(String.valueOf(0));
-        heardCountTextView.setGravity(Gravity.CENTER);
-        heardCountTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        tableRow.addView(heardCountTextView, tableLayoutParams);
+            // Column 1 :: Bead Division
+            TextView beadDivisionTextView = new TextView(super.getAppCompatActivity());
+            beadDivisionTextView.setTextSize(14);
+            beadDivisionTextView.setTextColor(super.getAppCompatActivity().getResources().getColor(R.color.history_list_row_view_round_number));
+            beadDivisionTextView.setText(MessageFormat.format("{0} - {1}", milestone.getStartBead(), milestone.getEndBead()));
+            beadDivisionTextView.setGravity(Gravity.CENTER);
+            beadDivisionTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            tableRow.addView(beadDivisionTextView, tableLayoutParams);
 
-        // Column 3 :: Progress bar
-        ProgressBar progressBar = new ProgressBar(this.getAppCompatActivity(), null, android.R.attr.progressBarStyleHorizontal);
-        progressBar.setLayoutParams(new LinearLayout.LayoutParams(5, 2));
-        //progressBar.setPadding(10, 5, 10, 5);
-        progressBar.setMax(16);
-        tableRow.addView(progressBar, tableLayoutParams);
+            // Column 2 :: Heard count
+            TextView heardCountTextView = new TextView(super.getAppCompatActivity());
+            heardCountTextView.setTextSize(14);
+            heardCountTextView.setTextColor(super.getAppCompatActivity().getResources().getColor(R.color.ch_dark_color));
+            heardCountTextView.setText(String.valueOf(0));
+            heardCountTextView.setGravity(Gravity.CENTER);
+            heardCountTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            tableRow.addView(heardCountTextView, tableLayoutParams);
 
-        // Adding row to the table
-        TableLayout tableLayout = super.getAppCompatActivity().findViewById(R.id.progressBarTableLayout);
-        tableLayout.addView(tableRow);
+            // Column 3 :: Progress bar
+            ProgressBar progressBar = new ProgressBar(this.getAppCompatActivity(), null, android.R.attr.progressBarStyleHorizontal);
+            progressBar.setLayoutParams(new LinearLayout.LayoutParams(5, 6));
+            progressBar.setMax(16);
+            tableRow.addView(progressBar, tableLayoutParams);
 
-        // Adding a row separator
-        View rowSeparator = new View(super.getAppCompatActivity());
+            // Adding row to the table
+            TableLayout tableLayout = super.getAppCompatActivity().findViewById(R.id.progressBarTableLayout);
+            tableLayout.addView(tableRow);
+
+            // Adding a row separator
+        /*View rowSeparator = new View(super.getAppCompatActivity());
         rowSeparator.setLayoutParams(new TableLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1));
         rowSeparator.setBackgroundResource(R.color.ch_counter_border_dark);
-        tableLayout.addView(rowSeparator);
+        tableLayout.addView(rowSeparator);*/
 
-        this.changePreviousRowsAppearance(milestone);
+            this.changePreviousRowsAppearance(milestone);
+        }
     }
 
     private void doNotificationOfMilestoneCompletion(Milestone milestone) {
@@ -154,7 +167,7 @@ public class ProgressBarHandler extends AbstractEventHandler {
 
             TableLayout tableLayout = super.getAppCompatActivity().findViewById(R.id.progressBarTableLayout);
 
-            for (int i = 0; i < tableLayout.getChildCount() - 2; i++) {
+            for (int i = 0; i < tableLayout.getChildCount(); i++) {
 
                 View view = tableLayout.getChildAt(i);
 
@@ -180,7 +193,7 @@ public class ProgressBarHandler extends AbstractEventHandler {
 
         TableLayout tableLayout = super.getAppCompatActivity().findViewById(R.id.progressBarTableLayout);
 
-        TableRow tableRow = (TableRow) (tableLayout.getChildAt(tableLayout.getChildCount() - 2));
+        TableRow tableRow = (TableRow) (tableLayout.getChildAt(tableLayout.getChildCount() - 1));
 
         // Column 2: Heard Count
         int levelValue = super.getAppCompatActivity().getHearButtonHandler().getLevelCountValue();
@@ -207,13 +220,16 @@ public class ProgressBarHandler extends AbstractEventHandler {
         this.milestoneWiseProgress = new HashMap<>();
     }
 
-    private void checkAndShowNoHeardVideo(int currentBeadCount) {
-        if (!attentiveVideoShown && (currentBeadCount > 16 && getAppCompatActivity().getJapaMalaViewModel().getHeardCounterLiveData().getValue() == 0)) {
+    private boolean checkAndShowNoHeardVideo(Milestone milestone) {
+        boolean stopRowAdd = false;
+        Integer milestoneWiseHeardCount = this.milestoneWiseProgress.get(milestone);
+        if (!milestone.equals(Milestone.MILESTONE_1) && milestoneWiseHeardCount == null) {
+            stopRowAdd = true;
             attentiveVideoShown = true;
             HkMantraClickHandler hkMantraClickHandler = getAppCompatActivity().getHkMantraClickHandler();
             hkMantraClickHandler.pauseMediaPlayer();
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getAppCompatActivity());
-            String message = "The process is that you chant and must hear the very sound. Your not clicking on heard button, please tap it promptly after every bead you have heard.";
+            String message = "The process is that you should chant and must hear the very sound. Please hear the sound and tap on the Heard Button promptly after every bead you have heard.";
             alertDialogBuilder.setTitle("Hare Krishna").setMessage(message);
             alertDialogBuilder.setPositiveButton("I will be attentive", new DialogInterface.OnClickListener() {
                 @Override
@@ -233,9 +249,51 @@ public class ProgressBarHandler extends AbstractEventHandler {
             });
             alertDialogBuilder.show();
         }
+
+        return stopRowAdd;
     }
 
     public void setAttentiveVideoShown(boolean attentiveVideoShown) {
         this.attentiveVideoShown = attentiveVideoShown;
+    }
+
+    private void showUserAttentionSlider() {
+        TextView textView = super.getAppCompatActivity().findViewById(R.id.userAttentionSliderMessage);
+        textView.setText(MessageFormat.format("Hare Krishan, \n{0}", UserAttentionSliderMessage.getAttentionMessage()));
+        textView.setAnimation(AnimationUtils.loadAnimation(getAppCompatActivity(), android.R.anim.fade_in));
+        RelativeLayout relativeLayout = super.getAppCompatActivity().findViewById(R.id.userAttentionSliderRelativeLayout);
+        relativeLayout.setVisibility(View.VISIBLE);
+        relativeLayout.setAnimation(AnimationUtils.loadAnimation(getAppCompatActivity(), android.R.anim.slide_in_left));
+        relativeLayout.animate();
+        textView.animate();
+
+        Handler hideUserAttentionSliderHadler = new Handler();
+
+        hideUserAttentionSliderHadler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Animation animation = AnimationUtils.loadAnimation(getAppCompatActivity(), android.R.anim.slide_out_right);
+                animation.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        relativeLayout.setVisibility(View.INVISIBLE);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+                if (relativeLayout.getVisibility() == View.VISIBLE) {
+                    relativeLayout.setAnimation(animation);
+                    relativeLayout.animate();
+                }
+            }
+        }, ApplicationConstants.USER_ATTENTION_SLIDER_CLOSER_TIME.getConstantValue(Integer.class));
     }
 }
