@@ -83,7 +83,7 @@
                     android:paddingStart="@dimen/_15sdp"
                     android:text="000"
                     android:textAlignment="textStart"
-                    android:textColor="@color/history_list_row_view_heardCount_value"
+                    android:textColor="@color/ch_dark_color"
                     android:textSize="25sp" />
             </LinearLayout>
 
