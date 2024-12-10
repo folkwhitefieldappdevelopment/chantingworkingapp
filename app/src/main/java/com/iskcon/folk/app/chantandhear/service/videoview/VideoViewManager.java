@@ -24,7 +24,7 @@ public class VideoViewManager extends AbstractEventHandler {
     }
 
     public void loadVideo() {
-        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "chantAndHear_v1" + File.separator + "sample_kirshna_images.mp4");
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), ".chantAndHear_v1" + File.separator + "sample_kirshna_images.mp4");
         VideoView videoView = getAppCompatActivity().findViewById(R.id.krishnaVideoView);
         videoView.setVideoPath(file.getPath());
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {

@@ -15,6 +15,7 @@ import com.iskcon.folk.app.chantandhear.service.beadcount.JapaMalaViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -22,6 +23,7 @@ public class HeardButtonHandler extends AbstractEventHandler {
 
     private final TextView levelCountTextView;
     private int levelCountValue = 1;
+    private Date lastHeard;
 
     public HeardButtonHandler(MainActivity appCompatActivity) {
         super(appCompatActivity);
@@ -39,8 +41,11 @@ public class HeardButtonHandler extends AbstractEventHandler {
 
         if (super.getAppCompatActivity().getHkMantraClickHandler().isHkMahaMantraPlaying() &&
                 japaMalaViewModel.getHeardCounterLiveData().getValue() < ApplicationConstants.TOTAL_BEADS.getConstantValue(Integer.class)) {
-            japaMalaViewModel.incrementHeardBy(levelCountValue);
-            super.getAppCompatActivity().getProgressBarHandler().incrementProgress(japaMalaViewModel.getHeardCounterLiveData().getValue());
+
+            if (!this.isThisFakeHearing(japaMalaViewModel.getHeardCounterLiveData().getValue())) {
+                japaMalaViewModel.incrementHeardBy(levelCountValue);
+                super.getAppCompatActivity().getProgressBarHandler().incrementProgress(japaMalaViewModel.getHeardCounterLiveData().getValue());
+            }
         }
         //this.showToast();
     }
@@ -117,5 +122,22 @@ public class HeardButtonHandler extends AbstractEventHandler {
 
     public int getLevelCountValue() {
         return levelCountValue;
+    }
+
+    private boolean isThisFakeHearing(int currentHeardCount) {
+        boolean isThisFakeHearing = false;
+        if (currentHeardCount == 0) {
+            this.lastHeard =new Date();
+        } else {
+            Date currentDate = new Date();
+            long heardTimeDifference = (currentDate.getTime() - this.lastHeard.getTime()) / 1000;
+            if (heardTimeDifference > ApplicationConstants.FAKE_HEARING_TIME_DIFFERENCE.getConstantValue(Long.class)) {
+                this.lastHeard = currentDate;
+            } else {
+                Toast.makeText(getAppCompatActivity(), "Haribol, this hearing won't be counted, hear and then tap. Do Prompt hearing.", Toast.LENGTH_SHORT).show();
+                isThisFakeHearing = true;
+            }
+        }
+        return isThisFakeHearing;
     }
 }

@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Px;
 
@@ -27,7 +28,9 @@ import com.iskcon.folk.app.chantandhear.constant.VideoType;
 import com.iskcon.folk.app.chantandhear.service.AbstractEventHandler;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.HkMantraClickHandler;
 
+import java.sql.Timestamp;
 import java.text.MessageFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -259,7 +262,7 @@ public class ProgressBarHandler extends AbstractEventHandler {
 
     private void showUserAttentionSlider() {
         TextView textView = super.getAppCompatActivity().findViewById(R.id.userAttentionSliderMessage);
-        textView.setText(MessageFormat.format("Hare Krishan, \n{0}", UserAttentionSliderMessage.getAttentionMessage()));
+        textView.setText(MessageFormat.format("Hare Krishna, \n{0}", UserAttentionSliderMessage.getAttentionMessage()));
         textView.setAnimation(AnimationUtils.loadAnimation(getAppCompatActivity(), android.R.anim.fade_in));
         RelativeLayout relativeLayout = super.getAppCompatActivity().findViewById(R.id.userAttentionSliderRelativeLayout);
         relativeLayout.setVisibility(View.VISIBLE);
@@ -267,16 +270,28 @@ public class ProgressBarHandler extends AbstractEventHandler {
         relativeLayout.animate();
         textView.animate();
 
-        Handler hideUserAttentionSliderHadler = new Handler();
+        super.vibrate(50);
 
-        hideUserAttentionSliderHadler.postDelayed(new Runnable() {
+        MediaPlayer milestoneMediaPlayer = MediaPlayer.create(getAppCompatActivity(), R.raw.copper_bell_ding);
+        milestoneMediaPlayer.setVolume(0.5f, 0.5f);
+        milestoneMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                mediaPlayer.stop();
+                mediaPlayer.release();
+            }
+        });
+        milestoneMediaPlayer.start();
+
+        Handler hideUserAttentionSliderHandler = new Handler();
+
+        hideUserAttentionSliderHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 Animation animation = AnimationUtils.loadAnimation(getAppCompatActivity(), android.R.anim.slide_out_right);
                 animation.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
-
                     }
 
                     @Override
@@ -286,7 +301,6 @@ public class ProgressBarHandler extends AbstractEventHandler {
 
                     @Override
                     public void onAnimationRepeat(Animation animation) {
-
                     }
                 });
                 if (relativeLayout.getVisibility() == View.VISIBLE) {

@@ -105,26 +105,27 @@ public class HomePageLevelSelectionFragment extends Fragment {
         FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
         StorageReference storageReference = firebaseStorage.getReference("flip_videos").child("sample_kirshna_images.mp4");
 
-        File rootDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "chantAndHear_v1");
+        File rootDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), ".chantAndHear_v1");
 
         if (!rootDirectory.exists()) {
             rootDirectory.mkdir();
         }
 
         File videoFilePath = new File(rootDirectory, "sample_kirshna_images.mp4");
-        videoFilePath.deleteOnExit();
 
-        storageReference.getFile(videoFilePath).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(getContext(), "File downloaded " + videoFilePath.getPath(), Toast.LENGTH_LONG).show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.e("TAG", e.getMessage(), e);
-                Toast.makeText(getContext(), "Unable to download the file, error = " + e.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
+        if(!videoFilePath.exists()) {
+            storageReference.getFile(videoFilePath).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(getContext(), "File downloaded " + videoFilePath.getPath(), Toast.LENGTH_LONG).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.e("TAG", e.getMessage(), e);
+                    Toast.makeText(getContext(), "Unable to download the file, error = " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+        }
     }
 }
