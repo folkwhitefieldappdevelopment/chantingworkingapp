@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.iskcon.folk.app.chantandhear.MainActivity;
 import com.iskcon.folk.app.chantandhear.service.AbstractEventHandler;
 import com.iskcon.folk.app.chantandhear.util.CommonUtils;
+import com.iskcon.folk.app.chantandhear.util.OpenAlertDialogRqModel;
 
 public class BeforeDoneClickHandler extends AbstractEventHandler {
 
@@ -21,33 +22,44 @@ public class BeforeDoneClickHandler extends AbstractEventHandler {
     @Override
     public void handle(View view) {
 
-        MediaPlayer mediaPlayer = getAppCompatActivity().getHkMantraClickHandler().getCurrentMediaPlayer();
+        MediaPlayer mediaPlayer =
+                getAppCompatActivity().getHkMantraClickHandler().getCurrentMediaPlayer();
 
         if (getAppCompatActivity().getHkMantraClickHandler().isHkMahaMantraPlaying()) {
 
             getAppCompatActivity().getHkMantraClickHandler().pauseMediaPlayer();
 
-            Vibrator vibrator = (Vibrator) super.getAppCompatActivity().getSystemService(Context.VIBRATOR_SERVICE);
+            Vibrator vibrator = (Vibrator) super.getAppCompatActivity()
+                    .getSystemService(Context.VIBRATOR_SERVICE);
 
-            new AlertDialog.Builder(getAppCompatActivity()).setTitle("Hare Krishna").setMessage("Are you really sure you have completed your round?").
-                    setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            DialogInterface.OnClickListener positiveClickHandler =
+                    new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             CommonUtils.vibrateFunction(50, vibrator);
                             dialogInterface.cancel();
                             getAppCompatActivity().getHkMantraClickHandler().onMalaCompleted(true);
                         }
-                    }).setNegativeButton("Resume", new DialogInterface.OnClickListener() {
+                    };
+            DialogInterface.OnClickListener negativeClickHandler =
+                    new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             CommonUtils.vibrateFunction(50, vibrator);
                             dialogInterface.cancel();
                             getAppCompatActivity().getHkMantraClickHandler().resumeMediaPlayer();
                         }
-                    }).show();
+                    };
+
+            CommonUtils.showDialog(getAppCompatActivity(),
+                    new OpenAlertDialogRqModel("Are you really sure you have completed your round?",
+                            "Yes", positiveClickHandler, "Resume", negativeClickHandler));
+
         } else {
 
-            Toast.makeText(getAppCompatActivity(), "Hare Krishna, round has not yet started, start round to mark it as completed.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getAppCompatActivity(),
+                    "Hare Krishna, round has not yet started, start round to mark it as completed.",
+                    Toast.LENGTH_SHORT).show();
         }
     }
 }

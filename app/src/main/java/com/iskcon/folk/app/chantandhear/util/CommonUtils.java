@@ -2,25 +2,39 @@ package com.iskcon.folk.app.chantandhear.util;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Vibrator;
 
 public class CommonUtils {
 
-    public static void vibrateFunction(long milliseconds,Vibrator vibrator) {
+    public static void vibrateFunction(long milliseconds, Vibrator vibrator) {
         if (vibrator != null && vibrator.hasVibrator()) {
             vibrator.vibrate(milliseconds);
         }
     }
 
-    public static void showWarningDialog(Context context, String title, String textForDialog, DialogInterface.OnClickListener OkHandler, DialogInterface.OnClickListener CancelHandler) {
-        AlertDialog.Builder builder;
-        builder = new AlertDialog.Builder(context);
-        builder.setTitle(title);
-        builder.setMessage(textForDialog);
-        builder.setPositiveButton("OK", OkHandler);
-        builder.setNegativeButton("Cancel", CancelHandler);
-        AlertDialog dialog = builder.create();
-        dialog.show();
+    public static void showDialog(Context context, OpenAlertDialogRqModel openAlertDialogRqModel) {
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+
+        // 1. Setting title.
+        String title = openAlertDialogRqModel.getTitle();
+        alertDialogBuilder.setTitle((title != null && !title.isEmpty() ? title : "Hare Krishna"));
+
+        // 2. Setting message
+        alertDialogBuilder.setMessage(openAlertDialogRqModel.getMessage());
+
+        // 3. Setting positive button name and handler.
+        alertDialogBuilder.setPositiveButton(openAlertDialogRqModel.getPositiveButtonName(),
+                openAlertDialogRqModel.getPositiveClickHandler());
+
+        // 4. Setting negative button name and handler.
+        if (openAlertDialogRqModel.getNegativeButtonName() != null && openAlertDialogRqModel.getNegativeClickHandler() != null) {
+            alertDialogBuilder.setNegativeButton(openAlertDialogRqModel.getNegativeButtonName(),
+                    openAlertDialogRqModel.getNegativeClickHandler());
+        }
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.setCancelable(false);
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.show();
     }
 }

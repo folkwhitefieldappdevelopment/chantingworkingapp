@@ -155,7 +155,8 @@ public class HistoryViewClickHandler {
     public void addStars(View historyRowView, int heardCount) {
         LinearLayout starContainerLinearLayout = historyRowView.findViewById(R.id.starContainerLinearLayout);
         if (heardCount > 0) {
-            int noOfStars = Math.round((float) heardCount / ApplicationConstants.TOTAL_BEADS.getConstantValue(Integer.class) * ApplicationConstants.STAR_RATING_FOR_HEARD_COUNT.getConstantValue(Integer.class));
+            int noOfStars = Math.round((float) heardCount / ApplicationConstants.TOTAL_BEADS.getConstantValue(Integer.class) *
+                    ApplicationConstants.STAR_RATING_FOR_HEARD_COUNT.getConstantValue(Integer.class));
             if (noOfStars > 0) {
                 for (int i = 0; i < noOfStars; i++) {
                     ImageView imageView = new ImageView(historyRowView.getContext());

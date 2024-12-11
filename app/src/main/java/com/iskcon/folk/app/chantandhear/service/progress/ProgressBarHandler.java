@@ -27,6 +27,8 @@ import com.iskcon.folk.app.chantandhear.constant.UserAttentionSliderMessage;
 import com.iskcon.folk.app.chantandhear.constant.VideoType;
 import com.iskcon.folk.app.chantandhear.service.AbstractEventHandler;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.HkMantraClickHandler;
+import com.iskcon.folk.app.chantandhear.util.CommonUtils;
+import com.iskcon.folk.app.chantandhear.util.OpenAlertDialogRqModel;
 
 import java.sql.Timestamp;
 import java.text.MessageFormat;
@@ -50,7 +52,8 @@ public class ProgressBarHandler extends AbstractEventHandler {
     }
 
     public void initializeProgressBar() {
-        ((TableLayout) super.getAppCompatActivity().findViewById(R.id.progressBarHeaderTableLayout)).setVisibility(View.VISIBLE);
+        ((TableLayout) super.getAppCompatActivity()
+                .findViewById(R.id.progressBarHeaderTableLayout)).setVisibility(View.VISIBLE);
         this.addRow(Milestone.MILESTONE_1);
     }
 
@@ -58,14 +61,17 @@ public class ProgressBarHandler extends AbstractEventHandler {
 
         if (currentMalaCount != 0) {
 
-            if (currentMalaCount % ApplicationConstants.USER_ATTENTION_SLIDER_SHOW_ON_EVERY.getConstantValue(Integer.class) == 0) {
+            if (currentMalaCount %
+                    ApplicationConstants.USER_ATTENTION_SLIDER_SHOW_ON_EVERY.getConstantValue(
+                            Integer.class) == 0) {
 
                 this.showUserAttentionSlider();
             }
 
             Milestone calculatedMilestone = Milestone.beadInBetweenWhichMilestoe(currentMalaCount);
 
-            if (!this.currentMilestone.equals(calculatedMilestone) && !this.milestoneWiseProgress.containsKey(calculatedMilestone)) {
+            if (!this.currentMilestone.equals(calculatedMilestone) &&
+                    !this.milestoneWiseProgress.containsKey(calculatedMilestone)) {
 
                 this.addRow(calculatedMilestone);
             }
@@ -106,15 +112,18 @@ public class ProgressBarHandler extends AbstractEventHandler {
             tableRow.setPadding(0, 0, 0, 15);
             tableRow.setGravity(Gravity.CENTER);
 
-            tableRow.setAnimation(AnimationUtils.loadAnimation(super.getAppCompatActivity(), R.anim.blink_5_times));
+            tableRow.setAnimation(AnimationUtils.loadAnimation(super.getAppCompatActivity(),
+                    R.anim.blink_5_times));
 
             TableRow.LayoutParams tableLayoutParams = new TableRow.LayoutParams(10, 40, 0f);
 
             // Column 1 :: Bead Division
             TextView beadDivisionTextView = new TextView(super.getAppCompatActivity());
             beadDivisionTextView.setTextSize(14);
-            beadDivisionTextView.setTextColor(super.getAppCompatActivity().getResources().getColor(R.color.history_list_row_view_round_number));
-            beadDivisionTextView.setText(MessageFormat.format("{0} - {1}", milestone.getStartBead(), milestone.getEndBead()));
+            beadDivisionTextView.setTextColor(super.getAppCompatActivity().getResources()
+                    .getColor(R.color.history_list_row_view_round_number));
+            beadDivisionTextView.setText(MessageFormat.format("{0} - {1}", milestone.getStartBead(),
+                    milestone.getEndBead()));
             beadDivisionTextView.setGravity(Gravity.CENTER);
             beadDivisionTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             tableRow.addView(beadDivisionTextView, tableLayoutParams);
@@ -122,20 +131,23 @@ public class ProgressBarHandler extends AbstractEventHandler {
             // Column 2 :: Heard count
             TextView heardCountTextView = new TextView(super.getAppCompatActivity());
             heardCountTextView.setTextSize(14);
-            heardCountTextView.setTextColor(super.getAppCompatActivity().getResources().getColor(R.color.ch_dark_color));
+            heardCountTextView.setTextColor(
+                    super.getAppCompatActivity().getResources().getColor(R.color.ch_dark_color));
             heardCountTextView.setText(String.valueOf(0));
             heardCountTextView.setGravity(Gravity.CENTER);
             heardCountTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             tableRow.addView(heardCountTextView, tableLayoutParams);
 
             // Column 3 :: Progress bar
-            ProgressBar progressBar = new ProgressBar(this.getAppCompatActivity(), null, android.R.attr.progressBarStyleHorizontal);
+            ProgressBar progressBar = new ProgressBar(this.getAppCompatActivity(), null,
+                    android.R.attr.progressBarStyleHorizontal);
             progressBar.setLayoutParams(new LinearLayout.LayoutParams(5, 6));
             progressBar.setMax(16);
             tableRow.addView(progressBar, tableLayoutParams);
 
             // Adding row to the table
-            TableLayout tableLayout = super.getAppCompatActivity().findViewById(R.id.progressBarTableLayout);
+            TableLayout tableLayout =
+                    super.getAppCompatActivity().findViewById(R.id.progressBarTableLayout);
             tableLayout.addView(tableRow);
 
             // Adding a row separator
@@ -152,7 +164,8 @@ public class ProgressBarHandler extends AbstractEventHandler {
 
         if (!milestone.equals(Milestone.MILESTONE_1)) {
 
-            MediaPlayer milestoneMediaPlayer = MediaPlayer.create(getAppCompatActivity(), R.raw.beat16);
+            MediaPlayer milestoneMediaPlayer =
+                    MediaPlayer.create(getAppCompatActivity(), R.raw.beat16);
             milestoneMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mediaPlayer) {
@@ -168,7 +181,8 @@ public class ProgressBarHandler extends AbstractEventHandler {
 
         if (!currentMilestone.equals(Milestone.MILESTONE_1)) {
 
-            TableLayout tableLayout = super.getAppCompatActivity().findViewById(R.id.progressBarTableLayout);
+            TableLayout tableLayout =
+                    super.getAppCompatActivity().findViewById(R.id.progressBarTableLayout);
 
             for (int i = 0; i < tableLayout.getChildCount(); i++) {
 
@@ -181,12 +195,14 @@ public class ProgressBarHandler extends AbstractEventHandler {
                     // Column 1: Beads division
                     TextView beadDivisionTextView = (TextView) tableRow.getChildAt(0);
                     beadDivisionTextView.setTextSize(12);
-                    beadDivisionTextView.setTextColor(super.getAppCompatActivity().getResources().getColor(R.color.green));
+                    beadDivisionTextView.setTextColor(
+                            super.getAppCompatActivity().getResources().getColor(R.color.green));
 
                     // Column 2: Heard Count
                     TextView heardCountTextView = (TextView) tableRow.getChildAt(1);
                     heardCountTextView.setTextSize(12);
-                    heardCountTextView.setTextColor(super.getAppCompatActivity().getResources().getColor(R.color.green));
+                    heardCountTextView.setTextColor(
+                            super.getAppCompatActivity().getResources().getColor(R.color.green));
                 }
             }
         }
@@ -194,7 +210,8 @@ public class ProgressBarHandler extends AbstractEventHandler {
 
     private void updateInProgressRow(int currentMilestoneHeardCount) {
 
-        TableLayout tableLayout = super.getAppCompatActivity().findViewById(R.id.progressBarTableLayout);
+        TableLayout tableLayout =
+                super.getAppCompatActivity().findViewById(R.id.progressBarTableLayout);
 
         TableRow tableRow = (TableRow) (tableLayout.getChildAt(tableLayout.getChildCount() - 1));
 
@@ -216,7 +233,8 @@ public class ProgressBarHandler extends AbstractEventHandler {
 
     public void clearProgressBar() {
 
-        ((TableLayout) super.getAppCompatActivity().findViewById(R.id.progressBarTableLayout)).removeAllViews();
+        ((TableLayout) super.getAppCompatActivity()
+                .findViewById(R.id.progressBarTableLayout)).removeAllViews();
 
         this.currentMilestone = null;
 
@@ -229,28 +247,35 @@ public class ProgressBarHandler extends AbstractEventHandler {
         if (!milestone.equals(Milestone.MILESTONE_1) && milestoneWiseHeardCount == null) {
             stopRowAdd = true;
             attentiveVideoShown = true;
-            HkMantraClickHandler hkMantraClickHandler = getAppCompatActivity().getHkMantraClickHandler();
+            HkMantraClickHandler hkMantraClickHandler =
+                    getAppCompatActivity().getHkMantraClickHandler();
             hkMantraClickHandler.pauseMediaPlayer();
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getAppCompatActivity());
-            String message = "The process is that you should chant and must hear the very sound. Please hear the sound and tap on the Heard Button promptly after every bead you have heard.";
-            alertDialogBuilder.setTitle("Hare Krishna").setMessage(message);
-            alertDialogBuilder.setPositiveButton("I will be attentive", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.cancel();
-                    hkMantraClickHandler.resumeMediaPlayer();
-                    //attentiveVideoShown = false;
-                }
-            });
-            alertDialogBuilder.setNegativeButton("Enlighten me more", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    //attentiveVideoShown = false;
-                    dialogInterface.cancel();
-                    getAppCompatActivity().getYoutubeVideoHandler().showVideo(VideoType.ATTENTIVE);
-                }
-            });
-            alertDialogBuilder.show();
+            String message =
+                    "The process is that you should chant and must hear the very sound. Please hear the sound and tap on the Heard Button promptly after every bead you have heard.";
+            DialogInterface.OnClickListener positiveClickHandler =
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                            hkMantraClickHandler.resumeMediaPlayer();
+                            //attentiveVideoShown = false;
+                        }
+                    };
+            DialogInterface.OnClickListener negativeClickHandler =
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //attentiveVideoShown = false;
+                            dialogInterface.cancel();
+                            getAppCompatActivity().getYoutubeVideoHandler()
+                                    .showVideo(VideoType.ATTENTIVE);
+                        }
+                    };
+
+            CommonUtils.showDialog(getAppCompatActivity(), new OpenAlertDialogRqModel(
+                    message,
+                    "I will be attentive", positiveClickHandler, "Enlighten me more",
+                    negativeClickHandler));
         }
 
         return stopRowAdd;
@@ -261,18 +286,24 @@ public class ProgressBarHandler extends AbstractEventHandler {
     }
 
     private void showUserAttentionSlider() {
-        TextView textView = super.getAppCompatActivity().findViewById(R.id.userAttentionSliderMessage);
-        textView.setText(MessageFormat.format("Hare Krishna, \n{0}", UserAttentionSliderMessage.getAttentionMessage()));
-        textView.setAnimation(AnimationUtils.loadAnimation(getAppCompatActivity(), android.R.anim.fade_in));
-        RelativeLayout relativeLayout = super.getAppCompatActivity().findViewById(R.id.userAttentionSliderRelativeLayout);
+        TextView textView =
+                super.getAppCompatActivity().findViewById(R.id.userAttentionSliderMessage);
+        textView.setText(MessageFormat.format("Hare Krishna, \n{0}",
+                UserAttentionSliderMessage.getAttentionMessage()));
+        textView.setAnimation(
+                AnimationUtils.loadAnimation(getAppCompatActivity(), android.R.anim.fade_in));
+        RelativeLayout relativeLayout =
+                super.getAppCompatActivity().findViewById(R.id.userAttentionSliderRelativeLayout);
         relativeLayout.setVisibility(View.VISIBLE);
-        relativeLayout.setAnimation(AnimationUtils.loadAnimation(getAppCompatActivity(), android.R.anim.slide_in_left));
+        relativeLayout.setAnimation(
+                AnimationUtils.loadAnimation(getAppCompatActivity(), android.R.anim.slide_in_left));
         relativeLayout.animate();
         textView.animate();
 
         super.vibrate(50);
 
-        MediaPlayer milestoneMediaPlayer = MediaPlayer.create(getAppCompatActivity(), R.raw.copper_bell_ding);
+        MediaPlayer milestoneMediaPlayer =
+                MediaPlayer.create(getAppCompatActivity(), R.raw.copper_bell_ding);
         milestoneMediaPlayer.setVolume(0.5f, 0.5f);
         milestoneMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
@@ -288,7 +319,8 @@ public class ProgressBarHandler extends AbstractEventHandler {
         hideUserAttentionSliderHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Animation animation = AnimationUtils.loadAnimation(getAppCompatActivity(), android.R.anim.slide_out_right);
+                Animation animation = AnimationUtils.loadAnimation(getAppCompatActivity(),
+                        android.R.anim.slide_out_right);
                 animation.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
