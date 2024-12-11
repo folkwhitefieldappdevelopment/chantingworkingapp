@@ -1,5 +1,6 @@
 package com.iskcon.folk.app.chantandhear.service;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.graphics.Typeface;
 import android.view.Gravity;
@@ -20,6 +21,7 @@ import com.iskcon.folk.app.chantandhear.constant.ApplicationConstants;
 import com.iskcon.folk.app.chantandhear.dao.ChantingDataDao;
 import com.iskcon.folk.app.chantandhear.history.model.RoundDataEntity;
 import com.iskcon.folk.app.chantandhear.model.UserDetails;
+import com.iskcon.folk.app.chantandhear.util.LoaderAlertDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.Collections;
@@ -32,17 +34,22 @@ public class HistoryViewClickHandler {
 
     public void showHistoryPopup(View view, UserDetails userDetails, boolean reverseList) {
 
+        LoaderAlertDialog loaderAlertDialog = new LoaderAlertDialog((Activity)view.getContext());
+
+        loaderAlertDialog.show();
+
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 GenericTypeIndicator<List<RoundDataEntity>> typeIndicator = new GenericTypeIndicator<List<RoundDataEntity>>() {
                 };
                 renderLayoutOverAlert(view, userDetails, reverseList, snapshot.getValue(typeIndicator));
+                loaderAlertDialog.close();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                loaderAlertDialog.close();
             }
         };
 
@@ -105,7 +112,7 @@ public class HistoryViewClickHandler {
             }
         } else {
             TextView textView = new TextView(view.getContext());
-            textView.setText("Hare Krishna, no data found, please start your mala to see data in history. ");
+            textView.setText("Hare Krishna, no data found, please start your mala to see data.");
             textView.setTextColor(view.getResources().getColor(R.color.ch_light_color));
             textView.setTypeface(textView.getTypeface(), Typeface.ITALIC);
             textView.setTextSize(14);
@@ -178,7 +185,7 @@ public class HistoryViewClickHandler {
                     LinearLayout.LayoutParams.WRAP_CONTENT
             );
             noStarsTextView.setLayoutParams(textViewLayoutParams);
-            noStarsTextView.setText("Please hear while chanting, no reward");
+            noStarsTextView.setText("Hear while chanting to get stars");
             noStarsTextView.setTextSize(12);
             noStarsTextView.setTextColor(historyRowView.getContext().getResources().getColor(R.color.red));
             noStarsTextView.setTypeface(noStarsTextView.getTypeface(), Typeface.ITALIC);

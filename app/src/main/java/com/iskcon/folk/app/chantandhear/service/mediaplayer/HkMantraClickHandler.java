@@ -337,7 +337,7 @@ public class HkMantraClickHandler extends AbstractEventHandler {
                     japaMalaViewModel.getRoundNumberLiveData().getValue());
         } else {
             message = MessageFormat.format(
-                    "Srila Prabhupada's mala is completed successfully. If yours is also completed then click on OK button to get immerse into a wonderful video. Haribol!!",
+                    "Srila Prabhupada's mala got completed. If yours is also completed, then click on OK button to get immerse into a wonderful video. Haribol!!",
                     japaMalaViewModel.getRoundNumberLiveData().getValue());
         }
 

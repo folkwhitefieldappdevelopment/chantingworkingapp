@@ -31,6 +31,7 @@ import com.iskcon.folk.app.chantandhear.dao.ChantingDataDao;
 import com.iskcon.folk.app.chantandhear.history.model.RoundDataEntity;
 import com.iskcon.folk.app.chantandhear.model.UserDetails;
 import com.iskcon.folk.app.chantandhear.util.CommonUtils;
+import com.iskcon.folk.app.chantandhear.util.LoaderAlertDialog;
 
 import java.io.File;
 import java.util.Date;
@@ -43,16 +44,17 @@ public class HomePageLevelSelectionFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.level_selection, container, false);
-        ImageView mind = view.findViewById(R.id.level1MindFullJapa);
+        ImageView level1MindFullJapa = view.findViewById(R.id.level1MindFullJapa);
         userDetails = (UserDetails) getActivity().getIntent().getExtras().get("userDetails");
-        mind.setOnClickListener(new View.OnClickListener() {
+        level1MindFullJapa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (gotData) {
-                    downloadFile();
-                    view.animate().setDuration(200).scaleX(1.2f).scaleY(1.2f).withEndAction(() -> view.animate().setDuration(300).scaleX(1f).scaleY(1f));
+                    view.animate().setDuration(200).scaleX(1.2f).scaleY(1.2f)
+                            .withEndAction(() -> view.animate().setDuration(300).scaleX(1f).scaleY(1f));
                     enterMain(userDetails, getCompletedRounds());
                 }
             }
@@ -67,6 +69,8 @@ public class HomePageLevelSelectionFragment extends Fragment {
     }
 
     private void getUserRoundDetails(UserDetails userDetails) {
+        LoaderAlertDialog loaderAlertDialog = new LoaderAlertDialog(this.getActivity());
+        loaderAlertDialog.show();
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -75,12 +79,14 @@ public class HomePageLevelSelectionFragment extends Fragment {
                 if (snapshot != null && snapshot.exists()) {
                     setCompletedRounds(snapshot.getValue(typeIndicator).size());
                 }
+                downloadFile();
                 gotData = true;
+                loaderAlertDialog.close();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                loaderAlertDialog.close();
             }
         };
         new ChantingDataDao(userDetails).get(new Date(), userDetails.getId(), valueEventListener);
@@ -105,7 +111,8 @@ public class HomePageLevelSelectionFragment extends Fragment {
         FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
         StorageReference storageReference = firebaseStorage.getReference("flip_videos").child("sample_kirshna_images.mp4");
 
-        File rootDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), ".chantAndHear_v1");
+        File rootDirectory =
+                new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), ".chantAndHear_v1");
 
         if (!rootDirectory.exists()) {
             rootDirectory.mkdir();
@@ -113,7 +120,7 @@ public class HomePageLevelSelectionFragment extends Fragment {
 
         File videoFilePath = new File(rootDirectory, "sample_kirshna_images.mp4");
 
-        if(!videoFilePath.exists()) {
+        if (!videoFilePath.exists()) {
             storageReference.getFile(videoFilePath).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
@@ -123,7 +130,8 @@ public class HomePageLevelSelectionFragment extends Fragment {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     Log.e("TAG", e.getMessage(), e);
-                    Toast.makeText(getContext(), "Unable to download the file, error = " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Unable to download the file, error = " + e.getMessage(), Toast.LENGTH_LONG)
+                            .show();
                 }
             });
         }

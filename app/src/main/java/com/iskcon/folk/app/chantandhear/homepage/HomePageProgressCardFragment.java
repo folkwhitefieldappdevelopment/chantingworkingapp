@@ -29,6 +29,7 @@ import com.iskcon.folk.app.chantandhear.dao.ChantingDataDao;
 import com.iskcon.folk.app.chantandhear.history.model.RoundDataEntity;
 import com.iskcon.folk.app.chantandhear.model.UserDetails;
 import com.iskcon.folk.app.chantandhear.service.HistoryViewClickHandler;
+import com.iskcon.folk.app.chantandhear.util.LoaderAlertDialog;
 
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
@@ -45,7 +46,7 @@ public class HomePageProgressCardFragment extends Fragment {
         View view = inflater.inflate(R.layout.home_page_progress_card_fragment, container, false);
         UserDetails userDetails = (UserDetails) getActivity().getIntent().getExtras().get("userDetails");
         ((TextView) view.findViewById(R.id.todayLegend)).setText(MessageFormat.format("Todays ({0})", new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH).format(new Date())));
-        getUserRoundDetails(view, userDetails);
+        this.getUserRoundDetails(view, userDetails);
         ((LinearLayout) view.findViewById(R.id.heardLinearLayout)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,6 +71,8 @@ public class HomePageProgressCardFragment extends Fragment {
     }
 
     private void getUserRoundDetails(View view, UserDetails userDetails) {
+        LoaderAlertDialog loaderAlertDialog = new LoaderAlertDialog(this.getActivity());
+        loaderAlertDialog.show();
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -95,11 +98,12 @@ public class HomePageProgressCardFragment extends Fragment {
                         textView.setVisibility(View.INVISIBLE);
                     }
                 }
+                loaderAlertDialog.close();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                loaderAlertDialog.close();
             }
         };
         new ChantingDataDao(userDetails).get(new Date(), userDetails.getId(), valueEventListener);
