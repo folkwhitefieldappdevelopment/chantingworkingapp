@@ -300,11 +300,10 @@ public class ProgressBarHandler extends AbstractEventHandler {
         relativeLayout.animate();
         textView.animate();
 
-        super.vibrate(50);
+        super.vibrate(100);
 
         MediaPlayer milestoneMediaPlayer =
                 MediaPlayer.create(getAppCompatActivity(), R.raw.copper_bell_ding);
-        milestoneMediaPlayer.setVolume(0.5f, 0.5f);
         milestoneMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
