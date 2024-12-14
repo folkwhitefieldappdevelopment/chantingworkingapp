@@ -22,6 +22,8 @@ public class BeforeDoneClickHandler extends AbstractEventHandler {
     @Override
     public void handle(View view) {
 
+        super.animateAndVibrate(view,50,100);
+
         MediaPlayer mediaPlayer =
                 getAppCompatActivity().getHkMantraClickHandler().getCurrentMediaPlayer();
 

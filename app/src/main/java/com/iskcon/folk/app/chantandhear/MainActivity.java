@@ -12,7 +12,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,13 +23,12 @@ import com.iskcon.folk.app.chantandhear.constant.ApplicationConstants;
 import com.iskcon.folk.app.chantandhear.databinding.ActivityMainBinding;
 import com.iskcon.folk.app.chantandhear.model.JapaMalaModel;
 import com.iskcon.folk.app.chantandhear.model.UserDetails;
-import com.iskcon.folk.app.chantandhear.service.FlipperFocusSlideshowHandler;
 import com.iskcon.folk.app.chantandhear.service.HeardButtonHandler;
 import com.iskcon.folk.app.chantandhear.service.HistoryViewClickHandler;
 import com.iskcon.folk.app.chantandhear.service.beadcount.JapaMalaViewModel;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.BeforeDoneClickHandler;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.HkMantraClickHandler;
-import com.iskcon.folk.app.chantandhear.service.mediaplayer.MuteButtonHandler;
+import com.iskcon.folk.app.chantandhear.service.mediaplayer.MuteMantraButtonHandler;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.ResetButtonHandler;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.SpeedButtonHandler;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.UnmuteButtonHandler;
@@ -45,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     private HeardButtonHandler hearButtonHandler;
     private ResetButtonHandler resetButtonHandler;
-    private MuteButtonHandler muteButtonHandler;
+    private MuteMantraButtonHandler muteMantraButtonHandler;
     private UnmuteButtonHandler unMuteButtonHandler;
     private HkMantraClickHandler hkMantraClickHandler;
     private SpeedButtonHandler speedClickHandler;
@@ -67,8 +65,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     ImageView menuHemBurgerIcon;
     ImageView startButtonImage;
     ImageView resetButtonImage;
-    ImageView unmuteIconImage;
-    ImageView muteIconImage;
 
     //Navigation Menu
     DrawerLayout drawerLayoutForMenu;
@@ -113,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         //MediaPlayers
         spHkmMediaplayer = MediaPlayer.create(MainActivity.this, R.raw.iu_maha_mantra_one_bead_1);
         resetButtonHandler = new ResetButtonHandler(this, spHkmMediaplayer);
-        muteButtonHandler = new MuteButtonHandler(this, spHkmMediaplayer);
+        muteMantraButtonHandler = new MuteMantraButtonHandler(this, spHkmMediaplayer);
         unMuteButtonHandler = new UnmuteButtonHandler(this, spHkmMediaplayer);
         hkMantraClickHandler = new HkMantraClickHandler(this);
         youtubeVideoHandler = new YoutubeVideoHandler(this);
@@ -150,18 +146,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 resetButtonHandler.handle(view);
             }
         });
-        muteIconImage = findViewById(R.id.muteIconImageView);
-        muteIconImage.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.muteIconImageView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                muteButtonHandler.handle(view);
-            }
-        });
-        unmuteIconImage = findViewById(R.id.unmuteIconImageView);
-        unmuteIconImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                unMuteButtonHandler.handle(view);
+                muteMantraButtonHandler.handle(view);
             }
         });
         binding.hearButton.setOnTouchListener(this);
