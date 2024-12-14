@@ -65,11 +65,13 @@ public class VideoViewManager extends AbstractEventHandler {
         ((VideoView) getAppCompatActivity().findViewById(R.id.krishnaVideoView)).pause();
     }
 
-    public void reVideo() {
-        ((VideoView) getAppCompatActivity().findViewById(R.id.krishnaVideoView)).resume();
+    public void resumeVideo() {
+
+        ((VideoView) getAppCompatActivity().findViewById(R.id.krishnaVideoView)).start();
     }
 
     public void stopVideo() {
+
         ((VideoView) getAppCompatActivity().findViewById(R.id.krishnaVideoView)).stopPlayback();
     }
 

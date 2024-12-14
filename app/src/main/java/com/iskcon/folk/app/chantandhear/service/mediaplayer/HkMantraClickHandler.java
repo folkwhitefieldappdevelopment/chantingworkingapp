@@ -278,6 +278,7 @@ public class HkMantraClickHandler extends AbstractEventHandler {
             } else {
                 this.startPanchaTattvaMantraMediaPlayer();
             }
+            super.getAppCompatActivity().getVideoViewManager().resumeVideo();
         }
         isMediaPaused = false;
     }
@@ -353,6 +354,8 @@ public class HkMantraClickHandler extends AbstractEventHandler {
 
         CommonUtils.showDialog(getAppCompatActivity(),
                 new OpenAlertDialogRqModel(message, "OK", positiveClickHandler));
+
+        super.getAppCompatActivity().getVideoViewManager().stopVideo();
     }
 
     public void resetActivity() {

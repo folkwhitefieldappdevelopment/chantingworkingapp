@@ -50,6 +50,8 @@ public class ResetButtonHandler extends AbstractMediaPlayerEventHandler {
                         getAppCompatActivity().getHkMantraClickHandler().resetActivity();
                         getAppCompatActivity().getProgressBarHandler()
                                 .setAttentiveVideoShown(false);
+
+                        getAppCompatActivity().getVideoViewManager().stopVideo();
                     }
                 };
         DialogInterface.OnClickListener negativeClickHandler =
