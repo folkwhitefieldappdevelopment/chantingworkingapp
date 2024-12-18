@@ -38,7 +38,7 @@ import java.util.Map;
 
 public class ProgressBarHandler extends AbstractEventHandler {
 
-    private Milestone currentMilestone;
+    private Milestone currentMilestone = Milestone.MILESTONE_1;
     private Map<Milestone, Integer> milestoneWiseProgress = new HashMap<>();
     private int progressData;
     private boolean attentiveVideoShown;
