@@ -278,7 +278,7 @@ public class HkMantraClickHandler extends AbstractEventHandler {
             } else {
                 this.startPanchaTattvaMantraMediaPlayer();
             }
-            super.getAppCompatActivity().getVideoViewManager().resumeVideo();
+           // super.getAppCompatActivity().getVideoViewManager().resumeVideo();
         }
         isMediaPaused = false;
     }

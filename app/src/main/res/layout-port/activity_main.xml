@@ -25,20 +25,23 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/hkmCardView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="100dp"
-            app:layout_constraintTop_toBottomOf="@id/guideline32"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="45dp"
+            app:layout_constraintBottom_toTopOf="@id/cardView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.48"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/relativeLayout"
             card_view:cardBackgroundColor="@android:color/transparent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_110sdp"
-                android:layout_marginStart="@dimen/_30sdp"
-                android:layout_marginEnd="@dimen/_30sdp"
-                android:layout_marginBottom="@dimen/_20sdp"
+
                 android:background="@drawable/main_activity_hkm_bg"
-                >
+                android:elevation="10dp">
 
                 <!-- ScrollView with TextView inside -->
                 <RelativeLayout
@@ -255,18 +258,19 @@
             android:id="@+id/relativeLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:orientation="@integer/linearlayoutOrientation"
 
-            app:layout_constraintBottom_toTopOf="@id/hearButton"
+            app:layout_constraintBottom_toTopOf="@id/hkmCardView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView"
+            app:layout_constraintHorizontal_bias="0.37"
+            app:layout_constraintStart_toEndOf="@id/guideline40"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/spMainActivityImage"
-                android:layout_width="300sp"
+                android:layout_width="225sp"
                 android:layout_height="300sp"
                 android:contentDescription="@string/shila_prabhupada_welcome_image"
                 android:visibility="visible"
@@ -277,15 +281,15 @@
 
             <VideoView
                 android:id="@+id/krishnaVideoView"
-                android:layout_width="300sp"
-                android:layout_height="300sp"
+                android:layout_width="225sp"
+                android:layout_height="285sp"
                 android:background="@drawable/main_activity_view_flipper_bg"
                 android:visibility="invisible" />
 
             <ViewFlipper
                 android:id="@+id/focusSlideshowFlipper"
-                android:layout_width="300sp"
-                android:layout_height="30sp"
+                android:layout_width="225sp"
+                android:layout_height="22.5sp"
                 android:layout_alignParentTop="true"
                 android:background="@drawable/level_change_image_background"
                 android:elevation="2dp"
@@ -600,11 +604,8 @@
             android:id="@+id/hearButton"
             android:layout_width="250sp"
             android:layout_height="150sp"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="#F1E8EB"
+            android:backgroundTint="@color/ch_light_color"
             android:contentDescription="@string/heard_button"
-            android:elevation="0dp"
-            android:scaleType="centerInside"
             android:src="@drawable/hear_tap"
             app:backgroundTint="@color/white"
             app:borderWidth="@dimen/_6sdp"
@@ -612,18 +613,22 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+            app:layout_constraintTop_toBottomOf="@+id/cardView"
             app:maxImageSize="0dp" />
+
         <RelativeLayout
             android:id="@+id/userAttentionSliderRelativeLayout"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_100sdp"
+            android:layout_marginTop="0dp"
+            android:clickable="true"
             android:gravity="center"
-            android:paddingStart="@dimen/_35sdp"
+            android:paddingStart="@dimen/_3sdp"
             android:translationY="@dimen/_10sdp"
             android:translationZ="2dp"
             android:visibility="invisible"
-            android:clickable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spBadgeImageView"
             tools:ignore="MissingConstraints">
 
             <ImageView
@@ -668,7 +673,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="30dp" />
+            app:layout_constraintGuide_begin="73dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="42dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
