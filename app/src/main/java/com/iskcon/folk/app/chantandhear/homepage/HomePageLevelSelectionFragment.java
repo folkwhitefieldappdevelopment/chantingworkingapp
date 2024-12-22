@@ -1,11 +1,6 @@
 package com.iskcon.folk.app.chantandhear.homepage;
 
-import android.Manifest;
-import android.app.Activity;
-import android.app.Application;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -17,7 +12,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -35,9 +29,7 @@ import com.iskcon.folk.app.chantandhear.constant.ApplicationConstants;
 import com.iskcon.folk.app.chantandhear.dao.ChantingDataDao;
 import com.iskcon.folk.app.chantandhear.history.model.RoundDataEntity;
 import com.iskcon.folk.app.chantandhear.model.UserDetails;
-import com.iskcon.folk.app.chantandhear.util.CommonUtils;
 import com.iskcon.folk.app.chantandhear.util.LoaderAlertDialog;
-import com.iskcon.folk.app.chantandhear.util.OpenAlertDialogRqModel;
 
 import java.io.File;
 import java.util.Date;
@@ -95,7 +87,7 @@ public class HomePageLevelSelectionFragment extends Fragment {
                 loaderAlertDialog.close();
             }
         };
-        new ChantingDataDao(userDetails).get(new Date(), userDetails.getId(), valueEventListener);
+        new ChantingDataDao(userDetails).getCurrentDayData(new Date(), userDetails.getId(), valueEventListener);
     }
 
     private void enterMain(UserDetails userDetails, int completedRounds) {

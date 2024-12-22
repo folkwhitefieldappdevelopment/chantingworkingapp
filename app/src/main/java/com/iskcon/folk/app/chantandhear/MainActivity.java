@@ -24,8 +24,8 @@ import com.iskcon.folk.app.chantandhear.databinding.ActivityMainBinding;
 import com.iskcon.folk.app.chantandhear.model.JapaMalaModel;
 import com.iskcon.folk.app.chantandhear.model.UserDetails;
 import com.iskcon.folk.app.chantandhear.service.HeardButtonHandler;
-import com.iskcon.folk.app.chantandhear.service.HistoryViewClickHandler;
 import com.iskcon.folk.app.chantandhear.service.beadcount.JapaMalaViewModel;
+import com.iskcon.folk.app.chantandhear.service.history.HistoryRoundDetailsViewClickHandler;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.BeforeDoneClickHandler;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.HkMantraClickHandler;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.MuteMantraButtonHandler;
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private YoutubeVideoHandler youtubeVideoHandler;
     private BeforeDoneClickHandler beforeDoneClickHandler;
     private ProgressBarHandler progressBarHandler;
-    private HistoryViewClickHandler historyViewOpenHandler;
+    private HistoryRoundDetailsViewClickHandler historyRoundDetailsViewClickHandler;
     private JapaMalaModel japaMalaModel = null;
     private UserDetails userDetails;
     private VideoViewManager videoViewManager;
@@ -88,7 +88,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         int initialRoundNumber = Integer.valueOf(getIntent().getExtras().get("completedRounds").toString());
 
         initialRoundNumber++;
-        ((TextView) findViewById(R.id.roundNoTextView)).setText(MessageFormat.format("R\no\nu\nn\nd\n\n{0}", initialRoundNumber).toLowerCase(Locale.ENGLISH));
+        ((TextView) findViewById(R.id.roundNoTextView)).setText(
+                MessageFormat.format("R\no\nu\nn\nd\n\n{0}", initialRoundNumber).toLowerCase(Locale.ENGLISH));
 
         this.japaMalaViewModel = this.initializeJapaMalaViewModel(initialRoundNumber);
 
@@ -117,12 +118,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         hearButtonHandler = new HeardButtonHandler(this);
         beforeDoneClickHandler = new BeforeDoneClickHandler(this);
         progressBarHandler = new ProgressBarHandler(this);
-        historyViewOpenHandler = new HistoryViewClickHandler();
+        historyRoundDetailsViewClickHandler = new HistoryRoundDetailsViewClickHandler();
         srilaPrabhupadaChantingWithOutPanchtattva = MediaPlayer.create(MainActivity.this, R.raw.hkm);
         videoViewManager = new VideoViewManager(this);
 
         //ImageViews
-       // menuHemBurgerIcon = findViewById(R.id.hamburgerIcon);
+        // menuHemBurgerIcon = findViewById(R.id.hamburgerIcon);
         startButtonImage = findViewById(R.id.startIconImageView);
 
         findViewById(R.id.speedMenu).setOnClickListener(new View.OnClickListener() {
@@ -179,11 +180,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         ((LinearLayout) findViewById(R.id.heardLinearLayout)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                historyViewOpenHandler.showHistoryPopup(view, userDetails, true);
+                historyRoundDetailsViewClickHandler.showHistoryRoundWiseDetailPopup(view, userDetails, true);
             }
         });
 
-        ((LinearLayout) findViewById(R.id.heardLinearLayout)).setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blink_10_times));
+        ((LinearLayout) findViewById(R.id.heardLinearLayout)).setAnimation(
+                AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blink_10_times));
 
         findViewById(R.id.userAttentionSliderRelativeLayout).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -274,11 +276,13 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         Observer<Integer> beadCountIncrementObserver = new Observer<Integer>() {
             @Override
             public void onChanged(Integer currentMalaBeadCount) {
-                if (currentMalaBeadCount != null && currentMalaBeadCount <= ApplicationConstants.TOTAL_BEADS.getConstantValue(Integer.class)) {
+                if (currentMalaBeadCount != null &&
+                        currentMalaBeadCount <= ApplicationConstants.TOTAL_BEADS.getConstantValue(Integer.class)) {
                     TextView beadCountTextView = findViewById(R.id.beadCountTextView);
                     beadCountTextView.setText(String.valueOf(currentMalaBeadCount));
                     TextView textView = findViewById(R.id.hareKrishnaMahaMantraTextView);
-                    textView.animate().setDuration(500).scaleX(1.1f).scaleY(1.1f).withEndAction(() -> textView.animate().scaleX(1).scaleY(1));
+                    textView.animate().setDuration(500).scaleX(1.1f).scaleY(1.1f)
+                            .withEndAction(() -> textView.animate().scaleX(1).scaleY(1));
                     progressBarHandler.addProgressRow(currentMalaBeadCount);
                 } else {
                     hkMantraClickHandler.onMalaCompleted();
@@ -291,9 +295,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         Observer<Integer> roundIncrementObserver = new Observer<Integer>() {
             @Override
             public void onChanged(Integer currentRoundNumber) {
-                if (currentRoundNumber != null && currentRoundNumber <= ApplicationConstants.TOTAL_ROUND.getConstantValue(Integer.class)) {
+                if (currentRoundNumber != null &&
+                        currentRoundNumber <= ApplicationConstants.TOTAL_ROUND.getConstantValue(Integer.class)) {
                     TextView roundNoTextView = findViewById(R.id.roundNoTextView);
-                    roundNoTextView.setText(String.valueOf(MessageFormat.format("R\no\nu\nn\nd\n\n{0}", currentRoundNumber)).toUpperCase(Locale.ENGLISH));
+                    roundNoTextView.setText(String.valueOf(MessageFormat.format("R\no\nu\nn\nd\n\n{0}", currentRoundNumber))
+                            .toUpperCase(Locale.ENGLISH));
                 }
                 Log.i(this.getClass().getSimpleName(), "roundIncrementObserver.onChanged: " + currentRoundNumber);
             }
@@ -303,7 +309,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         Observer<Integer> heardCountIncrementObserver = new Observer<Integer>() {
             @Override
             public void onChanged(Integer currentHeardCount) {
-                if (currentHeardCount != null && currentHeardCount <= ApplicationConstants.TOTAL_BEADS.getConstantValue(Integer.class)) {
+                if (currentHeardCount != null &&
+                        currentHeardCount <= ApplicationConstants.TOTAL_BEADS.getConstantValue(Integer.class)) {
                     if (currentHeardCount != 0) {
                         TextView heardCountTextView = findViewById(R.id.heardCountTextView);
                         heardCountTextView.setText(String.valueOf(currentHeardCount));
@@ -345,11 +352,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         return userDetails;
     }
 
-    public HistoryViewClickHandler getHistoryViewOpenHandler() {
-        return historyViewOpenHandler;
+    public HistoryRoundDetailsViewClickHandler getHistoryRoundDetailsViewClickHandler() {
+        return historyRoundDetailsViewClickHandler;
     }
 
-    public VideoViewManager getVideoViewManager(){
+    public VideoViewManager getVideoViewManager() {
         return videoViewManager;
     }
 

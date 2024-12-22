@@ -7,15 +7,12 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.iskcon.folk.app.chantandhear.history.model.RoundDataEntity;
 import com.iskcon.folk.app.chantandhear.model.UserDetails;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -76,7 +73,7 @@ public class ChantingDataDao {
                 });
     }
 
-    public List<RoundDataEntity> get(Date date, String userId, ValueEventListener valueEventListener) {
+    public List<RoundDataEntity> getCurrentDayData(Date date, String userId, ValueEventListener valueEventListener) {
 
         final List<RoundDataEntity> roundDataEntities = new ArrayList<>();
 
@@ -85,6 +82,19 @@ public class ChantingDataDao {
                 .child(userId)
                 .child(CHILD_ROUND_DATA)
                 .child(this.getCurrentDateAsString(date))
+                .addListenerForSingleValueEvent(valueEventListener);
+
+        return roundDataEntities;
+    }
+
+    public List<RoundDataEntity> getAllDaysData(String userId, ValueEventListener valueEventListener) {
+
+        final List<RoundDataEntity> roundDataEntities = new ArrayList<>();
+
+        firebaseDatabase.getReference()
+                .child(CHILD_USERS)
+                .child(userId)
+                .child(CHILD_ROUND_DATA)
                 .addListenerForSingleValueEvent(valueEventListener);
 
         return roundDataEntities;

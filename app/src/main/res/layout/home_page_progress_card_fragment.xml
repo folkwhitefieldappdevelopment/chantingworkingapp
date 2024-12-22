@@ -190,44 +190,69 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/level1MindFullJapaLegend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_50sdp"
             android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_60sdp"
-            android:background="@color/ch_light_color"
-            android:text="Cummulative"
-            android:textSize="@dimen/_15sdp"
-            android:visibility="invisible" />
+            android:background="@drawable/home_page_todays_progress_bg"
+            android:padding="@dimen/_8sdp"
+            android:text="Mindful Japa Progress"
+            android:textColor="@color/ch_dark_color"
+            android:textSize="@dimen/_10sdp"
+            android:textStyle="italic" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/_60sdp"
-            android:layout_gravity="top"
+            android:layout_gravity="center"
             android:background="@drawable/home_page_todays_progress_bg"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:visibility="invisible">
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/mindfulProgressLinearLayout"
+                android:layout_width="@dimen/_80sdp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_30sdp"
-                android:gravity="start"
-                android:orientation="vertical">
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/_10sdp">
+
+                <LinearLayout
+                    android:id="@+id/openMindfulProgressNewWindow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/mindfulTotallyHeard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="999999"
+                        android:textAlignment="center"
+                        android:textColor="@color/ch_dark_color"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <ImageView
+                        android:layout_width="15sp"
+                        android:layout_height="15sp"
+                        android:layout_marginStart="80sp"
+                        android:layout_marginTop="-25sp"
+                        android:background="@drawable/baseline_open_in_new_24"
+                        android:clickable="true"
+                        android:contentDescription="Open new popup"
+                        android:focusable="true" />
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="4"
-                    android:textAlignment="center"
-                    android:textColor="@color/ch_dark_color"
-                    android:textSize="@dimen/_15sdp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rounds"
+                    android:text="Total Heard"
                     android:textAlignment="center"
                     android:textColor="@color/ch_dark_color"
                     android:textSize="@dimen/_10sdp" />
@@ -236,22 +261,25 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="@dimen/_35sdp"
+                android:layout_gravity="center"
                 android:background="@color/ch_media_player_border_dark" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="@dimen/_30sdp"
-                android:layout_marginEnd="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/mindfulAcrossDays"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="367"
+                    android:text="0"
                     android:textAlignment="center"
                     android:textColor="@color/ch_dark_color"
                     android:textSize="@dimen/_15sdp" />
@@ -259,7 +287,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Heard"
+                    android:text="Across Days"
                     android:textAlignment="center"
                     android:textColor="@color/ch_dark_color"
                     android:textSize="@dimen/_10sdp" />
@@ -268,32 +296,35 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="@dimen/_35sdp"
+                android:layout_gravity="center"
                 android:background="@color/ch_media_player_border_dark" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_30sdp"
-                android:layout_marginEnd="@dimen/_30sdp"
-                android:gravity="start"
-                android:orientation="vertical">
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:orientation="horizontal">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="2.5"
-                    android:textAlignment="center"
-                    android:textColor="@color/ch_dark_color"
-                    android:textSize="@dimen/_15sdp" />
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_shield_24" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Stars"
-                    android:textAlignment="center"
-                    android:textColor="@color/ch_dark_color"
-                    android:textSize="@dimen/_10sdp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Type of Badge"
+                        android:textAlignment="center"
+                        android:textColor="@color/ch_dark_color"
+                        android:textSize="@dimen/_10sdp" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

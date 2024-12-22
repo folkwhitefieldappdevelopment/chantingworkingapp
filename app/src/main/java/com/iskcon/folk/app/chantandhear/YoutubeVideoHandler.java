@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 
 import com.iskcon.folk.app.chantandhear.constant.VideoType;
 import com.iskcon.folk.app.chantandhear.service.AbstractEventHandler;
-import com.iskcon.folk.app.chantandhear.service.HistoryViewClickHandler;
+import com.iskcon.folk.app.chantandhear.service.history.HistoryRoundDetailsViewClickHandler;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
@@ -58,7 +58,8 @@ public class YoutubeVideoHandler extends AbstractEventHandler {
             @Override
             public void onClick(View view) {
                 if (VideoType.SOULFUL_JAPA.equals(videoType)) {
-                    new AlertDialog.Builder(getAppCompatActivity()).setTitle("Hare Krishna").setMessage("Looks like your are very eager to start next round of mala, lets proceed towards next round of chanting haribol!!").
+                    new AlertDialog.Builder(getAppCompatActivity()).setTitle("Hare Krishna").setMessage(
+                                    "Looks like your are very eager to start next round of mala, lets proceed towards next round of chanting haribol!!").
                             setPositiveButton("Haribol (OK)", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -101,14 +102,16 @@ public class YoutubeVideoHandler extends AbstractEventHandler {
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                new AlertDialog.Builder(getAppCompatActivity()).setTitle("Hare Krishna").setMessage("You are spiritually energized after a wonderful video, lets proceed towards next round of chanting haribol!!.").
+                                new AlertDialog.Builder(getAppCompatActivity()).setTitle("Hare Krishna").setMessage(
+                                                "You are spiritually energized after a wonderful video, lets proceed towards next round of chanting haribol!!.").
                                         setPositiveButton("Haribol (OK)", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                 dialogInterface.cancel();
                                                 dialog.cancel();
                                                 onVideoCompleteOrSkip();
-                                                new HistoryViewClickHandler().showHistoryPopup(popupView, getAppCompatActivity().getUserDetails(), true);
+                                                new HistoryRoundDetailsViewClickHandler().showHistoryRoundWiseDetailPopup(
+                                                        popupView, getAppCompatActivity().getUserDetails(), true);
                                             }
                                         }).show();
                             }
