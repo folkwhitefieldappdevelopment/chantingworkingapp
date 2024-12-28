@@ -58,20 +58,16 @@
             android:id="@+id/homePageTabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             app:tabBackground="@color/ch_dark_color"
-            app:tabGravity="fill"
-            app:tabTextAppearance="@style/tabTextSizeStyle"
-
             app:tabRippleColor="@color/ch_light_color"
+            app:tabTextAppearance="@style/tabTextSizeStyle"
             app:tabTextColor="@color/ch_light_color">
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/levelSelectionTab"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Level selection"
-                android:textAlignment="center" />
+                android:text="Level selection" />
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/progressCardTab"
@@ -81,9 +77,14 @@
 
         </com.google.android.material.tabs.TabLayout>
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/homePageViewPager"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/homePageViewPager"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </ScrollView>
     </LinearLayout>
 </LinearLayout>
