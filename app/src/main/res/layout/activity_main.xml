@@ -36,8 +36,8 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/spMainActivityImage"
-                android:layout_width="300sp"
-                android:layout_height="400sp"
+                android:layout_width="300dp"
+                android:layout_height="400dp"
                 android:layout_marginTop="@dimen/login_activity_sp_image_margin_top"
                 android:contentDescription="@string/shila_prabhupada_welcome_image"
                 android:visibility="visible"
@@ -48,15 +48,15 @@
 
             <VideoView
                 android:id="@+id/krishnaVideoView"
-                android:layout_width="300sp"
-                android:layout_height="380sp"
+                android:layout_width="300dp"
+                android:layout_height="380dp"
                 android:background="@drawable/main_activity_view_flipper_bg"
                 android:visibility="invisible" />
 
             <ViewFlipper
                 android:id="@+id/focusSlideshowFlipper"
-                android:layout_width="300sp"
-                android:layout_height="30sp"
+                android:layout_width="300dp"
+                android:layout_height="30dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="22dp"
                 android:background="@drawable/level_change_image_background"
@@ -67,8 +67,8 @@
 
         <ImageView
             android:id="@+id/spBadgeImageView"
-            android:layout_width="80sp"
-            android:layout_height="80sp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:src="@drawable/sp_badge"
             android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
@@ -133,7 +133,7 @@
                                 android:text="R\no\nu\nn\nd\n\n"
                                 android:textAlignment="center"
                                 android:textColor="@color/ch_light_color_text_view"
-                                android:textSize="12sp" />
+                                android:textSize="12dp" />
 
                             <View
                                 android:layout_width="0.5dp"
@@ -157,7 +157,7 @@
                                     android:paddingTop="5dp"
                                     android:text="00:00"
                                     android:textColor="@color/ch_light_color"
-                                    android:textSize="15sp"
+                                    android:textSize="15dp"
                                     android:verticalScrollbarPosition="defaultPosition"
                                     android:visibility="visible"
                                     app:layout_constraintStart_toStartOf="parent" />
@@ -168,11 +168,10 @@
                                     android:layout_height="match_parent"
                                     android:layout_gravity="bottom"
                                     android:gravity="center"
-                                    android:letterSpacing="0.1"
                                     android:text="Hare Krishna"
                                     android:textAlignment="center"
                                     android:textColor="@color/ch_light_color_text_view"
-                                    android:textSize="14sp"
+                                    android:textSize="14dp"
                                     android:visibility="visible" />
                             </LinearLayout>
                         </LinearLayout>
@@ -202,7 +201,7 @@
                 <LinearLayout
                     android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="0sp"
+                    android:layout_height="0dp"
                     android:alpha="0.6"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/horizontalLine">
@@ -259,8 +258,8 @@
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:orientation="vertical"
-                            android:paddingLeft="20sp"
-                            android:paddingRight="20sp">
+                            android:paddingLeft="20dp"
+                            android:paddingRight="20dp">
 
                             <ImageView
                                 android:id="@+id/resetIconImageView"
@@ -288,9 +287,9 @@
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:orientation="vertical"
-                            android:paddingLeft="0sp"
+                            android:paddingLeft="0dp"
                             android:clickable="true"
-                            android:paddingRight="20sp">
+                            android:paddingRight="20dp">
                             <ImageView
                                 android:id="@+id/muteIconImageView"
                                 android:layout_width="wrap_content"
@@ -315,8 +314,8 @@
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:orientation="vertical"
-                            android:paddingLeft="0sp"
-                            android:paddingRight="20sp">
+                            android:paddingLeft="0dp"
+                            android:paddingRight="20dp">
 
                             <ImageView
                                 android:id="@+id/beforeDoneImageView"
@@ -343,8 +342,8 @@
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:orientation="vertical"
-                            android:paddingLeft="0sp"
-                            android:paddingRight="0sp">
+                            android:paddingLeft="0dp"
+                            android:paddingRight="0dp">
 
                             <TextView
                                 android:id="@+id/speedMenu"
@@ -356,7 +355,7 @@
                                 android:paddingTop="10dp"
                                 android:text="1x"
                                 android:textColor="@color/ch_light_color"
-                                android:textSize="13sp" />
+                                android:textSize="13dp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -475,7 +474,7 @@
                                 android:text="Chanted"
                                 android:textAlignment="center"
                                 android:textColor="@color/ch_dark_color"
-                                android:textSize="14sp" />
+                                android:textSize="14dp" />
 
                             <TextView
                                 android:id="@+id/beadCountTextView"
@@ -485,7 +484,7 @@
                                 android:text="0"
                                 android:textAlignment="center"
                                 android:textColor="@color/ch_dark_color"
-                                android:textSize="35sp" />
+                                android:textSize="35dp" />
                         </LinearLayout>
                         <!-- Space between count layouts -->
                         <View
@@ -522,13 +521,13 @@
                                     android:text="Heard"
                                     android:textAlignment="center"
                                     android:textColor="@color/ch_dark_color"
-                                    android:textSize="14sp" />
+                                    android:textSize="14dp" />
 
                                 <ImageView
                                     android:id="@+id/openNewWindow"
-                                    android:layout_width="12sp"
-                                    android:layout_height="12sp"
-                                    android:layout_marginStart="3sp"
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:layout_marginStart="3dp"
                                     android:background="@drawable/baseline_open_in_new_24"
                                     android:clickable="true"
                                     android:contentDescription="Open new popup"
@@ -539,12 +538,12 @@
                                 android:id="@+id/heardCountTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="20dp"
-                                android:layout_marginStart="-5sp"
+                                android:layout_marginStart="-5dp"
                                 android:layout_weight="1"
                                 android:text="0"
                                 android:textAlignment="textStart"
                                 android:textColor="@color/ch_dark_color"
-                                android:textSize="35sp" />
+                                android:textSize="35dp" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -561,22 +560,22 @@
                         android:id="@+id/hearLevelChangeLinearLayout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5sp"
+                        android:layout_marginTop="5dp"
                         android:background="@drawable/level_hearing_layout_background"
                         android:gravity="center">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="10sp"
+                            android:layout_marginEnd="10dp"
                             android:text="@string/level"
                             android:textAlignment="center"
                             android:textColor="@color/ch_dark_color"
-                            android:textSize="15sp" />
+                            android:textSize="15dp" />
 
                         <Button
                             android:id="@+id/hearingLevelDown"
-                            android:layout_width="10sp"
+                            android:layout_width="10dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@drawable/stroke_background"
@@ -584,30 +583,30 @@
                             android:paddingBottom="@dimen/_2sdp"
                             android:text="-"
                             android:textColor="@color/ch_dark_color"
-                            android:textSize="30sp" />
+                            android:textSize="30dp" />
 
                         <TextView
                             android:id="@+id/levelCount"
-                            android:layout_width="15sp"
+                            android:layout_width="15dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginStart="18sp"
-                            android:layout_marginEnd="18sp"
+                            android:layout_marginStart="18dp"
+                            android:layout_marginEnd="18dp"
                             android:gravity="center"
                             android:text="1"
                             android:textColor="@color/ch_dark_color"
-                            android:textSize="16sp" />
+                            android:textSize="16dp" />
 
                         <Button
                             android:id="@+id/hearingLevelUp"
-                            android:layout_width="30sp"
+                            android:layout_width="30dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@drawable/stroke_background"
                             android:gravity="center"
                             android:text="+"
                             android:textColor="@color/ch_dark_color"
-                            android:textSize="20sp" />
+                            android:textSize="20dp" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -615,7 +614,7 @@
                     android:id="@+id/progressBarVertical"
                     android:layout_width="@dimen/_120sdp"
                     android:layout_height="match_parent"
-                    android:layout_marginEnd="0sp"
+                    android:layout_marginEnd="0dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -656,7 +655,7 @@
                                     android:text="Beads"
                                     android:textAlignment="center"
                                     android:textColor="@color/ch_dark_color"
-                                    android:textSize="14sp" />
+                                    android:textSize="14dp" />
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -664,7 +663,7 @@
                                     android:text="Heard"
                                     android:textAlignment="center"
                                     android:textColor="@color/ch_dark_color"
-                                    android:textSize="14sp" />
+                                    android:textSize="14dp" />
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -672,7 +671,7 @@
                                     android:text="Progress"
                                     android:textAlignment="center"
                                     android:textColor="@color/ch_dark_color"
-                                    android:textSize="14sp" />
+                                    android:textSize="14dp" />
                             </TableRow>
 
                             <View
@@ -707,13 +706,13 @@
         <!--            android:id="@+id/actionInfo"-->
         <!--            android:layout_width="wrap_content"-->
         <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="-20sp"-->
-        <!--            android:padding="5sp"-->
+        <!--            android:layout_marginTop="-20dp"-->
+        <!--            android:padding="5dp"-->
         <!--            android:scaleType="centerCrop"-->
         <!--            android:text="Action info"-->
         <!--            android:textAlignment="center"-->
         <!--            android:textColor="@color/ch_light_color"-->
-        <!--            android:textSize="22sp"-->
+        <!--            android:textSize="22dp"-->
         <!--            android:visibility="invisible"-->
         <!--            app:layout_constraintBottom_toTopOf="@+id/guideline10"-->
         <!--            app:layout_constraintDimensionRatio="4:1"-->
@@ -922,8 +921,8 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/hearButton"
-            android:layout_width="250sp"
-            android:layout_height="150sp"
+            android:layout_width="250dp"
+            android:layout_height="150dp"
             android:backgroundTint="@color/ch_light_color"
             android:contentDescription="@string/heard_button"
             android:src="@drawable/hear_tap"
@@ -972,7 +971,7 @@
                 android:background="@drawable/user_box_bg_round_rect"
                 android:elevation="0dp"
                 android:src="@drawable/soul2"
-                android:translationX="20sp"
+                android:translationX="20dp"
                 android:translationY="-20dp"
                 android:translationZ="1dp"
                 android:visibility="visible" />
@@ -995,7 +994,7 @@
                 android:shadowDy="1"
                 android:shadowRadius="1"
                 android:textColor="@color/ch_dark_color"
-                android:textSize="13sp"
+                android:textSize="13dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintVertical_bias="0.53" />

@@ -3,6 +3,7 @@ package com.iskcon.folk.app.chantandhear.service.history;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.graphics.Typeface;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -118,7 +119,7 @@ public class HistoryDaysViewDetailClickHandler {
             textView.setText("Hare Krishna, no data found, please start your mala to see data.");
             textView.setTextColor(view.getResources().getColor(R.color.ch_light_color));
             textView.setTypeface(textView.getTypeface(), Typeface.ITALIC);
-            textView.setTextSize(14);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP,14);
             textView.setGravity(Gravity.CENTER);
             dynamicLinearLayout.addView(textView);
         }

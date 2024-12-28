@@ -32,7 +32,7 @@
         android:paddingTop="8dp"
         android:text="Chant &amp; hear"
         android:textColor="#000"
-        android:textSize="20sp"
+        android:textSize="20dp"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="parent" />
 

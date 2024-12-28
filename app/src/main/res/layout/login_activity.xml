@@ -55,8 +55,8 @@
                 android:id="@+id/spQuote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40sp"
-                android:layout_marginEnd="20sp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="20dp"
                 android:elevation="2dp"
                 android:shadowColor="#c5c5c5"
                 android:shadowDx="10"
@@ -64,7 +64,7 @@
                 android:shadowRadius="10"
                 android:text="@string/welcome_sp_quote"
                 android:textColor="#4D4D4D"
-                android:textSize="12sp"
+                android:textSize="12dp"
                 android:textStyle="italic" />
         </RelativeLayout>
 
@@ -105,15 +105,15 @@
                 android:text="@string/welcome_message"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large.Inverse"
                 android:textColor="#4D4D4D"
-                android:textSize="15sp" />
+                android:textSize="15dp" />
         </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/loginButtonLL"
             android:layout_width="wrap_content"
-            android:layout_height="63sp"
+            android:layout_height="63dp"
             android:layout_gravity="center"
-            android:layout_marginTop="40sp"
+            android:layout_marginTop="40dp"
             android:background="@drawable/welcome_button_drawable"
             android:clickable="true"
             android:elevation="5dp"
@@ -127,7 +127,7 @@
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:contentDescription="@string/google_icon"
-                android:padding="10sp"
+                android:padding="10dp"
                 app:srcCompat="@drawable/google_icon_lg"
                 tools:ignore="MissingConstraints" />
 
@@ -136,7 +136,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginEnd="20sp"
+                android:layout_marginEnd="20dp"
                 android:background="@android:color/transparent"
                 android:gravity="center"
                 android:text="@string/sign_up_using_google"

@@ -2,6 +2,7 @@ package com.iskcon.folk.app.chantandhear.service;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -145,7 +146,7 @@ public class FlipperFocusSlideshowHandler extends AbstractEventHandler {
         );
         textView.setText(krishnaQuote);
         textView.setGravity(Gravity.CENTER);
-        textView.setTextSize(16);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP,16);
         textView.setMaxLines(3);
         textView.setMinHeight(150);
         textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);

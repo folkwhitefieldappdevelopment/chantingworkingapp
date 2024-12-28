@@ -2,9 +2,17 @@ package com.iskcon.folk.app.chantandhear.service.mediaplayer;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
+import android.text.style.ScaleXSpan;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -21,6 +29,7 @@ import com.iskcon.folk.app.chantandhear.factory.MediaPlayerInstanceCreatorFactor
 import com.iskcon.folk.app.chantandhear.history.model.RoundDataEntity;
 import com.iskcon.folk.app.chantandhear.service.AbstractEventHandler;
 import com.iskcon.folk.app.chantandhear.service.CountdownTimerImpl;
+import com.iskcon.folk.app.chantandhear.service.HareKrishnaMantraTextManager;
 import com.iskcon.folk.app.chantandhear.service.beadcount.JapaMalaViewModel;
 import com.iskcon.folk.app.chantandhear.service.beadcount.MalaBeadCounter;
 import com.iskcon.folk.app.chantandhear.util.CommonUtils;
@@ -45,6 +54,7 @@ public class HkMantraClickHandler extends AbstractEventHandler {
     private CountDownTimer malaBeadCounter;
     private TextView hareKrishnaMahaMantraTextView;
     private CountdownTimerImpl countDownTimer;
+    private HareKrishnaMantraTextManager hareKrishnaMantraTextManager = null;
 
     private enum MediaPlayerPlaying {
         HKM_MEDIA_PLAYER,
@@ -202,7 +212,8 @@ public class HkMantraClickHandler extends AbstractEventHandler {
                 AnimationUtils.loadAnimation(getAppCompatActivity(), android.R.anim.fade_out));
         hareKrishnaMahaMantraTextView.setAnimation(
                 AnimationUtils.loadAnimation(getAppCompatActivity(), android.R.anim.fade_in));
-        hareKrishnaMahaMantraTextView.setText(R.string.main_activity_hk_maha_mantra);
+        hareKrishnaMantraTextManager = new HareKrishnaMantraTextManager(hareKrishnaMahaMantraTextView);
+        hareKrishnaMantraTextManager.initState(hareKrishnaMahaMantraTextView);
         hkMahaMantraMediaPlayer.setPlaybackParams(hkMahaMantraMediaPlayer.getPlaybackParams()
                 .setSpeed(speedButtonHandler.getSpeed()));
         if (!calledViaResume) {

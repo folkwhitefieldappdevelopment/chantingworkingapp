@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
@@ -119,7 +120,7 @@ public class ProgressBarHandler extends AbstractEventHandler {
 
             // Column 1 :: Bead Division
             TextView beadDivisionTextView = new TextView(super.getAppCompatActivity());
-            beadDivisionTextView.setTextSize(14);
+            beadDivisionTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP,14);
             beadDivisionTextView.setTextColor(super.getAppCompatActivity().getResources()
                     .getColor(R.color.history_list_row_view_round_number));
             beadDivisionTextView.setText(MessageFormat.format("{0} - {1}", milestone.getStartBead(),
@@ -130,7 +131,7 @@ public class ProgressBarHandler extends AbstractEventHandler {
 
             // Column 2 :: Heard count
             TextView heardCountTextView = new TextView(super.getAppCompatActivity());
-            heardCountTextView.setTextSize(14);
+            heardCountTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP,14);
             heardCountTextView.setTextColor(
                     super.getAppCompatActivity().getResources().getColor(R.color.ch_dark_color));
             heardCountTextView.setText(String.valueOf(0));
@@ -194,13 +195,13 @@ public class ProgressBarHandler extends AbstractEventHandler {
 
                     // Column 1: Beads division
                     TextView beadDivisionTextView = (TextView) tableRow.getChildAt(0);
-                    beadDivisionTextView.setTextSize(12);
+                    beadDivisionTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP,12);
                     beadDivisionTextView.setTextColor(
                             super.getAppCompatActivity().getResources().getColor(R.color.green));
 
                     // Column 2: Heard Count
                     TextView heardCountTextView = (TextView) tableRow.getChildAt(1);
-                    heardCountTextView.setTextSize(12);
+                    heardCountTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP,12);
                     heardCountTextView.setTextColor(
                             super.getAppCompatActivity().getResources().getColor(R.color.green));
                 }

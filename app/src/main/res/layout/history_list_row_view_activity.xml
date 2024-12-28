@@ -49,7 +49,7 @@
         <!-- Space between count layouts -->
         <View
             android:layout_width="1dp"
-            android:layout_height="65sp"
+            android:layout_height="65dp"
             android:background="@color/ch_counter_border_dark" />
 
         <LinearLayout
@@ -73,7 +73,7 @@
                     android:paddingStart="@dimen/_5sdp"
                     android:text="Heard"
                     android:textColor="@color/history_list_row_view_label_text"
-                    android:textSize="12sp" />
+                    android:textSize="12dp" />
 
                 <TextView
                     android:id="@+id/heardCountTextView"
@@ -84,7 +84,7 @@
                     android:text="000"
                     android:textAlignment="textStart"
                     android:textColor="@color/ch_dark_color"
-                    android:textSize="25sp" />
+                    android:textSize="25dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -116,7 +116,7 @@
                     android:text="Time"
                     android:textAlignment="textStart"
                     android:textColor="@color/history_list_row_view_label_text"
-                    android:textSize="12sp" />
+                    android:textSize="12dp" />
 
                 <TextView
                     android:id="@+id/timeTakenTextView"
@@ -127,7 +127,7 @@
                     android:text="00:00 min"
                     android:textAlignment="textStart"
                     android:textColor="@color/history_list_row_view_timeTaken_value"
-                    android:textSize="14sp" />
+                    android:textSize="14dp" />
             </LinearLayout>
         </LinearLayout>
         <LinearLayout

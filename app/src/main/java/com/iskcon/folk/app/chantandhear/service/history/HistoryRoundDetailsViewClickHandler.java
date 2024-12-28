@@ -3,6 +3,7 @@ package com.iskcon.folk.app.chantandhear.service.history;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.graphics.Typeface;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -73,11 +74,15 @@ public class HistoryRoundDetailsViewClickHandler {
 
         int totalHeardCount = 0;
 
+        int chantedRounds = 0;
+
         if (roundDataEntities != null && !roundDataEntities.isEmpty()) {
 
             if (reverseList) {
                 Collections.reverse(roundDataEntities);
             }
+
+            chantedRounds = roundDataEntities.size();
 
             for (int i = 0; i < roundDataEntities.size(); i++) {
                 RoundDataEntity roundDataEntity = roundDataEntities.get(i);
@@ -114,7 +119,7 @@ public class HistoryRoundDetailsViewClickHandler {
             textView.setText("Hare Krishna, no data found, please start your mala to see data.");
             textView.setTextColor(view.getResources().getColor(R.color.ch_light_color));
             textView.setTypeface(textView.getTypeface(), Typeface.ITALIC);
-            textView.setTextSize(14);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP,14);
             textView.setGravity(Gravity.CENTER);
             linearLayout.addView(textView);
         }
@@ -132,6 +137,9 @@ public class HistoryRoundDetailsViewClickHandler {
 
         ((TextView) historyListViewLinearLayout.findViewById(R.id.userNameTextView))
                 .setText(userDetails.getDisplayName());
+
+        ((TextView) historyListViewLinearLayout.findViewById(R.id.chantedRoundsTextView))
+                .setText(String.valueOf(chantedRounds));
 
         ((TextView) historyListViewLinearLayout.findViewById(R.id.totalHeardCountTextView))
                 .setText(String.valueOf(totalHeardCount));
@@ -189,7 +197,7 @@ public class HistoryRoundDetailsViewClickHandler {
             );
             noStarsTextView.setLayoutParams(textViewLayoutParams);
             noStarsTextView.setText("Hear while chanting to get stars");
-            noStarsTextView.setTextSize(12);
+            noStarsTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP,12);
             noStarsTextView.setTextColor(historyRowView.getContext().getResources().getColor(R.color.red));
             noStarsTextView.setTypeface(noStarsTextView.getTypeface(), Typeface.ITALIC);
             starContainerLinearLayout.addView(noStarsTextView);

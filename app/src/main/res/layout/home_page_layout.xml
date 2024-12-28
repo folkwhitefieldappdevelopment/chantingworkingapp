@@ -61,6 +61,8 @@
             android:layout_gravity="center"
             app:tabBackground="@color/ch_dark_color"
             app:tabGravity="fill"
+            app:tabTextAppearance="@style/tabTextSizeStyle"
+
             app:tabRippleColor="@color/ch_light_color"
             app:tabTextColor="@color/ch_light_color">
 

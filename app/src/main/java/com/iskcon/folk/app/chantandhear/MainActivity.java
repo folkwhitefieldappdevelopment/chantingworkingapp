@@ -85,6 +85,15 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                onCreateInternal();
+            }
+        });
+    }
+
+    private void onCreateInternal(){
         int initialRoundNumber = Integer.valueOf(getIntent().getExtras().get("completedRounds").toString());
 
         initialRoundNumber++;

@@ -79,10 +79,10 @@
 
                     <ImageView
                         android:id="@+id/openNewWindow"
-                        android:layout_width="15sp"
-                        android:layout_height="15sp"
-                        android:layout_marginStart="50sp"
-                        android:layout_marginTop="-25sp"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginTop="-25dp"
                         android:background="@drawable/baseline_open_in_new_24"
                         android:clickable="true"
                         android:contentDescription="Open new popup"
@@ -180,7 +180,7 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:layout_marginStart="10sp">
+                    android:layout_marginStart="10dp">
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -238,10 +238,10 @@
                         android:textSize="@dimen/_15sdp" />
 
                     <ImageView
-                        android:layout_width="15sp"
-                        android:layout_height="15sp"
-                        android:layout_marginStart="80sp"
-                        android:layout_marginTop="-25sp"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginStart="80dp"
+                        android:layout_marginTop="-25dp"
                         android:background="@drawable/baseline_open_in_new_24"
                         android:clickable="true"
                         android:contentDescription="Open new popup"
