@@ -14,14 +14,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
 import com.iskcon.folk.app.chantandhear.MainActivity;
 import com.iskcon.folk.app.chantandhear.R;
@@ -115,26 +118,31 @@ public class HomePageLevelSelectionFragment extends Fragment {
             rootDirectory.mkdir();
         }
 
-        for (int i = 1; i <= ApplicationConstants.KRISHNA_VIDEO_NO_OF_FILES_TO_DOWNLOAD.getConstantValue(Integer.class); i++) {
-            String videoFileName = "sample_krishna_images_" + i + ".mp4";
-            File videoFilePath = new File(rootDirectory,videoFileName );
-            StorageReference storageReference = firebaseStorage.getReference("flip_videos").child(videoFileName);
-            if (!videoFilePath.exists()) {
-                storageReference.getFile(videoFilePath)
-                        .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.e("TAG", e.getMessage(), e);
-                                Toast.makeText(getContext(), "Unable to download the file, please contact support team.",
-                                                Toast.LENGTH_LONG)
-                                        .show();
-                            }
-                        });
+        firebaseStorage.getReference("flip_videos").listAll().addOnCompleteListener(new OnCompleteListener<ListResult>() {
+            @Override
+            public void onComplete(@NonNull Task<ListResult> task) {
+                if(task.isSuccessful() && task.getResult() != null){
+                    for (StorageReference storageReference : task.getResult().getItems()) {
+                        File videoFilePath = new File(rootDirectory,storageReference.getName() );
+                        if (!videoFilePath.exists()) {
+                            storageReference.getFile(videoFilePath)
+                                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.e("TAG", e.getMessage(), e);
+                                            Toast.makeText(getContext(), "Unable to download the file, please contact support team.",
+                                                            Toast.LENGTH_LONG)
+                                                    .show();
+                                        }
+                                    });
+                        }
+                    }
+                }
             }
-        }
+        });
     }
 }

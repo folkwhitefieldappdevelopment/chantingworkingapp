@@ -31,21 +31,25 @@ public class VideoViewManager extends AbstractEventHandler {
 
         List<File> videoFiles = new ArrayList<>();
 
-        for (int i = 1; i <= ApplicationConstants.KRISHNA_VIDEO_NO_OF_FILES_TO_DOWNLOAD.getConstantValue(Integer.class); i++) {
+        File baseLocation = new File(this.getAppCompatActivity().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS),
+                ".chantAndHear_v1" + File.separator);
 
-            videoFiles.add(new File(this.getAppCompatActivity().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS),
-                    ".chantAndHear_v1" + File.separator + "sample_krishna_images_" + i + ".mp4"));
-        }
-
-        VideoView videoView = getAppCompatActivity().findViewById(R.id.krishnaVideoView);
-        videoView.setVideoPath(this.getNextFilePath(videoFiles));
-        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-                videoView.setVideoPath(getNextFilePath(videoFiles));
-                videoView.start();
+        if (baseLocation.exists()) {
+            int noOfFiles = baseLocation.list().length;
+            for (File file : baseLocation.listFiles()) {
+                videoFiles.add(file);
             }
-        });
+
+            VideoView videoView = getAppCompatActivity().findViewById(R.id.krishnaVideoView);
+            videoView.setVideoPath(this.getNextFilePath(videoFiles));
+            videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    videoView.setVideoPath(getNextFilePath(videoFiles));
+                    videoView.start();
+                }
+            });
+        }
         /*videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
@@ -76,8 +80,6 @@ public class VideoViewManager extends AbstractEventHandler {
     }
 
     private String getNextFilePath(List<File> videoFiles) {
-        return videoFiles.get(
-                        new Random().nextInt(ApplicationConstants.KRISHNA_VIDEO_NO_OF_FILES_TO_DOWNLOAD.getConstantValue(Integer.class)))
-                .getPath();
+        return videoFiles.get(new Random().nextInt(videoFiles.size())).getPath();
     }
 }

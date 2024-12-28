@@ -18,8 +18,8 @@ import java.util.TimerTask;
 public class HareKrishnaMantraTextManager {
 
     private final List<String> HARE_KRISHNA_MAHA_MANTRA =
-            Arrays.asList("Hare", "Krishna", "Hare", "Krishna", "Krishna", "Krishna", "Hare", "Hare", "Hare",
-                    "Rama", "Hare", "Rama", "Rama", "Rama", "Hare", "Hare");
+            Arrays.asList("Hare", "Krishna", "Hare", "Krishna\n", "Krishna", "Krishna", "Hare", "Hare\n", "Hare",
+                    "Rama", "Hare", "Rama\n", "Rama", "Rama", "Hare", "Hare");
     private final float PROPORTION = 1.5f;
     private Timer timer;
     private final TextView textView;
@@ -31,13 +31,13 @@ public class HareKrishnaMantraTextManager {
     }
 
     public void initState(TextView text) {
-        text.setTextColor(Color.parseColor("#666666"));
+        //text.setTextColor(Color.parseColor("#666666"));
         SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(
-                String.join("\b", HARE_KRISHNA_MAHA_MANTRA));
-        spannableStringBuilder.setSpan(new StyleSpan(Typeface.BOLD_ITALIC), 0, 5, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                String.join(" ", HARE_KRISHNA_MAHA_MANTRA));
+        /*spannableStringBuilder.setSpan(new StyleSpan(Typeface.BOLD_ITALIC), 0, 5, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannableStringBuilder.setSpan(new ForegroundColorSpan(Color.parseColor("#F1E8EB")), 0, 5,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableStringBuilder.setSpan(new RelativeSizeSpan(PROPORTION), 0, 5, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableStringBuilder.setSpan(new RelativeSizeSpan(PROPORTION), 0, 5, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);*/
         text.setText(spannableStringBuilder);
         DISPLAYED_MANTRA_BUFFER.append(HARE_KRISHNA_MAHA_MANTRA.get(0));
         //this.registerTimer();
