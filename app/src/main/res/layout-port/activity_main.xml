@@ -637,7 +637,7 @@
                 android:layout_height="90dp"
                 android:background="@drawable/user_box_bg_round_rect"
                 android:elevation="0dp"
-                android:src="@drawable/soul2"
+                android:src="@drawable/user_attention_chat_icon"
                 android:translationX="20dp"
                 android:translationY="-20dp"
                 android:translationZ="1dp"
