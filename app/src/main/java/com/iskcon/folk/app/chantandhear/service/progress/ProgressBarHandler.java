@@ -27,6 +27,7 @@ import com.iskcon.folk.app.chantandhear.constant.Milestone;
 import com.iskcon.folk.app.chantandhear.constant.UserAttentionSliderMessage;
 import com.iskcon.folk.app.chantandhear.constant.VideoType;
 import com.iskcon.folk.app.chantandhear.service.AbstractEventHandler;
+import com.iskcon.folk.app.chantandhear.service.LevelIncreaseService;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.HkMantraClickHandler;
 import com.iskcon.folk.app.chantandhear.util.CommonUtils;
 import com.iskcon.folk.app.chantandhear.util.OpenAlertDialogRqModel;
@@ -53,8 +54,10 @@ public class ProgressBarHandler extends AbstractEventHandler {
     }
 
     public void initializeProgressBar() {
+
         ((TableLayout) super.getAppCompatActivity()
                 .findViewById(R.id.progressBarHeaderTableLayout)).setVisibility(View.VISIBLE);
+
         this.addRow(Milestone.MILESTONE_1);
     }
 
@@ -120,7 +123,7 @@ public class ProgressBarHandler extends AbstractEventHandler {
 
             // Column 1 :: Bead Division
             TextView beadDivisionTextView = new TextView(super.getAppCompatActivity());
-            beadDivisionTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP,14);
+            beadDivisionTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
             beadDivisionTextView.setTextColor(super.getAppCompatActivity().getResources()
                     .getColor(R.color.history_list_row_view_round_number));
             beadDivisionTextView.setText(MessageFormat.format("{0} - {1}", milestone.getStartBead(),
@@ -131,7 +134,7 @@ public class ProgressBarHandler extends AbstractEventHandler {
 
             // Column 2 :: Heard count
             TextView heardCountTextView = new TextView(super.getAppCompatActivity());
-            heardCountTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP,14);
+            heardCountTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
             heardCountTextView.setTextColor(
                     super.getAppCompatActivity().getResources().getColor(R.color.ch_dark_color));
             heardCountTextView.setText(String.valueOf(0));
@@ -175,6 +178,11 @@ public class ProgressBarHandler extends AbstractEventHandler {
                 }
             });
             milestoneMediaPlayer.start();
+
+            if (!milestone.equals(Milestone.MILESTONE_7)) {
+
+                new LevelIncreaseService().showDialog(super.getAppCompatActivity());
+            }
         }
     }
 
@@ -195,13 +203,13 @@ public class ProgressBarHandler extends AbstractEventHandler {
 
                     // Column 1: Beads division
                     TextView beadDivisionTextView = (TextView) tableRow.getChildAt(0);
-                    beadDivisionTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP,12);
+                    beadDivisionTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
                     beadDivisionTextView.setTextColor(
                             super.getAppCompatActivity().getResources().getColor(R.color.green));
 
                     // Column 2: Heard Count
                     TextView heardCountTextView = (TextView) tableRow.getChildAt(1);
-                    heardCountTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP,12);
+                    heardCountTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
                     heardCountTextView.setTextColor(
                             super.getAppCompatActivity().getResources().getColor(R.color.green));
                 }

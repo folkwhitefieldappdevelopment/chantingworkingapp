@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="50dp"
+    android:layout_marginEnd="20dp"
+    android:gravity="center">
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:contentDescription="Level Increase Image"
+        android:src="@drawable/level_increase_popup_msg" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="10dp"
+        android:gravity="center"
+        android:orientation="@integer/linearlayoutOrientation">
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="15dp"
+                android:scrollHorizontally="false"
+                android:text="You have completed milestone,increase the Hearing level."
+                android:textAlignment="center"
+                android:textColor="@color/ch_dark_color"
+                android:textSize="16dp" />
+        </TableRow>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="top">
+
+                <Button
+                    android:id="@+id/dontIncreaseLevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/level_increase_later_button_bg"
+                    android:text="Later"
+                    android:textAllCaps="false"
+                    android:textColor="@color/ch_dark_color"
+                    android:textSize="16dp"
+                    android:clickable="true"/>
+
+                <Button
+                    android:id="@+id/increaseLevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@drawable/level_increase_button_bg"
+                    android:text="Increase!"
+                    android:textAllCaps="false"
+                    android:textColor="@color/ch_light_color"
+                    android:textSize="16dp"
+                    android:clickable="true"/>
+            </LinearLayout>
+
+    </TableLayout>
+</LinearLayout>

@@ -14,10 +14,13 @@ import com.iskcon.folk.app.chantandhear.constant.NamaPrabhuToasts;
 import com.iskcon.folk.app.chantandhear.service.beadcount.JapaMalaViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class HeardButtonHandler extends AbstractEventHandler {
 
@@ -40,11 +43,13 @@ public class HeardButtonHandler extends AbstractEventHandler {
         JapaMalaViewModel japaMalaViewModel = getAppCompatActivity().getJapaMalaViewModel();
 
         if (super.getAppCompatActivity().getHkMantraClickHandler().isHkMahaMantraPlaying() &&
-                japaMalaViewModel.getHeardCounterLiveData().getValue() < ApplicationConstants.TOTAL_BEADS.getConstantValue(Integer.class)) {
+                japaMalaViewModel.getHeardCounterLiveData().getValue() <
+                        ApplicationConstants.TOTAL_BEADS.getConstantValue(Integer.class)) {
 
             if (!this.isThisFakeHearing(japaMalaViewModel.getHeardCounterLiveData().getValue())) {
                 japaMalaViewModel.incrementHeardBy(levelCountValue);
-                super.getAppCompatActivity().getProgressBarHandler().incrementProgress(japaMalaViewModel.getHeardCounterLiveData().getValue());
+                super.getAppCompatActivity().getProgressBarHandler()
+                        .incrementProgress(japaMalaViewModel.getHeardCounterLiveData().getValue());
             }
         }
         //this.showToast();
@@ -88,9 +93,11 @@ public class HeardButtonHandler extends AbstractEventHandler {
         int upperLimit = 13;
         List<Integer> used = new ArrayList<>();
 
-        View layout = super.getAppCompatActivity().getLayoutInflater().inflate(R.layout.custom_toast, (ViewGroup) super.getAppCompatActivity().findViewById(R.id.custom_toast_layout));
+        View layout = super.getAppCompatActivity().getLayoutInflater()
+                .inflate(R.layout.custom_toast, (ViewGroup) super.getAppCompatActivity().findViewById(R.id.custom_toast_layout));
         TextView textHearQuote = layout.findViewById(R.id.text);
-        textHearQuote.setText(String.valueOf(NamaPrabhuToasts.TOAST_MSGS[this.generateRandomNumber(lowerLimit, upperLimit, used)]));
+        textHearQuote.setText(
+                String.valueOf(NamaPrabhuToasts.TOAST_MSGS[this.generateRandomNumber(lowerLimit, upperLimit, used)]));
 
         // Create and show the custom Toast
         Toast toast = new Toast(super.getAppCompatActivity().getApplicationContext());
@@ -125,19 +132,34 @@ public class HeardButtonHandler extends AbstractEventHandler {
     }
 
     private boolean isThisFakeHearing(int currentHeardCount) {
+
         boolean isThisFakeHearing = false;
+
         if (currentHeardCount == 0) {
-            this.lastHeard =new Date();
+
+            this.lastHeard = new Date();
+
         } else {
+
             Date currentDate = new Date();
-            long heardTimeDifference = (currentDate.getTime() - this.lastHeard.getTime()) / 1000;
-            if (heardTimeDifference > ApplicationConstants.FAKE_HEARING_TIME_DIFFERENCE.getConstantValue(Long.class)) {
+
+            long heardTimeDifference = TimeUnit.MILLISECONDS.toMillis(currentDate.getTime() - this.lastHeard.getTime());
+
+            if (heardTimeDifference > ApplicationConstants.HARE_KRISHNA_MANTRA_SINGLE_BEAD_DURATION.getConstantValue(Long.class) /
+                    super.getAppCompatActivity().getSpeedClickHandler().getSpeed()) {
+
                 this.lastHeard = currentDate;
+
             } else {
-                Toast.makeText(getAppCompatActivity(), "Haribol, this hearing won't be counted, hear and then tap. Do Prompt hearing.", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(getAppCompatActivity(),
+                                "Haribol, this hearing won't be counted, hear and then tap. Do Prompt hearing.", Toast.LENGTH_SHORT)
+                        .show();
+
                 isThisFakeHearing = true;
             }
         }
+
         return isThisFakeHearing;
     }
 }
