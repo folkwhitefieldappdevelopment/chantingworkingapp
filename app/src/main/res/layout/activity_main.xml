@@ -230,6 +230,8 @@
                                 android:id="@+id/muteNotification"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                 android:clickable="true"
+                                android:focusable="true"
                                 android:paddingTop="10dp"
                                 android:src="@drawable/baseline_notifications_active_24"
                                 android:visibility="visible" />
@@ -285,17 +287,19 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:clickable="true"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:paddingLeft="0dp"
-                            android:clickable="true"
                             android:paddingRight="20dp">
+
                             <ImageView
                                 android:id="@+id/muteIconImageView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingTop="10dp"
                                 android:src="@drawable/baseline_volume_up_24" />
+
                             <TextView
                                 android:id="@+id/muteIconTextView"
                                 android:layout_width="wrap_content"

@@ -4,10 +4,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Vibrator;
 
+import com.iskcon.folk.app.chantandhear.service.mediaplayer.MuteNotificationSingleton;
+
 public class CommonUtils {
 
     public static void vibrateFunction(long milliseconds, Vibrator vibrator) {
-        if (vibrator != null && vibrator.hasVibrator()) {
+        if (MuteNotificationSingleton.isNotificationNotMuted() && (vibrator != null && vibrator.hasVibrator())) {
             vibrator.vibrate(milliseconds);
         }
     }

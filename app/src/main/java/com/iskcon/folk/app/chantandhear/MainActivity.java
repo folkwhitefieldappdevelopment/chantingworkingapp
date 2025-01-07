@@ -29,6 +29,7 @@ import com.iskcon.folk.app.chantandhear.service.history.HistoryRoundDetailsViewC
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.BeforeDoneClickHandler;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.HkMantraClickHandler;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.MuteMantraButtonHandler;
+import com.iskcon.folk.app.chantandhear.service.mediaplayer.MuteNotificationSingleton;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.ResetButtonHandler;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.SpeedButtonHandler;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.UnmuteButtonHandler;
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         });
     }
 
-    private void onCreateInternal(){
+    private void onCreateInternal() {
         int initialRoundNumber = Integer.valueOf(getIntent().getExtras().get("completedRounds").toString());
 
         initialRoundNumber++;
@@ -218,6 +219,20 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 });
                 view.setAnimation(animation);
                 view.animate();
+            }
+        });
+
+        findViewById(R.id.muteNotification).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImageView imageView = (ImageView) view;
+                if(MuteNotificationSingleton.isNotificationNotMuted()){
+                    imageView.setImageResource(R.drawable.baseline_notifications_off_24);
+                    MuteNotificationSingleton.muteNotification(true);
+                } else {
+                    imageView.setImageResource(R.drawable.baseline_notifications_active_24);
+                    MuteNotificationSingleton.muteNotification(false);
+                }
             }
         });
     }

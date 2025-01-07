@@ -1,6 +1,5 @@
 package com.iskcon.folk.app.chantandhear.service.progress;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.os.Handler;
@@ -16,9 +15,6 @@ import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.Px;
 
 import com.iskcon.folk.app.chantandhear.MainActivity;
 import com.iskcon.folk.app.chantandhear.R;
@@ -29,12 +25,11 @@ import com.iskcon.folk.app.chantandhear.constant.VideoType;
 import com.iskcon.folk.app.chantandhear.service.AbstractEventHandler;
 import com.iskcon.folk.app.chantandhear.service.LevelIncreaseService;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.HkMantraClickHandler;
+import com.iskcon.folk.app.chantandhear.service.mediaplayer.MuteNotificationSingleton;
 import com.iskcon.folk.app.chantandhear.util.CommonUtils;
 import com.iskcon.folk.app.chantandhear.util.OpenAlertDialogRqModel;
 
-import java.sql.Timestamp;
 import java.text.MessageFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -168,16 +163,18 @@ public class ProgressBarHandler extends AbstractEventHandler {
 
         if (!milestone.equals(Milestone.MILESTONE_1)) {
 
-            MediaPlayer milestoneMediaPlayer =
-                    MediaPlayer.create(getAppCompatActivity(), R.raw.beat16);
-            milestoneMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mediaPlayer) {
-                    mediaPlayer.stop();
-                    mediaPlayer.release();
-                }
-            });
-            milestoneMediaPlayer.start();
+            if(MuteNotificationSingleton.isNotificationNotMuted()) {
+                MediaPlayer milestoneMediaPlayer =
+                        MediaPlayer.create(getAppCompatActivity(), R.raw.beat16);
+                milestoneMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        mediaPlayer.stop();
+                        mediaPlayer.release();
+                    }
+                });
+                milestoneMediaPlayer.start();
+            }
 
             if (!milestone.equals(Milestone.MILESTONE_7)) {
 
@@ -311,16 +308,18 @@ public class ProgressBarHandler extends AbstractEventHandler {
 
         super.vibrate(100);
 
-        MediaPlayer milestoneMediaPlayer =
-                MediaPlayer.create(getAppCompatActivity(), R.raw.copper_bell_ding);
-        milestoneMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-                mediaPlayer.stop();
-                mediaPlayer.release();
-            }
-        });
-        milestoneMediaPlayer.start();
+        if(MuteNotificationSingleton.isNotificationNotMuted()) {
+            MediaPlayer milestoneMediaPlayer =
+                    MediaPlayer.create(getAppCompatActivity(), R.raw.copper_bell_ding);
+            milestoneMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    mediaPlayer.stop();
+                    mediaPlayer.release();
+                }
+            });
+            milestoneMediaPlayer.start();
+        }
 
         Handler hideUserAttentionSliderHandler = new Handler();
 
