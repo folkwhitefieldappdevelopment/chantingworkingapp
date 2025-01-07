@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="wrap_content"
     android:layout_marginStart="20dp"
-    android:layout_marginTop="50dp"
     android:layout_marginEnd="20dp"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="horizontal">
 
     <ImageView
         android:layout_width="80dp"
@@ -16,7 +16,7 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:gravity="center"
         android:orientation="@integer/linearlayoutOrientation">
@@ -28,43 +28,44 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="15dp"
                 android:scrollHorizontally="false"
-                android:text="You have completed milestone,increase the Hearing level."
+                android:text="Hare Krishna, you have completed milestone, increase the Hearing Level."
                 android:textAlignment="center"
                 android:textColor="@color/ch_dark_color"
-                android:textSize="16dp" />
+                android:textSize="17dp" />
         </TableRow>
 
 
-            <LinearLayout
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="top"
+            android:paddingBottom="5dp">
+
+            <Button
+                android:id="@+id/dontIncreaseLevel"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="top">
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/level_increase_later_button_bg"
+                android:clickable="true"
+                android:text="Later"
+                android:textAllCaps="false"
+                android:textColor="@color/ch_dark_color"
+                android:textSize="17dp" />
 
-                <Button
-                    android:id="@+id/dontIncreaseLevel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/level_increase_later_button_bg"
-                    android:text="Later"
-                    android:textAllCaps="false"
-                    android:textColor="@color/ch_dark_color"
-                    android:textSize="16dp"
-                    android:clickable="true"/>
-
-                <Button
-                    android:id="@+id/increaseLevel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:background="@drawable/level_increase_button_bg"
-                    android:text="Increase!"
-                    android:textAllCaps="false"
-                    android:textColor="@color/ch_light_color"
-                    android:textSize="16dp"
-                    android:clickable="true"/>
-            </LinearLayout>
+            <Button
+                android:id="@+id/increaseLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@drawable/level_increase_button_bg"
+                android:clickable="true"
+                android:text="Increase"
+                android:textAllCaps="false"
+                android:textColor="@color/ch_light_color"
+                android:textSize="17dp" />
+        </LinearLayout>
 
     </TableLayout>
 </LinearLayout>
