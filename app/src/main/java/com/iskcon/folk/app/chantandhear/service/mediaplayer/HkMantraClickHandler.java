@@ -210,7 +210,6 @@ public class HkMantraClickHandler extends AbstractEventHandler {
     }
 
     private void startHkMahaMantraMultipleMediaPlayer(boolean calledViaResume) {
-        this.addSummeryProgressLayout();
         hareKrishnaMahaMantraTextView.setAnimation(
                 AnimationUtils.loadAnimation(getAppCompatActivity(), android.R.anim.fade_out));
         hareKrishnaMahaMantraTextView.setAnimation(
@@ -344,6 +343,8 @@ public class HkMantraClickHandler extends AbstractEventHandler {
 
         this.resetActivity();
 
+        this.addSummeryProgressLayout();
+
         String message = null;
 
         if (isBeforeDone) {
@@ -447,10 +448,7 @@ public class HkMantraClickHandler extends AbstractEventHandler {
         return hkMahaMantraMediaPlayer != null || panchTattvaMantraMediaPlayer != null;
     }
 
-    private void addSummeryProgressLayout() {
-        /*LinearLayout summaryProgressLayout = super.getAppCompatActivity().findViewById(R.id.summaryProgressLayoutId);
-        View summayView = View.inflate(super.getAppCompatActivity(), R.layout.summary_progress_layout, null);
-        summaryProgressLayout.addView(summayView);*/
+    public void addSummeryProgressLayout() {
         new SummaryProgressRowAdditionService().addSummaryRow(super.getAppCompatActivity());
     }
 }

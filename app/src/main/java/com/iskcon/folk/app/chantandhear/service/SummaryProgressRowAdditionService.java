@@ -2,8 +2,12 @@ package com.iskcon.folk.app.chantandhear.service;
 
 import android.app.Activity;
 import android.content.Context;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +23,7 @@ import com.iskcon.folk.app.chantandhear.history.model.RoundDataEntity;
 import com.iskcon.folk.app.chantandhear.model.UserDetails;
 import com.iskcon.folk.app.chantandhear.util.LoaderAlertDialog;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +32,8 @@ public class SummaryProgressRowAdditionService {
 
     public void addSummaryRow(MainActivity mainActivity) {
 
+        LinearLayout summaryProgressLayout = mainActivity.findViewById(R.id.summaryProgressLayoutId);
+        summaryProgressLayout.removeAllViews();
         this.getSummaryDataFromDatabase(mainActivity, mainActivity.getUserDetails(), true);
     }
 
@@ -34,21 +41,49 @@ public class SummaryProgressRowAdditionService {
 
         View summayView = View.inflate(mainActivity, R.layout.summary_progress_layout, null);
 
-        LinearLayout linearLayout = summayView.findViewById(R.id.summaryProgressRowLayoutId);
+        LinearLayout summaryProgressRowLayout = summayView.findViewById(R.id.summaryProgressRowLayoutId);
 
-        for (RoundDataEntity roundDataEntity : roundDataEntities) {
+        int totalHeardCount = 0;
 
-            View summaryProgressRowView =
-                    View.inflate(mainActivity.getApplicationContext(), R.layout.summary_progress_row_layout, null);
+        if(roundDataEntities != null && roundDataEntities.size() > 0) {
 
-            ((TextView) summaryProgressRowView.findViewById(R.id.summaryRoundHeaderTextView)).setText(
-                    String.valueOf(roundDataEntity.getRoundNumber()));
+            Collections.reverse(roundDataEntities);
 
-            ((TextView) summaryProgressRowView.findViewById(R.id.summaryHeardHeaderTextView)).setText(
-                    String.valueOf(roundDataEntity.getTotalHeardCount()));
+            for (RoundDataEntity roundDataEntity : roundDataEntities) {
 
-            linearLayout.addView(summaryProgressRowView);
+                View summaryProgressRowView =
+                        View.inflate(mainActivity.getApplicationContext(), R.layout.summary_progress_row_layout, null);
+
+                ((TextView) summaryProgressRowView.findViewById(R.id.summaryRoundHeaderTextView)).setText(
+                        String.valueOf(roundDataEntity.getRoundNumber()));
+
+                ((TextView) summaryProgressRowView.findViewById(R.id.summaryHeardHeaderTextView)).setText(
+                        String.valueOf(roundDataEntity.getTotalHeardCount()));
+
+                totalHeardCount = totalHeardCount + roundDataEntity.getTotalHeardCount();
+
+                LinearLayout linearLayoutRow = new LinearLayout(mainActivity.getApplicationContext());
+                linearLayoutRow.setOrientation(LinearLayout.VERTICAL);
+                linearLayoutRow.setGravity(Gravity.CENTER);
+                LinearLayout.LayoutParams layoutParamsRow =
+                        new LinearLayout.LayoutParams(100, LinearLayout.LayoutParams.WRAP_CONTENT);
+                layoutParamsRow.gravity = Gravity.CENTER;
+                linearLayoutRow.setLayoutParams(layoutParamsRow);
+                linearLayoutRow.addView(summaryProgressRowView);
+
+                summaryProgressRowLayout.addView(linearLayoutRow);
+
+                View divider = new View(mainActivity.getApplicationContext());
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(1, LinearLayout.LayoutParams.MATCH_PARENT);
+                layoutParams.setMargins(2, 20, 2, 20);
+                divider.setLayoutParams(layoutParams);
+                divider.setBackgroundResource(R.color.ch_counter_border_dark);
+
+                summaryProgressRowLayout.addView(divider);
+            }
         }
+
+        ((TextView) summayView.findViewById(R.id.summaryTotalHeardCount)).setText(String.valueOf(totalHeardCount));
 
         LinearLayout summaryProgressLayout = mainActivity.findViewById(R.id.summaryProgressLayoutId);
 

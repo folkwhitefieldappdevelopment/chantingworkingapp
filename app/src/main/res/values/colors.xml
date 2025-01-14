@@ -160,4 +160,7 @@
     <color name="history_list_row_view_label_text">#8C99AA</color>
     <color name="history_list_row_view_heardCount_value">#303640</color>
     <color name="history_list_row_view_timeTaken_value">#69788D</color>
+    <color name="summary_progress_header">#9e9cf0</color>
+    <color name="summary_progress_divider">#1A8886ed</color>
+    <color name="summary_progress_data">#7370e9</color>
 </resources>

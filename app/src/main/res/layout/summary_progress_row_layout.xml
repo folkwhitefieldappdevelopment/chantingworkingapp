@@ -11,20 +11,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="00"
-        android:textColor="@color/history_list_view_header_total_heard_count"
+        android:textColor="@color/summary_progress_header"
         android:textSize="12dp" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1.2dp"
-        android:layout_margin="@dimen/_2sdp"
-        android:background="@color/ch_counter_border_dark" />
+        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_marginBottom="@dimen/_2sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:background="@color/summary_progress_divider" />
 
     <TextView
         android:id="@+id/summaryHeardHeaderTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="000"
-        android:textColor="@color/history_list_view_header_total_heard_count"
+        android:textStyle="bold"
+        android:textColor="@color/summary_progress_data"
         android:textSize="12dp" />
 </LinearLayout>

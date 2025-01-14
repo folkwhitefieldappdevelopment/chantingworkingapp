@@ -315,217 +315,33 @@
             app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/hkmCardView"
-            >
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="160dp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:background="@android:color/transparent"
-            card_view:cardBackgroundColor="@android:color/transparent"
-            card_view:cardElevation="0dp">
+            app:layout_constraintTop_toBottomOf="@+id/hkmCardView">
 
-            <!-- Horizontal LinearLayout as a container for both child layouts -->
-            <LinearLayout
-                android:id="@+id/parentLayout"
+            <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:background="@drawable/main_activity_count_bg"
-                android:baselineAligned="false"
-                android:elevation="3dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="0dp">
+                android:layout_height="160dp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@android:color/transparent"
+                card_view:cardBackgroundColor="@android:color/transparent"
+                card_view:cardElevation="0dp">
 
-
-                <!-- Container for Progress Bars -->
-
-                <!-- Container for TextViews -->
-
+                <!-- Horizontal LinearLayout as a container for both child layouts -->
                 <LinearLayout
+                    android:id="@+id/parentLayout"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <!-- Horizontal layout for counts -->
-                    <LinearLayout
-                        android:layout_width="@dimen/_125sdp"
-                        android:layout_height="79dp"
-                        android:layout_gravity="top"
-                        android:gravity="top"
-                        android:orientation="horizontal">
-
-                        <!-- SPD count layout -->
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="70dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="0dp">
-
-                            <TextView
-                                android:id="@+id/spChanting"
-                                android:layout_width="wrap_content"
-                                android:layout_height="0dp"
-                                android:layout_marginTop="@dimen/_4sdp"
-                                android:layout_weight="1"
-                                android:text="Chanted"
-                                android:textAlignment="center"
-                                android:textColor="@color/ch_dark_color"
-                                android:textSize="14dp" />
-
-                            <TextView
-                                android:id="@+id/beadCountTextView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="20dp"
-                                android:layout_weight="1"
-                                android:text="0"
-                                android:textAlignment="center"
-                                android:textColor="@color/ch_dark_color"
-                                android:textSize="35dp" />
-                        </LinearLayout>
-                        <!-- Space between count layouts -->
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="@dimen/_45sdp"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:background="@color/ch_counter_border_dark" />
-                        <!-- Heard count layout -->
-                        <LinearLayout
-                            android:id="@+id/heardLinearLayout"
-                            android:layout_width="0dp"
-                            android:layout_height="70dp"
-                            android:layout_weight="1"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_4sdp"
-                                android:clickable="true"
-                                android:focusable="true"
-                                android:gravity="center_horizontal">
-
-                                <TextView
-                                    android:id="@+id/hearingCount"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="20dp"
-                                    android:layout_gravity="center"
-                                    android:clickable="true"
-                                    android:focusable="true"
-                                    android:text="Heard"
-                                    android:textAlignment="center"
-                                    android:textColor="@color/ch_dark_color"
-                                    android:textSize="14dp" />
-
-                                <ImageView
-                                    android:id="@+id/openNewWindow"
-                                    android:layout_width="12dp"
-                                    android:layout_height="12dp"
-                                    android:layout_marginStart="3dp"
-                                    android:background="@drawable/baseline_open_in_new_24"
-                                    android:clickable="true"
-                                    android:contentDescription="Open new popup"
-                                    android:focusable="true" />
-                            </LinearLayout>
-
-                            <TextView
-                                android:id="@+id/heardCountTextView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="20dp"
-                                android:layout_marginStart="-5dp"
-                                android:layout_weight="1"
-                                android:text="0"
-                                android:textAlignment="textStart"
-                                android:textColor="@color/ch_dark_color"
-                                android:textSize="35dp" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="@dimen/_105sdp"
-                        android:layout_height="1dp"
-                        android:layout_gravity="center"
-                        android:background="@color/ch_counter_border_dark"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
-                    <!-- Level layout -->
-                    <!-- Space between level text and buttons -->
-                    <LinearLayout
-                        android:id="@+id/hearLevelChangeLinearLayout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/level_hearing_layout_background"
-                        android:gravity="center">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:text="@string/level"
-                            android:textAlignment="center"
-                            android:textColor="@color/ch_dark_color"
-                            android:textSize="15dp" />
-
-                        <Button
-                            android:id="@+id/hearingLevelDown"
-                            android:layout_width="10dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@drawable/stroke_background"
-                            android:gravity="center"
-                            android:paddingBottom="@dimen/_2sdp"
-                            android:text="-"
-                            android:textColor="@color/ch_dark_color"
-                            android:textSize="30dp" />
-
-                        <TextView
-                            android:id="@+id/levelCount"
-                            android:layout_width="15dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="18dp"
-                            android:layout_marginEnd="18dp"
-                            android:gravity="center"
-                            android:text="1"
-                            android:textColor="@color/ch_dark_color"
-                            android:textSize="16dp" />
-
-                        <Button
-                            android:id="@+id/hearingLevelUp"
-                            android:layout_width="30dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@drawable/stroke_background"
-                            android:gravity="center"
-                            android:text="+"
-                            android:textColor="@color/ch_dark_color"
-                            android:textSize="20dp" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/progressBarVertical"
-                    android:layout_width="@dimen/_120sdp"
                     android:layout_height="match_parent"
-                    android:layout_marginEnd="10dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/main_activity_count_bg"
+                    android:baselineAligned="false"
+                    android:elevation="3dp"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="0dp">
 
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="@dimen/_95sdp"
-                        android:layout_gravity="center"
-                        android:background="@color/ch_counter_border_dark" />
+
+                    <!-- Container for Progress Bars -->
+
+                    <!-- Container for TextViews -->
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -535,83 +351,270 @@
                         android:gravity="center"
                         android:orientation="vertical">
 
-                        <TableLayout
-                            android:id="@+id/progressBarHeaderTableLayout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:paddingLeft="@dimen/_5sdp"
-                            android:paddingRight="@dimen/_5sdp"
-                            android:stretchColumns="*"
-                            android:visibility="visible">
+                        <!-- Horizontal layout for counts -->
+                        <LinearLayout
+                            android:layout_width="@dimen/_125sdp"
+                            android:layout_height="79dp"
+                            android:layout_gravity="top"
+                            android:gravity="top"
+                            android:orientation="horizontal">
 
-                            <TableRow
-                                android:layout_gravity="center"
-                                android:layout_marginTop="@dimen/_4sdp"
-                                android:layout_marginBottom="@dimen/_4sdp"
-                                android:gravity="center">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Beads"
-                                    android:textAlignment="center"
-                                    android:textColor="@color/ch_dark_color"
-                                    android:textSize="@dimen/std_dims_fonts_14" />
+                            <!-- SPD count layout -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="70dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="0dp">
 
                                 <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Heard"
+                                    android:id="@+id/spChanting"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="0dp"
+                                    android:layout_marginTop="@dimen/_4sdp"
+                                    android:layout_weight="1"
+                                    android:text="Chanted"
                                     android:textAlignment="center"
                                     android:textColor="@color/ch_dark_color"
                                     android:textSize="14dp" />
 
                                 <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Progress"
+                                    android:id="@+id/beadCountTextView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="20dp"
+                                    android:layout_weight="1"
+                                    android:text="0"
                                     android:textAlignment="center"
                                     android:textColor="@color/ch_dark_color"
-                                    android:textSize="14dp" />
-                            </TableRow>
-
+                                    android:textSize="35dp" />
+                            </LinearLayout>
+                            <!-- Space between count layouts -->
                             <View
-                                android:layout_width="wrap_content"
-                                android:layout_height="1dp"
-                                android:layout_gravity="center"
-                                android:layout_marginBottom="5dp"
+                                android:layout_width="1dp"
+                                android:layout_height="@dimen/_45sdp"
+                                android:layout_marginTop="@dimen/_5sdp"
                                 android:background="@color/ch_counter_border_dark" />
-                        </TableLayout>
+                            <!-- Heard count layout -->
+                            <LinearLayout
+                                android:id="@+id/heardLinearLayout"
+                                android:layout_width="0dp"
+                                android:layout_height="70dp"
+                                android:layout_weight="1"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
 
-                        <ScrollView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_4sdp"
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:gravity="center_horizontal">
 
-                            <TableLayout
-                                android:id="@+id/progressBarTableLayout"
+                                    <TextView
+                                        android:id="@+id/hearingCount"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="center"
+                                        android:clickable="true"
+                                        android:focusable="true"
+                                        android:text="Heard"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/ch_dark_color"
+                                        android:textSize="14dp" />
+
+                                    <ImageView
+                                        android:id="@+id/openNewWindow"
+                                        android:layout_width="12dp"
+                                        android:layout_height="12dp"
+                                        android:layout_marginStart="3dp"
+                                        android:background="@drawable/baseline_open_in_new_24"
+                                        android:clickable="true"
+                                        android:contentDescription="Open new popup"
+                                        android:focusable="true" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/heardCountTextView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="20dp"
+                                    android:layout_marginStart="-5dp"
+                                    android:layout_weight="1"
+                                    android:text="0"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/ch_dark_color"
+                                    android:textSize="35dp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="@dimen/_105sdp"
+                            android:layout_height="1dp"
+                            android:layout_gravity="center"
+                            android:background="@color/ch_counter_border_dark"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+                        <!-- Level layout -->
+                        <!-- Space between level text and buttons -->
+                        <LinearLayout
+                            android:id="@+id/hearLevelChangeLinearLayout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/level_hearing_layout_background"
+                            android:gravity="center">
+
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
+                                android:text="@string/level"
+                                android:textAlignment="center"
+                                android:textColor="@color/ch_dark_color"
+                                android:textSize="15dp" />
+
+                            <Button
+                                android:id="@+id/hearingLevelDown"
+                                android:layout_width="10dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/stroke_background"
+                                android:gravity="center"
+                                android:paddingBottom="@dimen/_2sdp"
+                                android:text="-"
+                                android:textColor="@color/ch_dark_color"
+                                android:textSize="30dp" />
+
+                            <TextView
+                                android:id="@+id/levelCount"
+                                android:layout_width="15dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="18dp"
+                                android:layout_marginEnd="18dp"
+                                android:gravity="center"
+                                android:text="1"
+                                android:textColor="@color/ch_dark_color"
+                                android:textSize="16dp" />
+
+                            <Button
+                                android:id="@+id/hearingLevelUp"
+                                android:layout_width="30dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/stroke_background"
+                                android:gravity="center"
+                                android:text="+"
+                                android:textColor="@color/ch_dark_color"
+                                android:textSize="20dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/progressBarVertical"
+                        android:layout_width="@dimen/_120sdp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="@dimen/_95sdp"
+                            android:layout_gravity="center"
+                            android:background="@color/ch_counter_border_dark" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TableLayout
+                                android:id="@+id/progressBarHeaderTableLayout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_gravity="center"
                                 android:gravity="center"
                                 android:paddingLeft="@dimen/_5sdp"
                                 android:paddingRight="@dimen/_5sdp"
-                                android:stretchColumns="*" />
-                        </ScrollView>
+                                android:stretchColumns="*"
+                                android:visibility="visible">
+
+                                <TableRow
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="@dimen/_4sdp"
+                                    android:layout_marginBottom="@dimen/_4sdp"
+                                    android:gravity="center">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Beads"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/ch_dark_color"
+                                        android:textSize="@dimen/std_dims_fonts_14" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Heard"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/ch_dark_color"
+                                        android:textSize="14dp" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Progress"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/ch_dark_color"
+                                        android:textSize="14dp" />
+                                </TableRow>
+
+                                <View
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="1dp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginBottom="5dp"
+                                    android:background="@color/ch_counter_border_dark" />
+                            </TableLayout>
+
+                            <ScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TableLayout
+                                    android:id="@+id/progressBarTableLayout"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:paddingLeft="@dimen/_5sdp"
+                                    android:paddingRight="@dimen/_5sdp"
+                                    android:stretchColumns="*" />
+                            </ScrollView>
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>
+
             <LinearLayout
                 android:id="@+id/summaryProgressLayoutId"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                app:layout_constraintBottom_toTopOf="@+id/hearButton">
-            </LinearLayout>
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/hearButton" />
+
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -696,7 +699,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_begin="42dp" />
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

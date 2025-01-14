@@ -1,82 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="wrap_content"
     android:layout_margin="@dimen/_10sdp"
-    android:gravity="left|top"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_gravity="start"
-        android:background="@drawable/summary_progress_card_bg"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="vertical"
-        android:padding="@dimen/_5sdp">
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/_3sdp">
+
+        <!--<ImageView
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_2sdp"
+            android:background="@drawable/summary_prayer_beads" />-->
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Total Heard"
-            android:textColor="@color/history_list_view_header_total_heard_count" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Summary progress"
+            android:textColor="@color/summary_progress_data"
+            android:textSize="12dp"
+            android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0000"
-            android:textColor="@color/history_list_row_view_round_number"
-            android:textSize="12dp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:background="@drawable/summary_progress_card_bg"
-        android:orientation="horizontal"
-        android:padding="@dimen/_5sdp">
+        android:layout_height="50dp"
+        android:gravity="left|top"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:background="@drawable/summary_progress_card_bg"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/_5sdp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Round"
-                android:textColor="@color/history_list_view_header_total_heard_count"
-                android:textSize="12dp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1.2dp"
-                android:layout_margin="@dimen/_2sdp"
-                android:background="@color/ch_counter_border_dark" />
+                android:text="Total Heard"
+                android:textColor="@color/summary_progress_header" />
 
             <TextView
+                android:id="@+id/summaryTotalHeardCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Heard"
-                android:textColor="@color/history_list_view_header_total_heard_count"
-                android:textSize="12dp" />
+                android:text="0000"
+                android:textColor="@color/summary_progress_data"
+                android:textSize="12dp"
+                android:textStyle="bold" />
+
         </LinearLayout>
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/_3sdp"
-            android:layout_marginEnd="@dimen/_3sdp"
-            android:background="@color/ch_counter_border_dark" />
         <LinearLayout
-            android:id="@+id/summaryProgressRowLayoutId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"></LinearLayout>
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:background="@drawable/summary_progress_card_bg"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/_5sdp">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Round"
+                    android:textColor="@color/summary_progress_header"
+                    android:textSize="12dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.2dp"
+                    android:layout_margin="@dimen/_2sdp"
+                    android:background="@color/summary_progress_divider" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Heard"
+                    android:textColor="@color/summary_progress_header"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@color/summary_progress_divider" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/summaryProgressRowLayoutId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center"
+                    android:gravity="center"
+                    android:orientation="horizontal"></LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

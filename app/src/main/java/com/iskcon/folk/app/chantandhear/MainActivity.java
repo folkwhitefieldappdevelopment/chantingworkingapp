@@ -235,6 +235,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 }
             }
         });
+
+        hkMantraClickHandler.addSummeryProgressLayout();
     }
 
     private JapaMalaModel initializeJapaMalaModel() {
