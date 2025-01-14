@@ -609,9 +609,7 @@
                 android:id="@+id/summaryProgressLayoutId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toTopOf="@+id/hearButton" />
 

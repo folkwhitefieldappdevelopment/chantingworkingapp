@@ -26,7 +26,7 @@ public class HeardButtonHandler extends AbstractEventHandler {
 
     private final TextView levelCountTextView;
     private int levelCountValue = ApplicationConstants.HEARING_LEVEL_DEFAULT_VALUE.getConstantValue(Integer.class);
-    private Date lastHeard;
+    private Date lastHeard = new Date();
 
     public HeardButtonHandler(MainActivity appCompatActivity) {
         super(appCompatActivity);

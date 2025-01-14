@@ -23,6 +23,7 @@ import com.iskcon.folk.app.chantandhear.constant.Milestone;
 import com.iskcon.folk.app.chantandhear.constant.UserAttentionSliderMessage;
 import com.iskcon.folk.app.chantandhear.constant.VideoType;
 import com.iskcon.folk.app.chantandhear.service.AbstractEventHandler;
+import com.iskcon.folk.app.chantandhear.service.JapaHintsService;
 import com.iskcon.folk.app.chantandhear.service.LevelIncreaseService;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.HkMantraClickHandler;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.MuteNotificationSingleton;
@@ -64,7 +65,7 @@ public class ProgressBarHandler extends AbstractEventHandler {
                     ApplicationConstants.USER_ATTENTION_SLIDER_SHOW_ON_EVERY.getConstantValue(
                             Integer.class) == 0) {
 
-                this.showUserAttentionSlider();
+                this.showUserAttentionSlideUpMessage();
             }
 
             Milestone calculatedMilestone = Milestone.beadInBetweenWhichMilestoe(currentMalaCount);
@@ -163,7 +164,7 @@ public class ProgressBarHandler extends AbstractEventHandler {
 
         if (!milestone.equals(Milestone.MILESTONE_1)) {
 
-            if(MuteNotificationSingleton.isNotificationNotMuted()) {
+            if (MuteNotificationSingleton.isNotificationNotMuted()) {
                 MediaPlayer milestoneMediaPlayer =
                         MediaPlayer.create(getAppCompatActivity(), R.raw.beat16);
                 milestoneMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -291,6 +292,10 @@ public class ProgressBarHandler extends AbstractEventHandler {
         this.attentiveVideoShown = attentiveVideoShown;
     }
 
+    public void showUserAttentionSlideUpMessage() {
+        new JapaHintsService().showDialog(super.getAppCompatActivity());
+    }
+
     private void showUserAttentionSlider() {
         TextView textView =
                 super.getAppCompatActivity().findViewById(R.id.userAttentionSliderMessage);
@@ -308,7 +313,7 @@ public class ProgressBarHandler extends AbstractEventHandler {
 
         super.vibrate(100);
 
-        if(MuteNotificationSingleton.isNotificationNotMuted()) {
+        if (MuteNotificationSingleton.isNotificationNotMuted()) {
             MediaPlayer milestoneMediaPlayer =
                     MediaPlayer.create(getAppCompatActivity(), R.raw.copper_bell_ding);
             milestoneMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {

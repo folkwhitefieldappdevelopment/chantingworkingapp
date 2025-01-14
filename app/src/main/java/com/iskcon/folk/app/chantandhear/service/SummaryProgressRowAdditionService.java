@@ -43,11 +43,13 @@ public class SummaryProgressRowAdditionService {
 
         LinearLayout summaryProgressRowLayout = summayView.findViewById(R.id.summaryProgressRowLayoutId);
 
-        int totalHeardCount = 0;
+        int totalHeardCount = 1;
 
-        if(roundDataEntities != null && roundDataEntities.size() > 0) {
+        if (roundDataEntities != null && roundDataEntities.size() > 0) {
 
             Collections.reverse(roundDataEntities);
+
+            int iterationCount = 0;
 
             for (RoundDataEntity roundDataEntity : roundDataEntities) {
 
@@ -63,6 +65,7 @@ public class SummaryProgressRowAdditionService {
                 totalHeardCount = totalHeardCount + roundDataEntity.getTotalHeardCount();
 
                 LinearLayout linearLayoutRow = new LinearLayout(mainActivity.getApplicationContext());
+
                 linearLayoutRow.setOrientation(LinearLayout.VERTICAL);
                 linearLayoutRow.setGravity(Gravity.CENTER);
                 LinearLayout.LayoutParams layoutParamsRow =
@@ -73,13 +76,18 @@ public class SummaryProgressRowAdditionService {
 
                 summaryProgressRowLayout.addView(linearLayoutRow);
 
-                View divider = new View(mainActivity.getApplicationContext());
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(1, LinearLayout.LayoutParams.MATCH_PARENT);
-                layoutParams.setMargins(2, 20, 2, 20);
-                divider.setLayoutParams(layoutParams);
-                divider.setBackgroundResource(R.color.ch_counter_border_dark);
+                iterationCount++;
 
-                summaryProgressRowLayout.addView(divider);
+                if (iterationCount != roundDataEntities.size()) {
+                    View divider = new View(mainActivity.getApplicationContext());
+                    LinearLayout.LayoutParams layoutParams =
+                            new LinearLayout.LayoutParams(1, LinearLayout.LayoutParams.MATCH_PARENT);
+                    layoutParams.setMargins(2, 5, 2, 5);
+                    divider.setLayoutParams(layoutParams);
+                    divider.setBackgroundResource(R.color.ch_counter_border_dark);
+
+                    summaryProgressRowLayout.addView(divider);
+                }
             }
         }
 

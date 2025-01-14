@@ -13,15 +13,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:gravity="center"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total Heard"
+            android:text="Heard"
             android:textColor="@color/history_list_view_header_total_heard_count" />
 
         <TextView
+            android:id="@+id/summaryTotalHeardCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0000"
@@ -69,32 +71,17 @@
                 android:textSize="12dp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/summaryProgressRowLayoutId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="000"
-                android:textColor="@color/history_list_row_view_round_number"
-                android:textSize="15dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:text="|"
-                android:textColor="@color/history_list_row_view_round_number"
-                android:textSize="20dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="000"
-                android:textColor="@color/history_list_row_view_round_number"
-                android:textSize="20dp" />
-        </LinearLayout>
+                android:layout_gravity="start|center"
+                android:gravity="center"
+                android:orientation="horizontal" />
+        </ScrollView>
     </LinearLayout>
 </LinearLayout>

@@ -676,7 +676,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Beads"
                                     android:textAlignment="center"
-                                    android:textColor="@color/ch_dark_color"
+                                    android:textColor="@color/green"
                                     android:textSize="@dimen/std_dims_fonts_14" />
 
                                 <TextView
@@ -684,7 +684,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Heard"
                                     android:textAlignment="center"
-                                    android:textColor="@color/ch_dark_color"
+                                    android:textColor="@color/green"
                                     android:textSize="14dp" />
 
                                 <TextView
@@ -692,7 +692,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Progress"
                                     android:textAlignment="center"
-                                    android:textColor="@color/ch_dark_color"
+                                    android:textColor="@color/green"
                                     android:textSize="14dp" />
                             </TableRow>
 
@@ -716,7 +716,7 @@
                                 android:gravity="center"
                                 android:paddingLeft="@dimen/_5sdp"
                                 android:paddingRight="@dimen/_5sdp"
-                                android:stretchColumns="*"></TableLayout>
+                                android:stretchColumns="*"/>
                         </ScrollView>
                     </LinearLayout>
                 </LinearLayout>
