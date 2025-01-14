@@ -42,10 +42,22 @@
             android:paddingBottom="5dp">
 
             <Button
+                android:id="@+id/increaseLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="2"
+                android:background="@drawable/level_increase_button_bg"
+                android:clickable="true"
+                android:text="Increase"
+                android:textAllCaps="false"
+                android:textColor="@color/ch_light_color"
+                android:textSize="17dp" />
+
+            <Button
                 android:id="@+id/dontIncreaseLevel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/level_increase_later_button_bg"
                 android:clickable="true"
@@ -54,17 +66,6 @@
                 android:textColor="@color/ch_dark_color"
                 android:textSize="17dp" />
 
-            <Button
-                android:id="@+id/increaseLevel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:background="@drawable/level_increase_button_bg"
-                android:clickable="true"
-                android:text="Increase"
-                android:textAllCaps="false"
-                android:textColor="@color/ch_light_color"
-                android:textSize="17dp" />
         </LinearLayout>
 
     </TableLayout>

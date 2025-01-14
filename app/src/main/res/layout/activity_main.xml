@@ -23,47 +23,65 @@
         android:layout_height="match_parent"
         android:background="@drawable/ch_background_light_3">
 
-        <RelativeLayout
-            android:id="@+id/relativeLayout"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="@integer/linearlayoutOrientation"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.75"
             app:layout_constraintStart_toEndOf="@+id/cardView"
-            app:layout_constraintTop_toTopOf="@+id/guideline41"
-            tools:ignore="MissingConstraints">
+            app:layout_constraintTop_toTopOf="@+id/guideline41">
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/spMainActivityImage"
-                android:layout_width="300dp"
-                android:layout_height="400dp"
-                android:layout_marginTop="@dimen/login_activity_sp_image_margin_top"
-                android:contentDescription="@string/shila_prabhupada_welcome_image"
-                android:visibility="visible"
-                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large"
-                app:srcCompat="@drawable/srila_prabhupada_welcome_image_lbg"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="10dp" />
+            <RelativeLayout
+                android:id="@+id/relativeLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
 
-            <VideoView
-                android:id="@+id/krishnaVideoView"
-                android:layout_width="300dp"
-                android:layout_height="380dp"
-                android:background="@drawable/main_activity_view_flipper_bg"
-                android:visibility="invisible" />
+                tools:ignore="MissingConstraints">
 
-            <ViewFlipper
-                android:id="@+id/focusSlideshowFlipper"
-                android:layout_width="300dp"
-                android:layout_height="30dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="22dp"
-                android:background="@drawable/level_change_image_background"
-                android:elevation="2dp"
-                android:visibility="invisible"
-                tools:ignore="MissingConstraints" />
-        </RelativeLayout>
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/spMainActivityImage"
+                    android:layout_width="300dp"
+                    android:layout_height="400dp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/login_activity_sp_image_margin_top"
+                    android:contentDescription="@string/shila_prabhupada_welcome_image"
+                    android:visibility="visible"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large"
+                    app:srcCompat="@drawable/srila_prabhupada_welcome_image_lbg"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteX="10dp" />
+
+                <VideoView
+                    android:id="@+id/krishnaVideoView"
+                    android:layout_width="300dp"
+                    android:layout_height="380dp"
+                    android:background="@drawable/main_activity_view_flipper_bg"
+                    android:visibility="invisible" />
+
+                <ViewFlipper
+                    android:id="@+id/focusSlideshowFlipper"
+                    android:layout_width="300dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="22dp"
+                    android:background="@drawable/level_change_image_background"
+                    android:elevation="2dp"
+                    android:visibility="invisible"
+                    tools:ignore="MissingConstraints" />
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/summaryProgressLayoutId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            </LinearLayout>
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/spBadgeImageView"
@@ -230,7 +248,7 @@
                                 android:id="@+id/muteNotification"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                 android:clickable="true"
+                                android:clickable="true"
                                 android:focusable="true"
                                 android:paddingTop="10dp"
                                 android:src="@drawable/baseline_notifications_active_24"

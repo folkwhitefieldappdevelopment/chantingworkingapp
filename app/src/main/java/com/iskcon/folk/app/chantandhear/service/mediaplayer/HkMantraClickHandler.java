@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.material.imageview.ShapeableImageView;
@@ -30,6 +31,7 @@ import com.iskcon.folk.app.chantandhear.history.model.RoundDataEntity;
 import com.iskcon.folk.app.chantandhear.service.AbstractEventHandler;
 import com.iskcon.folk.app.chantandhear.service.CountdownTimerImpl;
 import com.iskcon.folk.app.chantandhear.service.HareKrishnaMantraTextManager;
+import com.iskcon.folk.app.chantandhear.service.SummaryProgressRowAdditionService;
 import com.iskcon.folk.app.chantandhear.service.beadcount.JapaMalaViewModel;
 import com.iskcon.folk.app.chantandhear.service.beadcount.MalaBeadCounter;
 import com.iskcon.folk.app.chantandhear.util.CommonUtils;
@@ -208,6 +210,7 @@ public class HkMantraClickHandler extends AbstractEventHandler {
     }
 
     private void startHkMahaMantraMultipleMediaPlayer(boolean calledViaResume) {
+        this.addSummeryProgressLayout();
         hareKrishnaMahaMantraTextView.setAnimation(
                 AnimationUtils.loadAnimation(getAppCompatActivity(), android.R.anim.fade_out));
         hareKrishnaMahaMantraTextView.setAnimation(
@@ -442,5 +445,12 @@ public class HkMantraClickHandler extends AbstractEventHandler {
 
     public boolean isMediaPlayerInitialized() {
         return hkMahaMantraMediaPlayer != null || panchTattvaMantraMediaPlayer != null;
+    }
+
+    private void addSummeryProgressLayout() {
+        /*LinearLayout summaryProgressLayout = super.getAppCompatActivity().findViewById(R.id.summaryProgressLayoutId);
+        View summayView = View.inflate(super.getAppCompatActivity(), R.layout.summary_progress_layout, null);
+        summaryProgressLayout.addView(summayView);*/
+        new SummaryProgressRowAdditionService().addSummaryRow(super.getAppCompatActivity());
     }
 }
