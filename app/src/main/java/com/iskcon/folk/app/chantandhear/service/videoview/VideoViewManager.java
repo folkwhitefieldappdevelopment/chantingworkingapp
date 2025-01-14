@@ -58,6 +58,12 @@ public class VideoViewManager extends AbstractEventHandler {
         });*/
     }
 
+    public void resetVideo(){
+        ((ShapeableImageView) getAppCompatActivity().findViewById(R.id.spMainActivityImage)).setVisibility(ViewFlipper.VISIBLE);
+        VideoView videoView = getAppCompatActivity().findViewById(R.id.krishnaVideoView);
+        videoView.setVisibility(ViewFlipper.INVISIBLE);
+        videoView.stopPlayback();
+    }
     public void startVideo(long flipInterval) {
         ((ShapeableImageView) getAppCompatActivity().findViewById(R.id.spMainActivityImage)).setVisibility(ViewFlipper.INVISIBLE);
         VideoView videoView = getAppCompatActivity().findViewById(R.id.krishnaVideoView);

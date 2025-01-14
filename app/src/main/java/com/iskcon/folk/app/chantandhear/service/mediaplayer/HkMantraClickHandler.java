@@ -345,6 +345,10 @@ public class HkMantraClickHandler extends AbstractEventHandler {
 
         this.addSummeryProgressLayout();
 
+        super.getAppCompatActivity().getHearButtonHandler().setLevelCountValue(ApplicationConstants.HEARING_LEVEL_DEFAULT_VALUE.getConstantValue(Integer.class));
+
+        super.getAppCompatActivity().getVideoViewManager().resetVideo();
+
         String message = null;
 
         if (isBeforeDone) {

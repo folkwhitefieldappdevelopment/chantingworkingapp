@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 public class HeardButtonHandler extends AbstractEventHandler {
 
     private final TextView levelCountTextView;
-    private int levelCountValue = 1;
+    private int levelCountValue = ApplicationConstants.HEARING_LEVEL_DEFAULT_VALUE.getConstantValue(Integer.class);
     private Date lastHeard;
 
     public HeardButtonHandler(MainActivity appCompatActivity) {
@@ -161,5 +161,10 @@ public class HeardButtonHandler extends AbstractEventHandler {
         }
 
         return isThisFakeHearing;
+    }
+
+    public void setLevelCountValue(int levelCountValue) {
+        this.levelCountValue = levelCountValue;
+        ((TextView)super.getAppCompatActivity().findViewById(R.id.levelCount)).setText(String.valueOf(levelCountValue));
     }
 }
