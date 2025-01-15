@@ -23,10 +23,10 @@ public class JapaHintsService {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(mainActivity);
 
-        View levelIncreasePopupView = View.inflate(mainActivity, R.layout.japa_hints_popup, null);
+        View levelIncreasePopupView = View.inflate(mainActivity, R.layout.chanting_guidline, null);
 
-        ((TextView) levelIncreasePopupView.findViewById(R.id.hintMessage)).setText(
-                MessageFormat.format("Hare Krishna, \n{0}", UserAttentionSliderMessage.getAttentionMessage()));
+//        ((TextView) levelIncreasePopupView.findViewById(R.id.hintMessage)).setText(
+//                MessageFormat.format("Hare Krishna, \n{0}", UserAttentionSliderMessage.getAttentionMessage()));
 
         AlertDialog alertDialog = builder.create();
 
@@ -37,15 +37,15 @@ public class JapaHintsService {
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
         layoutParams.copyFrom(alertDialog.getWindow().getAttributes());
         layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
-        layoutParams.height = 500;
+//        layoutParams.height = 500;
 
         alertDialog.getWindow().setAttributes(layoutParams);
 
-        alertDialog.getWindow().setGravity(Gravity.BOTTOM);
+//        alertDialog.getWindow().setGravity(Gravity.BOTTOM);
 
-        this.bindButtonClickEvents(mainActivity, alertDialog, levelIncreasePopupView);
-
-        this.registerAutoClose(alertDialog);
+//        this.bindButtonClickEvents(mainActivity, alertDialog, levelIncreasePopupView);
+//
+//        this.registerAutoClose(alertDialog);
     }
 
     private void bindButtonClickEvents(MainActivity mainActivity, AlertDialog alertDialog, View japaHintsPopupView) {

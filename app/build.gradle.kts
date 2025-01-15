@@ -3,7 +3,7 @@ plugins {
     id("com.google.gms.google-services")
 }
 
-android {
+android{
     namespace = "com.iskcon.folk.app.chantandhear"
     compileSdk = 34
 
@@ -44,6 +44,7 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.google.firebase:firebase-auth")
     implementation("androidx.cardview:cardview:1.0.0")
+    implementation("com.github.gouravkhunger:AccoLib:1.1.2")
     implementation("com.google.android.gms:play-services-auth:21.2.0")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("com.google.android.gms:play-services-auth:21.2.0")    

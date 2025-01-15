@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical"><ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:src="@drawable/user_attention_chat_icon"/>
+        <com.gouravkhunger.accolib.widget.Accordion
+            android:id="@+id/accordion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="Always look at the App"
+            app:text="To keep the focus on Chanting."
+            app:titleSize="7dp"
+            app:textSize="6dp"
+            app:titleColor="@android:color/black"
+            app:textColor="@android:color/darker_gray"/>
+        <com.gouravkhunger.accolib.widget.Accordion
+            android:id="@+id/accordion2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:title="Consciously Increase Level"
+            app:text="To keep the focus on Chanting."
+            app:titleSize="7dp"
+            app:textSize="6dp"
+            app:titleColor="@android:color/black"
+            app:textColor="@android:color/darker_gray"/>
+        <com.gouravkhunger.accolib.widget.Accordion
+            android:id="@+id/accordion3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="Monitor Hearing and Chanting Count"
+            app:text="To keep the focus on Chanting."
+            app:titleSize="7dp"
+            app:textSize="6dp"
+            app:titleColor="@android:color/black"
+            app:textColor="@android:color/darker_gray"/>
+        <Button
+            android:id="@+id/increaseLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/level_increase_button_bg"
+            android:clickable="true"
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_gravity="center"
+            android:text="I WIll"
+            android:textAllCaps="false"
+            android:textColor="@color/ch_light_color"
+            android:textSize="20dp" />
+
+        <!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Hare Krishna, I will"-->
+<!--            -->
+<!--            android:textSize="25dp"/>-->
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="2dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:background="@color/black"-->
+<!--            android:gravity="center"-->
+<!--            android:textAlignment="center" />-->
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Hare Krishna, I will"-->
+<!--            android:textSize="25dp"/>-->
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Hare Krishna, I will"-->
+<!--            android:textSize="25dp"/>-->
+        
+    </LinearLayout>
+</RelativeLayout>
