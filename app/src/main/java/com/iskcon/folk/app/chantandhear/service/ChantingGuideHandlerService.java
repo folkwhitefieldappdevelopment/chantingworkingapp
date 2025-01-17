@@ -7,54 +7,36 @@ import android.os.Vibrator;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.TextView;
 
 import com.iskcon.folk.app.chantandhear.MainActivity;
 import com.iskcon.folk.app.chantandhear.R;
 import com.iskcon.folk.app.chantandhear.constant.ApplicationConstants;
-import com.iskcon.folk.app.chantandhear.constant.UserAttentionSliderMessage;
 import com.iskcon.folk.app.chantandhear.util.CommonUtils;
 
-import java.text.MessageFormat;
-
-public class JapaHintsService {
+public class ChantingGuideHandlerService {
 
     public void showDialog(MainActivity mainActivity) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(mainActivity);
-
-        View japaHintPopupView = View.inflate(mainActivity, R.layout.japa_hints_popup, null);
-
-        ((TextView) japaHintPopupView.findViewById(R.id.hintMessage)).setText(
-                MessageFormat.format("Hare Krishna, \n{0}", UserAttentionSliderMessage.getAttentionMessage()));
-
+        View chantingGuideView = View.inflate(mainActivity, R.layout.chanting_guidline, null);
         AlertDialog alertDialog = builder.create();
-
-        alertDialog.setView(japaHintPopupView, 0, 50, 0, 0);
-
+        alertDialog.setView(chantingGuideView, 0, 50, 0, 0);
         alertDialog.show();
-
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
         layoutParams.copyFrom(alertDialog.getWindow().getAttributes());
         layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
-        layoutParams.height = 500;
-
         alertDialog.getWindow().setAttributes(layoutParams);
-
-        alertDialog.getWindow().setGravity(Gravity.BOTTOM);
-
-        this.bindButtonClickEvents(mainActivity, alertDialog, japaHintPopupView);
-
-        this.registerAutoClose(alertDialog);
+        this.bindButtonClickEvents(mainActivity, alertDialog, chantingGuideView);
     }
 
-    private void bindButtonClickEvents(MainActivity mainActivity, AlertDialog alertDialog, View japaHintsPopupView) {
+    private void bindButtonClickEvents(MainActivity mainActivity, AlertDialog alertDialog, View chantingGuideView) {
 
-        japaHintsPopupView.findViewById(R.id.encouraging).setOnClickListener(new View.OnClickListener() {
+        chantingGuideView.findViewById(R.id.acceptButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CommonUtils.vibrateFunction(50, (Vibrator) mainActivity.getSystemService(Context.VIBRATOR_SERVICE));
                 alertDialog.dismiss();
+                mainActivity.getHkMantraClickHandler().startPanchaTattvaMantraMediaPlayer();
             }
         });
     }

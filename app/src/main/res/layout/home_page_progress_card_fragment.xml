@@ -34,11 +34,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_15sdp"
                 android:text="Lets finish chanting"
-                android:textColor="@color/ch_light_color_70_opacity"
+                android:textColor="@color/summary_progress_data"
                 android:textSize="@dimen/_10sdp"
                 android:textStyle="italic"
                 android:visibility="visible"
                 android:clickable="true"
+                android:padding="@dimen/_10sdp"
+                android:background="@android:drawable/dialog_holo_light_frame"
                 android:focusable="true"/>
 
         </LinearLayout>

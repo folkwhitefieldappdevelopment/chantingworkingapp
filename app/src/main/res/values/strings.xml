@@ -21,6 +21,7 @@
     <string name="heard_button">Heard button</string>
     <string name="milestone_wise_heard_count">Milestone wise heard count</string>
     <string name="star">Star</string>
+    <string name="chanting_guide"><u>Chanting Guide</u></string>
     <string-array name="playback_speed_options">
         <item>0.75x</item>
         <item>1.0x</item>

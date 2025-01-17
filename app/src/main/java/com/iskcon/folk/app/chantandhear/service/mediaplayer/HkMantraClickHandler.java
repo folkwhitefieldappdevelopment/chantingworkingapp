@@ -29,6 +29,7 @@ import com.iskcon.folk.app.chantandhear.dao.ChantingDataDao;
 import com.iskcon.folk.app.chantandhear.factory.MediaPlayerInstanceCreatorFactory;
 import com.iskcon.folk.app.chantandhear.history.model.RoundDataEntity;
 import com.iskcon.folk.app.chantandhear.service.AbstractEventHandler;
+import com.iskcon.folk.app.chantandhear.service.ChantingGuideHandlerService;
 import com.iskcon.folk.app.chantandhear.service.CountdownTimerImpl;
 import com.iskcon.folk.app.chantandhear.service.HareKrishnaMantraTextManager;
 import com.iskcon.folk.app.chantandhear.service.SummaryProgressRowAdditionService;
@@ -90,7 +91,8 @@ public class HkMantraClickHandler extends AbstractEventHandler {
             if (isMediaPaused) {
                 this.resumeMediaPlayer();
             } else {
-                this.startPanchaTattvaMantraMediaPlayer();
+                new ChantingGuideHandlerService().showDialog(super.getAppCompatActivity());
+                //this.startPanchaTattvaMantraMediaPlayer();
             }
         } else if (playButton.getVisibility() == View.INVISIBLE) { // Pause
             hareKrishnaMahaMantraTextView.setText(
@@ -100,7 +102,7 @@ public class HkMantraClickHandler extends AbstractEventHandler {
     }
 
     // Start Pancha Tattva Mantra Media player
-    private void startPanchaTattvaMantraMediaPlayer() {
+    public void startPanchaTattvaMantraMediaPlayer() {
         playButton.setVisibility(View.INVISIBLE);
         ((ImageView) super.getAppCompatActivity()
                 .findViewById(R.id.spBadgeImageView)).setVisibility(View.VISIBLE);
@@ -289,7 +291,8 @@ public class HkMantraClickHandler extends AbstractEventHandler {
             if (currentMediaPlayer.equals(MediaPlayerPlaying.HKM_MEDIA_PLAYER)) {
                 this.startHkMahaMantraMultipleMediaPlayer(true);
             } else {
-                this.startPanchaTattvaMantraMediaPlayer();
+                new ChantingGuideHandlerService().showDialog(super.getAppCompatActivity());
+                //this.startPanchaTattvaMantraMediaPlayer();
             }
             super.getAppCompatActivity().getVideoViewManager().resumeVideo();
         }

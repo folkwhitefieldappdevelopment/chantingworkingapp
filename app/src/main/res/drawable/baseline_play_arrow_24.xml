@@ -1,5 +1,11 @@
-<vector android:height="60dp" android:tint="@color/ch_light_color"
-    android:viewportHeight="24" android:viewportWidth="24"
-    android:width="60dp" xmlns:android="http://schemas.android.com/apk/res/android">
-    <path android:strokeColor="@color/ch_light_color" android:fillColor="@color/ch_light_color" android:pathData="M8,5v14l11,-7z"/>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="60dp"
+    android:height="60dp"
+    android:tint="@color/ch_dark_color"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="@color/ch_light_color"
+        android:pathData="M8,5v14l11,-7z"
+        android:strokeColor="@color/ch_dark_color" />
 </vector>

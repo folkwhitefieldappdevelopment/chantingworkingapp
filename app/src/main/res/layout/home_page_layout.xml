@@ -58,7 +58,7 @@
             android:id="@+id/homePageTabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabBackground="@color/ch_dark_color"
+            app:tabBackground="@android:color/transparent"
             app:tabRippleColor="@color/ch_light_color"
             app:tabTextAppearance="@style/tabTextSizeStyle"
             app:tabTextColor="@color/ch_light_color">

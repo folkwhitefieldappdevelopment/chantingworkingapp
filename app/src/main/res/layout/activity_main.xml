@@ -79,8 +79,7 @@
                 android:id="@+id/summaryProgressLayoutId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-            </LinearLayout>
+                android:orientation="vertical"></LinearLayout>
         </LinearLayout>
 
         <ImageView
@@ -144,13 +143,13 @@
                                 android:paddingEnd="@dimen/_15sdp"
                                 android:paddingBottom="@dimen/_6sdp"
                                 android:rotation="0"
-                                android:shadowColor="@color/history_list_row_view_heardCount_value"
+                                android:shadowColor="@color/ch_light_color"
                                 android:shadowDx="5"
                                 android:shadowDy="5"
                                 android:shadowRadius="5"
                                 android:text="R\no\nu\nn\nd\n\n"
                                 android:textAlignment="center"
-                                android:textColor="@color/ch_light_color_text_view"
+                                android:textColor="@color/ch_dark_color"
                                 android:textSize="12dp" />
 
                             <View
@@ -174,7 +173,7 @@
                                     android:letterSpacing="0.1"
                                     android:paddingTop="5dp"
                                     android:text="00:00"
-                                    android:textColor="@color/ch_light_color"
+                                    android:textColor="@color/ch_dark_color"
                                     android:textSize="15dp"
                                     android:verticalScrollbarPosition="defaultPosition"
                                     android:visibility="visible"
@@ -188,7 +187,7 @@
                                     android:gravity="center"
                                     android:text="Hare Krishna"
                                     android:textAlignment="center"
-                                    android:textColor="@color/ch_light_color_text_view"
+                                    android:textColor="@color/ch_dark_color"
                                     android:textSize="14dp"
                                     android:visibility="visible" />
                             </LinearLayout>
@@ -267,7 +266,7 @@
                                 android:layout_gravity="bottom"
                                 android:gravity="bottom"
                                 android:text="Mute notification"
-                                android:textColor="@color/ch_light_color_70_opacity"
+                                android:textColor="@color/summary_progress_data"
                                 android:textSize="8dp"
                                 android:translationY="-6dp" />
                         </LinearLayout>
@@ -295,7 +294,7 @@
                                 android:layout_gravity="bottom"
                                 android:gravity="bottom"
                                 android:text="Restart"
-                                android:textColor="@color/ch_light_color_70_opacity"
+                                android:textColor="@color/summary_progress_data"
                                 android:textSize="8dp"
                                 android:translationY="-6dp" />
                         </LinearLayout>
@@ -325,7 +324,7 @@
                                 android:layout_gravity="bottom"
                                 android:gravity="bottom"
                                 android:text="Mute mantra"
-                                android:textColor="@color/ch_light_color_70_opacity"
+                                android:textColor="@color/summary_progress_data"
                                 android:textSize="8dp"
                                 android:translationY="-6dp" />
                         </LinearLayout>
@@ -353,7 +352,7 @@
                                 android:layout_gravity="bottom"
                                 android:gravity="bottom"
                                 android:text="Early done"
-                                android:textColor="@color/ch_light_color_70_opacity"
+                                android:textColor="@color/summary_progress_data"
                                 android:textSize="8dp"
                                 android:translationY="-5dp" />
                         </LinearLayout>
@@ -376,7 +375,7 @@
                                 android:letterSpacing="0.0"
                                 android:paddingTop="10dp"
                                 android:text="1x"
-                                android:textColor="@color/ch_light_color"
+                                android:textColor="@color/ch_dark_color"
                                 android:textSize="13dp" />
 
                             <TextView
@@ -384,7 +383,7 @@
                                 android:layout_height="15dp"
                                 android:layout_gravity="center"
                                 android:text="Speed"
-                                android:textColor="@color/ch_light_color_70_opacity"
+                                android:textColor="@color/summary_progress_data"
                                 android:textSize="8dp"
                                 android:translationY="0dp" />
                         </LinearLayout>
@@ -676,7 +675,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Beads"
                                     android:textAlignment="center"
-                                    android:textColor="@color/green"
+                                    android:textColor="@color/ch_dark_color"
                                     android:textSize="@dimen/std_dims_fonts_14" />
 
                                 <TextView
@@ -684,7 +683,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Heard"
                                     android:textAlignment="center"
-                                    android:textColor="@color/green"
+                                    android:textColor="@color/ch_dark_color"
                                     android:textSize="14dp" />
 
                                 <TextView
@@ -692,7 +691,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Progress"
                                     android:textAlignment="center"
-                                    android:textColor="@color/green"
+                                    android:textColor="@color/ch_dark_color"
                                     android:textSize="14dp" />
                             </TableRow>
 
@@ -716,7 +715,7 @@
                                 android:gravity="center"
                                 android:paddingLeft="@dimen/_5sdp"
                                 android:paddingRight="@dimen/_5sdp"
-                                android:stretchColumns="*"/>
+                                android:stretchColumns="*" />
                         </ScrollView>
                     </LinearLayout>
                 </LinearLayout>

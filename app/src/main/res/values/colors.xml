@@ -142,7 +142,7 @@
     <color name="navy">#000080</color>
     <color name="black">#000000</color>
     <!-- Newly added for v2.0 -->
-    <color name="ch_dark_color">#191a92</color>
+    <color name="ch_dark_color">#E6191a92</color>
     <color name="ch_dark_color_80_opacity">#E6191a92</color>
     <color name="ch_dark_color_50_opacity">#80191a92</color>
     <color name="ch_dark_color_40_opacity">#66191a92</color>
