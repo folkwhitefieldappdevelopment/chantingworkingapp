@@ -1,23 +1,13 @@
 package com.iskcon.folk.app.chantandhear.service.mediaplayer;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.RelativeSizeSpan;
-import android.text.style.ScaleXSpan;
-import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.material.imageview.ShapeableImageView;
@@ -220,6 +210,7 @@ public class HkMantraClickHandler extends AbstractEventHandler {
         hareKrishnaMantraTextManager.initState(hareKrishnaMahaMantraTextView);
         hkMahaMantraMediaPlayer.setPlaybackParams(hkMahaMantraMediaPlayer.getPlaybackParams()
                 .setSpeed(speedButtonHandler.getSpeed()));
+        new ChantingGuideHandlerService().updateMarqueeTextView(super.getAppCompatActivity());
         if (!calledViaResume) {
             super.getAppCompatActivity().getProgressBarHandler().initializeProgressBar();
         }

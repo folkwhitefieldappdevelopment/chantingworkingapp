@@ -9,524 +9,360 @@
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
     <!-- res/layout/round_scoreboard.xml -->
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
+    <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:visibility="invisible"
-        app:headerLayout="@layout/nav_header"
-        app:menu="@menu/menuoption" />
+        android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:background="@drawable/ch_background_light_3">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/ch_background_light_3">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/hkmCardView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            app:layout_constraintBottom_toTopOf="@id/cardView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.48"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/relativeLayout"
-            card_view:cardBackgroundColor="@android:color/transparent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.cardview.widget.CardView
+                android:id="@+id/hkmCardView"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_110sdp"
-                android:background="@drawable/main_activity_hkm_bg"
-                android:elevation="10dp">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintBottom_toTopOf="@id/cardView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.48"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/relativeLayout"
+                card_view:cardBackgroundColor="@android:color/transparent">
 
-                <!-- ScrollView with TextView inside -->
-                <RelativeLayout
-                    android:id="@+id/hkmTextScrollView"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:gravity="center"
-                    app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_height="@dimen/_130sdp"
+                    android:background="@drawable/main_activity_hkm_bg"
+                    android:elevation="10dp">
 
-                    <!-- ScrollView for Text -->
-
-                    <!-- ImageView for Stop Icon -->
-                    <ScrollView
+                    <!-- ScrollView with TextView inside -->
+                    <RelativeLayout
+                        android:id="@+id/hkmTextScrollView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                        <LinearLayout
+                        <!-- ScrollView for Text -->
+
+                        <!-- ImageView for Stop Icon -->
+                        <ScrollView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:layout_height="wrap_content">
 
-                            <TextView
-                                android:id="@+id/roundNoTextView"
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/roundNoTextView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:letterSpacing="0.2"
+                                    android:paddingStart="@dimen/_15sdp"
+                                    android:paddingTop="@dimen/_6sdp"
+                                    android:paddingEnd="@dimen/_15sdp"
+                                    android:paddingBottom="@dimen/_6sdp"
+                                    android:rotation="0"
+                                    android:shadowColor="@color/ch_light_color"
+                                    android:shadowDx="5"
+                                    android:shadowDy="5"
+                                    android:shadowRadius="5"
+                                    android:text="R\no\nu\nn\nd\n\n"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/ch_dark_color"
+                                    android:textSize="12dp" />
+
+                                <View
+                                    android:layout_width="0.5dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_10sdp"
+                                    android:background="@color/ch_media_player_border_dark" />
+
+                                <RelativeLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/hareKrishnaMahaMantraTextView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:letterSpacing="0.1"
+                                        android:paddingEnd="@dimen/_20sdp"
+                                        android:text="Hare Krishna"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/ch_dark_color"
+                                        android:textSize="14dp"
+                                        android:visibility="visible" />
+
+                                    <TextView
+                                        android:id="@+id/chantingGuideMarqueeTextView"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentBottom="true"
+                                        android:layout_gravity="bottom|start"
+                                        android:background="@color/summary_progress_data"
+                                        android:ellipsize="marquee"
+                                        android:fadingEdge="horizontal"
+                                        android:gravity="bottom|start"
+                                        android:marqueeRepeatLimit="marquee_forever"
+                                        android:scrollHorizontally="true"
+                                        android:singleLine="true"
+                                        android:text=""
+                                        android:textColor="@color/ch_light_color"
+                                        android:textSize="14dp"
+                                        android:padding="@dimen/_5sdp"
+                                        android:textStyle="bold|italic"
+                                        android:visibility="invisible" />
+                                </RelativeLayout>
+                            </LinearLayout>
+
+
+                        </ScrollView>
+
+                        <ImageView
+                            android:id="@+id/startIconImageView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_margin="20dp"
+                            android:alpha="0.8"
+                            android:src="@drawable/baseline_play_arrow_24" />
+                    </RelativeLayout>
+
+                    <!-- Horizontal line -->
+                    <View
+                        android:id="@+id/horizontalLine"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/ch_dark_color"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/hkmTextScrollView" />
+
+                    <!-- TextView below the horizontal line -->
+                    <LinearLayout
+                        android:id="@+id/linearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:alpha="0.7"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/horizontalLine">
+
+                        <TextView
+                            android:id="@+id/mediaTimerTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:letterSpacing="0.1"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="8dp"
+                            android:paddingRight="10dp"
+                            android:text="00:00"
+                            android:textAlignment="center"
+                            android:textColor="@color/ch_dark_color"
+                            android:textSize="13dp"
+                            android:verticalScrollbarPosition="defaultPosition"
+                            android:visibility="visible"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/horizontalLine" />
+
+                        <!-- Icons layout to the right of the TextView -->
+                        <LinearLayout
+                            android:id="@+id/iconLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="end"
+                            android:orientation="horizontal"
+                            app:layout_constraintStart_toEndOf="@id/mediaTimerTextView"
+                            app:layout_constraintTop_toBottomOf="@id/horizontalLine">
+
+                            <FrameLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:gravity="center"
-                                android:letterSpacing="0.2"
-                                android:paddingStart="@dimen/_15sdp"
-                                android:paddingTop="@dimen/_6sdp"
-                                android:paddingEnd="@dimen/_15sdp"
-                                android:paddingBottom="@dimen/_6sdp"
-                                android:rotation="0"
-                                android:shadowColor="@color/ch_light_color"
-                                android:shadowDx="5"
-                                android:shadowDy="5"
-                                android:shadowRadius="5"
-                                android:text="R\no\nu\nn\nd\n\n"
-                                android:textAlignment="center"
-                                android:textColor="@color/ch_dark_color"
-                                android:textSize="12dp" />
+                                android:paddingLeft="10dp"
+                                android:paddingTop="4dp"
+                                android:paddingRight="10dp">
 
-                            <View
-                                android:layout_width="0.5dp"
-                                android:layout_height="match_parent"
-                                android:layout_marginTop="@dimen/_10sdp"
-                                android:layout_marginEnd="@dimen/_10sdp"
-                                android:layout_marginBottom="@dimen/_10sdp"
-                                android:background="@color/ch_media_player_border_dark" />
+                                <ImageView
+                                    android:id="@+id/muteNotification"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/baseline_notifications_active_24"
+                                    android:visibility="visible" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@android:color/black"
+                                    android:src="@drawable/baseline_notifications_off_24"
+                                    android:visibility="invisible" />
+                            </FrameLayout>
+
+                            <ImageView
+                                android:id="@+id/resetIconImageView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:src="@drawable/baseline_refresh_24" />
+
+                            <FrameLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp">
+
+                                <ImageView
+                                    android:id="@+id/muteIconImageView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/baseline_volume_up_24" />
+
+                                <ImageView
+                                    android:id="@+id/unmuteIconImageView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@android:color/white"
+                                    android:src="@drawable/baseline_volume_off_24"
+                                    android:visibility="invisible" />
+                            </FrameLayout>
 
                             <TextView
-                                android:id="@+id/hareKrishnaMahaMantraTextView"
-                                android:layout_width="match_parent"
+                                android:id="@+id/speedMenu"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:gravity="center"
                                 android:letterSpacing="0.1"
-                                android:paddingEnd="@dimen/_20sdp"
-                                android:text="Hare Krishna"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:text="1x"
                                 android:textAlignment="center"
                                 android:textColor="@color/ch_dark_color"
-                                android:textSize="14dp"
-                                android:visibility="visible" />
+                                android:textSize="@dimen/_11sdp" />
+
+                            <ImageView
+                                android:id="@+id/beforeDoneImageView"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:src="@drawable/baseline_task_alt_24" />
+
                         </LinearLayout>
+                    </LinearLayout>
 
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
-                    </ScrollView>
+            <RelativeLayout
+                android:id="@+id/relativeLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:orientation="@integer/linearlayoutOrientation"
+                app:layout_constraintBottom_toTopOf="@id/hkmCardView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.37"
+                app:layout_constraintStart_toEndOf="@id/guideline40"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.55"
+                tools:ignore="MissingConstraints">
 
-                    <ImageView
-                        android:id="@+id/startIconImageView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_margin="20dp"
-                        android:alpha="0.8"
-                        android:src="@drawable/baseline_play_arrow_24" />
-                </RelativeLayout>
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/spMainActivityImage"
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:contentDescription="@string/shila_prabhupada_welcome_image"
+                    android:visibility="visible"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large"
+                    app:srcCompat="@drawable/srila_prabhupada_welcome_image_lbg"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteX="10dp" />
 
-                <!-- Horizontal line -->
-                <View
-                    android:id="@+id/horizontalLine"
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/ch_dark_color"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/hkmTextScrollView" />
+                <VideoView
+                    android:id="@+id/krishnaVideoView"
+                    android:layout_width="270dp"
+                    android:layout_height="300dp"
+                    android:background="@drawable/main_activity_view_flipper_bg"
+                    android:visibility="invisible" />
 
-                <!-- TextView below the horizontal line -->
-                <LinearLayout
-                    android:id="@+id/linearLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:alpha="0.7"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/horizontalLine">
+                <ViewFlipper
+                    android:id="@+id/focusSlideshowFlipper"
+                    android:layout_width="225dp"
+                    android:layout_height="22.5dp"
+                    android:layout_alignParentTop="true"
+                    android:background="@drawable/level_change_image_background"
+                    android:elevation="2dp"
+                    android:visibility="invisible"
+                    tools:ignore="MissingConstraints" />
+            </RelativeLayout>
 
-                    <TextView
-                        android:id="@+id/mediaTimerTextView"
-                        android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/spBadgeImageView"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/sp_badge"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/cardView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hkmCardView">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="160dp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/main_activity_count_bg"
+                    card_view:cardBackgroundColor="@android:color/transparent"
+                    card_view:cardElevation="0dp">
+
+                    <!-- Horizontal LinearLayout as a container for both child layouts -->
+                    <LinearLayout
+                        android:id="@+id/parentLayout"
+                        android:layout_width="370dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        android:letterSpacing="0.1"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="8dp"
-                        android:paddingRight="10dp"
-                        android:text="00:00"
-                        android:textAlignment="center"
-                        android:textColor="@color/ch_dark_color"
-                        android:textSize="13dp"
-                        android:verticalScrollbarPosition="defaultPosition"
-                        android:visibility="visible"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/horizontalLine" />
-
-                    <!-- Icons layout to the right of the TextView -->
-                    <LinearLayout
-                        android:id="@+id/iconLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="end"
+                        android:background="@drawable/main_activity_count_bg"
+                        android:baselineAligned="false"
+                        android:elevation="3dp"
+                        android:gravity="center"
                         android:orientation="horizontal"
-                        app:layout_constraintStart_toEndOf="@id/mediaTimerTextView"
-                        app:layout_constraintTop_toBottomOf="@id/horizontalLine">
-
-                        <FrameLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:paddingLeft="10dp"
-                            android:paddingTop="4dp"
-                            android:paddingRight="10dp">
-
-                            <ImageView
-                                android:id="@+id/muteNotification"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/baseline_notifications_active_24"
-                                android:visibility="visible" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@android:color/black"
-                                android:src="@drawable/baseline_notifications_off_24"
-                                android:visibility="invisible" />
-                        </FrameLayout>
-
-                        <ImageView
-                            android:id="@+id/resetIconImageView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
-                            android:src="@drawable/baseline_refresh_24" />
-
-                        <FrameLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp">
-
-                            <ImageView
-                                android:id="@+id/muteIconImageView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/baseline_volume_up_24" />
-
-                            <ImageView
-                                android:id="@+id/unmuteIconImageView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@android:color/white"
-                                android:src="@drawable/baseline_volume_off_24"
-                                android:visibility="invisible" />
-                        </FrameLayout>
-
-                        <TextView
-                            android:id="@+id/speedMenu"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:letterSpacing="0.1"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
-                            android:text="1x"
-                            android:textAlignment="center"
-                            android:textColor="@color/ch_dark_color"
-                            android:textSize="@dimen/_11sdp" />
-
-                        <ImageView
-                            android:id="@+id/beforeDoneImageView"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
-                            android:src="@drawable/baseline_task_alt_24" />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <RelativeLayout
-            android:id="@+id/relativeLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:orientation="@integer/linearlayoutOrientation"
-            app:layout_constraintBottom_toTopOf="@id/hkmCardView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.37"
-            app:layout_constraintStart_toEndOf="@id/guideline40"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.55"
-            tools:ignore="MissingConstraints">
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/spMainActivityImage"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
-                android:contentDescription="@string/shila_prabhupada_welcome_image"
-                android:visibility="visible"
-                android:layout_marginBottom="@dimen/_10sdp"
-                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large"
-                app:srcCompat="@drawable/srila_prabhupada_welcome_image_lbg"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="10dp" />
-
-            <VideoView
-                android:id="@+id/krishnaVideoView"
-                android:layout_width="225dp"
-                android:layout_height="285dp"
-                android:background="@drawable/main_activity_view_flipper_bg"
-                android:visibility="invisible" />
-
-            <ViewFlipper
-                android:id="@+id/focusSlideshowFlipper"
-                android:layout_width="225dp"
-                android:layout_height="22.5dp"
-                android:layout_alignParentTop="true"
-                android:background="@drawable/level_change_image_background"
-                android:elevation="2dp"
-                android:visibility="invisible"
-                tools:ignore="MissingConstraints" />
-        </RelativeLayout>
-
-        <ImageView
-            android:id="@+id/spBadgeImageView"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/sp_badge"
-            android:visibility="invisible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <LinearLayout
-            android:id="@+id/cardView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="@dimen/_10sdp"
-            app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/hkmCardView">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="160dp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:background="@drawable/main_activity_count_bg"
-                card_view:cardBackgroundColor="@android:color/transparent"
-                card_view:cardElevation="0dp">
-
-                <!-- Horizontal LinearLayout as a container for both child layouts -->
-                <LinearLayout
-                    android:id="@+id/parentLayout"
-                    android:layout_width="370dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:baselineAligned="false"
-                    android:elevation="3dp"
-                    android:gravity="center"
-                    android:background="@drawable/main_activity_count_bg"
-                    android:orientation="horizontal"
-                    android:padding="0dp">
+                        android:padding="0dp">
 
 
-                    <!-- Container for Progress Bars -->
+                        <!-- Container for Progress Bars -->
 
-                    <!-- Container for TextViews -->
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="top"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <!-- Horizontal layout for counts -->
-                        <LinearLayout
-                            android:layout_width="@dimen/_125sdp"
-                            android:layout_height="79dp"
-                            android:layout_gravity="top"
-                            android:gravity="top"
-                            android:orientation="horizontal">
-
-                            <!-- SPD count layout -->
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="70dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="0dp">
-
-                                <TextView
-                                    android:id="@+id/spChanting"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="0dp"
-                                    android:layout_marginTop="@dimen/_4sdp"
-                                    android:layout_weight="1"
-                                    android:text="Chanted"
-                                    android:textAlignment="center"
-                                    android:textColor="@color/ch_dark_color"
-                                    android:textSize="14dp" />
-
-                                <TextView
-                                    android:id="@+id/beadCountTextView"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="20dp"
-                                    android:layout_weight="1"
-                                    android:text="0"
-                                    android:textAlignment="center"
-                                    android:textColor="@color/ch_dark_color"
-                                    android:textSize="35dp" />
-                            </LinearLayout>
-                            <!-- Space between count layouts -->
-                            <View
-                                android:layout_width="1dp"
-                                android:layout_height="@dimen/_45sdp"
-                                android:layout_marginTop="@dimen/_5sdp"
-                                android:background="@color/ch_counter_border_dark" />
-                            <!-- Heard count layout -->
-                            <LinearLayout
-                                android:id="@+id/heardLinearLayout"
-                                android:layout_width="0dp"
-                                android:layout_height="70dp"
-                                android:layout_weight="1"
-                                android:clickable="true"
-                                android:focusable="true"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/_4sdp"
-                                    android:clickable="true"
-                                    android:focusable="true"
-                                    android:gravity="center_horizontal">
-
-                                    <TextView
-                                        android:id="@+id/hearingCount"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="20dp"
-                                        android:layout_gravity="center"
-                                        android:clickable="true"
-                                        android:focusable="true"
-                                        android:text="Heard"
-                                        android:textAlignment="center"
-                                        android:textColor="@color/ch_dark_color"
-                                        android:textSize="14dp" />
-
-                                    <ImageView
-                                        android:id="@+id/openNewWindow"
-                                        android:layout_width="12dp"
-                                        android:layout_height="12dp"
-                                        android:layout_marginStart="3dp"
-                                        android:background="@drawable/baseline_open_in_new_24"
-                                        android:clickable="true"
-                                        android:contentDescription="Open new popup"
-                                        android:focusable="true" />
-                                </LinearLayout>
-
-                                <TextView
-                                    android:id="@+id/heardCountTextView"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="20dp"
-                                    android:layout_marginStart="-5dp"
-                                    android:layout_weight="1"
-                                    android:text="0"
-                                    android:textAlignment="textStart"
-                                    android:textColor="@color/ch_dark_color"
-                                    android:textSize="35dp" />
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="@dimen/_105sdp"
-                            android:layout_height="1dp"
-                            android:layout_gravity="center"
-                            android:background="@color/ch_counter_border_dark"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" />
-                        <!-- Level layout -->
-                        <!-- Space between level text and buttons -->
-                        <LinearLayout
-                            android:id="@+id/hearLevelChangeLinearLayout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:background="@drawable/level_hearing_layout_background"
-                            android:gravity="center">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="10dp"
-                                android:text="@string/level"
-                                android:textAlignment="center"
-                                android:textColor="@color/ch_dark_color"
-                                android:textSize="15dp" />
-
-                            <Button
-                                android:id="@+id/hearingLevelDown"
-                                android:layout_width="10dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:background="@drawable/stroke_background"
-                                android:gravity="center"
-                                android:paddingBottom="@dimen/_2sdp"
-                                android:text="-"
-                                android:textColor="@color/ch_dark_color"
-                                android:textSize="30dp" />
-
-                            <TextView
-                                android:id="@+id/levelCount"
-                                android:layout_width="15dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="18dp"
-                                android:layout_marginEnd="18dp"
-                                android:gravity="center"
-                                android:text="2"
-                                android:textColor="@color/ch_dark_color"
-                                android:textSize="16dp" />
-
-                            <Button
-                                android:id="@+id/hearingLevelUp"
-                                android:layout_width="30dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:background="@drawable/stroke_background"
-                                android:gravity="center"
-                                android:text="+"
-                                android:textColor="@color/ch_dark_color"
-                                android:textSize="20dp" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/progressBarVertical"
-                        android:layout_width="@dimen/_120sdp"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="10dp"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="@dimen/_95sdp"
-                            android:layout_gravity="center"
-                            android:background="@color/ch_counter_border_dark" />
+                        <!-- Container for TextViews -->
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -536,170 +372,352 @@
                             android:gravity="center"
                             android:orientation="vertical">
 
-                            <TableLayout
-                                android:id="@+id/progressBarHeaderTableLayout"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center"
-                                android:gravity="center"
-                                android:paddingLeft="@dimen/_5sdp"
-                                android:paddingRight="@dimen/_5sdp"
-                                android:stretchColumns="*"
-                                android:visibility="visible">
+                            <!-- Horizontal layout for counts -->
+                            <LinearLayout
+                                android:layout_width="@dimen/_125sdp"
+                                android:layout_height="79dp"
+                                android:layout_gravity="top"
+                                android:gravity="top"
+                                android:orientation="horizontal">
 
-                                <TableRow
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/_4sdp"
-                                    android:layout_marginBottom="@dimen/_4sdp"
-                                    android:gravity="center">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="Beads"
-                                        android:textAlignment="center"
-                                        android:textColor="@color/ch_dark_color"
-                                        android:textSize="@dimen/std_dims_fonts_14" />
+                                <!-- SPD count layout -->
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="70dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:padding="0dp">
 
                                     <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="Heard"
+                                        android:id="@+id/spChanting"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="0dp"
+                                        android:layout_marginTop="@dimen/_4sdp"
+                                        android:layout_weight="1"
+                                        android:text="Chanted"
                                         android:textAlignment="center"
                                         android:textColor="@color/ch_dark_color"
                                         android:textSize="14dp" />
 
                                     <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="Progress"
+                                        android:id="@+id/beadCountTextView"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="20dp"
+                                        android:layout_weight="1"
+                                        android:text="0"
                                         android:textAlignment="center"
                                         android:textColor="@color/ch_dark_color"
-                                        android:textSize="14dp" />
-                                </TableRow>
-
+                                        android:textSize="35dp" />
+                                </LinearLayout>
+                                <!-- Space between count layouts -->
                                 <View
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="1dp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginBottom="5dp"
+                                    android:layout_width="1dp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
                                     android:background="@color/ch_counter_border_dark" />
-                            </TableLayout>
+                                <!-- Heard count layout -->
+                                <LinearLayout
+                                    android:id="@+id/heardLinearLayout"
+                                    android:layout_width="0dp"
+                                    android:layout_height="70dp"
+                                    android:layout_weight="1"
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
 
-                            <ScrollView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_4sdp"
+                                        android:clickable="true"
+                                        android:focusable="true"
+                                        android:gravity="center_horizontal">
 
-                                <TableLayout
-                                    android:id="@+id/progressBarTableLayout"
+                                        <TextView
+                                            android:id="@+id/hearingCount"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="20dp"
+                                            android:layout_gravity="center"
+                                            android:clickable="true"
+                                            android:focusable="true"
+                                            android:text="Heard"
+                                            android:textAlignment="center"
+                                            android:textColor="@color/ch_dark_color"
+                                            android:textSize="14dp" />
+
+                                        <ImageView
+                                            android:id="@+id/openNewWindow"
+                                            android:layout_width="12dp"
+                                            android:layout_height="12dp"
+                                            android:layout_marginStart="3dp"
+                                            android:background="@drawable/baseline_open_in_new_24"
+                                            android:clickable="true"
+                                            android:contentDescription="Open new popup"
+                                            android:focusable="true" />
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:id="@+id/heardCountTextView"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="20dp"
+                                        android:layout_marginStart="-5dp"
+                                        android:layout_weight="1"
+                                        android:text="0"
+                                        android:textAlignment="textStart"
+                                        android:textColor="@color/ch_dark_color"
+                                        android:textSize="35dp" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="@dimen/_105sdp"
+                                android:layout_height="1dp"
+                                android:layout_gravity="center"
+                                android:background="@color/ch_counter_border_dark"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent" />
+                            <!-- Level layout -->
+                            <!-- Space between level text and buttons -->
+                            <LinearLayout
+                                android:id="@+id/hearLevelChangeLinearLayout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:background="@drawable/level_hearing_layout_background"
+                                android:gravity="center">
+
+                                <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginEnd="10dp"
+                                    android:text="@string/level"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/ch_dark_color"
+                                    android:textSize="15dp" />
+
+                                <Button
+                                    android:id="@+id/hearingLevelDown"
+                                    android:layout_width="10dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/stroke_background"
+                                    android:gravity="center"
+                                    android:paddingBottom="@dimen/_2sdp"
+                                    android:text="-"
+                                    android:textColor="@color/ch_dark_color"
+                                    android:textSize="30dp" />
+
+                                <TextView
+                                    android:id="@+id/levelCount"
+                                    android:layout_width="15dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="18dp"
+                                    android:layout_marginEnd="18dp"
+                                    android:gravity="center"
+                                    android:text="2"
+                                    android:textColor="@color/ch_dark_color"
+                                    android:textSize="16dp" />
+
+                                <Button
+                                    android:id="@+id/hearingLevelUp"
+                                    android:layout_width="30dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/stroke_background"
+                                    android:gravity="center"
+                                    android:text="+"
+                                    android:textColor="@color/ch_dark_color"
+                                    android:textSize="20dp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/progressBarVertical"
+                            android:layout_width="@dimen/_120sdp"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="10dp"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="@dimen/_95sdp"
+                                android:layout_gravity="center"
+                                android:background="@color/ch_counter_border_dark" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="top"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TableLayout
+                                    android:id="@+id/progressBarHeaderTableLayout"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
                                     android:layout_gravity="center"
                                     android:gravity="center"
                                     android:paddingLeft="@dimen/_5sdp"
                                     android:paddingRight="@dimen/_5sdp"
-                                    android:stretchColumns="*" />
-                            </ScrollView>
+                                    android:stretchColumns="*"
+                                    android:visibility="visible">
+
+                                    <TableRow
+                                        android:layout_gravity="center"
+                                        android:layout_marginTop="@dimen/_4sdp"
+                                        android:layout_marginBottom="@dimen/_4sdp"
+                                        android:gravity="center">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="Beads"
+                                            android:textAlignment="center"
+                                            android:textColor="@color/ch_dark_color"
+                                            android:textSize="@dimen/std_dims_fonts_14" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="Heard"
+                                            android:textAlignment="center"
+                                            android:textColor="@color/ch_dark_color"
+                                            android:textSize="14dp" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="Progress"
+                                            android:textAlignment="center"
+                                            android:textColor="@color/ch_dark_color"
+                                            android:textSize="14dp" />
+                                    </TableRow>
+
+                                    <View
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="1dp"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="5dp"
+                                        android:background="@color/ch_counter_border_dark" />
+                                </TableLayout>
+
+                                <ScrollView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <TableLayout
+                                        android:id="@+id/progressBarTableLayout"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:paddingLeft="@dimen/_5sdp"
+                                        android:paddingRight="@dimen/_5sdp"
+                                        android:stretchColumns="*" />
+                                </ScrollView>
+                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
-            <LinearLayout
-                android:id="@+id/summaryProgressLayoutId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toTopOf="@+id/hearButton" />
+                <LinearLayout
+                    android:id="@+id/summaryProgressLayoutId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toTopOf="@+id/hearButton" />
 
-        </LinearLayout>
+            </LinearLayout>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/hearButton"
-            android:layout_width="250dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="32dp"
-            android:backgroundTint="@color/ch_light_color"
-            android:contentDescription="@string/heard_button"
-            android:src="@drawable/hear_tap"
-            app:backgroundTint="@color/white"
-            app:borderWidth="@dimen/_6sdp"
-            app:fabCustomSize="45dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView"
-            app:maxImageSize="0dp" />
-
-        <RelativeLayout
-            android:id="@+id/userAttentionSliderRelativeLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_100sdp"
-            android:layout_marginTop="0dp"
-            android:clickable="true"
-            android:gravity="center"
-            android:paddingStart="@dimen/_3sdp"
-            android:translationY="@dimen/_10sdp"
-            android:translationZ="2dp"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spBadgeImageView"
-            tools:ignore="MissingConstraints">
-
-            <ImageView
-                android:id="@+id/soulfulJapabadge"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:background="@drawable/user_box_bg_round_rect"
-                android:elevation="0dp"
-                android:src="@drawable/user_attention_chat_icon"
-                android:translationX="20dp"
-                android:translationY="-20dp"
-                android:translationZ="1dp"
-                android:visibility="visible" />
-
-            <TextView
-                android:id="@+id/userAttentionSliderMessage"
-                android:layout_width="@dimen/_250sdp"
-                android:layout_height="@dimen/_70sdp"
-                android:layout_marginStart="@dimen/_40sdp"
-                android:layout_marginBottom="-5dp"
-                android:layout_weight="0.1"
-                android:background="@drawable/rounded_chat_bubble"
-                android:gravity="top"
-                android:paddingStart="@dimen/_40sdp"
-                android:paddingTop="@dimen/_10sdp"
-                android:paddingEnd="@dimen/_10sdp"
-                android:rotation="0"
-                android:shadowColor="@color/history_list_row_view_heardCount_value"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="1"
-                android:textColor="@color/ch_dark_color"
-                android:textSize="13dp"
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/hearButton"
+                android:layout_width="250dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="@color/ch_light_color"
+                android:contentDescription="@string/heard_button"
+                android:src="@drawable/hear_tap"
+                app:backgroundTint="@color/white"
+                app:borderWidth="@dimen/_6sdp"
+                app:fabCustomSize="45dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintVertical_bias="0.53" />
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView"
+                app:maxImageSize="0dp" />
 
-        </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/userAttentionSliderRelativeLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginTop="0dp"
+                android:clickable="true"
+                android:gravity="center"
+                android:paddingStart="@dimen/_3sdp"
+                android:translationY="@dimen/_10sdp"
+                android:translationZ="2dp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spBadgeImageView"
+                tools:ignore="MissingConstraints">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline32"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="73dp" />
+                <ImageView
+                    android:id="@+id/soulfulJapabadge"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:background="@drawable/user_box_bg_round_rect"
+                    android:elevation="0dp"
+                    android:src="@drawable/user_attention_chat_icon"
+                    android:translationX="20dp"
+                    android:translationY="-20dp"
+                    android:translationZ="1dp"
+                    android:visibility="visible" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline40"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="42dp" />
+                <TextView
+                    android:id="@+id/userAttentionSliderMessage"
+                    android:layout_width="@dimen/_250sdp"
+                    android:layout_height="@dimen/_70sdp"
+                    android:layout_marginStart="@dimen/_40sdp"
+                    android:layout_marginBottom="-5dp"
+                    android:layout_weight="0.1"
+                    android:background="@drawable/rounded_chat_bubble"
+                    android:gravity="top"
+                    android:paddingStart="@dimen/_40sdp"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:rotation="0"
+                    android:shadowColor="@color/history_list_row_view_heardCount_value"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
+                    android:textColor="@color/ch_dark_color"
+                    android:textSize="13dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintVertical_bias="0.53" />
 
+            </RelativeLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="73dp" />
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="42dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.drawerlayout.widget.DrawerLayout>

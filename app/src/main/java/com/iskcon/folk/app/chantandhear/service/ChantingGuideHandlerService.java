@@ -4,16 +4,36 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Vibrator;
-import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.iskcon.folk.app.chantandhear.MainActivity;
 import com.iskcon.folk.app.chantandhear.R;
 import com.iskcon.folk.app.chantandhear.constant.ApplicationConstants;
 import com.iskcon.folk.app.chantandhear.util.CommonUtils;
 
+import java.text.MessageFormat;
+import java.util.List;
+import java.util.Random;
+
 public class ChantingGuideHandlerService {
+
+    private static final List<Integer> TITLE_STRING =
+            List.of(R.string.chanting_guide_1_title, R.string.chanting_guide_2_title, R.string.chanting_guide_3_title);
+    private static final List<Integer> DESCRIPTION_STRING =
+            List.of(R.string.chanting_guide_1_description, R.string.chanting_guide_2_description,
+                    R.string.chanting_guide_3_description);
+
+    public void updateMarqueeTextView(MainActivity mainActivity) {
+        TextView textView = mainActivity.findViewById(R.id.chantingGuideMarqueeTextView);
+        int randomIndexNumber = new Random().nextInt(3);
+        int index = randomIndexNumber == 0 ? randomIndexNumber : randomIndexNumber - 1;
+        textView.setText(MessageFormat.format("{0} :: {1}", mainActivity.getString(TITLE_STRING.get(index)),
+                mainActivity.getString(DESCRIPTION_STRING.get(index))));
+        textView.setVisibility(View.VISIBLE);
+        textView.setSelected(true);
+    }
 
     public void showDialog(MainActivity mainActivity) {
 

@@ -23,6 +23,7 @@ import com.iskcon.folk.app.chantandhear.constant.Milestone;
 import com.iskcon.folk.app.chantandhear.constant.UserAttentionSliderMessage;
 import com.iskcon.folk.app.chantandhear.constant.VideoType;
 import com.iskcon.folk.app.chantandhear.service.AbstractEventHandler;
+import com.iskcon.folk.app.chantandhear.service.ChantingGuideHandlerService;
 import com.iskcon.folk.app.chantandhear.service.JapaHintsService;
 import com.iskcon.folk.app.chantandhear.service.LevelIncreaseService;
 import com.iskcon.folk.app.chantandhear.service.mediaplayer.HkMantraClickHandler;
@@ -65,7 +66,8 @@ public class ProgressBarHandler extends AbstractEventHandler {
                     ApplicationConstants.USER_ATTENTION_SLIDER_SHOW_ON_EVERY.getConstantValue(
                             Integer.class) == 0) {
 
-                this.showUserAttentionSlideUpMessage();
+                //this.showUserAttentionSlideUpMessage();
+                new ChantingGuideHandlerService().updateMarqueeTextView(super.getAppCompatActivity());
             }
 
             Milestone calculatedMilestone = Milestone.beadInBetweenWhichMilestoe(currentMalaCount);
@@ -83,6 +85,10 @@ public class ProgressBarHandler extends AbstractEventHandler {
         if (heardCount != 0) {
 
             int currentMilestoneHeardCount = this.milestoneWiseProgress.get(this.currentMilestone);
+
+            if(currentMilestoneHeardCount % 5 == 0){
+                new ChantingGuideHandlerService().updateMarqueeTextView(super.getAppCompatActivity());
+            }
 
             if (currentMilestoneHeardCount < 16) {
 

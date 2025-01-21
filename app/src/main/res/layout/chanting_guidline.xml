@@ -33,33 +33,33 @@
             android:id="@+id/accordion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="Always look at the App"
-            app:titleColor="@color/ch_dark_color"
-            app:text="Don't close your eyes while chanting, keep it open and chant. This helps you to perform Mindful Japa very effectively by keeping your focus locked."
+            app:text="@string/chanting_guide_1_description"
             app:textColor="@color/summary_progress_header"
             app:textSize="6dp"
+            app:title="@string/chanting_guide_1_title"
+            app:titleColor="@color/ch_dark_color"
             app:titleSize="7dp" />
 
         <com.gouravkhunger.accolib.widget.Accordion
             android:id="@+id/accordion2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:title="Consciously Increase Level"
-            app:titleColor="@color/ch_dark_color"
-            app:text="After every milestone completion i.e. multiple 16 beads, we should increase the hearing level from current plus one number."
+            app:text="@string/chanting_guide_2_description"
             app:textColor="@color/summary_progress_header"
             app:textSize="6dp"
+            app:title="@string/chanting_guide_2_title"
+            app:titleColor="@color/ch_dark_color"
             app:titleSize="7dp" />
 
         <com.gouravkhunger.accolib.widget.Accordion
             android:id="@+id/accordion3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="Monitor Hearing and Chanting Count"
-            app:titleColor="@color/ch_dark_color"
-            app:text="Keep monitoring your chanting count v/s hearing count, difference between them should not be more than five beads."
+            app:text="@string/chanting_guide_3_description"
             app:textColor="@color/summary_progress_header"
             app:textSize="6dp"
+            app:title="@string/chanting_guide_3_title"
+            app:titleColor="@color/ch_dark_color"
             app:titleSize="7dp" />
 
         <Button
@@ -70,10 +70,10 @@
             android:layout_margin="@dimen/_10sdp"
             android:background="@drawable/level_increase_button_bg"
             android:clickable="true"
-            android:text="I will follow, lets start"
             android:padding="@dimen/_10sdp"
-            android:textAllCaps="false"
             android:paddingBottom="@dimen/_10sdp"
+            android:text="I will follow, lets start"
+            android:textAllCaps="false"
             android:textColor="@color/ch_light_color"
             android:textSize="17dp" />
 

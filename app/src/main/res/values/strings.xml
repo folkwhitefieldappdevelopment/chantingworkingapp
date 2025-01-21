@@ -22,6 +22,12 @@
     <string name="milestone_wise_heard_count">Milestone wise heard count</string>
     <string name="star">Star</string>
     <string name="chanting_guide"><u>Chanting Guide</u></string>
+    <string name="chanting_guide_1_title">Always look at the App</string>
+    <string name="chanting_guide_1_description">Don\'t close your eyes while chanting, keep your eyes open and chant. This helps you to perform Mindful Japa very effectively by keeping your focus locked.</string>
+    <string name="chanting_guide_2_title">Consciously Increase Level</string>
+    <string name="chanting_guide_2_description">After every milestone completion i.e. multiples of 16 beads, we should increase the hearing level from current plus one number.</string>
+    <string name="chanting_guide_3_title">Monitor Hearing and Chanting Count</string>
+    <string name="chanting_guide_3_description">Keep monitoring your chanting count v/s hearing count, difference between them should not be more than five beads.</string>
     <string-array name="playback_speed_options">
         <item>0.75x</item>
         <item>1.0x</item>
