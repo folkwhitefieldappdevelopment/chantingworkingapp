@@ -10,8 +10,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.iskcon.folk.app.chantandhear.MainActivity;
 import com.iskcon.folk.app.chantandhear.history.model.RoundDataEntity;
 import com.iskcon.folk.app.chantandhear.model.UserDetails;
+import com.iskcon.folk.app.chantandhear.service.SummaryProgressRowAdditionService;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -40,7 +42,7 @@ public class ChantingDataDao {
                 .setValue(userDetails);
     }
 
-    public void saveRoundData(RoundDataEntity roundDataEntity, Date date) {
+    public void saveRoundData(RoundDataEntity roundDataEntity, Date date, MainActivity mainActivity) {
 
         DatabaseReference databaseReference = firebaseDatabase.getReference()
                 .child(CHILD_USERS)
@@ -66,7 +68,7 @@ public class ChantingDataDao {
                         databaseReference.setValue(roundDataEntities).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                Log.i(this.getClass().getSimpleName(), "onComplete: data got saved");
+                                new SummaryProgressRowAdditionService().addSummaryRow(mainActivity);
                             }
                         });
                     }

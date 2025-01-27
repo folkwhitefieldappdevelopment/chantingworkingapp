@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     ImageView menuHemBurgerIcon;
     ImageView startButtonImage;
-    ImageView resetButtonImage;
 
     //Navigation Menu
     DrawerLayout drawerLayoutForMenu;
@@ -136,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         // menuHemBurgerIcon = findViewById(R.id.hamburgerIcon);
         startButtonImage = findViewById(R.id.startIconImageView);
 
-        findViewById(R.id.speedMenu).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.speedMenuLayout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 speedClickHandler.handle(v);
@@ -150,14 +149,13 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 hkMantraClickHandler.handle(v);
             }
         });
-        resetButtonImage = findViewById(R.id.resetIconImageView);
-        resetButtonImage.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.resetIconImageView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 resetButtonHandler.handle(view);
             }
         });
-        findViewById(R.id.muteIconImageView).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.muteIconLayout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 muteMantraButtonHandler.handle(view);
@@ -180,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         videoViewManager.loadVideo();
 
-        ((ImageView) findViewById(R.id.beforeDoneImageView)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.beforeDoneImageView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 beforeDoneClickHandler.handle(view);
@@ -222,10 +220,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             }
         });
 
-        findViewById(R.id.muteNotification).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.muteNotificationLayout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ImageView imageView = (ImageView) view;
+                ImageView imageView = findViewById(R.id.muteNotification);
                 if (MuteNotificationSingleton.isNotificationNotMuted()) {
                     imageView.setImageResource(R.drawable.baseline_notifications_off_24);
                     MuteNotificationSingleton.muteNotification(true);

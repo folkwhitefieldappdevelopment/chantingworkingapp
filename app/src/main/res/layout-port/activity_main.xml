@@ -217,9 +217,12 @@
                         app:layout_constraintTop_toBottomOf="@id/horizontalLine">
 
                         <LinearLayout
+                            android:id="@+id/muteNotificationLayout"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:clickable="true"
+                            android:focusable="true"
                             android:gravity="center"
                             android:orientation="vertical">
 
@@ -245,16 +248,18 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/resetIconImageView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:clickable="true"
+                            android:focusable="true"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:paddingLeft="20dp"
                             android:paddingRight="20dp">
 
                             <ImageView
-                                android:id="@+id/resetIconImageView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -273,11 +278,12 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/muteIconLinearLayout"
+                            android:id="@+id/muteIconLayout"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:clickable="true"
+                            android:focusable="true"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:paddingLeft="0dp"
@@ -303,16 +309,19 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/beforeDoneImageView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:clickable="true"
+                            android:focusable="true"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:paddingLeft="0dp"
                             android:paddingRight="20dp">
 
                             <ImageView
-                                android:id="@+id/beforeDoneImageView"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -331,9 +340,12 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/speedMenuLayout"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:clickable="true"
+                            android:focusable="true"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:paddingLeft="0dp"

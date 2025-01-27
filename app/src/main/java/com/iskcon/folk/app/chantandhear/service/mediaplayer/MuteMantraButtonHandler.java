@@ -23,7 +23,7 @@ public class MuteMantraButtonHandler extends AbstractMediaPlayerEventHandler{
         if(textView.getText().equals("Mute mantra")){ // Process of muting the audio
             if (mediaPlayer != null && mediaPlayer.isPlaying() && mediaPlayer.getCurrentPosition() > 0) {
                 mediaPlayer.setVolume(0.0f, 0.0f);
-                ImageView muteMantraImageView = (ImageView) view;
+                ImageView muteMantraImageView = super.getAppCompatActivity().findViewById(R.id.muteIconImageView);
                 muteMantraImageView.setImageResource(R.drawable.baseline_volume_off_24);
                 textView.setText("Unmute mantra");
             } else {
@@ -32,7 +32,7 @@ public class MuteMantraButtonHandler extends AbstractMediaPlayerEventHandler{
         } else { // Process of unmuting the audio
             if (mediaPlayer != null && mediaPlayer.isPlaying() && mediaPlayer.getCurrentPosition() > 0) {
                 mediaPlayer.setVolume(1.0f, 1.0f);
-                ImageView muteMantraImageView = (ImageView) view;
+                ImageView muteMantraImageView = super.getAppCompatActivity().findViewById(R.id.muteIconImageView);
                 muteMantraImageView.setImageResource(R.drawable.baseline_volume_up_24);
                 textView.setText("Mute mantra");
             } else {

@@ -43,7 +43,7 @@ public class SummaryProgressRowAdditionService {
 
         LinearLayout summaryProgressRowLayout = summayView.findViewById(R.id.summaryProgressRowLayoutId);
 
-        int totalHeardCount = 1;
+        int totalHeardCount = 0;
 
         if (roundDataEntities != null && roundDataEntities.size() > 0) {
 

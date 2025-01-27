@@ -10,7 +10,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.firebase.database.DataSnapshot;
 import com.iskcon.folk.app.chantandhear.MainActivity;
 import com.iskcon.folk.app.chantandhear.R;
 import com.iskcon.folk.app.chantandhear.constant.ApplicationConstants;
@@ -30,6 +35,7 @@ import com.iskcon.folk.app.chantandhear.util.OpenAlertDialogRqModel;
 
 import java.text.MessageFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -216,7 +222,7 @@ public class HkMantraClickHandler extends AbstractEventHandler {
             }
         };
         currentMediaPlayer = MediaPlayerPlaying.HKM_MEDIA_PLAYER;
-        hkMahaMantraMalaCounterHandler.postDelayed(hkMahaMantraMalaCounterRunnable,COUNT_DOWN_INTERVAL);
+        hkMahaMantraMalaCounterHandler.postDelayed(hkMahaMantraMalaCounterRunnable, COUNT_DOWN_INTERVAL);
     }
 
     // Pause either Hare Krishna Maha Mantra or Pancha Tattva Media player depending on which is being played currently.
@@ -287,12 +293,11 @@ public class HkMantraClickHandler extends AbstractEventHandler {
         roundDataEntity.setRoundNumber(japaMalaViewModel.getRoundNumberLiveData().getValue());
         roundDataEntity.setTimeTaken(countDownTimer.getTimeElapsed());
         roundDataEntity.setTotalHeardCount(japaMalaViewModel.getHeardCounterLiveData().getValue());
+
         new ChantingDataDao(super.getAppCompatActivity().getUserDetails()).saveRoundData(
-                roundDataEntity, new Date());
+                roundDataEntity, new Date(),super.getAppCompatActivity());
 
         this.resetActivity();
-
-        this.addSummeryProgressLayout();
 
         super.getAppCompatActivity().getHearButtonHandler()
                 .setLevelCountValue(ApplicationConstants.HEARING_LEVEL_DEFAULT_VALUE.getConstantValue(Integer.class));
