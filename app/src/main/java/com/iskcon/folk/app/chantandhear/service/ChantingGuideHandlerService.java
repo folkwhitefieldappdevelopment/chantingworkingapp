@@ -15,24 +15,21 @@ import com.iskcon.folk.app.chantandhear.util.CommonUtils;
 
 import java.text.MessageFormat;
 import java.util.List;
-import java.util.Random;
 
 public class ChantingGuideHandlerService {
 
-    private static final List<Integer> TITLE_STRING =
-            List.of(R.string.chanting_guide_1_title, R.string.chanting_guide_2_title, R.string.chanting_guide_3_title);
-    private static final List<Integer> DESCRIPTION_STRING =
-            List.of(R.string.chanting_guide_1_description, R.string.chanting_guide_2_description,
-                    R.string.chanting_guide_3_description);
-
-    public void updateMarqueeTextView(MainActivity mainActivity) {
+    public void showMarqueeTextView(MainActivity mainActivity) {
         TextView textView = mainActivity.findViewById(R.id.chantingGuideMarqueeTextView);
-        int randomIndexNumber = new Random().nextInt(3);
-        int index = randomIndexNumber == 0 ? randomIndexNumber : randomIndexNumber - 1;
-        textView.setText(MessageFormat.format("{0} :: {1}", mainActivity.getString(TITLE_STRING.get(index)),
-                mainActivity.getString(DESCRIPTION_STRING.get(index))));
+        textView.setText(MessageFormat.format("Tips -> 1. {0} || 2. {1} || 3. {2} <- Tips", mainActivity.getString(R.string.chanting_guide_1_title),
+                mainActivity.getString(R.string.chanting_guide_2_title),
+                mainActivity.getString(R.string.chanting_guide_3_title)));
         textView.setVisibility(View.VISIBLE);
         textView.setSelected(true);
+    }
+
+    public void hideMarqueeTextView(MainActivity mainActivity) {
+        TextView textView = mainActivity.findViewById(R.id.chantingGuideMarqueeTextView);
+        textView.setVisibility(View.INVISIBLE);
     }
 
     public void showDialog(MainActivity mainActivity) {

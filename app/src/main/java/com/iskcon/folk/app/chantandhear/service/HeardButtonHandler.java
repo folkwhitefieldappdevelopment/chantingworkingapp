@@ -88,44 +88,6 @@ public class HeardButtonHandler extends AbstractEventHandler {
                 );
     }
 
-    private void showToast() {
-        int lowerLimit = 0;
-        int upperLimit = 13;
-        List<Integer> used = new ArrayList<>();
-
-        View layout = super.getAppCompatActivity().getLayoutInflater()
-                .inflate(R.layout.custom_toast, (ViewGroup) super.getAppCompatActivity().findViewById(R.id.custom_toast_layout));
-        TextView textHearQuote = layout.findViewById(R.id.text);
-        textHearQuote.setText(
-                String.valueOf(NamaPrabhuToasts.TOAST_MSGS[this.generateRandomNumber(lowerLimit, upperLimit, used)]));
-
-        // Create and show the custom Toast
-        Toast toast = new Toast(super.getAppCompatActivity().getApplicationContext());
-        toast.setGravity(Gravity.START | Gravity.CENTER, 1100, 400);
-        toast.setDuration(Toast.LENGTH_SHORT);
-        toast.setView(layout);
-        toast.show();
-    }
-
-    private int generateRandomNumber(int lowerLimit, int upperLimit, List<Integer> usedNumbers) {
-        if (lowerLimit > upperLimit) {
-            throw new IllegalArgumentException("Lower limit should be less than or equal to upper limit");
-        }
-        List<Integer> availableNumbers = new ArrayList<>();
-        for (int i = lowerLimit; i <= upperLimit; i++) {
-            if (!usedNumbers.contains(i)) {
-                availableNumbers.add(i);
-            }
-        }
-        Random random = new Random();
-        if (availableNumbers.isEmpty()) {
-            throw new IllegalStateException("All numbers in the range have been used");
-        }
-        int randomIndex = random.nextInt(availableNumbers.size());
-        int randomNumber = availableNumbers.get(randomIndex);
-        usedNumbers.add(randomNumber);
-        return randomNumber;
-    }
 
     public int getLevelCountValue() {
         return levelCountValue;
@@ -145,8 +107,8 @@ public class HeardButtonHandler extends AbstractEventHandler {
 
             long heardTimeDifference = TimeUnit.MILLISECONDS.toMillis(currentDate.getTime() - this.lastHeard.getTime());
 
-            if (heardTimeDifference > ApplicationConstants.HARE_KRISHNA_MANTRA_SINGLE_BEAD_DURATION.getConstantValue(Long.class) /
-                    super.getAppCompatActivity().getSpeedClickHandler().getSpeed()) {
+            // Math.abs(heardTimeDifference - ApplicationConstants.HARE_KRISHNA_MANTRA_SINGLE_BEAD_DURATION.getConstantValue(Long.class) / super.getAppCompatActivity().getSpeedClickHandler().getSpeed()) < 1000
+            if (true) {
 
                 this.lastHeard = currentDate;
 
@@ -165,6 +127,6 @@ public class HeardButtonHandler extends AbstractEventHandler {
 
     public void setLevelCountValue(int levelCountValue) {
         this.levelCountValue = levelCountValue;
-        ((TextView)super.getAppCompatActivity().findViewById(R.id.levelCount)).setText(String.valueOf(levelCountValue));
+        ((TextView) super.getAppCompatActivity().findViewById(R.id.levelCount)).setText(String.valueOf(levelCountValue));
     }
 }

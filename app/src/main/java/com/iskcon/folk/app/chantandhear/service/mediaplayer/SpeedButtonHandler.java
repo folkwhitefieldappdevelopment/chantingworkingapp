@@ -19,7 +19,8 @@ public class SpeedButtonHandler extends AbstractMediaPlayerEventHandler {
 
     private int speedIndex;
 
-    private final String[] SPEED_DROPDOWN_DATA = {"0.25x", "0.5x", "0.75x", "Normal", "1.2x", "1.25x", "1.3x", "1.4x", "1.5x", "1.75x"};
+    private final String[] SPEED_DROPDOWN_DATA =
+            {"0.25x", "0.5x", "0.75x", "1.0x", "1.2x", "1.25x", "1.3x", "1.4x", "1.5x", "1.75x"};
 
     public float getSpeed() {
         return speed;
@@ -87,7 +88,9 @@ public class SpeedButtonHandler extends AbstractMediaPlayerEventHandler {
                 }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ((TextView) getAppCompatActivity().findViewById(R.id.speedMenu)).setText(SPEED_DROPDOWN_DATA[speedIndex]);
+                        String updatedText = SPEED_DROPDOWN_DATA[speedIndex];
+                        ((TextView) getAppCompatActivity().findViewById(R.id.speedMenu)).setText(
+                                updatedText.equals("Normal") ? "1.0x" : updatedText);
                         HkMantraClickHandler hkMantraClickHandler = getAppCompatActivity().getHkMantraClickHandler();
                         if (hkMantraClickHandler.isMediaPlayerInitialized()) {
                             hkMantraClickHandler.pauseMediaPlayer();

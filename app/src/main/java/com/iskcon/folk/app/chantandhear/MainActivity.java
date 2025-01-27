@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         });
         TextView hareKrishnaMahaMantraTextView = findViewById(R.id.hareKrishnaMahaMantraTextView);
         hareKrishnaMahaMantraTextView.setText(R.string.main_activity_tap_to_start_your_mala_hare_krishna);
-        hareKrishnaMahaMantraTextView.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.mantraBoxClickHandler).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 hkMantraClickHandler.handle(v);
@@ -226,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             @Override
             public void onClick(View view) {
                 ImageView imageView = (ImageView) view;
-                if(MuteNotificationSingleton.isNotificationNotMuted()){
+                if (MuteNotificationSingleton.isNotificationNotMuted()) {
                     imageView.setImageResource(R.drawable.baseline_notifications_off_24);
                     MuteNotificationSingleton.muteNotification(true);
                 } else {
@@ -313,7 +313,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 } else {
                     hkMantraClickHandler.onMalaCompleted();
                 }
-                Log.i(this.getClass().getSimpleName(), "beadCountIncrementObserver.onChanged: " + currentMalaBeadCount);
             }
         };
         japaMalaViewModel.getBeadCounterLiveData().observe(this, beadCountIncrementObserver);

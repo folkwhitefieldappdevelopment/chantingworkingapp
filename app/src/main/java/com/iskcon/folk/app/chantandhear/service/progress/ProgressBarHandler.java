@@ -67,7 +67,6 @@ public class ProgressBarHandler extends AbstractEventHandler {
                             Integer.class) == 0) {
 
                 //this.showUserAttentionSlideUpMessage();
-                new ChantingGuideHandlerService().updateMarqueeTextView(super.getAppCompatActivity());
             }
 
             Milestone calculatedMilestone = Milestone.beadInBetweenWhichMilestoe(currentMalaCount);
@@ -85,10 +84,6 @@ public class ProgressBarHandler extends AbstractEventHandler {
         if (heardCount != 0) {
 
             int currentMilestoneHeardCount = this.milestoneWiseProgress.get(this.currentMilestone);
-
-            if(currentMilestoneHeardCount % 5 == 0){
-                new ChantingGuideHandlerService().updateMarqueeTextView(super.getAppCompatActivity());
-            }
 
             if (currentMilestoneHeardCount < 16) {
 

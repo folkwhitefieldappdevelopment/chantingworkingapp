@@ -20,7 +20,6 @@ public class UnmuteButtonHandler extends AbstractMediaPlayerEventHandler {
         if (mediaPlayer != null && mediaPlayer.isPlaying() && mediaPlayer.getCurrentPosition() > 0) {
             super.getAppCompatActivity().getHkMantraClickHandler().getCurrentMediaPlayer().setVolume(1.0f, 1.0f);
             super.getAppCompatActivity().findViewById(R.id.muteIconImageView).setVisibility(View.VISIBLE);
-            super.getAppCompatActivity().findViewById(R.id.unmuteIconImageView).setVisibility(View.INVISIBLE);
         } else {
             Toast.makeText(getAppCompatActivity(), "Hare Krishna, nothing to un-mute, round has not yet started.", Toast.LENGTH_SHORT).show();
         }
